@@ -1,11 +1,10 @@
 import React from 'react';
-import RelatedProducts from './RelatedProducts/RelatedProducts.jsx'
-import YourProducts from './YourProducts/YourProducts.jsx'
+// eslint-disable-next-line import/extensions
+import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
+// eslint-disable-next-line import/extensions
+import YourProducts from './YourProducts/YourProducts.jsx';
 
-
-
-import comparison from './Comparison.module.css';
-
+// eslint-disable-next-line react/prefer-stateless-function
 class Comparison extends React.Component {
   render() {
     return (
@@ -13,7 +12,7 @@ class Comparison extends React.Component {
         <RelatedProducts />
         <YourProducts />
       </div>
-    )
+    );
   }
 }
 
