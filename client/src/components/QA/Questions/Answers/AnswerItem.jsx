@@ -4,15 +4,15 @@ import AItemCSS from './AnswerItem.module.css';
 class AnswerItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
-  render(){
+  render() {
     return (
-      <div>
+      <div className={AItemCSS.answeritem}>
         This will be one Answer Item.
       </div>
-    )
+    );
   }
 }
 

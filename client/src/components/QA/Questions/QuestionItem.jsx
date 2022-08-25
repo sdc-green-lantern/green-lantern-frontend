@@ -1,19 +1,20 @@
 import React from 'react';
 import QItemCSS from './QuestionItem.module.css';
-import AnswerList from './Answers/AnswerList.jsx';
+import AnswerList from './Answers/AnswerList';
 
 class QuestionItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
-  render(){
+
+  render() {
     return (
-      <div>
+      <div className={QItemCSS.answerlist}>
         This is a Question item. It will utilize an Answer List.
-        <AnswerList/>
+        <AnswerList />
       </div>
-    )
+    );
   }
 }
 
