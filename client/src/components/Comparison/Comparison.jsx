@@ -1,15 +1,15 @@
 import React from 'react';
-import comparison  from './Comparison.module.css'
-import Card from './Card/Card.jsx'
+import comparison from './Comparison.module.css';
+import Card from './Card/Card.jsx';
 
 class Comparison extends React.Component {
-  render () {
+  render() {
     return (
-      <div >
+      <div>
         <div className={comparison.header}>Hello Comparison</div>
         <Card />
       </div>
-    )
+    );
   }
 }
 
