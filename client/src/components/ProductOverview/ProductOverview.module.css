@@ -11,7 +11,9 @@
   width: 70%;
 }
 .announcements {
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  border-left: 1px solid black;
+  border-right: 1px solid black;
   height: 30px;
   width: 70%;
 }
@@ -23,13 +25,8 @@
   display: flex;
   width: 70%;
 }
-.imagegallery {
-  border: 1px solid black;
-  width: 60%;
-  height: 500px;
-}
 .productoptions {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 40%;
 }
 .productdescription {
