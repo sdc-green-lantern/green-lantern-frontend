@@ -1,13 +1,17 @@
 import React from 'react';
-import comparison  from './Comparison.module.css'
-import Card from './Card/Card.jsx'
+import RelatedProducts from './RelatedProducts/RelatedProducts.jsx'
+import YourProducts from './YourProducts/YourProducts.jsx'
+
+
+
+import comparison from './Comparison.module.css';
 
 class Comparison extends React.Component {
-  render () {
+  render() {
     return (
-      <div >
-        <div className={comparison.header}>Hello Comparison</div>
-        <Card />
+      <div className="related-items">
+        <RelatedProducts />
+        <YourProducts />
       </div>
     )
   }

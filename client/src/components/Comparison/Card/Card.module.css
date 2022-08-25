@@ -1,3 +1,14 @@
-div{
-  background-color: aquamarine
+.container{
+  display: inline-block;
+  width: 16%;
+  border: 2px solid black;
+  margin-right: 1%;
 }
+
+img{
+  width:100%;
+}
+
+
+
+

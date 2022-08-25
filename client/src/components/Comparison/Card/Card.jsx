@@ -4,12 +4,18 @@ import card from './Card.module.css'
 class Card extends React.Component {
   render() {
     return (
-      <div>
-        <div className={card.header}>
-          Hello Card
+      <div className={card.container}>
+        <img
+          src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
+          alt="Grapefruit slice atop a pile of other slices"
+        />
+        <div>
+          <div>Category...</div>
+          <div>Name.......</div>
+          <div>Price.......</div>
+          <div>Average Rating.......</div>
         </div>
       </div>
-
     )
   }
 }

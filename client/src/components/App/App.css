@@ -1,0 +1,89 @@
+.product-overview {
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+.nav {
+  border: 3px solid black;
+  height: 100px;
+  width: 70%;
+}
+.announcements {
+  border: 3px solid black;
+  height: 30px;
+  width: 70%;
+}
+.announcement-text {
+  text-align: center;
+}
+.product-info {
+  border: 3px solid black;
+  display: flex;
+  width: 70%;
+}
+.image-gallery {
+  border: 3px solid black;
+  width: 60%;
+  height: 500px;
+}
+.product-options {
+  border: 3px solid black;
+  width: 40%;
+}
+.product-description {
+  border: 3px solid black;
+  height: 200px;
+  width: 70%;
+}
+.related-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid black;
+  width: 100%;
+}
+.related-products {
+  border: 3px solid black;
+  width: 70%;
+  /* height: 300px; */
+}
+.your-products {
+  border: 3px solid black;
+  width: 70%;
+  /* height: 300px; */
+}
+.qa-section {
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  width: 100%;
+}
+.qa-body {
+  border: 3px solid black;
+  height: 500px;
+  width: 70%;
+}
+.ratings-section {
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  height: 100%;
+  width: 100%;
+}
+.ratings-container {
+  border: 3px solid black;
+  display: flex;
+  width: 70%;
+}
+.ratings-sidebar {
+  border: 3px solid black;
+  height: 500px;
+  width: 30%;
+}
+.reviews-sidebar {
+  border: 3px solid black;
+  height: 500px;
+  width: 70%;
+}
