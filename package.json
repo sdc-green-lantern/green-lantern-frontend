@@ -1,0 +1,41 @@
+{
+  "name": "web-application-x",
+  "version": "1.0.0",
+  "description": "Our outdated client-facing retail web-portal has become significantly outdated and has been proven to be hurting sales numbers. This new project comprises a complete redesign of the retail portal designed to address this concern and modernize the site. This document outlines the features to be implemented as part of the project in its initial release. The following requirements define the new user interface required for customers to browse items in our retail catalog.\t ",
+  "main": "client/src/index.js",
+  "scripts": {
+    "dev": "webpack serve",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qzyan/web-application-X.git"
+  },
+  "keywords": [
+    "reatail"
+  ],
+  "author": "qingzhou yan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qzyan/web-application-X/issues"
+  },
+  "homepage": "https://github.com/qzyan/web-application-X#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.18.10",
+    "@babel/preset-react": "^7.18.6",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.10.0"
+  }
+}
