@@ -1,5 +1,5 @@
 import React from 'react';
-import card from './Card.module.css'
+import card from './Card.module.css';
 
 class Card extends React.Component {
   render() {
@@ -10,7 +10,7 @@ class Card extends React.Component {
         </div>
       </div>
 
-    )
+    );
   }
 }
 
