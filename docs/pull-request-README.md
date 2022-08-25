@@ -55,16 +55,22 @@ Give a descriptive title for the pull request (i.e. “Add Sort subwidget to Rat
   git pull origin master
   ```
 
-- [ ]  Checkout your local branch (git checkout <local-branch>)
+- [ ]  Checkout your local feature branch.
+  ```
+  git checkout <local-branch>
+  ```
 
-- [ ]  Merge master branch into your local branch (git merge master) (this merges in the changes from the remote master branch into your local branch)
+- [ ]  Merge master branch into your local branch. This will merge changes from the remote master branch into your local feature branch.
+  ```
+  git merge master
+  ```
 
 - [ ]  Push your updated local branch to the remote repository.
   ```
   git push origin <local-branch-name>
   ```
 
-- [ ]  Read Atlassian Feature Branch Workflow to further your understanding of the process.
+- [ ]  Read [Atlassian Feature Branch Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow) to further your understanding of the process.
 
 **Example Diagram:**
 
