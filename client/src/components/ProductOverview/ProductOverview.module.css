@@ -1,0 +1,39 @@
+.productoverview {
+  /* border: 1px solid black; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+.nav {
+  border: 1px solid black;
+  height: 100px;
+  width: 70%;
+}
+.announcements {
+  border: 1px solid black;
+  height: 30px;
+  width: 70%;
+}
+.announcementtext {
+  text-align: center;
+}
+.productinfo {
+  border: 1px solid black;
+  display: flex;
+  width: 70%;
+}
+.imagegallery {
+  border: 1px solid black;
+  width: 60%;
+  height: 500px;
+}
+.productoptions {
+  border: 1px solid black;
+  width: 40%;
+}
+.productdescription {
+  border: 1px solid black;
+  height: 200px;
+  width: 70%;
+}
