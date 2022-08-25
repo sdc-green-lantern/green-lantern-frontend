@@ -1,6 +1,7 @@
 import React from 'react';
 import card from './Card.module.css';
 
+// eslint-disable-next-line react/prefer-stateless-function
 class Card extends React.Component {
   render() {
     return (
