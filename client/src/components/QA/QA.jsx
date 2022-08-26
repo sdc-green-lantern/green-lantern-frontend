@@ -11,8 +11,11 @@ class QA extends React.Component {
   render() {
     return (
       <div>
-        This is QA component.
-        <QuestionList />
+        <div className={QACSS.qa_section}>
+          <div className={QACSS.qa_body}>
+            <QuestionList />
+          </div>
+        </div>
       </div>
     );
   }
