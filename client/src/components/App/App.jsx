@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductOverview from '../ProductOverview/ProductOverview.jsx';
 import Comparison from '../Comparison/Comparison.jsx';
 import QA from '../QA/QA.jsx';
 import RatingsReviews from '../RatingsReviews/RatingsReviews.jsx';
@@ -20,6 +21,7 @@ class App extends React.Component {
           Current Product Id:
           {productId}
         </p>
+        <ProductOverview />
         <QA />
         <Comparison />
         <RatingsReviews />
