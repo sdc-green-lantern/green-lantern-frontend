@@ -1,13 +1,16 @@
 import React from 'react';
-import comparison from './Comparison.module.css';
-import Card from './Card/Card.jsx';
+// eslint-disable-next-line import/extensions
+import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
+// eslint-disable-next-line import/extensions
+import YourProducts from './YourProducts/YourProducts.jsx';
 
+// eslint-disable-next-line react/prefer-stateless-function
 class Comparison extends React.Component {
   render() {
     return (
-      <div>
-        <div className={comparison.header}>Hello Comparison</div>
-        <Card />
+      <div className="related-items">
+        <RelatedProducts />
+        <YourProducts />
       </div>
     );
   }
