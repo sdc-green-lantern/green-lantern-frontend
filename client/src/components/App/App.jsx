@@ -1,11 +1,7 @@
 import React from 'react';
-import Comparison from '../Comparison/Comparison.jsx';
-<<<<<<< HEAD
-import QA from '../QA/QA.jsx';
-import './App.css'
-=======
+import Comparison from '../Comparison/Comparison';
+import QA from '../QA/QA';
 import './App.css';
->>>>>>> master
 
 class App extends React.Component {
   constructor(props) {
@@ -19,14 +15,11 @@ class App extends React.Component {
     const { productId } = this.state;
     return (
       <div>
-<<<<<<< HEAD
         <QA />
-=======
         <p>
           Current Product Id:
           {productId}
         </p>
->>>>>>> master
         <Comparison />
       </div>
     );
