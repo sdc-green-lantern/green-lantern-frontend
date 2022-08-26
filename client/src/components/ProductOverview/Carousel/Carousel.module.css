@@ -1,10 +1,28 @@
 .imagegallery {
+  display: flex;
+  flex-wrap: nowrap;
   border-right: 1px solid black;
   width: 60%;
   height: 500px;
 }
 .thumbnailrow {
+  background-color: blue;
   border-right: 1px solid black;
   width: 100px;
   height: 100%;
+}
+.arrows {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: red;
+  width: 100%;
+}
+.leftarrow{
+  padding-left: 12px;
+  font-size: 20px;
+}
+.rightarrow{
+  padding-right: 12px;
+  font-size: 20px;
 }
