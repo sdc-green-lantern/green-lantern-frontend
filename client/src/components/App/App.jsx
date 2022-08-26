@@ -20,6 +20,7 @@ class App extends React.Component {
           Current Product Id:
           {productId}
         </p>
+        <ProductOverview />
         <QA />
         <Comparison />
       </div>
