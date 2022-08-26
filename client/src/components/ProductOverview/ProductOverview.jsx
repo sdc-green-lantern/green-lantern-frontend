@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import postyles from './ProductOverview.module.css';
 
 import Carousel from './Carousel/Carousel.jsx';
