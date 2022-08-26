@@ -1,6 +1,6 @@
 import React from 'react';
 import QListCSS from './QuestionList.module.css';
-import QuestionItem from './QuestionItem';
+import QuestionItem from './QuestionItem.jsx';
 
 class QuestionList extends React.Component {
   constructor(props) {

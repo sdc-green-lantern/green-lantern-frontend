@@ -1,6 +1,6 @@
 import React from 'react';
 import QItemCSS from './QuestionItem.module.css';
-import AnswerList from './Answers/AnswerList';
+import AnswerList from './Answers/AnswerList.jsx';
 
 class QuestionItem extends React.Component {
   constructor(props) {

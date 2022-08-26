@@ -1,5 +1,5 @@
 import React from 'react';
-import AnswerItem from './AnswerItem';
+import AnswerItem from './AnswerItem.jsx';
 import AListCSS from './AnswerList.module.css';
 
 class AnswerList extends React.Component {
