@@ -13,18 +13,19 @@ export default function Carousel() {
   };
 
   return (
-    <div className={carouselstyles.imagegallery} style={imageGallery}>
-      <div className={carouselstyles.thumbnailrow}>
+    <div className={carouselstyles.imageGallery} style={imageGallery}>
+      <div className={carouselstyles.thumbnailRow}>
         {/* Map over all images pulled from API */}
         <div className={carouselstyles.thumbnail} />
         <div className={carouselstyles.thumbnail} />
         <div className={carouselstyles.thumbnail} />
         <div className={carouselstyles.thumbnail} />
         <div className={carouselstyles.thumbnail} />
+        <div className={carouselstyles.goToNext}>▼</div>
       </div>
       <div className={carouselstyles.arrows}>
-        <div className={carouselstyles.leftarrow}>❮</div>
-        <div className={carouselstyles.rightarrow}>❯</div>
+        <div className={carouselstyles.leftArrow}>❮</div>
+        <div className={carouselstyles.rightArrow}>❯</div>
       </div>
       <div className={carouselstyles.lightbox} />
     </div>
