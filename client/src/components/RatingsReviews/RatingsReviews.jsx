@@ -1,5 +1,6 @@
 import React from 'react';
 import RatingsReviewsCSS from './RatingsReviews.module.css';
+import ReviewsList from './ReviewsList.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class RatingsReviews extends React.Component {
   }
 
   render() {
+    const { productId } = this.props;
     return (
       <div className={RatingsReviewsCSS.ratings_section}>
         <div className={RatingsReviewsCSS.ratings_container}>
@@ -21,7 +23,7 @@ class RatingsReviews extends React.Component {
             <p>Sort Options</p>
           </div>
           <div className={RatingsReviewsCSS.reviews_list}>
-            <p>Reviews List</p>
+            <ReviewsList productId={productId} />
           </div>
           <div className={RatingsReviewsCSS.more_reviews_btn}>
             <p>More Reviews</p>
