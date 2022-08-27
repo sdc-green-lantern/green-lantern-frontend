@@ -15,11 +15,9 @@ class RelatedProducts extends React.Component {
   }
 
   static handleScroll(isRight) {
-    return (e) => {
+    return () => {
       const { leftOffset } = this.state;
-      const cardWidth = this.refs.card;
-      console.log(cardWidth);
-      const unitOffset = isRight ? cardWidth : -cardWidth;
+      const unitOffset = isRight ? -200 : 200;
       this.setState({
         leftOffset: leftOffset + unitOffset,
       });
@@ -27,30 +25,39 @@ class RelatedProducts extends React.Component {
   }
 
   render() {
-    const { currCardIndex, products } = this.state;
+    const { leftOffset } = this.state;
     return (
       <div className="related-products">
         <div className={relatedProducts.title}>
           RELATED PRODUCTS
         </div>
         <div className={relatedProducts.main}>
-          <div className={relatedProducts.left}>
+          <div
+            className={relatedProducts.left}
+            style={{ display: leftOffset === 0 ? 'none' : 'flex' }}
+          >
             <div
               className={relatedProducts['arrow-left']}
-              style={{ display: currCardIndex === 0 ? 'none' : 'inline-block' }}
             />
             <button type="button" onClick={this.handleScroll(false)} />
           </div>
-          <div className={relatedProducts.right}>
+          <div
+            className={relatedProducts.right}
+            style={{ display: leftOffset === 800 ? 'none' : 'flex' }}
+          >
             <div
               className={relatedProducts['arrow-right']}
-              style={{ display: currCardIndex === products.length ? 'none' : 'inline-block' }}
             />
             <button type="button" onClick={this.handleScroll(true)} />
           </div>
           <div className={relatedProducts.carousel}>
-            <div className={relatedProducts['carousel-wrapper']}>
-              <Card ref='card'/>
+            <div
+              className={relatedProducts['carousel-wrapper']}
+              style={{ left: leftOffset }}
+            >
+              <Card />
+              <Card />
+              <Card />
               <Card />
               <Card />
               <Card />
