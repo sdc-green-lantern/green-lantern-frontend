@@ -7,15 +7,20 @@ export default function Carousel() {
     width: '100%',
     height: '100%',
     backgroundPosition: 'center',
-    backgroundSize: '100%',
+    backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
-    backgroundImage: 'url(https://via.placeholder.com/800x1000)',
+    backgroundImage: 'url(https://via.placeholder.com/400x600)',
   };
 
   return (
     <div className={carouselstyles.imageGallery} style={imageGallery}>
       <div className={carouselstyles.thumbnailRow}>
         {/* Map over all images pulled from API */}
+        <div className={carouselstyles.thumbnail} />
+        <div className={carouselstyles.thumbnail} />
+        <div className={carouselstyles.thumbnail} />
+        <div className={carouselstyles.thumbnail} />
+        <div className={carouselstyles.thumbnail} />
         <div className={carouselstyles.thumbnail} />
         <div className={carouselstyles.thumbnail} />
         <div className={carouselstyles.thumbnail} />
