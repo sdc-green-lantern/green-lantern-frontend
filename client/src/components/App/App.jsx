@@ -1,4 +1,5 @@
 import React from 'react';
+import axiosConfig from '../../../../example.axiosConfig.js'; //use this variable in place of axios
 import ProductOverview from '../ProductOverview/ProductOverview.jsx';
 import Comparison from '../Comparison/Comparison.jsx';
 import QA from '../QA/QA.jsx';
