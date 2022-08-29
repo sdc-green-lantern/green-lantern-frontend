@@ -31,7 +31,7 @@ class QA extends React.Component {
     if (results.length !== 0) {
       display = <QuestionList questions={results} productId={productId} />;
     } else {
-      display = <button className="QACSS.askButton" type="submit">Ask a Question</button>;
+      display = <button className={QACSS.askButton} type="submit">Ask a Question</button>;
     }
     return (
       <div>
