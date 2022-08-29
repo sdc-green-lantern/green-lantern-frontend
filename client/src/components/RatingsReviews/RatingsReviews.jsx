@@ -19,7 +19,7 @@ class RatingsReviews extends React.Component {
   componentDidMount() {
     // GET reviews
     const { productId, axiosConfig } = this.props;
-    const productURL = '/reviews/?product_id=' + productId;
+    const productURL = `/reviews/?product_id=${productId}`;
 
     axiosConfig.get(productURL)
       .then((response) => {
@@ -37,7 +37,7 @@ class RatingsReviews extends React.Component {
       });
   }
 
-  handleMoreReviews(event) {
+  handleMoreReviews() {
     const { reviews, numReviews, numDisplayed } = this.state;
     const newNumDisplayed = numDisplayed + 2 > numReviews ? numReviews : numDisplayed + 2;
     const newDisplayedReviews = reviews.slice(0, newNumDisplayed);
@@ -48,9 +48,10 @@ class RatingsReviews extends React.Component {
   }
 
   render() {
-    const { axiosConfig, productId} = this.props;
-    const { reviews, displayedReviews, numReviews, numDisplayed } = this.state;
-    console.log(numReviews, numDisplayed);
+    const { axiosConfig, productId } = this.props;
+    const {
+      reviews, displayedReviews, numReviews, numDisplayed,
+    } = this.state;
     return (
       <div className={RatingsReviewsCSS.ratings_section}>
         <div className={RatingsReviewsCSS.ratings_container}>
@@ -80,6 +81,12 @@ class RatingsReviews extends React.Component {
           </div>
           <div className={RatingsReviewsCSS.write_new_review_btn_box}>
             <p>Add a Review</p>
+            <button
+              className={RatingsReviewsCSS.button}
+              type="button"
+            >
+              ADD A REVIEW+
+            </button>
           </div>
         </div>
       </div>

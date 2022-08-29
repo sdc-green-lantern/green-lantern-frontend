@@ -22,16 +22,16 @@ class ReviewTile extends React.Component {
         <div>Response to Review</div>
         <div>
           Helpful?
-          Yes {/* <button>Yes</button> */}
+          Yes
+          {/* <button>Yes</button> */}
           {review.helpfulness}
-          | Report {/* <button>Report</button> */}
+          | Report
+          {/* <button>Report</button> */}
         </div>
 
       </div>
     );
   }
-
 }
-
 
 export default ReviewTile;
