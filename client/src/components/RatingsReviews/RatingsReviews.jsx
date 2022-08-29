@@ -79,7 +79,7 @@ class RatingsReviews extends React.Component {
             />
           </div>
           <div className={RatingsReviewsCSS.write_new_review_btn_box}>
-            <p>Add a review</p>
+            <p>Add a Review</p>
           </div>
         </div>
       </div>
