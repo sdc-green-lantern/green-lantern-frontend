@@ -8,9 +8,11 @@ class AnswerItem extends React.Component {
   }
 
   render() {
+    const { answer } = this.props;
     return (
-      <div className={AItemCSS.answeritem}>
-        A: {this.props.answer.body}
+      <div className={AItemCSS.answerItem}>
+        A:
+        {answer.body}
       </div>
     );
   }
