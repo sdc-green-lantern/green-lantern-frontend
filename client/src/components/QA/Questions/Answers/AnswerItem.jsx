@@ -8,9 +8,11 @@ class AnswerItem extends React.Component {
   }
 
   render() {
+    const { answer } = this.props;
     return (
-      <div className={AItemCSS.answeritem}>
-        This will be one Answer Item.
+      <div className={AItemCSS.answerItem}>
+        A:
+        {answer.body}
       </div>
     );
   }

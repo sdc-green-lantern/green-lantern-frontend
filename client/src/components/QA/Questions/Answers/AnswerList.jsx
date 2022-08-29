@@ -9,10 +9,10 @@ class AnswerList extends React.Component {
   }
 
   render() {
+    const { answers } = this.props;
     return (
       <div className={AListCSS.answerlist}>
-        This is Answer List, it will generate an Answer Item for each Answer.
-        <AnswerItem />
+        {answers.map((answer, index) => <AnswerItem answer={answer} key={index} />)}
       </div>
     );
   }

@@ -1,0 +1,227 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="related-products"
+  >
+    <div
+      class="title"
+      data-testid="title"
+    >
+      RELATED PRODUCTS
+    </div>
+    <div
+      class="main"
+    >
+      <div
+        class="left"
+        style="display: none;"
+      >
+        <div
+          class="arrow-left"
+        />
+        <button
+          type="button"
+        />
+      </div>
+      <div
+        class="right"
+        style="display: flex;"
+      >
+        <div
+          class="arrow-right"
+        />
+        <button
+          type="button"
+        />
+      </div>
+      <div
+        class="carousel"
+      >
+        <div
+          class="carousel-wrapper"
+          style="left: 0px;"
+        >
+          <div
+            class="container"
+          >
+            <img
+              alt="Grapefruit slice atop a pile of other slices"
+              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
+            />
+            <div>
+              <div>
+                Category...
+              </div>
+              <div>
+                Name.......
+              </div>
+              <div>
+                Price.......
+              </div>
+              <div>
+                Average Rating.......
+              </div>
+            </div>
+          </div>
+          <div
+            class="container"
+          >
+            <img
+              alt="Grapefruit slice atop a pile of other slices"
+              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
+            />
+            <div>
+              <div>
+                Category...
+              </div>
+              <div>
+                Name.......
+              </div>
+              <div>
+                Price.......
+              </div>
+              <div>
+                Average Rating.......
+              </div>
+            </div>
+          </div>
+          <div
+            class="container"
+          >
+            <img
+              alt="Grapefruit slice atop a pile of other slices"
+              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
+            />
+            <div>
+              <div>
+                Category...
+              </div>
+              <div>
+                Name.......
+              </div>
+              <div>
+                Price.......
+              </div>
+              <div>
+                Average Rating.......
+              </div>
+            </div>
+          </div>
+          <div
+            class="container"
+          >
+            <img
+              alt="Grapefruit slice atop a pile of other slices"
+              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
+            />
+            <div>
+              <div>
+                Category...
+              </div>
+              <div>
+                Name.......
+              </div>
+              <div>
+                Price.......
+              </div>
+              <div>
+                Average Rating.......
+              </div>
+            </div>
+          </div>
+          <div
+            class="container"
+          >
+            <img
+              alt="Grapefruit slice atop a pile of other slices"
+              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
+            />
+            <div>
+              <div>
+                Category...
+              </div>
+              <div>
+                Name.......
+              </div>
+              <div>
+                Price.......
+              </div>
+              <div>
+                Average Rating.......
+              </div>
+            </div>
+          </div>
+          <div
+            class="container"
+          >
+            <img
+              alt="Grapefruit slice atop a pile of other slices"
+              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
+            />
+            <div>
+              <div>
+                Category...
+              </div>
+              <div>
+                Name.......
+              </div>
+              <div>
+                Price.......
+              </div>
+              <div>
+                Average Rating.......
+              </div>
+            </div>
+          </div>
+          <div
+            class="container"
+          >
+            <img
+              alt="Grapefruit slice atop a pile of other slices"
+              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
+            />
+            <div>
+              <div>
+                Category...
+              </div>
+              <div>
+                Name.......
+              </div>
+              <div>
+                Price.......
+              </div>
+              <div>
+                Average Rating.......
+              </div>
+            </div>
+          </div>
+          <div
+            class="container"
+          >
+            <img
+              alt="Grapefruit slice atop a pile of other slices"
+              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
+            />
+            <div>
+              <div>
+                Category...
+              </div>
+              <div>
+                Name.......
+              </div>
+              <div>
+                Price.......
+              </div>
+              <div>
+                Average Rating.......
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
