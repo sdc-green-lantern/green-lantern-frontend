@@ -50,6 +50,12 @@
   border: 1px solid black;
 }
 
+.review_tile {
+  background-color: gray;
+  /* grid-row: 2/5;
+  grid-column: 2/4; */
+  border: 1px solid black;
+}
 
 .more_reviews_btn {
   background-color: orange;

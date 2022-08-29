@@ -1,4 +1,5 @@
 import React from 'react';
+import RatingsReviewsCSS from './RatingsReviews.module.css';
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class ReviewTile extends React.Component {
   render() {
     const { review } = this.props;
     return (
-      <div className="reviewTile">
+      <div className={RatingsReviewsCSS.review_tile}>
         <div>
           {review.rating}
           {review.date}
