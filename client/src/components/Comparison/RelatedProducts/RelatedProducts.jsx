@@ -28,7 +28,7 @@ class RelatedProducts extends React.Component {
     const { leftOffset } = this.state;
     return (
       <div className="related-products">
-        <div className={relatedProducts.title}>
+        <div data-testid="title" className={relatedProducts.title}>
           RELATED PRODUCTS
         </div>
         <div className={relatedProducts.main}>
