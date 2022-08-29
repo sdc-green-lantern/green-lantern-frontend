@@ -1,5 +1,6 @@
 import React from 'react';
-import instance from '../../axiosConfig.js'
+import ReviewTile from './ReviewTile.jsx';
+// import instance from '../../axiosConfig.js'
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -12,12 +13,13 @@ class ReviewsList extends React.Component {
 
   componentDidMount() {
     // GET reviews
-    const { productId } = this.props;
+    const { productId, axiosConfig } = this.props;
     const productURL = '/reviews/?product_id=' + productId;
 
-    instance.get(productURL)
+    axiosConfig.get(productURL)
       .then((response) => {
         this.setState({ reviews: response.data.results });
+        this.setState({ displayedReviews: response.data.results.slice(0, 2) });
       })
       .catch((error) => {
         console.log(error);
@@ -29,8 +31,12 @@ class ReviewsList extends React.Component {
 
   render() {
     const { reviews, displayedReviews } = this.state;
-    console.log("Reviews: ", reviews);
+    console.log("Reviews: ", displayedReviews);
+
     // create individual review tile components
+    const reviewTiles = displayedReviews.map((review) => {
+      return <ReviewTile key={review.review_id} review={review}/>;
+    });
 
     // if there are 1-2 reviews
     if (reviews.length > 0 && reviews.length <= 2) {
@@ -38,7 +44,7 @@ class ReviewsList extends React.Component {
       // do not show the "More Reviews" button
       return (
         <div>
-          <p>Reviews List</p>
+          {reviewTiles}
         </div>
       );
     }
@@ -47,7 +53,8 @@ class ReviewsList extends React.Component {
       // render displayedReviews
       // show the "More Reviews" button
         <div>
-          <button type="submit">More Reviews</button>
+          {reviewTiles}
+          {/* <button type="submit">More Reviews</button> */}
         </div>
       );
     } return (

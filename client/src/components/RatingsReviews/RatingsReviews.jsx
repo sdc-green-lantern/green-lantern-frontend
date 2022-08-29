@@ -9,7 +9,7 @@ class RatingsReviews extends React.Component {
   }
 
   render() {
-    const { productId } = this.props;
+    const { productId, axiosConfig } = this.props;
     return (
       <div className={RatingsReviewsCSS.ratings_section}>
         <div className={RatingsReviewsCSS.ratings_container}>
@@ -23,7 +23,7 @@ class RatingsReviews extends React.Component {
             <p>Sort Options</p>
           </div>
           <div className={RatingsReviewsCSS.reviews_list}>
-            <ReviewsList productId={productId} />
+            <ReviewsList productId={productId} axiosConfig={axiosConfig} />
           </div>
           <div className={RatingsReviewsCSS.more_reviews_btn}>
             <p>More Reviews</p>
