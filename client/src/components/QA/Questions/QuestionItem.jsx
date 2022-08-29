@@ -10,8 +10,11 @@ class QuestionItem extends React.Component {
 
   render() {
     return (
-      <div className={QItemCSS.answerlist}>
-        This is a Question item. It will utilize an Answer List.
+      <div className={QItemCSS.questionEach}>
+        <h4>
+          Q:
+          {this.props.question.question_body}
+        </h4>
         <AnswerList />
       </div>
     );
