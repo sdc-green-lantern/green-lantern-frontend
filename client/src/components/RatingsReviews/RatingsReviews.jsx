@@ -71,15 +71,15 @@ class RatingsReviews extends React.Component {
               displayedReviews={displayedReviews}
             />
           </div>
-          <div className={RatingsReviewsCSS.more_reviews_btn}>
+          <div className={RatingsReviewsCSS.more_reviews_btn_box}>
             <MoreReviews
               handleMoreReviews={this.handleMoreReviews}
               numReviews={numReviews}
               numDisplayed={numDisplayed}
             />
           </div>
-          <div className={RatingsReviewsCSS.write_new_review_btn}>
-            <p>Write New Review</p>
+          <div className={RatingsReviewsCSS.write_new_review_btn_box}>
+            <p>Add a review</p>
           </div>
         </div>
       </div>

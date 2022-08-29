@@ -11,17 +11,19 @@ class MoreReviews extends React.Component {
     const { numReviews, numDisplayed, handleMoreReviews } = this.props;
     if (numReviews === numDisplayed) {
       return (
-        <div></div>
-      );
-    } else {
-      return (
-        <div>
-          <button onClick={handleMoreReviews}>More Reviews</button>
-        </div>
+        <div />
       );
     }
+    return (
+      <button
+        className={RatingsReviewsCSS.button}
+        type="button"
+        onClick={handleMoreReviews}
+      >
+        MORE REVIEWS
+      </button>
+    );
   }
-
 }
 
 export default MoreReviews;
