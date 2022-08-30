@@ -14,6 +14,7 @@ class ReviewTile extends React.Component {
 
     const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
     const date = format(parseISO(review.date), 'MMMM dd, yyyy');
+    const summary = review.summary.slice(0, 60);
 
     return (
 
@@ -27,7 +28,7 @@ class ReviewTile extends React.Component {
           </div>
         </div>
         <div className={RatingsReviewsCSS.review_summary}>
-          {review.summary}
+          {summary}
         </div>
         <div className={RatingsReviewsCSS.review_body}>
           {review.body}

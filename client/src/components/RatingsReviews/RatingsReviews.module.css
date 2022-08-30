@@ -74,10 +74,9 @@
 
 }
 
-/* .review_date {
-  color: yellow;
-  grid-column: 1;
-} */
+.review_summary {
+  font-weight: bold;
+}
 
 .review_content {
   /* grid-row: 2;
