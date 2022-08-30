@@ -4,49 +4,43 @@ import carouselstyles from './Carousel.module.css';
 
 export default function Carousel() {
   const [productImages, setProductImages] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentImage, setCurrentImage] = useState('');
 
   useEffect(() => {
     axiosConfig.get('/products/65633/styles')
       .then((response) => {
-        const result = response.data.results;
-        console.log(result);
+        const result = response.data.results[0].photos;
         setProductImages(result);
-        console.log('products... ', products);
+        setCurrentImage(result[currentIndex].url);
       })
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [currentIndex]);
 
-  const imageGallery = {
-    width: '100%',
-    height: '100%',
-    backgroundPosition: 'center',
-    backgroundSize: 'contain',
-    backgroundRepeat: 'no-repeat',
-    backgroundImage: 'url(https://via.placeholder.com/400x600)',
+  const handlePreviousImg = () => {
+    const isFirst = currentIndex === 0;
+    const newIndex = isFirst ? productImages.length : currentIndex - 1;
+    setCurrentIndex(newIndex);
   };
-
-  const thumbnails = {
-    cursor: 'pointer',
-    border: '1px solid red',
-    height: '50px',
-    width: '50px',
-    margin: '25px auto',
-    // backgroundImage: `${productImage.photos.thumbnail_url}`,
+  const handleNextImg = () => {
+    const isLast = currentIndex === productImages.length - 1;
+    const newIndex = isLast ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
   };
 
   return (
-    <div className={carouselstyles.imageGallery} style={imageGallery}>
+    <div className={carouselstyles.imageGallery} style={{ backgroundImage: `url(${currentImage})` }}>
       <div className={carouselstyles.thumbnailRow}>
         {productImages.map((productImage) => (
-          <div url={productImage.photos} style={thumbnails} />
+          <div className={carouselstyles.thumbnail} productImage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})` }} />
         ))}
         <div className={carouselstyles.goToNext}>▼</div>
       </div>
       <div className={carouselstyles.arrows}>
-        <div className={carouselstyles.leftArrow}>❮</div>
-        <div className={carouselstyles.rightArrow}>❯</div>
+        <div className={carouselstyles.leftArrow} onClick={handlePreviousImg}>❮</div>
+        <div className={carouselstyles.rightArrow} onClick={handleNextImg}>❯</div>
       </div>
       <div className={carouselstyles.lightbox} />
     </div>
