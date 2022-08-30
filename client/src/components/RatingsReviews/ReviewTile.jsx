@@ -17,6 +17,13 @@ class ReviewTile extends React.Component {
     const summary = review.summary.slice(0, 60);
     const recommend = review.recommend === true ? 'I recommend this product' : '';
     const reviewer = review.reviewer_name;
+    const response = review.response !== null ? review.response : '';
+    const body = review.body.slice(0, 250);
+    const photos = review.photos.slice(0, 5).map((photo) => {
+      return <a key={photo.id}>
+        <img src={photo.url} alt={photo.id} className={RatingsReviewsCSS.thumbnail_img} />
+        </a>;
+    });
 
     return (
 
@@ -33,11 +40,16 @@ class ReviewTile extends React.Component {
           {summary}
         </div>
         <div className={RatingsReviewsCSS.review_body}>
-          {review.body}
+          <div className={RatingsReviewsCSS.body_text}>
+            {body}
+          </div>
+          <div className={RatingsReviewsCSS.photos}>
+            {photos}
+          </div>
+
         </div>
         <div>{recommend}</div>
-        <div>{review.reviewer_name}</div>
-        <div>Response to Review</div>
+        <div>{response}</div>
         <div className="review_actions">
           Helpful?
           Yes

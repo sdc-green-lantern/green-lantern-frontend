@@ -122,3 +122,13 @@
   grid-column: 3/3;
   border: 1px solid black;
 }
+
+
+.thumbnail_img {
+  border: 1px solid black;
+  max-width: 20%;
+  /* max-height: 20%;
+  height: 20%; */
+  /* max-height: 20%; */
+
+}
