@@ -1,5 +1,5 @@
 import React from 'react';
-import axiosConfig from '../../../../example.axiosConfig.js'; //use this variable in place of axios
+import axiosConfig from '../../../../axiosConfig.js'; // use this variable in place of axios
 import ProductOverview from '../ProductOverview/ProductOverview.jsx';
 import Comparison from '../Comparison/Comparison.jsx';
 import QA from '../QA/QA.jsx';
@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 65631,
+      productId: 65632,
     };
   }
 
@@ -23,9 +23,9 @@ class App extends React.Component {
           {productId}
         </p>
         <ProductOverview />
-        <QA />
+        <QA productId={productId} />
         <Comparison />
-        <RatingsReviews productId={productId} />
+        <RatingsReviews axiosConfig={axiosConfig} productId={productId} />
       </div>
     );
   }
