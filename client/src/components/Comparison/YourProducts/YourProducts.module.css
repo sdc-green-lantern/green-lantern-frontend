@@ -1,7 +1,12 @@
+.your-products {
+  border: 3px solid black;
+  width: 70%;
+  height: 300px;
+}
+
 .main{
   overflow: hidden;
 }
-
 
 .card-container{
   width: 2000px;
