@@ -8,13 +8,15 @@ class QuestionItem extends React.Component {
     super(props);
     this.state = {
       results: [],
+      count: 2,
     };
   }
 
   componentDidMount() {
     const { question } = this.props;
     const { question_id } = question;
-    axiosConfig.get(`qa/questions/${question_id}/answers`)
+    const { count } = this.state;
+    axiosConfig.get(`qa/questions/${question_id}/answers?page=1&count=${count}`)
       .then((response) => {
         this.setState({
           results: response.data.results,
@@ -37,10 +39,25 @@ class QuestionItem extends React.Component {
     }
     return (
       <div className={QItemCSS.questionEach}>
-        <h4>
-          Q:
-          { question_body }
-        </h4>
+        <span>
+          <span style={{ fontWeight: 'bold' }}>
+            Q:
+            { question_body }
+          </span>
+          <span>
+            Helpful?
+            <span>
+              Yes
+            </span>
+            |
+            <span>
+              Add Answer
+            </span>
+          </span>
+          <span>
+            {`(${question.question_helpfulness})`}
+          </span>
+        </span>
         { answerDisplay }
       </div>
     );
