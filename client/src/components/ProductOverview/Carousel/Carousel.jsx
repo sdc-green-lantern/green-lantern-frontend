@@ -15,7 +15,7 @@ export default function Carousel() {
         setCurrentImage(result[currentIndex].url);
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
       });
   }, [currentIndex]);
 
