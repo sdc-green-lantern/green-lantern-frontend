@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axiosConfig from '../../../../../axiosConfig.js';
 import carouselstyles from './Carousel.module.css';
 
-export default function Carousel() {
+export default function Carousel({ productId }) {
   const [productImages, setProductImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState('');
 
   useEffect(() => {
-    axiosConfig.get('/products/65633/styles')
+    axiosConfig.get(`/products/${productId}/styles`)
       .then((response) => {
         const result = response.data.results[0].photos;
         setProductImages(result);
