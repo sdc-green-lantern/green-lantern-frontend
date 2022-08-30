@@ -1,7 +1,9 @@
 import React from 'react';
-import {format, parseISO} from 'date-fns';
-import RatingsReviewsCSS from './RatingsReviews.module.css';
+import { format, parseISO } from 'date-fns';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
+import RatingsReviewsCSS from './RatingsReviews.module.css';
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -54,7 +56,10 @@ class ReviewTile extends React.Component {
           </div>
 
         </div>
-        <div>{recommend}</div>
+        <div>
+          <FontAwesomeIcon icon={faCheck} />
+          {recommend}
+        </div>
         <div>{response}</div>
         <div className="review_actions">
           Helpful?
