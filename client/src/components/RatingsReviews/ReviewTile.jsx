@@ -9,11 +9,15 @@ class ReviewTile extends React.Component {
 
   render() {
     const { review } = this.props;
+
+    const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+
     return (
+
       <div className={RatingsReviewsCSS.review_tile}>
         <div className={RatingsReviewsCSS.review_header}>
           <div className={RatingsReviewsCSS.stars}>
-            ★★★★★
+            {stars}
           </div>
           <div className={RatingsReviewsCSS.review_date}>
             {review.date}

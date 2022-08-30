@@ -113,13 +113,6 @@
   cursor: pointer;
 }
 
-.stars {
-  color: white;
-  /* grid-row: 1;
-  grid-column: 1; */
-}
-
-
 
 .write_new_review_btn_box {
   display: flex;
