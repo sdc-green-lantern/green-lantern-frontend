@@ -18,3 +18,14 @@ test('loads and displays Ratings and Reviews heading', () => {
   expect(RatingsReviewsHeader).toBeInTheDocument();
   expect(RatingsReviewsHeader).toHaveTextContent('RATINGS & REVIEWS');
 });
+
+
+// Review Tile
+
+  // Star Rating
+    // test for each rating from 1 through 5
+
+// Content:
+  // no more than 5 images
+  // renders images
+

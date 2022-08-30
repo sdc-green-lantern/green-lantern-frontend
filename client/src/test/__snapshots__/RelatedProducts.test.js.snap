@@ -15,7 +15,7 @@ exports[`should take a snapshot 1`] = `
       class="main"
     >
       <div
-        class="left"
+        class="scroll-left"
         style="display: none;"
       >
         <div
@@ -26,8 +26,8 @@ exports[`should take a snapshot 1`] = `
         />
       </div>
       <div
-        class="right"
-        style="display: flex;"
+        class="scroll-right"
+        style="display: none;"
       >
         <div
           class="arrow-right"
@@ -42,184 +42,7 @@ exports[`should take a snapshot 1`] = `
         <div
           class="carousel-wrapper"
           style="left: 0px;"
-        >
-          <div
-            class="container"
-          >
-            <img
-              alt="Grapefruit slice atop a pile of other slices"
-              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
-            />
-            <div>
-              <div>
-                Category...
-              </div>
-              <div>
-                Name.......
-              </div>
-              <div>
-                Price.......
-              </div>
-              <div>
-                Average Rating.......
-              </div>
-            </div>
-          </div>
-          <div
-            class="container"
-          >
-            <img
-              alt="Grapefruit slice atop a pile of other slices"
-              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
-            />
-            <div>
-              <div>
-                Category...
-              </div>
-              <div>
-                Name.......
-              </div>
-              <div>
-                Price.......
-              </div>
-              <div>
-                Average Rating.......
-              </div>
-            </div>
-          </div>
-          <div
-            class="container"
-          >
-            <img
-              alt="Grapefruit slice atop a pile of other slices"
-              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
-            />
-            <div>
-              <div>
-                Category...
-              </div>
-              <div>
-                Name.......
-              </div>
-              <div>
-                Price.......
-              </div>
-              <div>
-                Average Rating.......
-              </div>
-            </div>
-          </div>
-          <div
-            class="container"
-          >
-            <img
-              alt="Grapefruit slice atop a pile of other slices"
-              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
-            />
-            <div>
-              <div>
-                Category...
-              </div>
-              <div>
-                Name.......
-              </div>
-              <div>
-                Price.......
-              </div>
-              <div>
-                Average Rating.......
-              </div>
-            </div>
-          </div>
-          <div
-            class="container"
-          >
-            <img
-              alt="Grapefruit slice atop a pile of other slices"
-              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
-            />
-            <div>
-              <div>
-                Category...
-              </div>
-              <div>
-                Name.......
-              </div>
-              <div>
-                Price.......
-              </div>
-              <div>
-                Average Rating.......
-              </div>
-            </div>
-          </div>
-          <div
-            class="container"
-          >
-            <img
-              alt="Grapefruit slice atop a pile of other slices"
-              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
-            />
-            <div>
-              <div>
-                Category...
-              </div>
-              <div>
-                Name.......
-              </div>
-              <div>
-                Price.......
-              </div>
-              <div>
-                Average Rating.......
-              </div>
-            </div>
-          </div>
-          <div
-            class="container"
-          >
-            <img
-              alt="Grapefruit slice atop a pile of other slices"
-              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
-            />
-            <div>
-              <div>
-                Category...
-              </div>
-              <div>
-                Name.......
-              </div>
-              <div>
-                Price.......
-              </div>
-              <div>
-                Average Rating.......
-              </div>
-            </div>
-          </div>
-          <div
-            class="container"
-          >
-            <img
-              alt="Grapefruit slice atop a pile of other slices"
-              src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
-            />
-            <div>
-              <div>
-                Category...
-              </div>
-              <div>
-                Name.......
-              </div>
-              <div>
-                Price.......
-              </div>
-              <div>
-                Average Rating.......
-              </div>
-            </div>
-          </div>
-        </div>
+        />
       </div>
     </div>
   </div>
