@@ -65,7 +65,6 @@ class RelatedProducts extends React.Component {
           relatedProductIds: data,
         }, res);
       });
-      console.log(this.state.relatedProductIds)
     } catch (e) {
       console.warn(e);
     }
