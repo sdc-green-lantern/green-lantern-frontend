@@ -1,39 +1,86 @@
 import React from 'react';
+import axios from 'axios';
 // eslint-disable-next-line import/extensions
 import Card from '../Card/Card.jsx';
 import relatedProducts from './RelatedProducts.module.css';
+import instance from '../../../../../axiosConfig.js';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isRightEdgeInBound: true,
       leftOffset: 0,
-      products: [1, 2, 3, 4, 5, 6, 6, 7],
+      relatedProductIds: [],
     };
-    this.handleScroll = RelatedProducts.handleScroll.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+    this.rightScrollerDisplay = this.rightScrollerDisplay.bind(this);
   }
 
-  static handleScroll(isRight) {
-    return () => {
-      const { leftOffset } = this.state;
-      const unitOffset = isRight ? -200 : 200;
-      this.setState({
-        leftOffset: leftOffset + unitOffset,
+  componentDidMount() {
+    this.updateRelatedProducts()
+      .then(() => {
+        this.rightScrollerDisplay();
       });
+  }
+
+  handleScroll(isRight) {
+    return async () => {
+      const unitOffset = isRight ? -162 : 162;
+      const { leftOffset } = this.state;
+      await new Promise((resolve) => {
+        this.setState({
+          leftOffset: leftOffset + unitOffset,
+        }, resolve);
+      });
+      this.rightScrollerDisplay();
     };
+  }
+
+  // if the right edge of the carousel is inside the container
+  // set this.state.isRightEdgeInBound to false
+  rightScrollerDisplay() {
+    const { clientWidth: conainerWidth } = this.main || {};
+    const { clientWidth: wrapperWidth } = this.carouselWrapper;
+    const { leftOffset } = this.state;
+    if (wrapperWidth + leftOffset <= conainerWidth) {
+      this.setState({
+        isRightEdgeInBound: true,
+      });
+    } else {
+      this.setState({
+        isRightEdgeInBound: false,
+      });
+    }
+  }
+
+  async updateRelatedProducts() {
+    const { productId } = this.props;
+    try {
+      const response = await instance.get(`/products/${productId}/related`);
+      const { data } = response;
+      await new Promise((res) => {
+        this.setState({
+          relatedProductIds: data,
+        }, res);
+      });
+      console.log(this.state.relatedProductIds)
+    } catch (e) {
+      console.warn(e);
+    }
   }
 
   render() {
-    const { leftOffset } = this.state;
+    const { leftOffset, isRightEdgeInBound, relatedProductIds } = this.state;
     return (
-      <div className="related-products">
-        <div data-testid="title" className={relatedProducts.title}>
+      <div className={relatedProducts['related-products']}>
+        <div className={relatedProducts.title} data-testid="title">
           RELATED PRODUCTS
         </div>
-        <div className={relatedProducts.main}>
+        <div className={relatedProducts.main} ref={(ele) => { this.main = ele; }}>
           <div
-            className={relatedProducts.left}
+            className={relatedProducts['scroll-left']}
             style={{ display: leftOffset === 0 ? 'none' : 'flex' }}
           >
             <div
@@ -42,8 +89,8 @@ class RelatedProducts extends React.Component {
             <button type="button" onClick={this.handleScroll(false)} />
           </div>
           <div
-            className={relatedProducts.right}
-            style={{ display: leftOffset === 800 ? 'none' : 'flex' }}
+            className={relatedProducts['scroll-right']}
+            style={{ display: isRightEdgeInBound ? 'none' : 'flex' }}
           >
             <div
               className={relatedProducts['arrow-right']}
@@ -53,16 +100,10 @@ class RelatedProducts extends React.Component {
           <div className={relatedProducts.carousel}>
             <div
               className={relatedProducts['carousel-wrapper']}
+              ref={(ele) => { this.carouselWrapper = ele; }}
               style={{ left: leftOffset }}
             >
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
+              {relatedProductIds.map((id) => <Card key={id} id={id} />)}
             </div>
           </div>
         </div>
