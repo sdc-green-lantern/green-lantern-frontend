@@ -1,19 +1,46 @@
 import React from 'react';
 import card from './Card.module.css';
+import instance from '../../../../../axiosConfig.js';
 
+const cate = ['computer', 'tv', 'ipad', 'bike', 'monitor', 'chair', 'table', 'watch', 'jean', 'motor', 'ship', 'bag'];
 // eslint-disable-next-line react/prefer-stateless-function
 class Card extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      product: {}
+    };
+    this.updateProduct = this.updateProduct.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateProduct();
+  }
+
+  async updateProduct() {
+    const { id } = this.props;
+    const response = await instance.get(`/products/${id}`);
+    const { data } = response;
+    console.log(data);
+    this.setState({
+      product: data,
+    });
+  }
+
   render() {
+    const { id, name, category, default_price: defaultPrice, } = this.state.product;
     return (
       <div className={card.container}>
-        <img
-          src="https://images.unsplash.com/photo-1661308354640-a48b818557ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
-          alt="Grapefruit slice atop a pile of other slices"
-        />
+        <div className={card['img-container']}>
+          <img
+            src={`https://source.unsplash.com/random/?${cate[Math.floor(Math.random() * cate.length)]}`}
+            alt="Grapefruit slice atop a pile of other slices"
+          />
+        </div>
         <div>
-          <div>Category...</div>
-          <div>Name.......</div>
-          <div>Price.......</div>
+          <div>{category}</div>
+          <div>{name}</div>
+          <div>${defaultPrice}</div>
           <div>Average Rating.......</div>
         </div>
       </div>

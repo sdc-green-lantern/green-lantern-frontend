@@ -1,3 +1,26 @@
 .questionlist {
-  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  height: 350px;
+  flex-flow: row wrap;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid blue;
+  overflow-y: auto;
+}
+
+.addQButton {
+  right: 40%;
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+  color: blue;
+}
+
+.moreButton {
+  right: 60%;
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+  color: blue;
 }
