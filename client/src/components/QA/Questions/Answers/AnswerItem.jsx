@@ -28,7 +28,13 @@ class AnswerItem extends React.Component {
             {answer.answerer_name}
           </span>
           <span>
-            {`, ${answer.date}`}
+            {`, ${answer.date}   |`}
+          </span>
+          <span>
+            {'   Helpful?'}
+          </span>
+          <span>
+            {`  Yes(${answer.helpfulness})`}
           </span>
         </span>
 
