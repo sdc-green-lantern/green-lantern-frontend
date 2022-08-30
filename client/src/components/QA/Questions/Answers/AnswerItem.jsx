@@ -31,11 +31,11 @@ class AnswerItem extends React.Component {
             {`, ${answer.date}   |`}
           </span>
           <span>
-            {'   Helpful?'}
+            {'   Helpful?   '}
+            <span>Yes</span>
+            {`(${answer.helpfulness})   |`}
           </span>
-          <span>
-            {`  Yes(${answer.helpfulness})`}
-          </span>
+          <span>Report</span>
         </span>
 
       </div>
