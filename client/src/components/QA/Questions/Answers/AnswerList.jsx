@@ -12,7 +12,12 @@ class AnswerList extends React.Component {
     const { answers } = this.props;
     return (
       <div className={AListCSS.answerlist}>
-        {answers.map((answer, index) => <AnswerItem answer={answer} key={index} />)}
+        {answers.map((answer) => (
+          <AnswerItem
+            answer={answer}
+            key={answer.answer_id}
+          />
+        ))}
       </div>
     );
   }

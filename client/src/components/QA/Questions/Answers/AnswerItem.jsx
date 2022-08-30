@@ -9,10 +9,29 @@ class AnswerItem extends React.Component {
 
   render() {
     const { answer } = this.props;
+    const { answerer_name } = answer;
+    const condition = {
+      fontWeight: 'normal',
+    };
+    if (answerer_name === 'Seller') {
+      condition.fontWeight = 'bold';
+    }
     return (
       <div className={AItemCSS.answerItem}>
-        A:
-        {answer.body}
+        <p className={AItemCSS.answerBody}>
+          A:
+          {answer.body}
+        </p>
+        <span>
+          <span className={AItemCSS.answerInfo}> by </span>
+          <span style={condition}>
+            {answer.answerer_name}
+          </span>
+          <span>
+            {`, ${answer.date}`}
+          </span>
+        </span>
+
       </div>
     );
   }
