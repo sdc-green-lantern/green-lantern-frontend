@@ -11,13 +11,16 @@ class AnswerList extends React.Component {
   render() {
     const { answers } = this.props;
     return (
-      <div className={AListCSS.answerlist}>
-        {answers.map((answer) => (
-          <AnswerItem
-            answer={answer}
-            key={answer.answer_id}
-          />
-        ))}
+      <div>
+        <div className={AListCSS.answerlist}>
+          {answers.map((answer) => (
+            <AnswerItem
+              answer={answer}
+              key={answer.answer_id}
+            />
+          ))}
+        </div>
+        <button type="submit" className={AListCSS.showAnswers}>Show more Answers</button>
       </div>
     );
   }

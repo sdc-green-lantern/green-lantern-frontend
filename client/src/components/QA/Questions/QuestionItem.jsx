@@ -33,12 +33,7 @@ class QuestionItem extends React.Component {
     const { question_body } = question;
     const { results } = this.state;
     if (results.length !== 0) {
-      answerDisplay = (
-        <div>
-          <AnswerList answers={results} />
-          <button type="submit">Show more Answers</button>
-        </div>
-      );
+      answerDisplay = <AnswerList answers={results} />;
     } else {
       answerDisplay = <button type="submit"> Answer this question </button>;
     }
