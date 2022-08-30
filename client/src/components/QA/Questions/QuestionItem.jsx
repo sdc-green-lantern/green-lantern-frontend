@@ -54,6 +54,10 @@ class QuestionItem extends React.Component {
             <span>
               Yes
             </span>
+            |
+            <span>
+              Add Answer
+            </span>
           </span>
           <span>
             {`(${question.question_helpfulness})`}
