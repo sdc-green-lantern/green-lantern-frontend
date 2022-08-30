@@ -55,7 +55,7 @@ class RatingsReviews extends React.Component {
     return (
       <div className={RatingsReviewsCSS.ratings_section}>
         <div className={RatingsReviewsCSS.ratings_container}>
-          <div className={RatingsReviewsCSS.ratings_header}>
+          <div className={RatingsReviewsCSS.ratings_header} data-testid="RatingsReviews-header">
             RATINGS & REVIEWS
           </div>
           <div className={RatingsReviewsCSS.ratings_breakdown_sidebar}>
