@@ -25,6 +25,10 @@ test('loads and displays Ratings and Reviews heading', () => {
   // Star Rating
     // test for each rating from 1 through 5
 
+  // Summary
+    // bold
+    // will
+
 // Content:
   // no more than 5 images
   // renders images
