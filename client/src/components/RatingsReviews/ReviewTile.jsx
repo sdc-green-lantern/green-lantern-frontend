@@ -1,5 +1,7 @@
 import React from 'react';
+import {format, parseISO} from 'date-fns';
 import RatingsReviewsCSS from './RatingsReviews.module.css';
+
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -11,6 +13,7 @@ class ReviewTile extends React.Component {
     const { review } = this.props;
 
     const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+    const date = format(parseISO(review.date), 'MMMM dd, yyyy');
 
     return (
 
@@ -20,7 +23,7 @@ class ReviewTile extends React.Component {
             {stars}
           </div>
           <div className={RatingsReviewsCSS.review_date}>
-            {review.date}
+            {date}
           </div>
         </div>
         <div className={RatingsReviewsCSS.review_summary}>
