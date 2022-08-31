@@ -4,11 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import RatingsReviewsCSS from './RatingsReviews.module.css';
+import ReviewImageModal from './ReviewImageModal.jsx';
 
 class ReviewTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.showReviewImageModal = this.showReviewImageModal.bind(this);
+  }
+
+  showReviewImageModal(event) {
+    console.log(event.target);
   }
 
   render() {
@@ -23,14 +29,23 @@ class ReviewTile extends React.Component {
     const body = review.body.slice(0, 250);
     const photos = review.photos.slice(0, 5).map((photo) =>
       (
-        <a href={photo.url} key={photo.id}>
+        // <button
+        //   className={RatingsReviewsCSS.review_photo}
+        //   type="submit"
+        //   // href={photo.url}
+        //   key={photo.id}
+        //   onClick={this.showReviewImageModal}
+        // >
+        <div>
           <img
             src={photo.url}
             alt={photo.id}
             className={RatingsReviewsCSS.thumbnail_img}
           />
-        </a>
-      )
+        </div>
+
+        // </button>
+      ),
     );
 
     return (

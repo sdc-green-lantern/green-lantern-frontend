@@ -110,6 +110,10 @@
   border: 1px solid black;
 }
 
+.review_photo {
+
+}
+
 .button {
   min-width: 10%;
   max-width: 40%;
@@ -122,6 +126,10 @@
 
 .button:hover {
   background-color: darkgray;
+  cursor: pointer;
+}
+
+.img:hover {
   cursor: pointer;
 }
 
@@ -160,4 +168,8 @@
   /* height: 20%; */
   /* max-height: 20%; */
 
+}
+
+.thumbnail_img:hover {
+  cursor: pointer;
 }
