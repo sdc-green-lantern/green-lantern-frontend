@@ -11,20 +11,22 @@ class ReviewTile extends React.Component {
     super(props);
     this.state = {
       show: false,
+      currentPhoto: {},
     };
     this.showReviewImageModal = this.showReviewImageModal.bind(this);
     this.closeReviewImageModal = this.closeReviewImageModal.bind(this);
   }
 
   showReviewImageModal(event) {
-    console.log("Open Modal: ");
-    console.log(event.target);
+    const currentPhoto = {
+      url: event.target.src,
+      id: event.target.alt,
+    };
     this.setState({ show: true });
+    this.setState({ currentPhoto });
   }
 
-  closeReviewImageModal(event) {
-    console.log("Close Modal: ");
-    console.log(event.target);
+  closeReviewImageModal() {
     this.setState({ show: false });
   }
 
@@ -39,18 +41,11 @@ class ReviewTile extends React.Component {
     const response = review.response !== null ? `Response from seller: ${review.response}` : '';
     const body = review.body.slice(0, 250);
 
-    var { show } = this.state;
+    const { show, currentPhoto } = this.state;
     const photos = review.photos.slice(0, 5).map((photo) =>
       (
-        // <button
-        //   className={RatingsReviewsCSS.review_photo}
-        //   type="submit"
-        //   // href={photo.url}
-        //   key={photo.id}
-        //   onClick={this.showReviewImageModal}
-        // >
-        <div key={photo.id}
-          // onClick={() => {this.showReviewImageModal} }
+        <div
+          key={photo.id}
           onClick={this.showReviewImageModal}
           role="button"
         >
@@ -59,20 +54,11 @@ class ReviewTile extends React.Component {
             alt={photo.id}
             className={RatingsReviewsCSS.thumbnail_img}
           />
-          <ReviewImageModal
-            show={show}
-            // close={() => {this.closeReviewImageModal} }
-            close={this.closeReviewImageModal}
-            photo={photo}
-          />
         </div>
-
-        // </button>
       ),
     );
 
     return (
-
       <div className={RatingsReviewsCSS.review_tile}>
         <div className={RatingsReviewsCSS.review_header}>
           <div className={RatingsReviewsCSS.stars}>
@@ -105,7 +91,12 @@ class ReviewTile extends React.Component {
           {review.helpfulness}
           | Report
         </div>
-
+        {show && (
+          <ReviewImageModal
+            close={this.closeReviewImageModal}
+            photo={currentPhoto}
+          />
+        )}
       </div>
     );
   }

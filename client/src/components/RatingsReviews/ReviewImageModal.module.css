@@ -8,17 +8,11 @@
   height: 100%;
   padding-top: 100px;
   background-color: black;
-  background-color: rgba(0, 0, 0, 0.4);
-  -webkit-transition: 0.5s;
-  overflow: auto;
-  transition: all 0.3s linear;
 }
 
 .imgModalContainer {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border-radius: 4px;
-  max-width: 300px;
-  height: 450px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
 }
+

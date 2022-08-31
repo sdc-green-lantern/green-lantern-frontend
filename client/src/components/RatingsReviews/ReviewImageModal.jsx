@@ -11,36 +11,23 @@ export default class ReviewImageModal extends React.Component {
   }
 
   render() {
-    const { show, close, photo } = this.props;
-    console.log(show);
-
-    if (show === false) {
-      return null;
-    }
-    // return (
-    //   <div>
-    //     <div>{this.props.children}</div>
-    //     <button onClose={close}>Close</button>
-    //   </div>
-
-    // );
-
+    const { close, photo } = this.props;
     return (
       <div className={ReviewImageModalCSS.imgModalBackground}>
         <div className={ReviewImageModalCSS.imgModalContainer}>
-          <button
-            onClick={close}
-            className={RatingsReviewsCSS.button}
-            type="button"
-          >
-            {/* <FontAwesomeIcon icon={faWindowClose} /> */}
-            Close
-          </button>
-          <img
-            src={photo.url}
-            alt={photo.id}
-            className={RatingsReviewsCSS.thumbnail_img}
-          />
+          <div>
+            <button
+              onClick={close}
+              className={RatingsReviewsCSS.button}
+              type="button"
+            >
+              {/* <FontAwesomeIcon icon={faWindowClose} /> */}
+              Close
+            </button>
+          </div>
+          <div>
+            <img src={photo.url} alt={photo.id} />
+          </div>
         </div>
       </div>
     );
