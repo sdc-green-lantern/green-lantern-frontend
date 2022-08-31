@@ -19,7 +19,9 @@ class AnswerItem extends React.Component {
     return (
       <div className={AItemCSS.answerItem}>
         <p className={AItemCSS.answerBody}>
-          A:
+          <span style={{ fontWeight: 'bold' }}>
+            A:
+          </span>
           {answer.body}
         </p>
         <span>
@@ -32,10 +34,10 @@ class AnswerItem extends React.Component {
           </span>
           <span>
             {'   Helpful?   '}
-            <span>Yes</span>
+            <span className={AItemCSS.yesHelpful}>Yes</span>
             {`(${answer.helpfulness})   |`}
           </span>
-          <span>Report</span>
+          <span className={AItemCSS.reportBtn}>Report</span>
         </span>
 
       </div>
