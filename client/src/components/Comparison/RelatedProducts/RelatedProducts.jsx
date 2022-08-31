@@ -1,9 +1,8 @@
 import React from 'react';
-import axios from 'axios';
 // eslint-disable-next-line import/extensions
 import Card from '../Card/Card.jsx';
 import relatedProducts from './RelatedProducts.module.css';
-import instance from '../../../../../axiosConfig.js';
+import instance from '@/axiosConfig.js';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class RelatedProducts extends React.Component {
