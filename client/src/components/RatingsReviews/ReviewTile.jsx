@@ -84,7 +84,15 @@ class ReviewTile extends React.Component {
           <FontAwesomeIcon icon={faCheck} />
           {recommend}
         </div>
-        <div>{response}</div>
+        <div className={RatingsReviewsCSS.review_response}>
+          {response == null && (
+            <div>
+              <p>Response:</p>
+              <p>The product is good. stop complaining.</p>
+            </div>
+          )}
+
+        </div>
         <div className="review_actions">
           Helpful?
           Yes
