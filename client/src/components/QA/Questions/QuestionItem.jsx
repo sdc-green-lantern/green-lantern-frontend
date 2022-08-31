@@ -31,6 +31,7 @@ class QuestionItem extends React.Component {
 
   render() {
     let answerDisplay;
+    const { showAModal } = this.state;
     const { question } = this.props;
     const { question_body } = question;
     const { results } = this.state;
@@ -46,19 +47,22 @@ class QuestionItem extends React.Component {
             Q:
             { question_body }
           </span>
-          <span>
+          <span className={QItemCSS.helpful}>
             Helpful?
-            <span>
-              Yes
-            </span>
-            |
-            <span>
-              Add Answer
-            </span>
+            <button type="submit" className={QItemCSS.yesHelpful}>Yes</button>
           </span>
           <span>
             {`(${question.question_helpfulness})`}
           </span>
+          |
+          <span>
+            <button className={QItemCSS.addAnswerBtn} type="submit" onClick={() => { this.setState({ showAModal: true }); }}>Add Answer</button>
+          </span>
+          <div>
+            { showAModal && (
+            <AnswerModal hideModal={() => { this.setState({ showAModal: false }); }} />
+            )}
+          </div>
         </span>
         { answerDisplay }
       </div>
