@@ -50,10 +50,8 @@ class RatingsReviews extends React.Component {
   }
 
   handleSort(event) {
-    console.log(event.target.value);
     const { productId, axiosConfig } = this.props;
     const sortOption = event.target.value;
-    console.log(sortOption);
     const productURL = `/reviews/?sort=${sortOption}&product_id=${productId}&count=1000`;
 
     axiosConfig.get(productURL)
