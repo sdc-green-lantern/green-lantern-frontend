@@ -2,6 +2,7 @@ import React from 'react';
 import RatingsReviewsCSS from './RatingsReviews.module.css';
 import ReviewsList from './ReviewsList.jsx';
 import MoreReviews from './MoreReviews.jsx';
+import SortOptions from './SortOptions.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
@@ -11,16 +12,16 @@ class RatingsReviews extends React.Component {
       displayedReviews: [],
       numReviews: 0,
       numDisplayed: 0,
-      sortOption: 'relevance',
+      sortOption: 'relevant', // newest, helpful, relevant
     };
 
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
+    this.handleSort = this.handleSort.bind(this);
   }
 
   componentDidMount() {
-    // GET reviews
     const { productId, axiosConfig } = this.props;
-    const productURL = `/reviews/?product_id=${productId}`;
+    const productURL = `/reviews/?sort=relevant&product_id=${productId}&count=1000`;
 
     axiosConfig.get(productURL)
       .then((response) => {
@@ -48,10 +49,34 @@ class RatingsReviews extends React.Component {
     });
   }
 
+  handleSort(event) {
+    console.log(event.target.value);
+    const { productId, axiosConfig } = this.props;
+    const sortOption = event.target.value;
+    console.log(sortOption);
+    const productURL = `/reviews/?sort=${sortOption}&product_id=${productId}&count=1000`;
+
+    axiosConfig.get(productURL)
+      .then((response) => {
+        const reviews = response.data.results;
+        const displayedReviews = response.data.results.slice(0, 2);
+        this.setState({
+          reviews,
+          displayedReviews,
+          numReviews: reviews.length,
+          numDisplayed: displayedReviews.length,
+          sortOption,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   render() {
     const { axiosConfig, productId } = this.props;
     const {
-      reviews, displayedReviews, numReviews, numDisplayed, sortOption
+      reviews, displayedReviews, numReviews, numDisplayed,
     } = this.state;
     return (
       <div className={RatingsReviewsCSS.ratings_section}>
@@ -66,9 +91,10 @@ class RatingsReviews extends React.Component {
             <p>Product Breakdown</p>
           </div>
           <div className={RatingsReviewsCSS.sort_options}>
-            <div>
-              {`${numReviews} reviews, ordered by ${sortOption}`}
-            </div>
+            <SortOptions
+              numReviews={numReviews}
+              handleSort={this.handleSort}
+            />
           </div>
           <div className={RatingsReviewsCSS.reviews_list}>
             <ReviewsList
