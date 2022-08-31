@@ -52,12 +52,12 @@
   text-decoration: underline;
 }
 .productinfo {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: flex;
   width: 70%;
 }
 .starRatings {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   padding: 20px;
 }
 .starRatings span {
@@ -66,16 +66,107 @@
   text-decoration: underline;
 }
 .productTitle {
-
+  /* border: 1px solid red; */
+  line-height: 5px;
+  padding: 0 20px;
+}
+.productTitle h3 {
+  font-weight: 100;
+  text-transform: uppercase;
+}
+.productPrice {
+  padding: 10px 0;
+}
+/* .productSelection {
+  border: 1px solid red;
+  padding: 0 20px;
+} */
+.productSelection h3 {
+  font-size: 14px;
+  padding: 0 20px;
+}
+.productSelection span {
+  font-weight: 100;
+}
+.selectionContainer img {
+  border: 2px solid black;
+  border-radius: 100%;
+  margin: 10px 20px;
+  height: 50px;
+  width: 50px;
+}
+.buttons {
+  /* border: 1px solid red; */
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.selectSize {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border: 1px solid black;
+  width: 55%;
+}
+.selectQuantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border: 1px solid black;
+  padding-left: 15px;
+  width: 25%;
+}
+.addToBag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border: 1px solid black;
+  padding-left: 10px;
+  width: 70%;
+}
+.favorite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  width: 15%;
+}
+.quantityRow, .checkoutRow{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px 20px;
+  height: 50px;
 }
 .productoptions {
   /* border: 1px solid black; */
   width: 60%;
 }
 .productdescription {
-  border-right: 1px solid black;
-  border-left: 1px solid black;
+  /* border-right: 1px solid black;
+  border-left: 1px solid black; */
+  display: flex;
   border-bottom: 1px solid black;
+  padding-top: 40px;
   height: 200px;
   width: 70%;
+}
+.descriptionBody {
+  /* border-right: 1px solid black; */
+  padding-left: 10%;
+}
+.checklist {
+  width: 60%;
+}
+.checklistStyles {
+  border-left: 2px solid black;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  list-style: none;
+}
+.listItem {
+  padding: 5px 0;
 }

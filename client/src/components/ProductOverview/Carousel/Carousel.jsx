@@ -35,11 +35,7 @@ export default function Carousel({ productId }) {
     <div className={carouselstyles.imageGallery} style={{ backgroundImage: `url(${currentImage})` }}>
       <div className={carouselstyles.thumbnailRow}>
         {productImages.map((productImage, index) => (
-<<<<<<< HEAD
-          <div className={carouselstyles.thumbnail} key={index} productImage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})` }} />
-=======
           <div className={carouselstyles.thumbnail} key={index} productimage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})` }} />
->>>>>>> master
         ))}
         <div className={carouselstyles.goToNext}>▼</div>
       </div>
