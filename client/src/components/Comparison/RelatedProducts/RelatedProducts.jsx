@@ -27,7 +27,7 @@ class RelatedProducts extends React.Component {
 
   handleScroll(isRight) {
     return async () => {
-      const unitOffset = isRight ? -162 : 162;
+      const unitOffset = isRight ? -192 : 192;
       const { leftOffset } = this.state;
       await new Promise((resolve) => {
         this.setState({
@@ -59,7 +59,9 @@ class RelatedProducts extends React.Component {
     const { productId } = this.props;
     try {
       const response = await instance.get(`/products/${productId}/related`);
-      const { data } = response;
+      let { data } = response;
+      data = [...new Set(data)];
+
       await new Promise((res) => {
         this.setState({
           relatedProductIds: data,

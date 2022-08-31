@@ -12,7 +12,7 @@ class Comparison extends React.Component {
     return (
       <div className="related-items">
         <RelatedProducts productId={productId} />
-        {/* <YourProducts /> */}
+        <YourProducts />
       </div>
     );
   }
