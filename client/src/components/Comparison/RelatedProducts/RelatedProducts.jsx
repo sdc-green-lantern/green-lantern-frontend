@@ -1,9 +1,8 @@
 import React from 'react';
-import axios from 'axios';
 // eslint-disable-next-line import/extensions
 import Card from '../Card/Card.jsx';
 import relatedProducts from './RelatedProducts.module.css';
-import instance from '../../../../../axiosConfig.js';
+import instance from '@/axiosConfig.js';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class RelatedProducts extends React.Component {
@@ -27,7 +26,7 @@ class RelatedProducts extends React.Component {
 
   handleScroll(isRight) {
     return async () => {
-      const unitOffset = isRight ? -162 : 162;
+      const unitOffset = isRight ? -192 : 192;
       const { leftOffset } = this.state;
       await new Promise((resolve) => {
         this.setState({
@@ -59,7 +58,9 @@ class RelatedProducts extends React.Component {
     const { productId } = this.props;
     try {
       const response = await instance.get(`/products/${productId}/related`);
-      const { data } = response;
+      let { data } = response;
+      data = [...new Set(data)];
+
       await new Promise((res) => {
         this.setState({
           relatedProductIds: data,

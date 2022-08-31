@@ -1,6 +1,7 @@
 .container{
+  position: relative;
   display: inline-block;
-  width: 150px;
+  width: 180px;
   height: 250px;
   border: 1px solid black;
   margin: 10px 10px 10px 0;
@@ -14,13 +15,41 @@
   width: 100%;
   height: 150px;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  background-color: grey;
 }
 
 img{
-  width: 150px;
-  min-height: 150px;
+  height: 100%;
 }
 
+.info{
+  margin: 5px;
+}
 
+.action{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color:#0ABAB5;
+  opacity: 50%;
+}
 
+.action:active{
 
+  color:#0ABAB5;
+  opacity: 100%;
+  -ms-zoom-animation: default;
+}
+
+.reg-star{
+  color: aquamarine;
+}
+
+.reg-star::after{
+  content: 'asdasda';
+  width: 60%;
+  color: aquamarine;
+
+}
