@@ -8,7 +8,7 @@ function QuestionList(props) {
   const [openQModal, toggleQModal] = useState(false);
   const { questions } = props;
   return (
-    <div>
+    <div className={QListCSS.questionContainer}>
       <div className={QListCSS.questionlist}>
         {questions.map((question) => (
           <QuestionItem
