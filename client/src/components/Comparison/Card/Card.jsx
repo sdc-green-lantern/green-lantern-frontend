@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faRegStar } from '@fortawesome/free-regular-svg-icons';
 import card from './Card.module.css';
 import instance from '@/axiosConfig.js';
 
@@ -59,7 +60,7 @@ class Card extends React.Component {
     const averageRating = Card.averageRating(ratings);
     return (
       <div className={card.container}>
-        <FontAwesomeIcon icon={faStar} size="lg" className={card.action} />
+        <FontAwesomeIcon icon={faRegStar} size="lg" className={card.action} />
         <div className={card['img-container']}>
           <img
             src={photos ? photos[0].url : ''}
@@ -76,11 +77,12 @@ class Card extends React.Component {
           </div>
           <div>
             {averageRating}
-            <FontAwesomeIcon icon={faStar} size="m" className={card.rating} />
-            <FontAwesomeIcon icon={faStar} size="m" className={card.rating} />
-            <FontAwesomeIcon icon={faStar} size="m" className={card.rating} />
-            <FontAwesomeIcon icon={faStar} size="m" className={card.rating} />
-            <FontAwesomeIcon icon={faStar} size="m" className={card.rating} />
+            <FontAwesomeIcon icon={faStar} size="m" className={card.star} />
+            <FontAwesomeIcon icon={faStar} size="m" className={card.star} />
+            <FontAwesomeIcon icon={faStar} size="m" className={card.star} />
+            <FontAwesomeIcon icon={faStar} size="m" className={card.star} />
+            <FontAwesomeIcon icon={faStar} size="m" className={card.star} />
+            <FontAwesomeIcon icon={faRegStar} size="m" className={card['reg-star']} />
           </div>
         </div>
       </div>

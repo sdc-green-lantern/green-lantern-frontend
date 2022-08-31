@@ -43,4 +43,13 @@ img{
   -ms-zoom-animation: default;
 }
 
+.reg-star{
+  color: aquamarine;
+}
 
+.reg-star::after{
+  content: 'asdasda';
+  width: 60%;
+  color: aquamarine;
+
+}
