@@ -15,8 +15,8 @@ class AnswerModal extends React.Component {
           <div className={AModalCSS.exitButton}>
             <button type="submit" onClick={hideModal}>X</button>
           </div>
-          <h2>Submit Your Answer</h2>
-          <h4>
+          <h2 className={AModalCSS.title}>Submit Your Answer</h2>
+          <h4 className={AModalCSS.subtitle}>
             product name: question body
           </h4>
           <div>
@@ -38,6 +38,8 @@ class AnswerModal extends React.Component {
               Upload you photos:
               <input type="file" />
             </label>
+          </div>
+          <div className={AModalCSS.submitBtn}>
             <button type="submit">Submit answer</button>
           </div>
         </div>
