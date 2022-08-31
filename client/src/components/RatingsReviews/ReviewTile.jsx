@@ -50,15 +50,15 @@ class ReviewTile extends React.Component {
           onClick={this.showReviewImageModal}
           role="button"
         >
-          {/* <ReviewImageModal
-            show={showModal}
-            close={this.closeReviewImageModal}
-            photo={photo}
-          /> */}
           <img
             src={photo.url}
             alt={photo.id}
             className={RatingsReviewsCSS.thumbnail_img}
+          />
+          <ReviewImageModal
+            show={showModal}
+            close={this.closeReviewImageModal}
+            photo={photo}
           />
         </div>
 
