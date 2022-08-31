@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import card from './Card.module.css';
-import instance from '../../../../../axiosConfig.js';
+import instance from '@/axiosConfig.js';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Card extends React.Component {
@@ -67,7 +67,7 @@ class Card extends React.Component {
             style={{ display: photos ? 'block' : 'none' }}
           />
         </div>
-        <div className={card.info}  style={{ display: ratings ? 'block' : 'none' }}>
+        <div className={card.info} style={{ display: ratings ? 'block' : 'none' }}>
           <div>{category}</div>
           <div>{name}</div>
           <div>
