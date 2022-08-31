@@ -8,8 +8,10 @@ class AnswerModal extends React.Component {
   }
 
   render() {
+    const { hideModal } = this.props;
     return (
       <div>
+        <button type="submit" onClick={hideModal}>X</button>
         <h2>Submit Your Answer</h2>
         <h4>
           product name: question body
