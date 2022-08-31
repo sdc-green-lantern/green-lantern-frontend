@@ -4,11 +4,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import RatingsReviewsCSS from './RatingsReviews.module.css';
+import ReviewImageModal from './ReviewImageModal.jsx';
 
 class ReviewTile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      show: false,
+      currentPhoto: {},
+    };
+    this.showReviewImageModal = this.showReviewImageModal.bind(this);
+    this.closeReviewImageModal = this.closeReviewImageModal.bind(this);
+  }
+
+  showReviewImageModal(event) {
+    const currentPhoto = {
+      url: event.target.src,
+      id: event.target.alt,
+    };
+    this.setState({ show: true });
+    this.setState({ currentPhoto });
+  }
+
+  closeReviewImageModal() {
+    this.setState({ show: false });
   }
 
   render() {
@@ -21,20 +40,25 @@ class ReviewTile extends React.Component {
     const reviewer = review.reviewer_name;
     const response = review.response !== null ? `Response from seller: ${review.response}` : '';
     const body = review.body.slice(0, 250);
+
+    const { show, currentPhoto } = this.state;
     const photos = review.photos.slice(0, 5).map((photo) =>
       (
-        <a href={photo.url} key={photo.id}>
+        <div
+          key={photo.id}
+          onClick={this.showReviewImageModal}
+          role="button"
+        >
           <img
             src={photo.url}
             alt={photo.id}
             className={RatingsReviewsCSS.thumbnail_img}
           />
-        </a>
-      )
+        </div>
+      ),
     );
 
     return (
-
       <div className={RatingsReviewsCSS.review_tile}>
         <div className={RatingsReviewsCSS.review_header}>
           <div className={RatingsReviewsCSS.stars}>
@@ -67,7 +91,12 @@ class ReviewTile extends React.Component {
           {review.helpfulness}
           | Report
         </div>
-
+        {show && (
+          <ReviewImageModal
+            close={this.closeReviewImageModal}
+            photo={currentPhoto}
+          />
+        )}
       </div>
     );
   }

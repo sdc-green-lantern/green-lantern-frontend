@@ -11,8 +11,8 @@ class SortOptions extends React.Component {
     return (
       <div>
         {`${numReviews} reviews, ordered by `}
-        <select onChange={handleSort}>
-          <option selected value="relevant">Relevance</option>
+        <select defaultValue="relevant" onChange={handleSort}>
+          <option value="relevant">Relevance</option>
           <option value="helpful">Helpfulness</option>
           <option value="newest">Newest</option>
         </select>
