@@ -2,9 +2,41 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 200px;
+  height: fit-content;
   padding-bottom: 5px;
   margin-bottom: 5px;
   border: 1px solid black;
   background-color: white;
+}
+
+.helpful {
+  left: 10px;
+  cursor: pointer;
+}
+.yesHelpful {
+  position: static;
+  text-decoration: underline;
+  width: fit-content;
+  height: fit-content;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  color: blue;
+}
+
+.addAnswerBtn {
+  position: static;
+  text-decoration: underline;
+  width: fit-content;
+  height: fit-content;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  color: blue;
 }

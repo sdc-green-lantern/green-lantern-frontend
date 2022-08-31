@@ -47,22 +47,22 @@ class QuestionItem extends React.Component {
             Q:
             { question_body }
           </span>
-          <span>
+          <span className={QItemCSS.helpful}>
             Helpful?
-            <span>
-              Yes
-            </span>
-            <span>
-              {`(${question.question_helpfulness})`}
-            </span>
-            |
-            <span>
-              <button type="submit" onClick={() => { this.setState({ showAModal: true }); }}>Add Answer</button>
-            </span>
+            <button type="submit" className={QItemCSS.yesHelpful}>Yes</button>
+          </span>
+          <span>
+            {`(${question.question_helpfulness})`}
+          </span>
+          |
+          <span>
+            <button className={QItemCSS.addAnswerBtn} type="submit" onClick={() => { this.setState({ showAModal: true }); }}>Add Answer</button>
+          </span>
+          <div>
             { showAModal && (
             <AnswerModal hideModal={() => { this.setState({ showAModal: false }); }} />
             )}
-          </span>
+          </div>
         </span>
         { answerDisplay }
       </div>
