@@ -24,6 +24,7 @@ export default function Carousel({ productId }) {
     const newIndex = isFirst ? productImages.length : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
+
   const handleNextImg = () => {
     const isLast = currentIndex === productImages.length - 1;
     const newIndex = isLast ? 0 : currentIndex + 1;

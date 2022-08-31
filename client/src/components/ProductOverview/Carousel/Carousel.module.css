@@ -62,9 +62,6 @@
   padding-right: 12px;
   font-size: 30px;
 }
-.rightArrow:hover, .leftArrow:hover, .goToNext:hover {
-  color: black;
-}
 .lightbox {
   position: absolute;
   right: 5px;
