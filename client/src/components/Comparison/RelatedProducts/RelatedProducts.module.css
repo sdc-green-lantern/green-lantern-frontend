@@ -61,7 +61,7 @@ button{
   box-sizing: border-box;
   width: 20px;
   height: 20px;
-  border: solid black;
+  border: solid lightgray;
   border-width: 0 6px 6px 0;
   transform: rotate(135deg);
   display: inline-block;
@@ -73,7 +73,7 @@ button{
   box-sizing: border-box;
   width: 20px;
   height: 20px;
-  border: solid black;
+  border: solid lightgray;
   border-width: 0 6px 6px 0;
   transform: rotate(-45deg);
   display: inline-block;
