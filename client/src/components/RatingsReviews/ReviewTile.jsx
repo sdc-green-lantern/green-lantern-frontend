@@ -9,12 +9,20 @@ import ReviewImageModal from './ReviewImageModal.jsx';
 class ReviewTile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      show: false,
+    };
     this.showReviewImageModal = this.showReviewImageModal.bind(this);
+    this.closeReviewImageModal = this.closeReviewImageModal.bind(this);
   }
 
   showReviewImageModal(event) {
     console.log(event.target);
+    this.setState({ show: true });
+  }
+
+  closeReviewImageModal(event) {
+    this.setState({ show: false });
   }
 
   render() {
@@ -27,6 +35,8 @@ class ReviewTile extends React.Component {
     const reviewer = review.reviewer_name;
     const response = review.response !== null ? `Response from seller: ${review.response}` : '';
     const body = review.body.slice(0, 250);
+
+    const { showModal } = this.state;
     const photos = review.photos.slice(0, 5).map((photo) =>
       (
         // <button
@@ -36,7 +46,15 @@ class ReviewTile extends React.Component {
         //   key={photo.id}
         //   onClick={this.showReviewImageModal}
         // >
-        <div>
+        <div
+          onClick={this.showReviewImageModal}
+          role="button"
+        >
+          {/* <ReviewImageModal
+            show={showModal}
+            close={this.closeReviewImageModal}
+            photo={photo}
+          /> */}
           <img
             src={photo.url}
             alt={photo.id}

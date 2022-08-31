@@ -1,4 +1,5 @@
 import React from 'react';
+import RatingsReviewsCSS from './RatingsReviews.module.css';
 
 export default class ReviewImageModal extends React.Component {
   constructor(props) {
@@ -7,8 +8,16 @@ export default class ReviewImageModal extends React.Component {
   }
 
   render() {
+    const { show, close } = this.props;
+    if (!show) {
+      return null;
+    }
     return (
-      <div>Hello Modal</div>
+      <div>
+        <div>{this.props.children}</div>
+        <button onClose={close}>Close</button>
+      </div>
+
     );
   }
 }
