@@ -9,9 +9,11 @@ class QuestionItem extends React.Component {
     super(props);
     this.getAnswers = this.getAnswers.bind(this);
     this.getMoreAnswers = this.getMoreAnswers.bind(this);
+    this.addQYes = this.addQYes.bind(this);
     this.state = {
       results: [],
       count: 2,
+      yesCount: 0,
       showAModal: false,
     };
   }
@@ -29,6 +31,7 @@ class QuestionItem extends React.Component {
         this.setState({
           count: count + 2,
           results: response.data.results,
+          yesCount: question.question_helpfulness,
         });
       })
       .catch((err) => {
@@ -40,9 +43,25 @@ class QuestionItem extends React.Component {
     this.getAnswers();
   };
 
+  addQYes = () => {
+    const { question } = this.props;
+    const { question_id } = question;
+    const { yesCount } = this.state;
+    axiosConfig.put(`/qa/questions/${question_id}/helpful`)
+      .then((response) => {
+        this.setState({
+          yesCount: yesCount + 1,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   render() {
     let answerDisplay;
     const { showAModal } = this.state;
+    const { yesCount } = this.state;
     const { question } = this.props;
     const { question_body } = question;
     const { results } = this.state;
@@ -63,13 +82,13 @@ class QuestionItem extends React.Component {
             <button
               type="submit"
               className={QItemCSS.yesHelpful}
-              onClick={() => { console.log('clicked'); }}
+              onClick={() => { this.addQYes(); }}
             >
               Yes
             </button>
           </span>
           <span>
-            {`(${question.question_helpfulness})`}
+            {`(${yesCount})`}
           </span>
           |
           <span>
