@@ -1,5 +1,6 @@
 import React from 'react';
 import RatingsReviewsCSS from './RatingsReviews.module.css';
+import ReviewImageModalCSS from './ReviewImageModal.module.css';
 
 export default class ReviewImageModal extends React.Component {
   constructor(props) {
