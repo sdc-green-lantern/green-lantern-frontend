@@ -38,7 +38,8 @@ class ReviewTile extends React.Component {
     const summary = review.summary.slice(0, 60);
     const recommend = review.recommend === true ? 'I recommend this product' : '';
     const reviewer = review.reviewer_name;
-    const response = review.response !== null ? `Response from seller: ${review.response}` : '';
+    const response = review.response !== null ? review.response : '';
+    const responseStyle = { 'font-weight': 'bold' };
     const body = review.body.slice(0, 250);
 
     const { show, currentPhoto } = this.state;
@@ -85,13 +86,17 @@ class ReviewTile extends React.Component {
           {recommend}
         </div>
         <div className={RatingsReviewsCSS.review_response}>
-          {response == null && (
-            <div>
-              <p>Response:</p>
-              <p>The product is good. stop complaining.</p>
-            </div>
-          )}
-
+          {response !== ''
+            ? (
+              <>
+                <p style={responseStyle}>Response:</p>
+                <p>The product is good. stop complaining.</p>
+              </>
+            )
+            : (
+              <>
+              </>
+            )}
         </div>
         <div className="review_actions">
           Helpful?
