@@ -24,6 +24,7 @@ class ReviewTile extends React.Component {
 
   closeReviewImageModal(event) {
     console.log("Close Modal: ");
+    console.log(event.target);
     this.setState({ show: false });
   }
 
@@ -38,7 +39,7 @@ class ReviewTile extends React.Component {
     const response = review.response !== null ? `Response from seller: ${review.response}` : '';
     const body = review.body.slice(0, 250);
 
-    const { show } = this.state;
+    var { show } = this.state;
     const photos = review.photos.slice(0, 5).map((photo) =>
       (
         // <button
@@ -48,7 +49,8 @@ class ReviewTile extends React.Component {
         //   key={photo.id}
         //   onClick={this.showReviewImageModal}
         // >
-        <div
+        <div key={photo.id}
+          // onClick={() => {this.showReviewImageModal} }
           onClick={this.showReviewImageModal}
           role="button"
         >
@@ -59,6 +61,7 @@ class ReviewTile extends React.Component {
           />
           <ReviewImageModal
             show={show}
+            // close={() => {this.closeReviewImageModal} }
             close={this.closeReviewImageModal}
             photo={photo}
           />

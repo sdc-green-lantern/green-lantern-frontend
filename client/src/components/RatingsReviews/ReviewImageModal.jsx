@@ -4,7 +4,6 @@ import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import RatingsReviewsCSS from './RatingsReviews.module.css';
 import ReviewImageModalCSS from './ReviewImageModal.module.css';
 
-
 export default class ReviewImageModal extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +13,7 @@ export default class ReviewImageModal extends React.Component {
   render() {
     const { show, close, photo } = this.props;
     console.log(show);
+
     if (show === false) {
       return null;
     }
@@ -33,7 +33,8 @@ export default class ReviewImageModal extends React.Component {
             className={RatingsReviewsCSS.button}
             type="button"
           >
-            <FontAwesomeIcon icon={faWindowClose} />
+            {/* <FontAwesomeIcon icon={faWindowClose} /> */}
+            Close
           </button>
           <img
             src={photo.url}
