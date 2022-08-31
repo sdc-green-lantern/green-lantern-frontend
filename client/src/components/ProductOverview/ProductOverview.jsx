@@ -3,7 +3,7 @@ import postyles from './ProductOverview.module.css';
 
 import Carousel from './Carousel/Carousel.jsx';
 
-export default function ProductOverview() {
+export default function ProductOverview({ productId }) {
   return (
     <div className={postyles.productoverview}>
       <div className={postyles.nav}>
@@ -13,7 +13,7 @@ export default function ProductOverview() {
         Announcements
       </div>
       <div className={postyles.productinfo}>
-        <Carousel />
+        <Carousel productId={productId} data-testid="Carousel" />
         <div className={postyles.productoptions}>Product Options</div>
       </div>
       <div className={postyles.productdescription}>

@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 65632,
+      productId: 65633,
     };
   }
 
@@ -22,7 +22,7 @@ class App extends React.Component {
           Current Product Id:
           {productId}
         </p>
-        <ProductOverview />
+        <ProductOverview productId={productId} />
         <QA productId={productId} />
         <Comparison productId={productId} />
         <RatingsReviews axiosConfig={axiosConfig} productId={productId} />
