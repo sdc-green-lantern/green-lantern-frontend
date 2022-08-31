@@ -2,7 +2,6 @@ import React from 'react';
 import Card from '../Card/Card.jsx';
 import yourProducts from './YourProducts.module.css';
 
-
 class YourProducts extends React.Component {
   render() {
     return (
@@ -12,12 +11,6 @@ class YourProducts extends React.Component {
         </div>
         <div className={yourProducts.main}>
           <div className={yourProducts['card-container']}>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
           </div>
         </div>
       </div>
@@ -25,4 +18,4 @@ class YourProducts extends React.Component {
   }
 }
 
-export default YourProducts
+export default YourProducts;
