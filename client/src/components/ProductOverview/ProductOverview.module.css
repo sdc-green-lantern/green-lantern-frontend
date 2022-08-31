@@ -56,6 +56,18 @@
   display: flex;
   width: 70%;
 }
+.starRatings {
+  border: 1px solid red;
+  padding: 20px;
+}
+.starRatings span {
+  display: inline-block;
+  font-size: 12px;
+  text-decoration: underline;
+}
+.productTitle {
+
+}
 .productoptions {
   /* border: 1px solid black; */
   width: 60%;

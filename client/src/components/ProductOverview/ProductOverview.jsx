@@ -22,7 +22,13 @@ export default function ProductOverview({ productId }) {
       </div>
       <div className={postyles.productinfo}>
         <Carousel productId={productId} data-testid="Carousel" />
-        <div className={postyles.productoptions}>Product Options</div>
+        <div className={postyles.productoptions}>
+          <div className={postyles.starRatings}><span>Read all reviews</span></div>
+          <div className={postyles.productTitle}>
+            <h3>Category</h3>
+            <h1>Expanded Product Name</h1>
+          </div>
+        </div>
       </div>
       <div className={postyles.productdescription}>
         Product Description
