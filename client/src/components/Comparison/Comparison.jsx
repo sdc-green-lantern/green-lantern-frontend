@@ -3,16 +3,18 @@ import React from 'react';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 // eslint-disable-next-line import/extensions
 import YourProducts from './YourProducts/YourProducts.jsx';
-import './Comparison.module.css';
+import Modal from './Modal/Modal.jsx';
+import comparison from './Comparison.module.css';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Comparison extends React.Component {
   render() {
     const { productId } = this.props;
     return (
-      <div className="related-items">
+      <div className={comparison.container}>
         <RelatedProducts productId={productId} />
         <YourProducts />
+        <Modal />
       </div>
     );
   }
