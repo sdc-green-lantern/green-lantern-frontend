@@ -60,7 +60,7 @@ class Card extends React.Component {
     const averageRating = Card.averageRating(ratings);
     return (
       <div className={card.container}>
-        <FontAwesomeIcon icon={faRegStar} size="lg" className={card.action} />
+        <FontAwesomeIcon icon={faRegStar} size="2xl" className={card.action} />
         <div className={card['img-container']}>
           <img
             src={photos ? photos[0].url : ''}
@@ -77,12 +77,12 @@ class Card extends React.Component {
           </div>
           <div>
             {averageRating}
-            <FontAwesomeIcon icon={faStar} size="m" className={card.star} />
-            <FontAwesomeIcon icon={faStar} size="m" className={card.star} />
-            <FontAwesomeIcon icon={faStar} size="m" className={card.star} />
-            <FontAwesomeIcon icon={faStar} size="m" className={card.star} />
-            <FontAwesomeIcon icon={faStar} size="m" className={card.star} />
-            <FontAwesomeIcon icon={faRegStar} size="m" className={card['reg-star']} />
+            <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
+            <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
+            <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
+            <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
+            <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
+            <FontAwesomeIcon icon={faRegStar} size="lg" className={card['reg-star']} />
           </div>
         </div>
       </div>
