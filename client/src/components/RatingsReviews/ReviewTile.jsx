@@ -17,11 +17,13 @@ class ReviewTile extends React.Component {
   }
 
   showReviewImageModal(event) {
+    console.log("Open Modal: ");
     console.log(event.target);
     this.setState({ show: true });
   }
 
   closeReviewImageModal(event) {
+    console.log("Close Modal: ");
     this.setState({ show: false });
   }
 
@@ -36,7 +38,7 @@ class ReviewTile extends React.Component {
     const response = review.response !== null ? `Response from seller: ${review.response}` : '';
     const body = review.body.slice(0, 250);
 
-    const { showModal } = this.state;
+    const { show } = this.state;
     const photos = review.photos.slice(0, 5).map((photo) =>
       (
         // <button
@@ -56,7 +58,7 @@ class ReviewTile extends React.Component {
             className={RatingsReviewsCSS.thumbnail_img}
           />
           <ReviewImageModal
-            show={showModal}
+            show={show}
             close={this.closeReviewImageModal}
             photo={photo}
           />
