@@ -2,6 +2,7 @@ import React from 'react';
 import QItemCSS from './QuestionItem.module.css';
 import AnswerList from './Answers/AnswerList.jsx';
 import axiosConfig from '../../../../../axiosConfig.js';
+import AnswerModal from './AnswerModal.jsx';
 
 class QuestionItem extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class QuestionItem extends React.Component {
     axiosConfig.get(`qa/questions/${question_id}/answers?page=1&count=${count}`)
       .then((response) => {
         this.setState({
+          showAModal: false,
           results: response.data.results,
         });
       })
@@ -35,7 +37,7 @@ class QuestionItem extends React.Component {
     if (results.length !== 0) {
       answerDisplay = <AnswerList answers={results} />;
     } else {
-      answerDisplay = <button type="submit"> Answer this question </button>;
+      answerDisplay = <button type="submit" onClick={() => {}}> Answer this question </button>;
     }
     return (
       <div className={QItemCSS.questionEach}>
