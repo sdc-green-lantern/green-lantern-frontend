@@ -11,6 +11,7 @@ class RatingsReviews extends React.Component {
       displayedReviews: [],
       numReviews: 0,
       numDisplayed: 0,
+      sortOption: 'relevance',
     };
 
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
@@ -50,7 +51,7 @@ class RatingsReviews extends React.Component {
   render() {
     const { axiosConfig, productId } = this.props;
     const {
-      reviews, displayedReviews, numReviews, numDisplayed,
+      reviews, displayedReviews, numReviews, numDisplayed, sortOption
     } = this.state;
     return (
       <div className={RatingsReviewsCSS.ratings_section}>
@@ -65,7 +66,9 @@ class RatingsReviews extends React.Component {
             <p>Product Breakdown</p>
           </div>
           <div className={RatingsReviewsCSS.sort_options}>
-            <p>Sort Options</p>
+            <div>
+              {`${numReviews} reviews, ordered by ${sortOption}`}
+            </div>
           </div>
           <div className={RatingsReviewsCSS.reviews_list}>
             <ReviewsList
