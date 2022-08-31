@@ -13,7 +13,7 @@ class Card extends React.Component {
     }
     const total = Object.entries(ratings).reduce((prev, [key, value]) => (prev + key * value), 0);
     const count = Object.entries(ratings).reduce((prev, [_, value]) => (prev + value * 1), 0);
-    return (total / count).toFixed(2);
+    return Math.floor((total / count) / 0.25) * 0.25;
   }
 
   constructor(props) {
@@ -75,14 +75,13 @@ class Card extends React.Component {
             <span style={{ display: salePrice ? 'inline' : 'none' }}>{`sale price: $ ${salePrice}`}</span>
             <span style={{ display: originalPrice ? 'inline' : 'none' }}>{`$ ${originalPrice}`}</span>
           </div>
-          <div>
-            {averageRating}
+          <div className={card.rating}>
+            <div className={card['rating-overlay']} style={{ width: `${averageRating * 20}%` }} />
             <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
             <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
             <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
             <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
             <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
-            <FontAwesomeIcon icon={faRegStar} size="lg" className={card['reg-star']} />
           </div>
         </div>
       </div>
