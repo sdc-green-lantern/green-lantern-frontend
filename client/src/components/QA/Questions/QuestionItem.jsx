@@ -7,27 +7,38 @@ import AnswerModal from './AnswerModal.jsx';
 class QuestionItem extends React.Component {
   constructor(props) {
     super(props);
+    this.getAnswers = this.getAnswers.bind(this);
+    this.getMoreAnswers = this.getMoreAnswers.bind(this);
     this.state = {
       results: [],
       count: 2,
+      showAModal: false,
     };
   }
 
   componentDidMount() {
+    this.getAnswers();
+  }
+
+  getAnswers = (pages = 1) => {
     const { question } = this.props;
     const { question_id } = question;
     const { count } = this.state;
-    axiosConfig.get(`qa/questions/${question_id}/answers?page=1&count=${count}`)
+    axiosConfig.get(`qa/questions/${question_id}/answers?page=${pages}&count=${count}`)
       .then((response) => {
         this.setState({
-          showAModal: false,
+          count: count + 2,
           results: response.data.results,
         });
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
+
+  getMoreAnswers = () => {
+    this.getAnswers();
+  };
 
   render() {
     let answerDisplay;
@@ -36,7 +47,7 @@ class QuestionItem extends React.Component {
     const { question_body } = question;
     const { results } = this.state;
     if (results.length !== 0) {
-      answerDisplay = <AnswerList answers={results} />;
+      answerDisplay = <AnswerList answers={results} getMoreAnswers={this.getMoreAnswers} />;
     } else {
       answerDisplay = <button type="submit" onClick={() => {}}> Answer this question </button>;
     }
@@ -49,7 +60,13 @@ class QuestionItem extends React.Component {
           </span>
           <span className={QItemCSS.helpful}>
             Helpful?
-            <button type="submit" className={QItemCSS.yesHelpful}>Yes</button>
+            <button
+              type="submit"
+              className={QItemCSS.yesHelpful}
+              onClick={() => { console.log('clicked'); }}
+            >
+              Yes
+            </button>
           </span>
           <span>
             {`(${question.question_helpfulness})`}
