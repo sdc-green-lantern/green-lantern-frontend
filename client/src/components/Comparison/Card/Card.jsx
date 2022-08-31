@@ -1,8 +1,9 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import card from './Card.module.css';
 import instance from '../../../../../axiosConfig.js';
 
-const cate = ['computer', 'tv', 'ipad', 'bike', 'monitor', 'chair', 'table', 'watch', 'jean', 'motor', 'ship', 'bag'];
 // eslint-disable-next-line react/prefer-stateless-function
 class Card extends React.Component {
   static averageRating(ratings) {
@@ -44,7 +45,7 @@ class Card extends React.Component {
     this.setState({
       info: infoData,
       styles: styleData,
-      defaultStyle: defaultStyle,
+      defaultStyle,
       reviewMeta: reviewData,
     });
   }
@@ -58,21 +59,29 @@ class Card extends React.Component {
     const averageRating = Card.averageRating(ratings);
     return (
       <div className={card.container}>
+        <FontAwesomeIcon icon={faStar} size="lg" className={card.action} />
         <div className={card['img-container']}>
           <img
             src={photos ? photos[0].url : ''}
-            alt="Grapefruit slice atop a pile of other slices"
+            alt="No Pic Available"
             style={{ display: photos ? 'block' : 'none' }}
           />
         </div>
-        <div className={card.info}>
+        <div className={card.info}  style={{ display: ratings ? 'block' : 'none' }}>
           <div>{category}</div>
           <div>{name}</div>
           <div>
             <span style={{ display: salePrice ? 'inline' : 'none' }}>{`sale price: $ ${salePrice}`}</span>
             <span style={{ display: originalPrice ? 'inline' : 'none' }}>{`$ ${originalPrice}`}</span>
           </div>
-          <div>{averageRating}</div>
+          <div>
+            {averageRating}
+            <FontAwesomeIcon icon={faStar} size="m" className={card.rating} />
+            <FontAwesomeIcon icon={faStar} size="m" className={card.rating} />
+            <FontAwesomeIcon icon={faStar} size="m" className={card.rating} />
+            <FontAwesomeIcon icon={faStar} size="m" className={card.rating} />
+            <FontAwesomeIcon icon={faStar} size="m" className={card.rating} />
+          </div>
         </div>
       </div>
 
