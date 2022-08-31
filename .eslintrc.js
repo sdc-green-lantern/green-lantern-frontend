@@ -19,5 +19,6 @@ module.exports = {
   rules: {
     'react/prop-types': 'off',
     'import/extensions': 'off',
+    'react/state-in-constructor': 'off',
   },
 };
