@@ -70,7 +70,7 @@ class QuestionItem extends React.Component {
     if (results.length !== 0) {
       answerDisplay = <AnswerList answers={results} getMoreAnswers={this.getMoreAnswers} />;
     } else {
-      answerDisplay = <button type="submit" onClick={() => {}}> Answer this question </button>;
+      answerDisplay = <button type="submit" className={QItemCSS.answerQBtn} onClick={() => {}}> Answer this question </button>;
     }
     return (
       <div className={QItemCSS.questionEach}>
