@@ -1,5 +1,6 @@
 .formModalBackground {
-  display: block;
+  display: flex;
+  justify-content: center;
   position: fixed;
   left: 0;
   top: 0;
@@ -16,13 +17,13 @@
 
 .formModalContainer {
   background-color: #fefefe;
+  border-radius: 20px;
+  width: 40%;
+  height: 80%;
+
   display: flex;
-  justify-content: center;
-/*
-  margin: auto;
-  padding: 20px;
-  border-radius: 4px;
-  max-width: 300px;
-  height: 450px;
-   */
+  flex-direction: row;
+  /* align-items: center; */
+  justify-content: space-around;
+
 }
