@@ -9,8 +9,11 @@ class AnswerList extends React.Component {
   }
 
   render() {
-    const { getMoreAnswers } = this.props;
-    const { answers } = this.props;
+    const { answers, compare, getMoreAnswers } = this.props;
+    let showMoreBtn = true;
+    if (answers.length === compare.length) {
+      showMoreBtn = false;
+    }
     return (
       <div>
         <div className={AListCSS.answerlist}>
@@ -21,7 +24,7 @@ class AnswerList extends React.Component {
             />
           ))}
         </div>
-        <button type="submit" className={AListCSS.showAnswers} onClick={getMoreAnswers}>Show more Answers</button>
+        {showMoreBtn && <button type="submit" className={AListCSS.showAnswers} onClick={getMoreAnswers}>Show more Answers</button>}
       </div>
     );
   }
