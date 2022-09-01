@@ -9,6 +9,7 @@ class AnswerList extends React.Component {
   }
 
   render() {
+    const { getMoreAnswers } = this.props;
     const { answers } = this.props;
     return (
       <div>
@@ -20,7 +21,7 @@ class AnswerList extends React.Component {
             />
           ))}
         </div>
-        <button type="submit" className={AListCSS.showAnswers}>Show more Answers</button>
+        <button type="submit" className={AListCSS.showAnswers} onClick={getMoreAnswers}>Show more Answers</button>
       </div>
     );
   }
