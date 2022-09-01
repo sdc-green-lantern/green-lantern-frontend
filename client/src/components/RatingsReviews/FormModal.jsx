@@ -52,10 +52,11 @@ export default class FormModal extends React.Component {
           </div>
           <div>
             <p>Do you recommend this product?*</p>
-            <div>
+            <div className={FormModalCSS.recommendation}>
               <label htmlFor="yes">
                 Yes
                 <input
+                  className={FormModalCSS.radio_input}
                   type="radio"
                   id="yes"
                   name="recommendation"
@@ -65,6 +66,7 @@ export default class FormModal extends React.Component {
               <label htmlFor="no">
                 No
                 <input
+                  className={FormModalCSS.radio_input}
                   type="radio"
                   id="radio_no"
                   name="recommendation"
