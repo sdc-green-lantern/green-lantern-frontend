@@ -31,7 +31,6 @@ class QuestionItem extends React.Component {
         this.setState({
           count: count + 2,
           results: response.data.results,
-          yesCount: question.question_helpfulness,
         });
       })
       .catch((err) => {
@@ -47,15 +46,17 @@ class QuestionItem extends React.Component {
     const { question } = this.props;
     const { question_id } = question;
     const { yesCount } = this.state;
-    axiosConfig.put(`/qa/questions/${question_id}/helpful`)
-      .then((response) => {
-        this.setState({
-          yesCount: yesCount + 1,
+    if (yesCount < 1) {
+      axiosConfig.put(`/qa/questions/${question_id}/helpful`)
+        .then((response) => {
+          this.setState({
+            yesCount: yesCount + 1,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }
   };
 
   render() {
@@ -65,6 +66,7 @@ class QuestionItem extends React.Component {
     const { question } = this.props;
     const { question_body } = question;
     const { results } = this.state;
+    const { question_helpfulness } = question;
     if (results.length !== 0) {
       answerDisplay = <AnswerList answers={results} getMoreAnswers={this.getMoreAnswers} />;
     } else {
@@ -88,7 +90,7 @@ class QuestionItem extends React.Component {
             </button>
           </span>
           <span>
-            {`(${yesCount})`}
+            {`(${question_helpfulness + yesCount})`}
           </span>
           |
           <span>
