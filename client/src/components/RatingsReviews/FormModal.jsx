@@ -25,8 +25,10 @@ export default class FormModal extends React.Component {
     return (
       <div className={FormModalCSS.formModalBackground}>
         <div className={FormModalCSS.formModalContainer}>
-          <h2>Write Your Review</h2>
-          <h4>{`About the ${productName}`}</h4>
+          <div>
+            <h2>Write Your Review</h2>
+            <h4>{`About the ${productName}`}</h4>
+          </div>
           <div>
             <button
               onClick={close}
@@ -38,7 +40,7 @@ export default class FormModal extends React.Component {
           </div>
 
           <div>
-            Star Rating:
+            Overall Rating*
             <select>
               <option defaultValue value={null}>--Select a Rating--</option>
               <option value={1}>★</option>
@@ -49,10 +51,10 @@ export default class FormModal extends React.Component {
             </select>
           </div>
           <div>
-            Do you recommend this product?
+            Do you recommend this product?*
           </div>
           <div>
-            Characteristics:
+            Characteristics*
             Size
             Width
             Comfort
@@ -75,7 +77,7 @@ export default class FormModal extends React.Component {
           </div>
           <div>
             <label htmlFor="review_body">
-              <p>Review Body:</p>
+              <p>Review Body*</p>
               <textarea
                 id="review_body"
                 name="review_body"
@@ -96,14 +98,14 @@ export default class FormModal extends React.Component {
           </div>
           <div>
             <label htmlFor="displayName">
-              <p>What is your nickname?</p>
+              <p>What is your nickname?*</p>
               <input id="displayName" type="text" maxLength="60" size="50" />
             </label>
             <p>For privacy reasons, do not use your full name or email address.</p>
           </div>
           <div>
             <label htmlFor="email">
-              <p>What is your email?</p>
+              <p>Your email*</p>
               <input
                 id="email"
                 name="email"
@@ -120,7 +122,7 @@ export default class FormModal extends React.Component {
               className={FormModalCSS.button}
               // type="button"
             >
-              Submit
+              Submit review
             </button>
           </div>
         </div>
