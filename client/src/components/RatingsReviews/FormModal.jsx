@@ -51,7 +51,27 @@ export default class FormModal extends React.Component {
             </select>
           </div>
           <div>
-            Do you recommend this product?*
+            <p>Do you recommend this product?*</p>
+            <div>
+              <label htmlFor="yes">
+                Yes
+                <input
+                  type="radio"
+                  id="yes"
+                  name="recommendation"
+                  value="yes"
+                />
+              </label>
+              <label htmlFor="no">
+                No
+                <input
+                  type="radio"
+                  id="radio_no"
+                  name="recommendation"
+                  value="no"
+                />
+              </label>
+            </div>
           </div>
           <div>
             Characteristics*
