@@ -28,6 +28,7 @@ export default class FormModal extends React.Component {
           <div>
             Star Rating:
             <select>
+              <option selected value={null}>--Select a Rating--</option>
               <option value={1}>★</option>
               <option value={2}>★★</option>
               <option value={3}>★★★</option>
@@ -49,6 +50,12 @@ export default class FormModal extends React.Component {
           </div>
           <div>
             Review Summary
+            <input
+              placeholder="Example: Best purchase ever!"
+              type="text"
+              maxLength="60"
+              size="50"
+            />
           </div>
           <div>
             Review Body
@@ -63,6 +70,12 @@ export default class FormModal extends React.Component {
           </div>
           <div>
             What is your email?
+            <input
+              type="email"
+              maxLength="60"
+               size="50"
+            />
+            <p>For authentication reasons, you will not be emailed.</p>
           </div>
           <div>
             <button
