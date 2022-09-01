@@ -17,11 +17,6 @@ class Card extends React.Component {
     return Math.floor((total / count) / 0.25) * 0.25;
   }
 
-  showModal = () => {
-    const { id } = this.props;
-    PubSub.publish('showModal', { isShown: true, id });
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -36,6 +31,11 @@ class Card extends React.Component {
   componentDidMount() {
     this.updateProduct();
   }
+
+  showModal = () => {
+    const { id } = this.props;
+    PubSub.publish('showModal', { isShown: true, id });
+  };
 
   async updateProduct() {
     const { id } = this.props;

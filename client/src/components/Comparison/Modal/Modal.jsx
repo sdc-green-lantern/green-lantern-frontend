@@ -37,25 +37,30 @@ class Modal extends React.Component {
     const { isShown, features } = this.state;
 
     return (
-      <div className={modal.container} style={{ display: isShown ? 'block' : 'none' }}>
-        <div className={modal.head}>
-          <div>COMPARING</div>
-          <FontAwesomeIcon icon={faXmark} onClick={this.toggleDisplay} className={modal['close-button']} />
+      <div>
+        <div className={modal.mask} style={{ display: isShown ? 'block' : 'none' }} />
+        <div
+          className={`${modal.container} ${isShown ? modal.active : null}`}
+        >
+          <div className={modal.head}>
+            <div>COMPARING</div>
+            <FontAwesomeIcon icon={faXmark} onClick={this.toggleDisplay} className={modal['close-button']} />
+          </div>
+          <ul className={modal.row}>
+            <li>
+              <div>product1</div>
+              {features.map((feature, index) => (<div key={index}>{feature}</div>))}
+            </li>
+            <li>
+              <div>feature</div>
+              {features.map((feature, index) => (<div key={index}>{feature}</div>))}
+            </li>
+            <li>
+              <div>product3</div>
+              {features.map((feature, index) => (<div key={index}>{feature}</div>))}
+            </li>
+          </ul>
         </div>
-        <ul className={modal.row}>
-          <li>
-            <div>product1</div>
-            {features.map((feature) => (<div>{feature}</div>))}
-          </li>
-          <li>
-            <div>feature</div>
-            {features.map((feature) => (<div>{feature}</div>))}
-          </li>
-          <li>
-            <div>product3</div>
-            {features.map((feature) => (<div>{feature}</div>))}
-          </li>
-        </ul>
       </div>
     );
   }
