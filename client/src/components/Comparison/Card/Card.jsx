@@ -17,8 +17,9 @@ class Card extends React.Component {
     return Math.floor((total / count) / 0.25) * 0.25;
   }
 
-  static showModal = () => {
-    PubSub.publish('showModal', true);
+  showModal = () => {
+    const { id } = this.props;
+    PubSub.publish('showModal', { isShown: true, id });
   };
 
   constructor(props) {
@@ -65,7 +66,7 @@ class Card extends React.Component {
     const averageRating = Card.averageRating(ratings);
     return (
       <div className={card.container}>
-        <FontAwesomeIcon icon={faRegStar} size="2xl" className={card.action} onClick={Card.showModal} />
+        <FontAwesomeIcon icon={faRegStar} size="2xl" className={card.action} onClick={this.showModal} />
         <div className={card['img-container']}>
           <img
             src={photos ? photos[0].url : ''}

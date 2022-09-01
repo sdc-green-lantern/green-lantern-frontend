@@ -11,3 +11,45 @@
   border-radius: 10px;
   z-index: 100;
 }
+
+.head{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 10px 10px 0 10px;
+}
+
+ul{
+  margin: 10px;
+  padding-inline-start: 0;
+  display: flex;
+  list-style-type: none;
+  height: 80%;
+  justify-content: space-between ;
+}
+
+li{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+li:first-of-type{
+   align-items: flex-start;
+}
+
+li:last-of-type{
+  align-items: flex-end;
+}
+
+
+li>div:first-of-type{
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.close-button:active {
+  opacity: 0.5;
+}

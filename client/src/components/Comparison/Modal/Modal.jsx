@@ -8,12 +8,18 @@ import modal from './Modal.module.css';
 class Modal extends React.Component {
   state = {
     isShown: false,
+    comparedId: null,
+    features: ['a', 'c', 'b', 'aaaaaaaa', 'ccccccc', 'bbbbbb'],
   };
 
   componentDidMount() {
+    const { productId } = this.props;
     this.token = PubSub.subscribe('showModal', (msg, data) => {
+      const { isShown, id } = data;
+      console.log(data, productId);
       this.setState({
-        isShown: data,
+        isShown,
+        comparedId: id,
       });
     });
   }
@@ -28,13 +34,28 @@ class Modal extends React.Component {
   };
 
   render() {
-    const { isShown } = this.state;
+    const { isShown, features } = this.state;
 
     return (
       <div className={modal.container} style={{ display: isShown ? 'block' : 'none' }}>
-        <button onClick={this.toggleDisplay} type="button">
-          <FontAwesomeIcon icon={faXmark} />
-        </button>
+        <div className={modal.head}>
+          <div>COMPARING</div>
+          <FontAwesomeIcon icon={faXmark} onClick={this.toggleDisplay} className={modal['close-button']} />
+        </div>
+        <ul className={modal.row}>
+          <li>
+            <div>product1</div>
+            {features.map((feature) => (<div>{feature}</div>))}
+          </li>
+          <li>
+            <div>feature</div>
+            {features.map((feature) => (<div>{feature}</div>))}
+          </li>
+          <li>
+            <div>product3</div>
+            {features.map((feature) => (<div>{feature}</div>))}
+          </li>
+        </ul>
       </div>
     );
   }
