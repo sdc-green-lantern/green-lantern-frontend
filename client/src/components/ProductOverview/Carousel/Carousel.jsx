@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import axiosConfig from '../../../../../axiosConfig.js';
 import carouselstyles from './Carousel.module.css';
 
-export default function Carousel({ productId }) {
+export default function Carousel() {
   const [productImages, setProductImages] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    console.log(productId);
-    axiosConfig.get(`/products/${productId}/styles`)
-      .then((response) => {
-        const result = response.data.results[0].photos;
-        setProductImages(result);
-        setCurrentImage(result[currentIndex].url);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [currentIndex]);
+    //
+  }, []);
+  // axiosConfig.get(`/products/${productId}/styles`)
+  //   .then((response) => {
+  //     const result = response.data.results;
+  //     console.log('in carousel, result => ', result);
+  //     setStyles(result);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 
   const handlePreviousImg = () => {
     const isFirst = currentIndex === 0;
