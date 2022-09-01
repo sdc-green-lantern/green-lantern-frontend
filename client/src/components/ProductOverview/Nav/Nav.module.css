@@ -1,0 +1,29 @@
+.nav {
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* border: 1px solid black; */
+  height: 100px;
+  width: 70%;
+}
+.nav h1 {
+  color: white;
+  text-decoration: underline;
+}
+.logo {
+  margin-right: auto;
+  margin-left: 20px;
+}
+.formInput {
+  color: white;
+  background-color: grey;
+  border: none;
+  border-bottom: 2px solid white;
+}
+.formInput:focus {
+  outline: none;
+}
+.formButton {
+  margin-right: 20px;
+}

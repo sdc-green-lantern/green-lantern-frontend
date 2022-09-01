@@ -1,0 +1,30 @@
+.productinfo {
+  /* border: 1px solid black; */
+  display: flex;
+  width: 70%;
+}
+.starRatings {
+  /* border: 1px solid red; */
+  padding: 20px;
+}
+.starRatings span {
+  display: inline-block;
+  font-size: 12px;
+  text-decoration: underline;
+}
+.productTitle {
+  /* border: 1px solid red; */
+  line-height: 5px;
+  padding: 0 20px;
+}
+.productTitle h3 {
+  font-weight: 100;
+  text-transform: uppercase;
+}
+.productPrice {
+  padding: 10px 0;
+}
+.productoptions {
+  /* border: 1px solid black; */
+  width: 60%;
+}
