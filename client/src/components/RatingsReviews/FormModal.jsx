@@ -57,7 +57,9 @@ export default class FormModal extends React.Component {
             Upload your photos
           </div>
           <div>
-            What is your nickname?
+            <p>What is your nickname?</p>
+            <input type="text" maxLength="60" size="50" />
+            <p>For privacy reasons, do not use your full name or email address.</p>
           </div>
           <div>
             What is your email?
