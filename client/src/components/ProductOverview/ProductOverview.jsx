@@ -2,6 +2,7 @@ import React from 'react';
 import postyles from './ProductOverview.module.css';
 
 import Carousel from './Carousel/Carousel.jsx';
+import Buttons from './Buttons/Buttons.jsx'
 
 export default function ProductOverview({ productId }) {
   return (
@@ -42,25 +43,7 @@ export default function ProductOverview({ productId }) {
               <img className={postyles.selectionOption} src="https://via.placeholder.com/100x100" />
             </div>
           </div>
-          <div className={postyles.buttons}>
-            <div className={postyles.quantityRow}>
-              <div className={postyles.selectSize}>
-                <p>select size</p>
-                <p>▼</p>
-              </div>
-              <div className={postyles.selectQuantity}>
-                <p>1</p>
-                <p>▼</p>
-              </div>
-            </div>
-            <div className={postyles.checkoutRow}>
-              <div className={postyles.addToBag}>
-                <p>add to bag</p>
-                <p>▼</p>
-              </div>
-              <div className={postyles.favorite}>⭐</div>
-            </div>
-          </div>
+          <Buttons />
         </div>
       </div>
       <div className={postyles.productdescription}>
