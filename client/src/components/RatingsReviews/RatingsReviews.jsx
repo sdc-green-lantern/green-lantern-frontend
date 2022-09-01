@@ -3,6 +3,7 @@ import RatingsReviewsCSS from './RatingsReviews.module.css';
 import ReviewsList from './ReviewsList.jsx';
 import MoreReviews from './MoreReviews.jsx';
 import SortOptions from './SortOptions.jsx';
+import NewReview from './NewReview.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
@@ -110,13 +111,8 @@ class RatingsReviews extends React.Component {
             />
           </div>
           <div className={RatingsReviewsCSS.write_new_review_btn_box}>
-            <p>Add a Review</p>
-            <button
-              className={RatingsReviewsCSS.button}
-              type="button"
-            >
-              ADD A REVIEW+
-            </button>
+            {/* <p>Add a review</p> */}
+            <NewReview />
           </div>
         </div>
       </div>
