@@ -9,9 +9,9 @@ class QA extends React.Component {
     this.getQuestions = this.getQuestions.bind(this);
     this.getMoreQuestions = this.getMoreQuestions.bind(this);
     this.state = {
-      count: 3,
+      count: 2,
       results: [],
-      showMoreBtn: true,
+      display: [],
     };
   }
 
@@ -19,25 +19,15 @@ class QA extends React.Component {
     this.getQuestions();
   }
 
-  getQuestions = (pages = 1) => {
+  getQuestions = () => {
     const { productId } = this.props;
-    const { count } = this.state;
-    const { results } = this.state;
-    axiosConfig.get(`/qa/questions?product_id=${productId}&page=${pages}&count=${count}`)
+    axiosConfig.get(`/qa/questions?product_id=${productId}&page=1&count=1000`)
       .then((response) => {
-        if (results.length === response.data.results.length) {
-          this.setState({
-            count: count + 2,
-            results: response.data.results,
-            showMoreBtn: false,
-          });
-        } else {
-          this.setState({
-            count: count + 2,
-            results: response.data.results,
-            showMoreBtn: true,
-          });
-        }
+        const { count } = this.state;
+        this.setState({
+          results: response.data.results,
+          display: response.data.results.slice(0, count),
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -45,32 +35,38 @@ class QA extends React.Component {
   };
 
   getMoreQuestions = () => {
-    this.getQuestions();
+    let { count } = this.state;
+    const { results } = this.state;
+    count += 2;
+    this.setState({
+      display: results.slice(0, count),
+      count,
+    });
   };
 
   render() {
-    let display;
+    let displayList;
+    const { display } = this.state;
     const { results } = this.state;
-    const { showMoreBtn } = this.state;
     const { productId } = this.props;
-    if (results.length !== 0) {
-      display = (
+    if (display.length !== 0) {
+      displayList = (
         <QuestionList
-          questions={results}
+          questions={display}
+          compare={results}
           productId={productId}
           getMoreQuestions={this.getMoreQuestions}
-          showMoreBtn={showMoreBtn}
         />
       );
     } else {
-      display = <button className={QACSS.askButton} type="submit">Ask a Question</button>;
+      displayList = <button className={QACSS.askButton} type="submit">Ask a Question</button>;
     }
     return (
       <div>
         <div className={QACSS.qa_section}>
           <div className={QACSS.qa_body}>
             <h2 data-testid="QA-1">Questions and Answers</h2>
-            { display }
+            { displayList }
           </div>
         </div>
       </div>
