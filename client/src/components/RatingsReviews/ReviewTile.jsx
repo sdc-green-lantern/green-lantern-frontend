@@ -18,23 +18,12 @@ export default class ReviewTile extends React.Component {
       currentPhoto: {},
       displayFullBody: false,
       voted: false,
+      // reported: false,
     };
     this.showReviewImageModal = this.showReviewImageModal.bind(this);
     this.closeReviewImageModal = this.closeReviewImageModal.bind(this);
     this.handleHelpfulVote = this.handleHelpfulVote.bind(this);
-  }
-
-  showReviewImageModal(event) {
-    const currentPhoto = {
-      url: event.target.src,
-      id: event.target.alt,
-    };
-    this.setState({ show: true });
-    this.setState({ currentPhoto });
-  }
-
-  closeReviewImageModal() {
-    this.setState({ show: false });
+    this.handleReport = this.handleReport.bind(this);
   }
 
   handleHelpfulVote() {
@@ -52,6 +41,33 @@ export default class ReviewTile extends React.Component {
           console.log(error);
         });
     }
+  }
+
+  handleReport() {
+    const { review, axiosConfig, handleGetReviews } = this.props;
+    const reviewURL = `/reviews/${review.review_id}/report`;
+
+    axiosConfig.put(reviewURL)
+      .then(() => {
+        // this.setState({ reported: true });
+        handleGetReviews();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  closeReviewImageModal() {
+    this.setState({ show: false });
+  }
+
+  showReviewImageModal(event) {
+    const currentPhoto = {
+      url: event.target.src,
+      id: event.target.alt,
+    };
+    this.setState({ show: true });
+    this.setState({ currentPhoto });
   }
 
   render() {
@@ -151,7 +167,12 @@ export default class ReviewTile extends React.Component {
             {` (${helpfulness})`}
           </div>
           <div>|</div>
-          <a href="#0">Report</a>
+          <a
+            href="#0"
+            onClick={this.handleReport}
+          >
+            Report
+          </a>
         </div>
         {show && (
           <ReviewImageModal
