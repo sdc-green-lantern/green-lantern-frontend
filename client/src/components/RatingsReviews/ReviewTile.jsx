@@ -45,7 +45,7 @@ class ReviewTile extends React.Component {
     const reviewer = review.reviewer_name;
     const response = review.response !== null ? review.response : '';
     const responseStyle = { 'font-weight': 'bold' };
-    const { body } = review;
+    const { body, helpfulness } = review;
 
     const { show, currentPhoto, displayFullBody } = this.state;
     const photos = review.photos.slice(0, 5).map((photo) => (
@@ -120,11 +120,14 @@ class ReviewTile extends React.Component {
               </>
             )}
         </div>
-        <div className="review_actions">
-          Helpful?
-          Yes
-          {review.helpfulness}
-          | Report
+        <div className={RatingsReviewsCSS.review_actions}>
+          <div>Helpful?</div>
+          <div>
+            <a href="#0">Yes</a>
+            {` (${helpfulness})`}
+          </div>
+          <div>|</div>
+          <a href="#0">Report</a>
         </div>
         {show && (
           <ReviewImageModal

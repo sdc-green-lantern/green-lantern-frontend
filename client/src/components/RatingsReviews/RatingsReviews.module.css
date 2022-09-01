@@ -71,6 +71,14 @@
   justify-content: space-between;
 }
 
+.review_actions {
+  display: flex;
+  flex-direction: row;
+  /* align-content: space-between; */
+  /* justify-content: flex-start; */
+  column-gap: 0.5em;
+}
+
 .review_summary {
   font-weight: bold;
 }
