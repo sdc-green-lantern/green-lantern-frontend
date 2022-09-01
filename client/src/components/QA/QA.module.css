@@ -3,7 +3,6 @@
   justify-content: center;
   border: 1px solid black;
   width: 100%;
-  background-color: aqua;
 }
 .qa_body {
   display: flex;
@@ -11,7 +10,6 @@
   border: 3px solid black;
   height: 500px;
   width: 70%;
-  background-color: aquamarine;
 }
 
 .askButton {
