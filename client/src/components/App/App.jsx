@@ -25,7 +25,10 @@ class App extends React.Component {
         <ProductOverview productId={productId} />
         <QA productId={productId} />
         <Comparison productId={productId} />
-        <RatingsReviews axiosConfig={axiosConfig} productId={productId} />
+        <RatingsReviews
+          axiosConfig={axiosConfig}
+          productId={productId}
+        />
       </div>
     );
   }

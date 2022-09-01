@@ -16,6 +16,7 @@ export default class NewReview extends React.Component {
   }
 
   render() {
+    const { productName } = this.props;
     const { showModal } = this.state;
     return (
       <>
@@ -28,6 +29,7 @@ export default class NewReview extends React.Component {
         </button>
         {showModal && (
           <FormModal
+            productName={productName}
             close={() => { this.setState({ showModal: false }); }}
             submit={this.handleSubmitForm}
           />
