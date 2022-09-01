@@ -74,8 +74,6 @@
 .review_actions {
   display: flex;
   flex-direction: row;
-  /* align-content: space-between; */
-  /* justify-content: flex-start; */
   column-gap: 0.5em;
 }
 

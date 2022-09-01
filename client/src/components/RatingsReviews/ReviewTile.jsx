@@ -10,7 +10,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import RatingsReviewsCSS from './RatingsReviews.module.css';
 import ReviewImageModal from './ReviewImageModal.jsx';
 
-class ReviewTile extends React.Component {
+export default class ReviewTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +20,7 @@ class ReviewTile extends React.Component {
     };
     this.showReviewImageModal = this.showReviewImageModal.bind(this);
     this.closeReviewImageModal = this.closeReviewImageModal.bind(this);
+    this.handleHelpfulVote = this.handleHelpfulVote.bind(this);
   }
 
   showReviewImageModal(event) {
@@ -33,6 +34,26 @@ class ReviewTile extends React.Component {
 
   closeReviewImageModal() {
     this.setState({ show: false });
+  }
+
+  handleHelpfulVote() {
+    const { review, axiosConfig } = this.props;
+    const reviewURL = `/reviews/${review.review_id}/helpful`;
+
+    axiosConfig.put(reviewURL)
+      .then((response) => {
+        // const reviews = response.data.results;
+        // const displayedReviews = response.data.results.slice(0, 2);
+        // this.setState({
+        //   reviews,
+        //   displayedReviews,
+        //   numReviews: reviews.length,
+        //   numDisplayed: displayedReviews.length,
+        // });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render() {
@@ -123,7 +144,12 @@ class ReviewTile extends React.Component {
         <div className={RatingsReviewsCSS.review_actions}>
           <div>Helpful?</div>
           <div>
-            <a href="#0">Yes</a>
+            <a
+              href="#0"
+              onClick={this.handleHelpfulVote}
+            >
+              Yes
+            </a>
             {` (${helpfulness})`}
           </div>
           <div>|</div>
@@ -139,5 +165,3 @@ class ReviewTile extends React.Component {
     );
   }
 }
-
-export default ReviewTile;

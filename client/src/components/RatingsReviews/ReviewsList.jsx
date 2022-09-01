@@ -9,13 +9,17 @@ class ReviewsList extends React.Component {
   }
 
   render() {
-    const { displayedReviews } = this.props;
+    const { displayedReviews, axiosConfig } = this.props;
     // console.log('Reviews: ', displayedReviews);
 
     // create individual review tile components
-    const reviewTiles = displayedReviews.map((review) =>
-      <ReviewTile key={review.review_id} review={review} />
-    );
+    const reviewTiles = displayedReviews.map((review) => (
+      <ReviewTile
+        axiosConfig={axiosConfig}
+        key={review.review_id}
+        review={review}
+      />
+    ));
 
     return (
       <div>
