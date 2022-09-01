@@ -8,6 +8,7 @@ export default function Carousel({ productId }) {
   const [currentImage, setCurrentImage] = useState('');
 
   useEffect(() => {
+    console.log(productId);
     axiosConfig.get(`/products/${productId}/styles`)
       .then((response) => {
         const result = response.data.results[0].photos;
