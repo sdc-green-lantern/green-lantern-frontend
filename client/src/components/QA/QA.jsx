@@ -11,6 +11,7 @@ class QA extends React.Component {
     this.state = {
       count: 3,
       results: [],
+      showMoreBtn: true,
     };
   }
 
@@ -21,12 +22,22 @@ class QA extends React.Component {
   getQuestions = (pages = 1) => {
     const { productId } = this.props;
     const { count } = this.state;
+    const { results } = this.state;
     axiosConfig.get(`/qa/questions?product_id=${productId}&page=${pages}&count=${count}`)
       .then((response) => {
-        this.setState({
-          count: count + 2,
-          results: response.data.results,
-        });
+        if (results.length === response.data.results.length) {
+          this.setState({
+            count: count + 2,
+            results: response.data.results,
+            showMoreBtn: false,
+          });
+        } else {
+          this.setState({
+            count: count + 2,
+            results: response.data.results,
+            showMoreBtn: true,
+          });
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -40,6 +51,7 @@ class QA extends React.Component {
   render() {
     let display;
     const { results } = this.state;
+    const { showMoreBtn } = this.state;
     const { productId } = this.props;
     if (results.length !== 0) {
       display = (
@@ -47,6 +59,7 @@ class QA extends React.Component {
           questions={results}
           productId={productId}
           getMoreQuestions={this.getMoreQuestions}
+          showMoreBtn={showMoreBtn}
         />
       );
     } else {
