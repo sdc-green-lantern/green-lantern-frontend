@@ -12,27 +12,33 @@ class QuestionModal extends React.Component {
     return (
       <div className={QModalCSS.modalBackground}>
         <div className={QModalCSS.modalContainer}>
-          <button type="submit" onClick={() => { toggleQModal(false); }}> X </button>
+          <button type="submit" className={QModalCSS.exitBtn} onClick={() => { toggleQModal(false); }}> X </button>
           <h2>Ask Your Question</h2>
           <h4>
             About the product name
           </h4>
-          <div>
-            <label>
+          <div className={QModalCSS.body}>
+            <div>
               Your Question:
-              <input type="textarea" placeholder="Ask away..." />
-            </label>
-            <label>
+              <textarea placeholder="Ask away..." maxLength="1000" rows="4" cols="60" />
+            </div>
+            <div>
               What is your nickname:
               <input type="type" placeholder="Example: jackson11!" />
-              <span>For privacy reasons, do not use your full name or email address</span>
-            </label>
-            <label>
+              <div className={QModalCSS.security}>
+                For privacy reasons, do not use your full name or email address
+              </div>
+            </div>
+            <div>
               Your email:
-              <input type="email" placeholder="Why did you like the product or not?" />
-              <span>For authentication reasons, you will not be emailed</span>
-            </label>
-            <button type="submit">Submit question</button>
+              <input type="email" placeholder="Example: jackson@email.com" />
+              <div className={QModalCSS.security}>
+                For authentication reasons, you will not be emailed
+              </div>
+            </div>
+            <div className={QModalCSS.footer}>
+              <button type="submit" className={QModalCSS.submitBtn}>Submit question</button>
+            </div>
           </div>
         </div>
       </div>
