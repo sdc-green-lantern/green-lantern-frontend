@@ -9,7 +9,7 @@ class ReviewsList extends React.Component {
   }
 
   render() {
-    const { displayedReviews, axiosConfig } = this.props;
+    const { displayedReviews, axiosConfig, handleGetReviews } = this.props;
     // console.log('Reviews: ', displayedReviews);
 
     // create individual review tile components
@@ -18,6 +18,7 @@ class ReviewsList extends React.Component {
         axiosConfig={axiosConfig}
         key={review.review_id}
         review={review}
+        handleGetReviews={handleGetReviews}
       />
     ));
 

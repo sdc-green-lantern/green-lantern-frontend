@@ -37,7 +37,7 @@ export default class ReviewTile extends React.Component {
   }
 
   handleHelpfulVote() {
-    const { review, axiosConfig } = this.props;
+    const { review, axiosConfig, handleGetReviews } = this.props;
     const reviewURL = `/reviews/${review.review_id}/helpful`;
 
     axiosConfig.put(reviewURL)
@@ -50,6 +50,7 @@ export default class ReviewTile extends React.Component {
         //   numReviews: reviews.length,
         //   numDisplayed: displayedReviews.length,
         // });
+        handleGetReviews();
       })
       .catch((error) => {
         console.log(error);
