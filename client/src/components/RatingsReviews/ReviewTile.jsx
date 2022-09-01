@@ -1,3 +1,7 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+/* eslint-disable react/jsx-no-useless-fragment */
+
 import React from 'react';
 import { format, parseISO } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,6 +16,7 @@ class ReviewTile extends React.Component {
     this.state = {
       show: false,
       currentPhoto: {},
+      displayFullBody: false,
     };
     this.showReviewImageModal = this.showReviewImageModal.bind(this);
     this.closeReviewImageModal = this.closeReviewImageModal.bind(this);
@@ -40,24 +45,22 @@ class ReviewTile extends React.Component {
     const reviewer = review.reviewer_name;
     const response = review.response !== null ? review.response : '';
     const responseStyle = { 'font-weight': 'bold' };
-    const body = review.body.slice(0, 250);
+    const { body } = review;
 
-    const { show, currentPhoto } = this.state;
-    const photos = review.photos.slice(0, 5).map((photo) =>
-      (
-        <div
-          key={photo.id}
-          onClick={this.showReviewImageModal}
-          role="button"
-        >
-          <img
-            src={photo.url}
-            alt={photo.id}
-            className={RatingsReviewsCSS.thumbnail_img}
-          />
-        </div>
-      ),
-    );
+    const { show, currentPhoto, displayFullBody } = this.state;
+    const photos = review.photos.slice(0, 5).map((photo) => (
+      <div
+        key={photo.id}
+        onClick={this.showReviewImageModal}
+        role="button"
+      >
+        <img
+          src={photo.url}
+          alt={photo.id}
+          className={RatingsReviewsCSS.thumbnail_img}
+        />
+      </div>
+    ));
 
     return (
       <div className={RatingsReviewsCSS.review_tile}>
@@ -74,7 +77,26 @@ class ReviewTile extends React.Component {
         </div>
         <div className={RatingsReviewsCSS.review_body}>
           <div className={RatingsReviewsCSS.body_text}>
-            {body}
+            {displayFullBody === false && body.length > 250
+              ? (
+                <>
+                  { body.slice(0, 250) }
+                  <p>
+                    <a
+                      href="#0"
+                      onClick={() => { this.setState({ displayFullBody: true }); }}
+                    >
+                      Show more
+                    </a>
+                  </p>
+                </>
+              )
+              : (
+                <>
+                  { body }
+                </>
+              )}
+
           </div>
           <div className={RatingsReviewsCSS.photos}>
             {photos}
