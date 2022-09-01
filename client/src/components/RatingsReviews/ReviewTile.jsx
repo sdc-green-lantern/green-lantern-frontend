@@ -17,6 +17,7 @@ export default class ReviewTile extends React.Component {
       show: false,
       currentPhoto: {},
       displayFullBody: false,
+      voted: false,
     };
     this.showReviewImageModal = this.showReviewImageModal.bind(this);
     this.closeReviewImageModal = this.closeReviewImageModal.bind(this);
@@ -39,22 +40,18 @@ export default class ReviewTile extends React.Component {
   handleHelpfulVote() {
     const { review, axiosConfig, handleGetReviews } = this.props;
     const reviewURL = `/reviews/${review.review_id}/helpful`;
+    const { voted } = this.state;
 
-    axiosConfig.put(reviewURL)
-      .then((response) => {
-        // const reviews = response.data.results;
-        // const displayedReviews = response.data.results.slice(0, 2);
-        // this.setState({
-        //   reviews,
-        //   displayedReviews,
-        //   numReviews: reviews.length,
-        //   numDisplayed: displayedReviews.length,
-        // });
-        handleGetReviews();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (voted === false) {
+      axiosConfig.put(reviewURL)
+        .then(() => {
+          this.setState({ voted: true });
+          handleGetReviews();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   render() {
