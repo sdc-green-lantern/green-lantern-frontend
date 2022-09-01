@@ -18,13 +18,13 @@ export default class FormModal extends React.Component {
           <div>
             <button
               onClick={close}
-              className={RatingsReviewsCSS.button}
+              className={FormModalCSS.button}
               type="button"
             >
-              {/* <FontAwesomeIcon icon={faWindowClose} /> */}
               Close
             </button>
           </div>
+
           <div>
             Star Rating:
             <select>
@@ -34,6 +34,42 @@ export default class FormModal extends React.Component {
               <option value={4}>★★★★</option>
               <option value={5}>★★★★★</option>
             </select>
+          </div>
+          <div>
+            Do you recommend this product?
+          </div>
+          <div>
+            Characteristics:
+            Size
+            Width
+            Comfort
+            Quality
+            Length
+            Fit
+          </div>
+          <div>
+            Review Summary
+          </div>
+          <div>
+            Review Body
+          </div>
+          <div>
+            Upload your photos
+          </div>
+          <div>
+            What is your nickname?
+          </div>
+          <div>
+            What is your email?
+          </div>
+          <div>
+            <button
+              // onClick={close}
+              className={FormModalCSS.button}
+              // type="button"
+            >
+              Submit
+            </button>
           </div>
         </div>
       </div>
