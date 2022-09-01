@@ -1,0 +1,14 @@
+.productSelection h3 {
+  font-size: 14px;
+  padding: 0 20px;
+}
+.productSelection span {
+  font-weight: 100;
+}
+.selectionContainer img {
+  border: 2px solid black;
+  border-radius: 100%;
+  margin: 10px 20px;
+  height: 50px;
+  width: 50px;
+}
