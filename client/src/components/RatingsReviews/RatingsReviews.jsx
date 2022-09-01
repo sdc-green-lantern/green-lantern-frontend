@@ -16,6 +16,7 @@ class RatingsReviews extends React.Component {
       sortOption: 'relevant', // newest, helpful, relevant
     };
 
+    this.handleGetReviews = this.handleGetReviews.bind(this);
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
     this.handleSort = this.handleSort.bind(this);
   }
@@ -33,6 +34,25 @@ class RatingsReviews extends React.Component {
           displayedReviews,
           numReviews: reviews.length,
           numDisplayed: displayedReviews.length,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  handleGetReviews() {
+    const { productId, axiosConfig } = this.props;
+    const productURL = `/reviews/?sort=relevant&product_id=${productId}&count=1000`;
+
+    const { numDisplayed } = this.state;
+
+    axiosConfig.get(productURL)
+      .then((response) => {
+        const reviews = response.data.results;
+        this.setState({
+          reviews,
+          displayedReviews: reviews.slice(0, numDisplayed),
         });
       })
       .catch((error) => {
@@ -101,6 +121,7 @@ class RatingsReviews extends React.Component {
               productId={productId}
               reviews={reviews}
               displayedReviews={displayedReviews}
+              handleGetReviews={this.handleGetReviews}
             />
           </div>
           <div className={RatingsReviewsCSS.more_reviews_btn_box}>

@@ -1,3 +1,7 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+/* eslint-disable react/jsx-no-useless-fragment */
+
 import React from 'react';
 import { format, parseISO } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,15 +10,55 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import RatingsReviewsCSS from './RatingsReviews.module.css';
 import ReviewImageModal from './ReviewImageModal.jsx';
 
-class ReviewTile extends React.Component {
+export default class ReviewTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       show: false,
       currentPhoto: {},
+      displayFullBody: false,
+      voted: false,
+      // reported: false,
     };
     this.showReviewImageModal = this.showReviewImageModal.bind(this);
     this.closeReviewImageModal = this.closeReviewImageModal.bind(this);
+    this.handleHelpfulVote = this.handleHelpfulVote.bind(this);
+    this.handleReport = this.handleReport.bind(this);
+  }
+
+  handleHelpfulVote() {
+    const { review, axiosConfig, handleGetReviews } = this.props;
+    const reviewURL = `/reviews/${review.review_id}/helpful`;
+    const { voted } = this.state;
+
+    if (voted === false) {
+      axiosConfig.put(reviewURL)
+        .then(() => {
+          this.setState({ voted: true });
+          handleGetReviews();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
+
+  handleReport() {
+    const { review, axiosConfig, handleGetReviews } = this.props;
+    const reviewURL = `/reviews/${review.review_id}/report`;
+
+    axiosConfig.put(reviewURL)
+      .then(() => {
+        // this.setState({ reported: true });
+        handleGetReviews();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  closeReviewImageModal() {
+    this.setState({ show: false });
   }
 
   showReviewImageModal(event) {
@@ -26,10 +70,6 @@ class ReviewTile extends React.Component {
     this.setState({ currentPhoto });
   }
 
-  closeReviewImageModal() {
-    this.setState({ show: false });
-  }
-
   render() {
     const { review } = this.props;
 
@@ -38,25 +78,24 @@ class ReviewTile extends React.Component {
     const summary = review.summary.slice(0, 60);
     const recommend = review.recommend === true ? 'I recommend this product' : '';
     const reviewer = review.reviewer_name;
-    const response = review.response !== null ? `Response from seller: ${review.response}` : '';
-    const body = review.body.slice(0, 250);
+    const response = review.response !== null ? review.response : '';
+    const responseStyle = { 'font-weight': 'bold' };
+    const { body, helpfulness } = review;
 
-    const { show, currentPhoto } = this.state;
-    const photos = review.photos.slice(0, 5).map((photo) =>
-      (
-        <div
-          key={photo.id}
-          onClick={this.showReviewImageModal}
-          role="button"
-        >
-          <img
-            src={photo.url}
-            alt={photo.id}
-            className={RatingsReviewsCSS.thumbnail_img}
-          />
-        </div>
-      ),
-    );
+    const { show, currentPhoto, displayFullBody } = this.state;
+    const photos = review.photos.slice(0, 5).map((photo) => (
+      <div
+        key={photo.id}
+        onClick={this.showReviewImageModal}
+        role="button"
+      >
+        <img
+          src={photo.url}
+          alt={photo.id}
+          className={RatingsReviewsCSS.thumbnail_img}
+        />
+      </div>
+    ));
 
     return (
       <div className={RatingsReviewsCSS.review_tile}>
@@ -73,7 +112,26 @@ class ReviewTile extends React.Component {
         </div>
         <div className={RatingsReviewsCSS.review_body}>
           <div className={RatingsReviewsCSS.body_text}>
-            {body}
+            {displayFullBody === false && body.length > 250
+              ? (
+                <>
+                  { body.slice(0, 250) }
+                  <p>
+                    <a
+                      href="#0"
+                      onClick={() => { this.setState({ displayFullBody: true }); }}
+                    >
+                      Show more
+                    </a>
+                  </p>
+                </>
+              )
+              : (
+                <>
+                  { body }
+                </>
+              )}
+
           </div>
           <div className={RatingsReviewsCSS.photos}>
             {photos}
@@ -84,12 +142,37 @@ class ReviewTile extends React.Component {
           <FontAwesomeIcon icon={faCheck} />
           {recommend}
         </div>
-        <div>{response}</div>
-        <div className="review_actions">
-          Helpful?
-          Yes
-          {review.helpfulness}
-          | Report
+        <div className={RatingsReviewsCSS.review_response}>
+          {response !== ''
+            ? (
+              <>
+                <p style={responseStyle}>Response:</p>
+                <p>The product is good. stop complaining.</p>
+              </>
+            )
+            : (
+              <>
+              </>
+            )}
+        </div>
+        <div className={RatingsReviewsCSS.review_actions}>
+          <div>Helpful?</div>
+          <div>
+            <a
+              href="#0"
+              onClick={this.handleHelpfulVote}
+            >
+              Yes
+            </a>
+            {` (${helpfulness})`}
+          </div>
+          <div>|</div>
+          <a
+            href="#0"
+            onClick={this.handleReport}
+          >
+            Report
+          </a>
         </div>
         {show && (
           <ReviewImageModal
@@ -101,5 +184,3 @@ class ReviewTile extends React.Component {
     );
   }
 }
-
-export default ReviewTile;
