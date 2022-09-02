@@ -6,9 +6,9 @@ import QuestionModal from './QuestionModal.jsx';
 
 function QuestionList(props) {
   const [openQModal, toggleQModal] = useState(false);
-  const { compare } = props;
-  const { questions } = props;
-  const { getMoreQuestions } = props;
+  const {
+    compare, questions, getMoreQuestions, productId, getQuestions,
+  } = props;
   let showBtn = true;
 
   if (questions.length === compare.length) {
@@ -27,7 +27,13 @@ function QuestionList(props) {
       </div>
       {showBtn && <button type="submit" className={QListCSS.moreButton} onClick={getMoreQuestions}>More Answered Questions</button>}
       <button type="submit" className={QListCSS.addQButton} onClick={() => { toggleQModal(true); }}>Ask a Question +</button>
-      {openQModal && <QuestionModal toggleQModal={toggleQModal} />}
+      {openQModal && (
+      <QuestionModal
+        toggleQModal={toggleQModal}
+        productId={productId}
+        getQuestions={getQuestions}
+      />
+      )}
     </div>
 
   );

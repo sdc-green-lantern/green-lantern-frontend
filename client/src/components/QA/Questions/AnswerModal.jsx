@@ -27,10 +27,12 @@ class AnswerModal extends React.Component {
   };
 
   submitAnswer = () => {
-    const { question_id } = this.props;
+    const { question_id, hideModal, getAnswers } = this.props;
     console.log(this.state);
     axiosConfig.post(`/qa/questions/${question_id}/answers`, this.state)
       .then((response) => {
+        hideModal();
+        getAnswers();
         console.log(response);
       })
       .catch((err) => {

@@ -47,8 +47,7 @@ class QA extends React.Component {
 
   render() {
     let displayList;
-    const { display } = this.state;
-    const { results } = this.state;
+    const { display, results } = this.state;
     const { productId } = this.props;
     if (display.length !== 0) {
       displayList = (
@@ -56,6 +55,7 @@ class QA extends React.Component {
           questions={display}
           compare={results}
           productId={productId}
+          getQuestions={this.getQuestions}
           getMoreQuestions={this.getMoreQuestions}
         />
       );

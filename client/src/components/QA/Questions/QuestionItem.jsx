@@ -126,6 +126,8 @@ class QuestionItem extends React.Component {
           <AnswerModal
             question_id={question_id}
             hideModal={() => { this.setState({ showAModal: false }); }}
+            getAnswers={this.getAnswers}
+            getMoreAnswers={this.getMoreAnswers}
           />
           )}
         </div>
