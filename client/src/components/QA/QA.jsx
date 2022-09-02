@@ -2,6 +2,7 @@ import React from 'react';
 import QACSS from './QA.module.css';
 import QuestionList from './Questions/QuestionList.jsx';
 import axiosConfig from '../../../../axiosConfig.js';
+import SearchQA from './SearchQA/SearchQA.jsx';
 
 class QA extends React.Component {
   constructor(props) {
@@ -66,6 +67,7 @@ class QA extends React.Component {
         <div className={QACSS.qa_section}>
           <div className={QACSS.qa_body}>
             <h2 data-testid="QA-1">Questions and Answers</h2>
+            <SearchQA />
             { displayList }
           </div>
         </div>

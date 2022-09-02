@@ -90,6 +90,7 @@ class QuestionItem extends React.Component {
           answers={display}
           compare={results}
           getMoreAnswers={this.getMoreAnswers}
+          getAnswers={this.getAnswers}
         />
       );
     } else {
