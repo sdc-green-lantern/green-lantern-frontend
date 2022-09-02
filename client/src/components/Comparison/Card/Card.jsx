@@ -1,4 +1,5 @@
 import React from 'react';
+import PubSub from 'pubsub-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faRegStar } from '@fortawesome/free-regular-svg-icons';
@@ -31,6 +32,11 @@ class Card extends React.Component {
     this.updateProduct();
   }
 
+  showModal = () => {
+    const { id } = this.props;
+    PubSub.publish('showModal', { isShown: true, id });
+  };
+
   async updateProduct() {
     const { id } = this.props;
     const infoResponse = await instance.get(`/products/${id}`);
@@ -60,7 +66,7 @@ class Card extends React.Component {
     const averageRating = Card.averageRating(ratings);
     return (
       <div className={card.container}>
-        <FontAwesomeIcon icon={faRegStar} size="2xl" className={card.action} />
+        <FontAwesomeIcon icon={faRegStar} size="2xl" className={card.action} onClick={this.showModal} />
         <div className={card['img-container']}>
           <img
             src={photos ? photos[0].url : ''}
