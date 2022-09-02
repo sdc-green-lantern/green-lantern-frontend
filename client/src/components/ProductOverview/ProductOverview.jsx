@@ -26,7 +26,7 @@ export default function ProductOverview({ productId }) {
     <div className={postyles.productoverview}>
       <Nav />
       <Announcements />
-      <ProductInfo productId={productId} />
+      <ProductInfo productId={productId} product={product} />
       <ProductDescription productId={productId} product={product} />
     </div>
   );
