@@ -77,16 +77,16 @@ class Modal extends React.Component {
             <li>
               <div>{productName}</div>
               {features.map((feature) =>
-                (<div key={feature}>{productFeatures.get(feature) || 'N/A'}</div>))}
+                (<div key={feature}><span>{productFeatures.get(feature) || 'N/A'}</span></div>))}
             </li>
             <li>
               <div>FEATURES</div>
-              {features.map((feature) => (<div key={feature}>{feature}</div>))}
+              {features.map((feature) => (<div key={feature}><span>{feature}</span></div>))}
             </li>
             <li>
               <div>{comparedProductName}</div>
               {features.map((feature) =>
-                (<div key={feature}>{comparedFeatures.get(feature) || 'N/A'}</div>))}
+                (<div key={feature}><span>{comparedFeatures.get(feature) || 'N/A'}</span></div>))}
             </li>
           </ul>
         </div>
