@@ -29,15 +29,6 @@ class RatingsReviews extends React.Component {
     this.updateProductName();
   }
 
-  componentDidUpdate(prevProps) {
-    const { prevProductId } = prevProps.productId;
-    const { productId } = this.props;
-    if (productId !== prevProductId) {
-      this.updateReviews();
-      // this.updateProductName();
-    }
-  }
-
   handleGetReviews() {
     const { productId, axiosConfig } = this.props;
     const productURL = `/reviews/?sort=relevant&product_id=${productId}&count=1000`;
@@ -129,7 +120,7 @@ class RatingsReviews extends React.Component {
       reviews, displayedReviews, numReviews, numDisplayed, productName,
     } = this.state;
     return (
-      <div key={productId} className={RatingsReviewsCSS.ratings_section}>
+      <div className={RatingsReviewsCSS.ratings_section}>
         <div className={RatingsReviewsCSS.ratings_container}>
           <div className={RatingsReviewsCSS.ratings_header} data-testid="RatingsReviews-header">
             RATINGS & REVIEWS
