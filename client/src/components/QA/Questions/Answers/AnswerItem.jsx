@@ -6,6 +6,7 @@ class AnswerItem extends React.Component {
   constructor(props) {
     super(props);
     this.addAYes = this.addAYes.bind(this);
+    this.sendReport = this.sendReport.bind(this);
     this.state = {
       yesCount: 0,
     };
@@ -28,11 +29,23 @@ class AnswerItem extends React.Component {
     }
   };
 
+  sendReport = () => {
+    const { answer, getAnswers } = this.props;
+    const { answer_id } = answer;
+    axiosConfig.put(`/qa/answers/${answer_id}/report`)
+      .then((response) => {
+        getAnswers();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   render() {
     const { answer } = this.props;
-    const { answerer_name } = answer;
+    const { answerer_name, helpfulness } = answer;
     const { yesCount } = this.state;
-    const { helpfulness } = answer;
+
     const condition = {
       fontWeight: 'normal',
     };
@@ -60,7 +73,7 @@ class AnswerItem extends React.Component {
             <button type="submit" className={AItemCSS.yesHelpful} onClick={() => { this.addAYes(); }}>Yes</button>
             {`(${helpfulness + yesCount})   |`}
           </span>
-          <span className={AItemCSS.reportBtn}>Report</span>
+          <button type="submit" className={AItemCSS.reportBtn} onClick={() => { this.sendReport(); }}>Report</button>
         </span>
 
       </div>
