@@ -25,24 +25,14 @@ class Card extends React.Component {
       defaultStyle: {},
       reviewMeta: {},
     };
-    this.updateProduct = this.updateProduct.bind(this);
+    this.getProductInfo = this.getProductInfo.bind(this);
   }
 
   componentDidMount() {
-    this.updateProduct();
+    this.getProductInfo();
   }
 
-  showModal = (e) => {
-    e.stopPropagation();
-    const { id } = this.props;
-    PubSub.publish('showModal', { isShown: true, id });
-  };
-
-  showProduct = (e) => {
-    console.log(e.target, this.props);
-  };
-
-  async updateProduct() {
+  async getProductInfo() {
     const { id } = this.props;
     const infoResponse = await instance.get(`/products/${id}`);
     const styleResponse = await instance.get(`/products/${id}/styles`);
@@ -62,6 +52,17 @@ class Card extends React.Component {
     });
   }
 
+  showProduct = () => {
+    const { id } = this.props;
+    PubSub.publish('showProduct', { id });
+  };
+
+  showModal = (e) => {
+    e.stopPropagation();
+    const { id } = this.props;
+    PubSub.publish('showModal', { isShown: true, id });
+  };
+
   render() {
     const { info, reviewMeta, defaultStyle } = this.state;
     const { name, category } = info;
@@ -71,7 +72,7 @@ class Card extends React.Component {
     const averageRating = Card.averageRating(ratings);
     return (
       <div className={card.container} onClick={this.showProduct}>
-        <FontAwesomeIcon icon={faRegStar} size="2xl" className={card.action} onClick={this.showModal} tabindex="-1" />
+        <FontAwesomeIcon icon={faRegStar} size="2xl" className={card.action} onClick={this.showModal} tabIndex="-1" />
         <div className={card['img-container']}>
           <img
             src={photos ? photos[0].url : ''}

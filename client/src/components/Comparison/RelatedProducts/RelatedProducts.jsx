@@ -18,6 +18,7 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
+    // this.token = PubSub.subscribe('showProduct', (msg, data) => {}
     this.updateRelatedProducts()
       .then(() => {
         this.rightScrollerDisplay();
@@ -78,6 +79,10 @@ class RelatedProducts extends React.Component {
         <div className={relatedProducts.title} data-testid="title">
           RELATED PRODUCTS
         </div>
+        <span>
+          Current Product Id:
+          {this.props.productId}
+        </span>
         <div className={relatedProducts.main} ref={(ele) => { this.main = ele; }}>
           <div
             className={relatedProducts['scroll-left']}

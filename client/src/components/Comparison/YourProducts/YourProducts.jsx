@@ -3,6 +3,10 @@ import Card from '../Card/Card.jsx';
 import yourProducts from './YourProducts.module.css';
 
 class YourProducts extends React.Component {
+  state = {
+
+  };
+
   render() {
     return (
       <div className={yourProducts['your-products']}>

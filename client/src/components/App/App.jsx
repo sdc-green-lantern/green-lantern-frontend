@@ -1,4 +1,5 @@
 import React from 'react';
+import PubSub from 'pubsub-js';
 import axiosConfig from '../../../../axiosConfig.js'; // use this variable in place of axios
 import ProductOverview from '../ProductOverview/ProductOverview.jsx';
 import Comparison from '../Comparison/Comparison.jsx';
@@ -10,8 +11,20 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 65633, // Pugs: 65633 // Shoes: 65635
+      productId: 65635, // Pugs: 65633 // Shoes: 65635
     };
+  }
+
+  componentDidMount() {
+    this.token = PubSub.subscribe('showProduct', (msg, data) => {
+      this.setState({
+        productId: data.id,
+      });
+    });
+  }
+
+  componentWillUnmount() {
+    PubSub.unsubscribe(this.token);
   }
 
   render() {
