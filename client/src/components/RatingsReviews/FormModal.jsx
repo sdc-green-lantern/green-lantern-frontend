@@ -11,12 +11,17 @@ export default class FormModal extends React.Component {
       remainingChars: 50,
     };
     this.handleReviewBodyChange = this.handleReviewBodyChange.bind(this);
+    this.handleFormSubmission = this.handleFormSubmission.bind(this);
   }
 
   handleReviewBodyChange(event) {
     const reviewLength = event.target.value.length;
     const remainingChars = reviewLength < 50 ? 50 - reviewLength : 0;
     this.setState({ remainingChars });
+  }
+
+  handleFormSubmission(event) {
+    console.log(event);
   }
 
   render() {
@@ -36,7 +41,7 @@ export default class FormModal extends React.Component {
             </div>
           </div>
           <div>
-            <h2>Write Your Review</h2>
+            <h1>Write Your Review</h1>
             <h4>{`About the ${productName}`}</h4>
           </div>
           <div>
@@ -76,13 +81,15 @@ export default class FormModal extends React.Component {
             </div>
           </div>
           <div>
-            Characteristics*
-            Size
-            Width
-            Comfort
-            Quality
-            Length
-            Fit
+            <p>
+              Characteristics*
+              Size
+              Width
+              Comfort
+              Quality
+              Length
+              Fit
+            </p>
           </div>
           <div className={FormModalCSS.reviewContainer}>
             <label htmlFor="review_summary">
@@ -97,7 +104,7 @@ export default class FormModal extends React.Component {
               />
             </label>
           </div>
-          <div style={{padding: '0 30px'}}>
+          <div>
             <label htmlFor="review_body">
               <p>Review Body*</p>
               <textarea
@@ -108,15 +115,12 @@ export default class FormModal extends React.Component {
                 cols="100"
                 placeholder="Why did you like the product or not?"
                 onChange={this.handleReviewBodyChange}
-                // minLength="50"
-                // maxLength="1000"
-                // size="100"
               />
             </label>
-            <p>{(remainingChars > 0 && `Minimum required characters left: ${remainingChars}`)}</p>
+            {(remainingChars > 0 && `Minimum required characters left: ${remainingChars}`)}
           </div>
           <div>
-            Upload your photos
+            <p>Upload your photos</p>
           </div>
           <div>
             <label htmlFor="displayName">
@@ -141,13 +145,12 @@ export default class FormModal extends React.Component {
           <div>
             <div
               className={FormModalCSS.modal_button}
+              onClick={this.handleFormSubmission}
               style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0px 0px 10px'}}
             >
               Submit
             </div>
           </div>
-
-
         </div>
       </div>
     );
