@@ -38,7 +38,6 @@ class Modal extends React.Component {
       let features = [...comparedFeatureKeys, ...productFeatureKeys];
       features = new Set(features);
       features = [...features];
-      features.push('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'l', 'm');
 
       this.setState({
         isShown,
