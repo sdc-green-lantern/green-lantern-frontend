@@ -38,6 +38,7 @@ class Modal extends React.Component {
       let features = [...comparedFeatureKeys, ...productFeatureKeys];
       features = new Set(features);
       features = [...features];
+      features.push('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'l', 'm');
 
       this.setState({
         isShown,
@@ -73,22 +74,24 @@ class Modal extends React.Component {
             <div>COMPARING</div>
             <FontAwesomeIcon icon={faXmark} onClick={this.toggleDisplay} className={modal['close-button']} />
           </div>
-          <ul className={modal.row}>
-            <li>
-              <div>{productName}</div>
-              {features.map((feature) =>
-                (<div key={feature}><span>{productFeatures.get(feature) || 'N/A'}</span></div>))}
-            </li>
-            <li>
-              <div>FEATURES</div>
-              {features.map((feature) => (<div key={feature}><span>{feature}</span></div>))}
-            </li>
-            <li>
-              <div>{comparedProductName}</div>
-              {features.map((feature) =>
-                (<div key={feature}><span>{comparedFeatures.get(feature) || 'N/A'}</span></div>))}
-            </li>
-          </ul>
+          <div className={modal.row}>
+            <ul>
+              <li>
+                <div>{productName}</div>
+                {features.map((feature) =>
+                  (<div key={`p${feature}`}><span>{productFeatures.get(feature) || 'N/A'}</span></div>))}
+              </li>
+              <li>
+                <div>FEATURES</div>
+                {features.map((feature) => (<div key={feature}><span>{feature}</span></div>))}
+              </li>
+              <li>
+                <div>{comparedProductName}</div>
+                {features.map((feature) =>
+                  (<div key={`c${feature}`}><span>{comparedFeatures.get(feature) || 'N/A'}</span></div>))}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     );
