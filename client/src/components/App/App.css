@@ -40,7 +40,13 @@ body {
   height: 200px;
   width: 70%;
 }
-
+.related-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid black;
+  width: 100%;
+}
 .qa-section {
   display: flex;
   justify-content: center;

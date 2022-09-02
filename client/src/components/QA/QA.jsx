@@ -2,6 +2,7 @@ import React from 'react';
 import QACSS from './QA.module.css';
 import QuestionList from './Questions/QuestionList.jsx';
 import axiosConfig from '../../../../axiosConfig.js';
+import SearchQA from './SearchQA/SearchQA.jsx';
 
 class QA extends React.Component {
   constructor(props) {
@@ -9,8 +10,9 @@ class QA extends React.Component {
     this.getQuestions = this.getQuestions.bind(this);
     this.getMoreQuestions = this.getMoreQuestions.bind(this);
     this.state = {
-      count: 3,
+      count: 2,
       results: [],
+      display: [],
     };
   }
 
@@ -18,14 +20,14 @@ class QA extends React.Component {
     this.getQuestions();
   }
 
-  getQuestions = (pages = 1) => {
+  getQuestions = () => {
     const { productId } = this.props;
-    const { count } = this.state;
-    axiosConfig.get(`/qa/questions?product_id=${productId}&page=${pages}&count=${count}`)
+    axiosConfig.get(`/qa/questions?product_id=${productId}&page=1&count=1000`)
       .then((response) => {
+        const { count } = this.state;
         this.setState({
-          count: count + 2,
           results: response.data.results,
+          display: response.data.results.slice(0, count),
         });
       })
       .catch((err) => {
@@ -34,30 +36,39 @@ class QA extends React.Component {
   };
 
   getMoreQuestions = () => {
-    this.getQuestions();
+    let { count } = this.state;
+    const { results } = this.state;
+    count += 2;
+    this.setState({
+      display: results.slice(0, count),
+      count,
+    });
   };
 
   render() {
-    let display;
+    let displayList;
+    const { display } = this.state;
     const { results } = this.state;
     const { productId } = this.props;
-    if (results.length !== 0) {
-      display = (
+    if (display.length !== 0) {
+      displayList = (
         <QuestionList
-          questions={results}
+          questions={display}
+          compare={results}
           productId={productId}
           getMoreQuestions={this.getMoreQuestions}
         />
       );
     } else {
-      display = <button className={QACSS.askButton} type="submit">Ask a Question</button>;
+      displayList = <button className={QACSS.askButton} type="submit">Ask a Question</button>;
     }
     return (
       <div>
         <div className={QACSS.qa_section}>
           <div className={QACSS.qa_body}>
             <h2 data-testid="QA-1">Questions and Answers</h2>
-            { display }
+            <SearchQA />
+            { displayList }
           </div>
         </div>
       </div>

@@ -53,6 +53,10 @@
   border: 1px solid black;
 }
 
+.review_response {
+  background-color: green;
+}
+
 .review_tile {
   display: flex;
   background-color: gray;
@@ -65,6 +69,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.review_actions {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.5em;
 }
 
 .review_summary {

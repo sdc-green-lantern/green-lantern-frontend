@@ -19,7 +19,47 @@
   margin: auto;
   padding: 20px;
   border-radius: 4px;
-  max-width: 300px;
-  height: 450px;
+  max-width: 450px;
+  height: 500px;
+}
+.exitBtn {
+  position: relative;
+  justify-content: right;
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+  color: rgba(255, 0, 0, 0.399);
 }
 
+.body {
+  	width : 400px;
+	height : 300px;
+	margin : 0 auto;
+	padding : 5px;
+	display : flex;
+	flex-direction: column;
+	justify-content:space-around;
+}
+
+.footer {
+  display : flex;
+	flex-direction: column;
+	justify-content:space-around;
+  align-items: center;
+}
+
+.submitBtn {
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+  background-color: lightseagreen;
+}
+
+.submitBtn:hover {
+  background-color: darkseagreen;
+}
+
+.security {
+  font-style: italic;
+  font-size: small;
+}

@@ -1,0 +1,19 @@
+.announcements {
+  /* border: 1px solid black; */
+  /* border-left: 1px solid black;
+  border-right: 1px solid black; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 70%;
+}
+.bold {
+  font-weight: bold;
+}
+.underline {
+  text-decoration: underline;
+}
+.italic {
+  font-style: italic;
+}

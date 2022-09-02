@@ -13,34 +13,38 @@ class AnswerModal extends React.Component {
       <div className={AModalCSS.modalBackground}>
         <div className={AModalCSS.modalContainer}>
           <div className={AModalCSS.exitButton}>
-            <button type="submit" onClick={hideModal}>X</button>
+            <button type="submit" className={AModalCSS.exitBtn} onClick={hideModal}>X</button>
           </div>
           <h2 className={AModalCSS.title}>Submit Your Answer</h2>
           <h4 className={AModalCSS.subtitle}>
             product name: question body
           </h4>
-          <div>
-            <label>
-              Your Answer:
-              <input type="textarea" placeholder="Answer away..." />
-            </label>
-            <label>
-              What is your nickname:
+          <div className={AModalCSS.body}>
+            <div>
+              <div>Your Answer:</div>
+              <textarea placeholder="Answer away..." maxLength="1000" rows="4" cols="60" />
+            </div>
+            <div>
+              <div>What is your nickname:</div>
               <input type="type" placeholder="Example: jack543!" />
-              <span>For privacy reasons, do not use your full name or email address</span>
-            </label>
-            <label>
-              Your email:
+              <div className={AModalCSS.security}>
+                For privacy reasons, do not use your full name or email address
+              </div>
+            </div>
+            <div>
+              <div>Your email:</div>
               <input type="email" placeholder="Example: jack@email.com" />
-              <span>For authentication reasons, you will not be emailed</span>
-            </label>
-            <label>
-              Upload you photos:
+              <div className={AModalCSS.security}>
+                For authentication reasons, you will not be emailed
+              </div>
+            </div>
+            <div>
+              <div>Upload you photos:</div>
               <input type="file" />
-            </label>
+            </div>
           </div>
-          <div className={AModalCSS.submitBtn}>
-            <button type="submit">Submit answer</button>
+          <div className={AModalCSS.footer}>
+            <button type="submit" className={AModalCSS.submitBtn}>Submit answer</button>
           </div>
         </div>
       </div>
