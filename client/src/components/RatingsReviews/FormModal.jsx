@@ -14,6 +14,7 @@ export default class FormModal extends React.Component {
       remainingChars: 50,
       imgFilePaths: [],
       imgFileURLs: [],
+      showUploadButton: true,
     };
     this.handleReviewBodyChange = this.handleReviewBodyChange.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
@@ -28,7 +29,7 @@ export default class FormModal extends React.Component {
 
   handleImageUpload(event) {
     const { IMGBB_API_KEY } = this.props;
-    let { imgFilePaths, imgFileURLs } = this.state;
+    const { imgFilePaths, imgFileURLs } = this.state;
 
     // console.log(event);
     // console.log(event.target.files[0]);
@@ -46,7 +47,11 @@ export default class FormModal extends React.Component {
     imgFilePaths.push(filePath);
     this.setState({ imgFilePaths });
 
-    let body = new FormData();
+    if (imgFilePaths.length >= 5) {
+      this.setState({ showUploadButton: false });
+    }
+
+    const body = new FormData();
     body.set('key', IMGBB_API_KEY);
     body.append('image', event.target.files[0]);
     // console.log(body);
@@ -76,7 +81,18 @@ export default class FormModal extends React.Component {
 
   render() {
     const { close, productName } = this.props;
-    const { remainingChars } = this.state;
+    const { remainingChars, imgFileURLs, showUploadButton } = this.state;
+    const photos = imgFileURLs.map((url) => (
+      <div>
+        <img
+          src={url}
+          alt=""
+          className={FormModalCSS.thumbnail_img}
+          // alt={photo.id}
+          // className={RatingsReviewsCSS.thumbnail_img}
+        />
+      </div>
+    ));
     return (
       <div className={FormModalCSS.formModalBackground}>
         <div className={FormModalCSS.formModalContainer}>
@@ -85,7 +101,7 @@ export default class FormModal extends React.Component {
             <div
               className={FormModalCSS.modal_button}
               onClick={close}
-              style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
               Cancel
             </div>
@@ -171,16 +187,7 @@ export default class FormModal extends React.Component {
           </div>
           <div>
             <p>Upload your photos</p>
-            {/* <label htmlFor="upload-images">
-              <input
-                type="file"
-                id="upload-images"
-                name="upload-images"
-                accept="image/png, image/jpeg"
-                onChange={this.handleImageUpload}
-                multiple
-              />
-            </label> */}
+            {showUploadButton && (
             <label htmlFor="upload-images">
               <input
                 type="file"
@@ -190,11 +197,10 @@ export default class FormModal extends React.Component {
                 onChange={this.handleImageUpload}
               />
             </label>
-            {/* {imgFiles.length > 0
-            ?
-            `Your photos have successfully uploaded. `
-            : ''
-            } */}
+            )}
+            <div>
+              {photos}
+            </div>
           </div>
           <div>
             <label htmlFor="displayName">
@@ -220,7 +226,9 @@ export default class FormModal extends React.Component {
             <div
               className={FormModalCSS.modal_button}
               onClick={this.handleFormSubmission}
-              style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0px 0px 10px'}}
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0px 0px 10px',
+              }}
             >
               Submit
             </div>
