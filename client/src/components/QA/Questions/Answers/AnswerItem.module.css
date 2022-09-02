@@ -1,5 +1,9 @@
 .answerItem {
-  border: 1px solid rgb(230, 20, 20);
+  border-bottom: 1px solid lightseagreen;
+}
+
+.interactions {
+
 }
 .yesHelpful {
   position: static;

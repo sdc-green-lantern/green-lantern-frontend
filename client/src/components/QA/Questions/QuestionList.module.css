@@ -6,7 +6,6 @@
   flex-flow: row wrap;
   margin: 5px;
   padding: 5px;
-  border: 1px solid blue;
   overflow-y: auto;
 }
 

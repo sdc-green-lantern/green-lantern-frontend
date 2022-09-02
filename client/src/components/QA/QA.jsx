@@ -60,7 +60,7 @@ class QA extends React.Component {
         />
       );
     } else {
-      displayList = <button className={QACSS.askButton} type="submit">Ask a Question</button>;
+      displayList = <div className={QACSS.container}><button className={QACSS.askButton} type="submit">Ask a Question</button></div>;
     }
     return (
       <div>

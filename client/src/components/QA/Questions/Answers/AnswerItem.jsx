@@ -68,14 +68,15 @@ class AnswerItem extends React.Component {
           <span>
             {`, ${answer.date}   |`}
           </span>
-          <span>
-            {'   Helpful?   '}
-            <button type="submit" className={AItemCSS.yesHelpful} onClick={() => { this.addAYes(); }}>Yes</button>
-            {`(${helpfulness + yesCount})   |`}
+          <span className={AItemCSS.interactions}>
+            <span>
+              {'   Helpful?   '}
+              <button type="submit" className={AItemCSS.yesHelpful} onClick={() => { this.addAYes(); }}>Yes</button>
+              {`(${helpfulness + yesCount})   |`}
+            </span>
+            <button type="submit" className={AItemCSS.reportBtn} onClick={() => { this.sendReport(); }}>Report</button>
           </span>
-          <button type="submit" className={AItemCSS.reportBtn} onClick={() => { this.sendReport(); }}>Report</button>
         </span>
-
       </div>
     );
   }
