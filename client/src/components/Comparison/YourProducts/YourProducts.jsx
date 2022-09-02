@@ -15,7 +15,7 @@ class YourProducts extends React.Component {
         </div>
         <div className={yourProducts.main}>
           <div className={yourProducts['card-container']}>
-            <Card CardType={true} />
+            <Card CardType="add" />
           </div>
         </div>
       </div>
