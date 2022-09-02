@@ -25,20 +25,20 @@ export default class FormModal extends React.Component {
     return (
       <div className={FormModalCSS.formModalBackground}>
         <div className={FormModalCSS.formModalContainer}>
+          {/* TO-DO: Button not responding to import from CSS */}
+          <div>
+            <div
+              className={FormModalCSS.modal_button}
+              onClick={close}
+              style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+            >
+              Cancel
+            </div>
+          </div>
           <div>
             <h2>Write Your Review</h2>
             <h4>{`About the ${productName}`}</h4>
           </div>
-          {/* <button
-            onClick={close}
-            className={FormModalCSS.button}
-            type="button"
-          >
-            Close
-          </button> */}
-          {/* <div> */}
-          {/* </div> */}
-
           <div>
             Overall Rating*
             <select>
@@ -137,22 +137,17 @@ export default class FormModal extends React.Component {
               />
             </label>
             <p>For authentication reasons, you will not be emailed.</p>
-            <div style={{display: 'flex', justifyContent: 'center'}}>
-              <div style={{cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '50px', width: '100%', border: '1px solid red', margin: '20px 5px'}}>Cancel</div>
-              <div style={{cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',height: '50px', width: '100%', border: '1px solid red', margin: '20px 5px'}}>Submit</div>
-              {/* <button>Cancel</button>
-              <button>Submit</button> */}
+          </div>
+          <div>
+            <div
+              className={FormModalCSS.modal_button}
+              style={{display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0px 0px 10px'}}
+            >
+              Submit
             </div>
           </div>
-          {/* <div>
-          </div> */}
-          {/* <button
-            // onClick={close}
-            className={FormModalCSS.button}
-            // type="button"
-          >
-            Submit review
-          </button> */}
+
+
         </div>
       </div>
     );
