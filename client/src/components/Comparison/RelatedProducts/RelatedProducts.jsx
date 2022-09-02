@@ -119,8 +119,9 @@ class RelatedProducts extends React.Component {
               ref={(ele) => { this.carouselWrapper = ele; }}
               style={{ left: leftOffset }}
             >
-              {relatedProductIds.map((id) =>
-                (<Card key={id} id={id} updateProductId={updateProductId} />))}
+              {relatedProductIds.map((id) => (<Card
+                key={id} id={id} updateProductId={updateProductId}
+              />))}
             </div>
           </div>
         </div>
