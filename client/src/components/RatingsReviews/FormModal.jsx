@@ -11,6 +11,7 @@ export default class FormModal extends React.Component {
       remainingChars: 50,
     };
     this.handleReviewBodyChange = this.handleReviewBodyChange.bind(this);
+    this.handleImageUpload = this.handleImageUpload.bind(this);
     this.handleFormSubmission = this.handleFormSubmission.bind(this);
   }
 
@@ -20,8 +21,16 @@ export default class FormModal extends React.Component {
     this.setState({ remainingChars });
   }
 
+  handleImageUpload(event) {
+    console.log(event);
+    console.log(event.target.files);
+  }
+
   handleFormSubmission(event) {
     console.log(event);
+    // validate form inputs
+    // if any invalid entries, do not send to API.
+    // display warning message: "You must enter the following: "
   }
 
   render() {
@@ -80,7 +89,7 @@ export default class FormModal extends React.Component {
               </label>
             </div>
           </div>
-          <div>
+          {/* <div>
             <p>
               Characteristics*
               Size
@@ -90,7 +99,7 @@ export default class FormModal extends React.Component {
               Length
               Fit
             </p>
-          </div>
+          </div> */}
           <div className={FormModalCSS.reviewContainer}>
             <label htmlFor="review_summary">
               <p>Review Summary</p>
@@ -121,6 +130,16 @@ export default class FormModal extends React.Component {
           </div>
           <div>
             <p>Upload your photos</p>
+            <label htmlFor="upload-images">
+              <input
+                type="file"
+                id="upload-images"
+                name="upload-images"
+                accept="image/png, image/jpeg"
+                onChange={this.handleImageUpload}
+                multiple
+              />
+            </label>
           </div>
           <div>
             <label htmlFor="displayName">
