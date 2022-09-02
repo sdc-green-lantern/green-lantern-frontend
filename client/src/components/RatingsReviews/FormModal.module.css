@@ -25,17 +25,20 @@
   flex-direction: column;
   /* row-gap: 0.5em; */
   align-items: center;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
 
 }
 
 
 .button {
-  width: 10%;
+  /* display: block; */
+  /* display: flex; */
+  justify-self: flex-end;
+  width: 10rem;
   /* min-width: 10%;
   max-width: 20%; */
   /* position: */
-  max-height: 5%;
+  max-height: 3rem;
   opacity: 1;
   border-radius: 0%;
   border: 1px solid black;

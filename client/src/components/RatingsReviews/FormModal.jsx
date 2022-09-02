@@ -29,7 +29,7 @@ export default class FormModal extends React.Component {
             <h2>Write Your Review</h2>
             <h4>{`About the ${productName}`}</h4>
           </div>
-          <div>
+          {/* <div> */}
             <button
               onClick={close}
               className={FormModalCSS.button}
@@ -37,7 +37,7 @@ export default class FormModal extends React.Component {
             >
               Close
             </button>
-          </div>
+          {/* </div> */}
 
           <div>
             Overall Rating*
