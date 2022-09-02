@@ -32,9 +32,14 @@ class Card extends React.Component {
     this.updateProduct();
   }
 
-  showModal = () => {
+  showModal = (e) => {
+    e.stopPropagation();
     const { id } = this.props;
     PubSub.publish('showModal', { isShown: true, id });
+  };
+
+  showProduct = (e) => {
+    console.log(e.target, this.props);
   };
 
   async updateProduct() {
@@ -65,8 +70,8 @@ class Card extends React.Component {
 
     const averageRating = Card.averageRating(ratings);
     return (
-      <div className={card.container}>
-        <FontAwesomeIcon icon={faRegStar} size="2xl" className={card.action} onClick={this.showModal} />
+      <div className={card.container} onClick={this.showProduct}>
+        <FontAwesomeIcon icon={faRegStar} size="2xl" className={card.action} onClick={this.showModal} tabindex="-1" />
         <div className={card['img-container']}>
           <img
             src={photos ? photos[0].url : ''}
