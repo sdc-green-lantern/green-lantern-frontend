@@ -5,18 +5,17 @@ import Carousel from '../Carousel/Carousel.jsx';
 import Buttons from '../Buttons/Buttons.jsx';
 import Selection from '../Selection/Selection.jsx';
 
-export default function ProductInfo({ productId, product }) {
-  // const [styles, setStyles] = useState([]);
-
+export default function ProductInfo({ productId, product, styles, setStyles }) {
   useEffect(() => {
-    //
-  }, []);
+    console.log('productId => ', productId);
+    console.log('product => ', product);
+    console.log('style => ', styles);
+  }, [product, styles]);
 
   return (
     <div className={piStyles.productinfo}>
       <Carousel
         data-testid="Carousel"
-        productId={productId}
       />
       <div className={piStyles.productoptions}>
         <div className={piStyles.starRatings}><span>Read all reviews</span></div>
@@ -25,7 +24,7 @@ export default function ProductInfo({ productId, product }) {
           <h1>{product.name}</h1>
           <h3 className={piStyles.productPrice}>${product.default_price}</h3>
         </div>
-        <Selection />
+        <Selection styles={styles} setStyles={setStyles} />
         <Buttons />
       </div>
     </div>

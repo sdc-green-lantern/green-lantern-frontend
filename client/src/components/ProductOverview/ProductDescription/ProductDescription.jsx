@@ -13,7 +13,7 @@ export default function ProductDescription({ product }) {
       </div>
       <div className={pdStyles.checklist}>
         <ul className={pdStyles.checklistStyles}>
-          {product.features.map((feature) => <li className={pdStyles.listItem}>✅ <span>{feature.feature}: {feature.value}</span></li>)}
+          {product.features.map((feature, index) => <li className={pdStyles.listItem} key={index}>✅ <span>{feature.feature}: {feature.value}</span></li>)}
         </ul>
       </div>
     </div>

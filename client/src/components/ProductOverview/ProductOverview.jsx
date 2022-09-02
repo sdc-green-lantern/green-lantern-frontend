@@ -10,12 +10,20 @@ import ProductDescription from './ProductDescription/ProductDescription.jsx';
 
 export default function ProductOverview({ productId }) {
   const [product, setProduct] = useState({ features: [] });
+  const [styles, setStyles] = useState([]);
 
   useEffect(() => {
     axiosConfig.get(`/products/${productId}`)
       .then((response) => {
-        console.log('making call in po..', response.data);
+        console.log('get product => ', response.data);
         setProduct(response.data);
+      })
+      .then(() => {
+        axiosConfig.get(`/products/${productId}/styles`)
+          .then((response) => {
+            console.log('get styles => ', response.data);
+            setStyles(response.data.results);
+          });
       })
       .catch((err) => {
         console.error(err);
@@ -26,7 +34,7 @@ export default function ProductOverview({ productId }) {
     <div className={postyles.productoverview}>
       <Nav />
       <Announcements />
-      <ProductInfo productId={productId} product={product} />
+      <ProductInfo productId={productId} product={product} styles={styles} setStyles={setStyles} />
       <ProductDescription productId={productId} product={product} />
     </div>
   );
