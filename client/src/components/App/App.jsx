@@ -1,6 +1,6 @@
 import React from 'react';
+import axiosConfig, { IMGBB_API_KEY } from '../../../../axiosConfig.js'; // use this variable in place of axios
 import PubSub from 'pubsub-js';
-import axiosConfig from '../../../../axiosConfig.js'; // use this variable in place of axios
 import ProductOverview from '../ProductOverview/ProductOverview.jsx';
 import Comparison from '../Comparison/Comparison.jsx';
 import QA from '../QA/QA.jsx';
@@ -38,7 +38,11 @@ class App extends React.Component {
         <ProductOverview productId={productId} />
         <QA productId={productId} />
         <Comparison productId={productId} updateProductId={this.updateProductId} />
-        <RatingsReviews axiosConfig={axiosConfig} productId={productId} />
+        <RatingsReviews
+          axiosConfig={axiosConfig}
+          IMGBB_API_KEY={IMGBB_API_KEY}
+          productId={productId}
+        />
       </div>
     );
   }
