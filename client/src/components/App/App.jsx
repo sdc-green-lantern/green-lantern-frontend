@@ -1,4 +1,5 @@
 import React from 'react';
+import PubSub from 'pubsub-js';
 import axiosConfig from '../../../../axiosConfig.js'; // use this variable in place of axios
 import ProductOverview from '../ProductOverview/ProductOverview.jsx';
 import Comparison from '../Comparison/Comparison.jsx';
@@ -10,21 +11,33 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 65633, // Pugs: 65633 // Shoes: 65635
+      productId: 65635, // Pugs: 65633 // Shoes: 65635
     };
+    this.updateProductId = this.updateProductId.bind(this);
+  }
+
+  updateProductId(id) {
+    this.setState({
+      productId: id,
+    });
+    PubSub.publish('newProductId', { id });
   }
 
   render() {
     const { productId } = this.state;
     return (
       <div>
-        <p>
+        <select id="id-selector" onChange={(e) => {this.updateProductId(e.target.value)}}>
+          <option value="65633">65633</option>
+          <option value="65635">65635</option>
+        </select>
+        <p id="id-display">
           Current Product Id:
           {productId}
         </p>
         <ProductOverview productId={productId} />
         <QA productId={productId} />
-        <Comparison productId={productId} />
+        <Comparison productId={productId} updateProductId={this.updateProductId} />
         <RatingsReviews axiosConfig={axiosConfig} productId={productId} />
       </div>
     );

@@ -1,17 +1,26 @@
-.container{
+.container {
   position: relative;
   display: inline-block;
   width: 180px;
   height: 250px;
   border: 1px solid black;
   margin: 10px 10px 10px 0;
+
 }
 
-.container:last-child{
+.container:last-child {
   margin-right: 0;
 }
 
-.img-container{
+svg{
+  color: black;
+}
+
+.container:active:not(:focus-within) {
+  outline: thick double #0ABAB5;
+}
+
+.img-container {
   width: 100%;
   height: 150px;
   overflow: hidden;
@@ -20,47 +29,51 @@
   background-color: grey;
 }
 
-img{
+img {
   height: 100%;
 }
 
-.info{
+.info {
   margin: 5px;
 }
 
-.action{
+.action {
   position: absolute;
   right: 10px;
   top: 10px;
-  color:#0ABAB5;
+  color: #0ABAB5;
   opacity: 50%;
 }
 
-.action:active{
-
-  color:#0ABAB5;
-  opacity: 100%;
-  -ms-zoom-animation: default;
+.action:focus{
+  outline: none
 }
 
-.rating{
+.action:active {
+  color: #0ABAB5;
+  opacity: 100%;
+  z-index: 100;
+
+}
+
+.rating {
   position: relative;
   background-color: white;
   display: inline-flex;
   justify-content: space-around;
 }
 
-.rating-overlay{
+.rating-overlay {
   background-color: #0ABAB5;
   opacity: 75%;
   position: absolute;
   left: 0;
   top: 0;
   height: 100%;
- mix-blend-mode: color;
+  mix-blend-mode: color;
 }
 
-.star{
+.star {
   color: lightgray;
   display: flex;
   justify-content: left;
