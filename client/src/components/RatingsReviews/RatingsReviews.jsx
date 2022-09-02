@@ -17,38 +17,25 @@ class RatingsReviews extends React.Component {
       sortOption: 'relevant', // newest, helpful, relevant
     };
 
+    this.updateReviews = this.updateReviews.bind(this);
+    this.updateProductName = this.updateProductName.bind(this);
     this.handleGetReviews = this.handleGetReviews.bind(this);
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
     this.handleSort = this.handleSort.bind(this);
   }
 
   componentDidMount() {
-    const { productId, axiosConfig } = this.props;
-    const productURL = `/reviews/?sort=relevant&product_id=${productId}&count=1000`;
+    this.updateReviews();
+    this.updateProductName();
+  }
 
-    axiosConfig.get(productURL)
-      .then((response) => {
-        const reviews = response.data.results;
-        const displayedReviews = response.data.results.slice(0, 2);
-        this.setState({
-          reviews,
-          displayedReviews,
-          numReviews: reviews.length,
-          numDisplayed: displayedReviews.length,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    const productNameURL = `/products/${productId}`;
-    axiosConfig.get(productNameURL)
-      .then((response) => {
-        this.setState({ productName: response.data.name });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  componentDidUpdate(prevProps) {
+    const { prevProductId } = prevProps.productId;
+    const { productId } = this.props;
+    if (productId !== prevProductId) {
+      this.updateReviews();
+      // this.updateProductName();
+    }
   }
 
   handleGetReviews() {
@@ -102,13 +89,47 @@ class RatingsReviews extends React.Component {
       });
   }
 
+  updateReviews() {
+    const { productId, axiosConfig } = this.props;
+    const productURL = `/reviews/?sort=relevant&product_id=${productId}&count=1000`;
+
+    axiosConfig.get(productURL)
+      .then((response) => {
+        const reviews = response.data.results;
+        const displayedReviews = response.data.results.slice(0, 2);
+        this.setState({
+          reviews,
+          displayedReviews,
+          numReviews: reviews.length,
+          numDisplayed: displayedReviews.length,
+        });
+      })
+
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  updateProductName() {
+    const { productId, axiosConfig } = this.props;
+    const productNameURL = `/products/${productId}`;
+
+    axiosConfig.get(productNameURL)
+      .then((response) => {
+        this.setState({ productName: response.data.name });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   render() {
     const { axiosConfig, IMGBB_API_KEY, productId } = this.props;
     const {
       reviews, displayedReviews, numReviews, numDisplayed, productName,
     } = this.state;
     return (
-      <div className={RatingsReviewsCSS.ratings_section}>
+      <div key={productId} className={RatingsReviewsCSS.ratings_section}>
         <div className={RatingsReviewsCSS.ratings_container}>
           <div className={RatingsReviewsCSS.ratings_header} data-testid="RatingsReviews-header">
             RATINGS & REVIEWS
