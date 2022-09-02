@@ -9,15 +9,6 @@ export default function Carousel() {
   useEffect(() => {
     //
   }, []);
-  // axiosConfig.get(`/products/${productId}/styles`)
-  //   .then((response) => {
-  //     const result = response.data.results;
-  //     console.log('in carousel, result => ', result);
-  //     setStyles(result);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
 
   const handlePreviousImg = () => {
     const isFirst = currentIndex === 0;
