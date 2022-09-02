@@ -12,6 +12,7 @@ class QuestionItem extends React.Component {
     this.addQYes = this.addQYes.bind(this);
     this.state = {
       results: [],
+      display: [],
       count: 2,
       yesCount: 0,
       showAModal: false,
@@ -22,15 +23,26 @@ class QuestionItem extends React.Component {
     this.getAnswers();
   }
 
-  getAnswers = (pages = 1) => {
+  sortAnswers = (data) => {
+    const sorted = data.reduce((acc, element) => {
+      if (element.author === 'Seller') {
+        return [element, ...acc];
+      }
+      return [...acc, element];
+    }, []);
+    return sorted;
+  };
+
+  getAnswers = () => {
     const { question } = this.props;
     const { question_id } = question;
     const { count } = this.state;
-    axiosConfig.get(`qa/questions/${question_id}/answers?page=${pages}&count=${count}`)
+    axiosConfig.get(`qa/questions/${question_id}/answers?page=1&count=1000`)
       .then((response) => {
+        const newData = this.sortAnswers(response.data.results);
         this.setState({
-          count: count + 2,
-          results: response.data.results,
+          results: newData,
+          display: newData.slice(0, count),
         });
       })
       .catch((err) => {
@@ -39,7 +51,13 @@ class QuestionItem extends React.Component {
   };
 
   getMoreAnswers = () => {
-    this.getAnswers();
+    let { count } = this.state;
+    const { results } = this.state;
+    count += 2;
+    this.setState({
+      display: results.slice(0, count),
+      count,
+    });
   };
 
   addQYes = () => {
@@ -61,14 +79,20 @@ class QuestionItem extends React.Component {
 
   render() {
     let answerDisplay;
-    const { showAModal } = this.state;
-    const { yesCount } = this.state;
+    const {
+      results, showAModal, yesCount, display,
+    } = this.state;
     const { question } = this.props;
-    const { question_body } = question;
-    const { results } = this.state;
-    const { question_helpfulness } = question;
-    if (results.length !== 0) {
-      answerDisplay = <AnswerList answers={results} getMoreAnswers={this.getMoreAnswers} />;
+    const { question_body, question_helpfulness } = question;
+    if (display.length !== 0) {
+      answerDisplay = (
+        <AnswerList
+          answers={display}
+          compare={results}
+          getMoreAnswers={this.getMoreAnswers}
+          getAnswers={this.getAnswers}
+        />
+      );
     } else {
       answerDisplay = <button type="submit" className={QItemCSS.answerQBtn} onClick={() => {}}> Answer this question </button>;
     }
