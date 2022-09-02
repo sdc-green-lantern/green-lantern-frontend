@@ -112,6 +112,10 @@ class RatingsReviews extends React.Component {
         <div className={RatingsReviewsCSS.ratings_container}>
           <div className={RatingsReviewsCSS.ratings_header} data-testid="RatingsReviews-header">
             RATINGS & REVIEWS
+            <span>
+              Current Product Id:
+              {productId}
+            </span>
           </div>
           <div className={RatingsReviewsCSS.ratings_breakdown_sidebar}>
             <p>Ratings Breakdown</p>
