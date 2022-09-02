@@ -16,7 +16,7 @@ export default class NewReview extends React.Component {
   }
 
   render() {
-    const { productName } = this.props;
+    const { productName, axiosConfig, IMGBB_API_KEY } = this.props;
     const { showModal } = this.state;
     return (
       <>
@@ -30,6 +30,8 @@ export default class NewReview extends React.Component {
         {showModal && (
           <FormModal
             productName={productName}
+            axiosConfig={axiosConfig}
+            IMGBB_API_KEY={IMGBB_API_KEY}
             close={() => { this.setState({ showModal: false }); }}
             submit={this.handleSubmitForm}
           />

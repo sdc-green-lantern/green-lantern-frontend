@@ -1,4 +1,7 @@
 import React from 'react';
+import axios from 'axios';
+// import fs from "fs";
+
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import RatingsReviewsCSS from './RatingsReviews.module.css';
@@ -9,6 +12,8 @@ export default class FormModal extends React.Component {
     super(props);
     this.state = {
       remainingChars: 50,
+      imgFilePaths: [],
+      imgFileURLs: [],
     };
     this.handleReviewBodyChange = this.handleReviewBodyChange.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
@@ -22,8 +27,44 @@ export default class FormModal extends React.Component {
   }
 
   handleImageUpload(event) {
-    console.log(event);
-    console.log(event.target.files);
+    const { IMGBB_API_KEY } = this.props;
+    let { imgFilePaths, imgFileURLs } = this.state;
+
+    // console.log(event);
+    // console.log(event.target.files[0]);
+    // let files = Array.from(event.target.files);
+    // if (files.length > 5) {
+    //   this.setState({ numImgs: files.length });
+    //   files = files.slice(0, 5);
+    // }
+    // this.setState({ imgFiles: files });
+
+    const filePath = event.target.value;
+    // console.log(filePath);
+    // console.log(IMGBB_API_KEY);
+
+    imgFilePaths.push(filePath);
+    this.setState({ imgFilePaths });
+
+    let body = new FormData();
+    body.set('key', IMGBB_API_KEY);
+    body.append('image', event.target.files[0]);
+    // console.log(body);
+
+    axios({
+      method: 'post',
+      url: 'https://api.imgbb.com/1/upload',
+      data: body,
+    })
+      .then((response) => {
+        // console.log(response);
+        console.log(response.data.data.display_url);
+        imgFileURLs.push(response.data.data.display_url);
+        this.setState({ imgFileURLs });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   handleFormSubmission(event) {
@@ -130,7 +171,7 @@ export default class FormModal extends React.Component {
           </div>
           <div>
             <p>Upload your photos</p>
-            <label htmlFor="upload-images">
+            {/* <label htmlFor="upload-images">
               <input
                 type="file"
                 id="upload-images"
@@ -139,7 +180,21 @@ export default class FormModal extends React.Component {
                 onChange={this.handleImageUpload}
                 multiple
               />
+            </label> */}
+            <label htmlFor="upload-images">
+              <input
+                type="file"
+                id="upload-images"
+                name="upload-images"
+                accept="image/png, image/jpeg"
+                onChange={this.handleImageUpload}
+              />
             </label>
+            {/* {imgFiles.length > 0
+            ?
+            `Your photos have successfully uploaded. `
+            : ''
+            } */}
           </div>
           <div>
             <label htmlFor="displayName">

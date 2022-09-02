@@ -103,7 +103,7 @@ class RatingsReviews extends React.Component {
   }
 
   render() {
-    const { axiosConfig, productId } = this.props;
+    const { axiosConfig, IMGBB_API_KEY, productId } = this.props;
     const {
       reviews, displayedReviews, numReviews, numDisplayed, productName,
     } = this.state;
@@ -144,6 +144,8 @@ class RatingsReviews extends React.Component {
           <div className={RatingsReviewsCSS.write_new_review_btn_box}>
             {/* <p>Add a review</p> */}
             <NewReview
+              axiosConfig={axiosConfig}
+              IMGBB_API_KEY={IMGBB_API_KEY}
               productName={productName}
             />
           </div>

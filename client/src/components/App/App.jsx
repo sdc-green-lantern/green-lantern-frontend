@@ -1,5 +1,5 @@
 import React from 'react';
-import axiosConfig from '../../../../axiosConfig.js'; // use this variable in place of axios
+import axiosConfig, { IMGBB_API_KEY } from '../../../../axiosConfig.js'; // use this variable in place of axios
 import ProductOverview from '../ProductOverview/ProductOverview.jsx';
 import Comparison from '../Comparison/Comparison.jsx';
 import QA from '../QA/QA.jsx';
@@ -27,6 +27,7 @@ class App extends React.Component {
         <Comparison productId={productId} />
         <RatingsReviews
           axiosConfig={axiosConfig}
+          IMGBB_API_KEY={IMGBB_API_KEY}
           productId={productId}
         />
       </div>
