@@ -3,7 +3,7 @@ import pdStyles from './ProductDescription.module.css';
 
 export default function ProductDescription({ product }) {
   // const { features } = product;
-  console.log('product description - product prop... ', product);
+  console.log('product description - product features... ', product.features);
 
   return (
     <div className={pdStyles.productdescription}>
@@ -23,9 +23,7 @@ export default function ProductDescription({ product }) {
           <li className={pdStyles.listItem}>✅ Made with 100% Genetic Modification</li>
           <li className={pdStyles.listItem}>✅ This is made up</li>
           <li className={pdStyles.listItem}>✅ It doesn't matter</li> */}
-          {product.features.map((feature) => {
-            return <li>{`${feature.feature} : ${feature.value}`}</li>;
-          })}
+          {product.features.map((feature) => <li>✅ {`${feature.feature} : ${feature.value}`}</li>)}
         </ul>
       </div>
     </div>

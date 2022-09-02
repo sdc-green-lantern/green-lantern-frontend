@@ -9,7 +9,7 @@ import ProductInfo from './ProductInfo/ProductInfo.jsx';
 import ProductDescription from './ProductDescription/ProductDescription.jsx';
 
 export default function ProductOverview({ productId }) {
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState({ features: [] });
 
   useEffect(() => {
     axiosConfig.get(`/products/${productId}`)
