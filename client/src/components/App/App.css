@@ -80,3 +80,13 @@ body {
   height: 500px;
   width: 70%;
 }
+
+#id-selector {
+  position: fixed;
+  top: 0
+}
+
+#id-display {
+  position: fixed;
+  top: 0
+}

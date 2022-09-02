@@ -9,10 +9,10 @@ import comparison from './Comparison.module.css';
 // eslint-disable-next-line react/prefer-stateless-function
 class Comparison extends React.Component {
   render() {
-    const { productId } = this.props;
+    const { productId, updateProductId } = this.props;
     return (
       <div className={comparison.container}>
-        <RelatedProducts productId={productId} />
+        <RelatedProducts productId={productId} updateProductId={updateProductId} />
         <YourProducts />
         <Modal productId={productId} />
       </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import PubSub from 'pubsub-js';
 // eslint-disable-next-line import/extensions
 import Card from '../Card/Card.jsx';
 import relatedProducts from './RelatedProducts.module.css';
@@ -18,11 +19,21 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
-    // this.token = PubSub.subscribe('showProduct', (msg, data) => {}
-    this.updateRelatedProducts()
+    this.token = PubSub.subscribe('newProductId', (msg, data) => {
+      this.updateRelatedProducts(data.id)
+        .then(() => {
+          this.rightScrollerDisplay();
+        });
+    });
+
+    this.updateRelatedProducts(this.props.productId)
       .then(() => {
         this.rightScrollerDisplay();
       });
+  }
+
+  componentWillUnmount() {
+    PubSub.unsubscribe(this.token);
   }
 
   handleScroll(isRight) {
@@ -55,8 +66,7 @@ class RelatedProducts extends React.Component {
     }
   }
 
-  async updateRelatedProducts() {
-    const { productId } = this.props;
+  async updateRelatedProducts(productId) {
     try {
       const response = await instance.get(`/products/${productId}/related`);
       let { data } = response;
@@ -74,6 +84,7 @@ class RelatedProducts extends React.Component {
 
   render() {
     const { leftOffset, isRightEdgeInBound, relatedProductIds } = this.state;
+    const { productId, updateProductId } = this.props;
     return (
       <div className={relatedProducts['related-products']}>
         <div className={relatedProducts.title} data-testid="title">
@@ -81,7 +92,7 @@ class RelatedProducts extends React.Component {
         </div>
         <span>
           Current Product Id:
-          {this.props.productId}
+          {productId}
         </span>
         <div className={relatedProducts.main} ref={(ele) => { this.main = ele; }}>
           <div
@@ -108,7 +119,8 @@ class RelatedProducts extends React.Component {
               ref={(ele) => { this.carouselWrapper = ele; }}
               style={{ left: leftOffset }}
             >
-              {relatedProductIds.map((id) => <Card key={id} id={id} />)}
+              {relatedProductIds.map((id) =>
+                (<Card key={id} id={id} updateProductId={updateProductId} />))}
             </div>
           </div>
         </div>

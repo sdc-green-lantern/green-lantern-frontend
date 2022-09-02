@@ -53,8 +53,8 @@ class Card extends React.Component {
   }
 
   showProduct = () => {
-    const { id } = this.props;
-    PubSub.publish('showProduct', { id });
+    const { id, updateProductId } = this.props;
+    updateProductId(id);
   };
 
   showModal = (e) => {

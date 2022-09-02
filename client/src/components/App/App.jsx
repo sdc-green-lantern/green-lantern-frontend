@@ -13,31 +13,31 @@ class App extends React.Component {
     this.state = {
       productId: 65635, // Pugs: 65633 // Shoes: 65635
     };
+    this.updateProductId = this.updateProductId.bind(this);
   }
 
-  componentDidMount() {
-    this.token = PubSub.subscribe('showProduct', (msg, data) => {
-      this.setState({
-        productId: data.id,
-      });
+  updateProductId(id) {
+    this.setState({
+      productId: id,
     });
-  }
-
-  componentWillUnmount() {
-    PubSub.unsubscribe(this.token);
+    PubSub.publish('newProductId', { id });
   }
 
   render() {
     const { productId } = this.state;
     return (
       <div>
-        <p>
+        <select id="id-selector" onChange={(e) => {this.updateProductId(e.target.value)}}>
+          <option value="65633">65633</option>
+          <option value="65635">65635</option>
+        </select>
+        <p id="id-display">
           Current Product Id:
           {productId}
         </p>
         <ProductOverview productId={productId} />
         <QA productId={productId} />
-        <Comparison productId={productId} />
+        <Comparison productId={productId} updateProductId={this.updateProductId} />
         <RatingsReviews axiosConfig={axiosConfig} productId={productId} />
       </div>
     );
