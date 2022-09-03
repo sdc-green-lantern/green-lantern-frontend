@@ -68,7 +68,6 @@ export default class FormModal extends React.Component {
   }
 
   handleCharacteristicsChange(event) {
-    // console.log(event.target.name);
     // console.log(event.target.value);
     let { characteristics } = this.state;
     characteristics[event.target.name] = Number(event.target.value);
@@ -117,24 +116,27 @@ export default class FormModal extends React.Component {
 
   handleFormValidation(event) {
     event.preventDefault();
-    console.log(this.state);
 
     let isValid = true;
     let warning = 'You must enter the following: ';
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-    const { rating, recommendation, characteristics, reviewSummary,
-      reviewBody, imgFileURLs, displayName, email, remainingChars
+    const {
+      rating, recommendation, characteristics,
+      displayName, email, remainingChars,
     } = this.state;
 
     if (rating === 0) {
+      isValid = false;
       warning += '\n - valid rating';
     }
 
-    if (recommendation !== 'yes' && recommendation !== 'no') {
+    if (recommendation === null) {
+      isValid = false;
       warning += '\n - valid recommendation';
     }
 
     if (Object.values(characteristics).includes(null)) {
+      isValid = false;
       warning += '\n - valid characteristics';
     }
 
@@ -151,7 +153,7 @@ export default class FormModal extends React.Component {
       warning += '\n - valid email';
     }
 
-    warning = warning.slice(0, warning.length - 1);
+    // warning = warning.slice(0, warning.length - 1);
     if (isValid) {
       this.submitForm();
     } else {
@@ -160,8 +162,36 @@ export default class FormModal extends React.Component {
   }
 
   submitForm() {
+    const {
+      rating, recommendation, characteristics, reviewSummary,
+      reviewBody, imgFileURLs, displayName, email,
+    } = this.state;
+    const {
+      axiosConfig, productId, updateReviews, close,
+    } = this.props;
+    const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews/';
+    const body = {
+      product_id: productId,
+      rating,
+      summary: reviewSummary,
+      body: reviewBody,
+      recommend: recommendation === 'true',
+      name: displayName,
+      email,
+      photos: imgFileURLs,
+      characteristics,
+    };
 
-    console.log('form submitted!');
+    axiosConfig.post(url, body)
+      .then((response) => {
+        alert('Form successfully submitted!');
+        updateReviews();
+        close();
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log('Form not submitted.');
+      });
   }
 
   render() {
@@ -175,8 +205,6 @@ export default class FormModal extends React.Component {
           src={url}
           alt=""
           className={FormModalCSS.thumbnail_img}
-          // alt={photo.id}
-          // className={RatingsReviewsCSS.thumbnail_img}
         />
       </div>
     ));
@@ -215,15 +243,13 @@ export default class FormModal extends React.Component {
     return (
       <div className={FormModalCSS.formModalBackground}>
         <div className={FormModalCSS.formModalContainer}>
-          {/* TO-DO: Button not responding to import from CSS */}
           <div>
-            <div
+            <input
+              type="submit"
+              value="Cancel"
               className={FormModalCSS.modal_button}
               onClick={close}
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-            >
-              Cancel
-            </div>
+            />
           </div>
           <div>
             <h1>Write Your Review</h1>
@@ -255,7 +281,7 @@ export default class FormModal extends React.Component {
                     type="radio"
                     id="yes"
                     name="recommendation"
-                    value="yes"
+                    value={true}
                     onChange={this.handleChange}
                     required
                   />
@@ -267,7 +293,7 @@ export default class FormModal extends React.Component {
                     type="radio"
                     id="radio_no"
                     name="recommendation"
-                    value="no"
+                    value={false}
                     onChange={this.handleChange}
                     required
                   />
@@ -306,7 +332,7 @@ export default class FormModal extends React.Component {
                   cols="100"
                   placeholder="Why did you like the product or not?"
                   onChange={this.handleReviewBodyChange}
-                  required
+                  // required
                 />
               </label>
               {(remainingChars > 0 && `Minimum required characters left: ${remainingChars}`)}
@@ -338,7 +364,7 @@ export default class FormModal extends React.Component {
                   maxLength="60"
                   size="50"
                   onChange={this.handleChange}
-                  required
+                  // required
                 />
               </label>
               <p>For privacy reasons, do not use your full name or email address.</p>
@@ -353,7 +379,7 @@ export default class FormModal extends React.Component {
                   maxLength="60"
                   size="50"
                   onChange={this.handleChange}
-                  required
+                  // required
                 />
               </label>
               <p>For authentication reasons, you will not be emailed.</p>
@@ -363,9 +389,6 @@ export default class FormModal extends React.Component {
               value="Submit"
               className={FormModalCSS.modal_button}
               onClick={this.handleFormValidation}
-              style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0px 0px 10px',
-              }}
             />
           </form>
         </div>

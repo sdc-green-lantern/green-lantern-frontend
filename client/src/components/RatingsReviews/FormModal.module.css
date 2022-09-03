@@ -72,12 +72,13 @@ max-width: 20%; */
 .modal_button {
   /* align-items: 'center';
   justify-content: 'center'; */
-  margin: 10px 0px 0px;
+  margin: 10px 0px 10px;
   border: 2px solid black;
   height: 3em;
   width: 5em;
   background-color: buttonface;
 }
+
 
 .modal_button:hover {
   background-color: darkgrey;

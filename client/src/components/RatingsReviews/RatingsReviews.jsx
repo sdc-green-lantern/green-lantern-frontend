@@ -180,7 +180,9 @@ class RatingsReviews extends React.Component {
               axiosConfig={axiosConfig}
               IMGBB_API_KEY={IMGBB_API_KEY}
               productName={productName}
+              productId={productId}
               characteristics={metadata.characteristics}
+              updateReviews={this.updateReviews}
             />
           </div>
         </div>
