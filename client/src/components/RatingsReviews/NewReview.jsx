@@ -16,7 +16,7 @@ export default class NewReview extends React.Component {
   }
 
   render() {
-    const { productName, axiosConfig, IMGBB_API_KEY } = this.props;
+    const { productName, characteristics, axiosConfig, IMGBB_API_KEY } = this.props;
     const { showModal } = this.state;
     return (
       <>
@@ -30,6 +30,7 @@ export default class NewReview extends React.Component {
         {showModal && (
           <FormModal
             productName={productName}
+            characteristics={characteristics}
             axiosConfig={axiosConfig}
             IMGBB_API_KEY={IMGBB_API_KEY}
             close={() => { this.setState({ showModal: false }); }}

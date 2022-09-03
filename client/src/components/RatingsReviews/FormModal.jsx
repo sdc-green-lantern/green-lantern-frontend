@@ -15,6 +15,14 @@ export default class FormModal extends React.Component {
       imgFilePaths: [],
       imgFileURLs: [],
       showUploadButton: true,
+      featureRatings: {
+        Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
+        Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+        Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+        Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+        Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+        Fit: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+      },
     };
     this.handleReviewBodyChange = this.handleReviewBodyChange.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
@@ -80,8 +88,8 @@ export default class FormModal extends React.Component {
   }
 
   render() {
-    const { close, productName } = this.props;
-    const { remainingChars, imgFileURLs, showUploadButton } = this.state;
+    const { close, productName, characteristics } = this.props;
+    const { remainingChars, imgFileURLs, showUploadButton, featureRatings } = this.state;
     const photos = imgFileURLs.map((url) => (
       <div>
         <img
@@ -93,6 +101,34 @@ export default class FormModal extends React.Component {
         />
       </div>
     ));
+
+    // const gridHeader = (
+    //   <div className={FormModalCSS.characteristics_grid}>
+    //     {['', 1, 2, 3, 4, 5].map((rating) => (
+    //       {rating}
+    //     ))}
+    //   </div>
+    // );
+
+    const characteristicsGrid = Object.keys(characteristics).map((feature, index) => (
+      <div className={FormModalCSS.characteristics_grid}>
+        { feature }
+        {[1, 2, 3, 4, 5].map((rating) => (
+          <label htmlFor={feature}>
+            {featureRatings[feature][rating - 1]}
+            <input
+              key={feature}
+              className={FormModalCSS.radio_input}
+              type="radio"
+              id={feature}
+              name={feature}
+              value={rating}
+            />
+          </label>
+        ))}
+      </div>
+    ));
+
     return (
       <div className={FormModalCSS.formModalBackground}>
         <div className={FormModalCSS.formModalContainer}>
@@ -146,17 +182,13 @@ export default class FormModal extends React.Component {
               </label>
             </div>
           </div>
-          {/* <div>
-            <p>
-              Characteristics*
-              Size
-              Width
-              Comfort
-              Quality
-              Length
-              Fit
-            </p>
-          </div> */}
+          <div>
+            <p>Characteristics*</p>
+            <div className={FormModalCSS.characteristics_grid}>
+              {/* {gridHeader} */}
+              {characteristicsGrid}
+            </div>
+          </div>
           <div className={FormModalCSS.reviewContainer}>
             <label htmlFor="review_summary">
               <p>Review Summary</p>
