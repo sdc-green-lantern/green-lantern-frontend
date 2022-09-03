@@ -1,7 +1,7 @@
 import React from 'react';
 import PubSub from 'pubsub-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faRegStar, faSquarePlus } from '@fortawesome/free-regular-svg-icons';
 import card from './Card.module.css';
 import instance from '../../../../../axiosConfig.js';
@@ -81,8 +81,8 @@ class Card extends React.Component {
 
     if (cardType === 'add') {
       return (
-        <div className={card.container} onClick={this.addYourProduct}>
-          <FontAwesomeIcon icon={faSquarePlus} id={card['plus-icon']} />
+        <div className={card.container} onClick={this.addYourProduct} id={card.add} >
+          <FontAwesomeIcon icon={faCirclePlus} id={card['plus-icon']} />
         </div>
       );
     }

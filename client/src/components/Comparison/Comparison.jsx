@@ -14,7 +14,7 @@ class Comparison extends React.Component {
     return (
       <div className={comparison.container}>
         <RelatedProducts productId={productId} updateProductId={updateProductId} />
-        <YourProducts productId={productId} />
+        <YourProducts productId={productId} updateProductId={updateProductId} />
         <Modal key={productId} productId={productId} />
       </div>
     );

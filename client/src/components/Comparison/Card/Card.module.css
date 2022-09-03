@@ -5,6 +5,7 @@
   height: 250px;
   border: 1px solid black;
   margin: 10px 10px 10px 0;
+  background-color: white;
 
 }
 
@@ -14,6 +15,12 @@
 
 .container:active:not(:focus-within) {
   outline: thick double #0ABAB5;
+}
+
+#add {
+  position: sticky;
+  left: 0;
+  z-index: 90;
 }
 
 #plus-icon {

@@ -31,14 +31,14 @@ class YourProducts extends React.Component {
 
   render() {
     const { yourProductIds } = this.state;
-    const { productId } = this.props;
+    const { productId, updateProductId } = this.props;
     return (
       <div className={yourProducts['your-products']}>
         <span>
           Current Product Id:
           {productId}
         </span>
-        <ProductList productsIdToDisplay={yourProductIds} listType="YourProducts" productId={productId} />
+        <ProductList productsIdToDisplay={yourProductIds} listType="YourProducts" productId={productId} updateProductId={updateProductId} />
       </div>
     );
   }
