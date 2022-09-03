@@ -86,14 +86,14 @@ class QuestionModal extends React.Component {
             </div>
             <div>
               What is your nickname:
-              <input type="type" placeholder="Example: jackson11!" name="name" required onChange={(e) => { this.handleChange(e); }} />
+              <input type="type" placeholder="Example: jackson11!" maxLength="60" name="name" required onChange={(e) => { this.handleChange(e); }} />
               <div className={QModalCSS.security}>
                 For privacy reasons, do not use your full name or email address
               </div>
             </div>
             <div>
               Your email:
-              <input type="email" placeholder="Example: jackson@email.com" name="email" required onChange={(e) => { this.handleChange(e); }} />
+              <input type="email" placeholder="Example: jackson@email.com" name="email" maxLength="60" required onChange={(e) => { this.handleChange(e); }} />
               <div className={QModalCSS.security}>
                 For authentication reasons, you will not be emailed
               </div>

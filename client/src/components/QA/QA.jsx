@@ -10,6 +10,7 @@ class QA extends React.Component {
     this.getQuestions = this.getQuestions.bind(this);
     this.getMoreQuestions = this.getMoreQuestions.bind(this);
     this.getProductInfo = this.getProductInfo.bind(this);
+    this.searchQuestions = this.searchQuestions.bind(this);
     this.state = {
       count: 2,
       results: [],
@@ -61,6 +62,23 @@ class QA extends React.Component {
       });
   };
 
+  searchQuestions = (string) => {
+    const standard = string.toUpperCase();
+    const { results } = this.state;
+    const newDisplay = [];
+    if (string.length > 2) {
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < results.length; i++) {
+        if (results[i].question_body.includes(standard)) {
+          newDisplay.push(results[i]);
+        }
+      }
+      this.setState({
+        display: newDisplay,
+      });
+    }
+  };
+
   render() {
     const { display, results, productName } = this.state;
     const { productId } = this.props;
@@ -70,7 +88,7 @@ class QA extends React.Component {
         <div className={QACSS.qa_section}>
           <div className={QACSS.qa_body}>
             <h2 data-testid="QA-1">Questions and Answers</h2>
-            <SearchQA />
+            <SearchQA searchQuestions={this.searchQuestions} />
             <QuestionList
               questions={display}
               compare={results}

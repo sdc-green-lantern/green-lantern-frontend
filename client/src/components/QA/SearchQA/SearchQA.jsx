@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function SearchQA() {
+function SearchQA(props) {
+  const [term, setTerm] = useState('');
+
   return (
     <div>
-      <label>
+      <div>
         Search Questions:
-        <input type="Search" />
-      </label>
+        <input type="Search" onChange={(e) => setTerm(e.target.value)} />
+      </div>
 
     </div>
   );
