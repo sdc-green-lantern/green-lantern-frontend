@@ -1,5 +1,4 @@
 import React from 'react';
-import PubSub from 'pubsub-js';
 import axiosConfig from '../../../../axiosConfig.js'; // use this variable in place of axios
 import ProductOverview from '../ProductOverview/ProductOverview.jsx';
 import Comparison from '../Comparison/Comparison.jsx';
@@ -20,7 +19,6 @@ class App extends React.Component {
     this.setState({
       productId: id,
     });
-    PubSub.publish('newProductId', { id });
   }
 
   render() {
@@ -37,7 +35,7 @@ class App extends React.Component {
         </p>
         <ProductOverview productId={productId} />
         <QA productId={productId} />
-        <Comparison productId={productId} updateProductId={this.updateProductId} />
+        <Comparison productId={productId} updateProductId={this.updateProductId} key={`comp${productId}`} />
         <RatingsReviews axiosConfig={axiosConfig} productId={productId} />
       </div>
     );
