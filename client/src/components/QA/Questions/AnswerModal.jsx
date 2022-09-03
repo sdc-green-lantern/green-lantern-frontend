@@ -69,7 +69,6 @@ class AnswerModal extends React.Component {
     const body = new FormData();
     body.set('key', IMGBB_API_KEY);
     body.append('image', e.target.files[0]);
-    console.log(body);
 
     axios({
       method: 'post',
@@ -77,8 +76,6 @@ class AnswerModal extends React.Component {
       data: body,
     })
       .then((response) => {
-        // console.log(response);
-        console.log(response.data.data.display_url);
         imgFileURLs.push(response.data.data.display_url);
         this.setState({ imgFileURLs });
       })
@@ -97,10 +94,9 @@ class AnswerModal extends React.Component {
     axiosConfig.post(`/qa/questions/${question_id}/answers`, {
       body, name, email, photos: imgFileURLs,
     })
-      .then((response) => {
+      .then(() => {
         hideModal();
         getAnswers();
-        console.log(response);
       })
       .catch((err) => {
         console.log(err);
@@ -110,15 +106,18 @@ class AnswerModal extends React.Component {
   render() {
     const { hideModal, question, productName } = this.props;
     const { question_body } = question;
-    const { imgFileURLs } = this.state;
-    const displayPhotos = imgFileURLs.map((url) => (
-      <div className={AModalCSS.imgContainer}>
-        <img
-          src={url}
-          alt=""
-          className={AModalCSS.thumbnail_img}
-        />
-      </div>
+    const { imgFileURLs, photos } = this.state;
+    let showUpload = true;
+    if (photos.length === 5) {
+      showUpload = false;
+    }
+    const displayPhotos = imgFileURLs.map((url, index) => (
+      <img
+        src={url}
+        alt=""
+        className={AModalCSS.thumbnail_img}
+        key={index}
+      />
     ));
     return (
       <div className={AModalCSS.modalBackground}>
@@ -151,8 +150,11 @@ class AnswerModal extends React.Component {
             </div>
             <div>
               <div>Upload you photos:</div>
-              <input type="file" onChange={(e) => { this.handlePhotos(e); }} />
-              {displayPhotos}
+              {showUpload && <input type="file" display="none" className={AModalCSS.file} onChange={(e) => { this.handlePhotos(e); }} />}
+              <div className={AModalCSS.imgContainer}>
+                {displayPhotos}
+              </div>
+
             </div>
 
           </div>
