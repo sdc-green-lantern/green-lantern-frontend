@@ -8,11 +8,48 @@ class AnswerModal extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.submitAnswer = this.submitAnswer.bind(this);
+    this.validateForm = this.validateForm.bind(this);
     this.state = {
       photos: [],
       imgFileURLs: [],
+      body: '',
+      email: '',
+      name: '',
     };
   }
+
+  validateForm = () => {
+    let isValid = true;
+    let warning = 'You must enter the following: ';
+    const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    const {
+      body, name, email, photos, imgFileURLs,
+    } = this.state;
+
+    if (body.length < 1) {
+      isValid = false;
+      warning += 'valid answer,';
+    }
+    if (name.length < 1) {
+      isValid = false;
+      warning += ' valid name,';
+    }
+    if (email.length < 1 || regex.test(email) === false) {
+      isValid = false;
+      warning += ' valid email,';
+    }
+    if (photos.length !== imgFileURLs.length) {
+      isValid = false;
+      warning += ' valid image file type,';
+    }
+
+    warning = warning.slice(0, warning.length - 1);
+    if (isValid) {
+      this.submitAnswer();
+    } else {
+      alert(warning);
+    }
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -56,7 +93,7 @@ class AnswerModal extends React.Component {
     const {
       body, name, email, imgFileURLs,
     } = this.state;
-    console.log(this.state);
+
     axiosConfig.post(`/qa/questions/${question_id}/answers`, {
       body, name, email, photos: imgFileURLs,
     })
@@ -85,7 +122,7 @@ class AnswerModal extends React.Component {
     ));
     return (
       <div className={AModalCSS.modalBackground}>
-        <div className={AModalCSS.modalContainer}>
+        <form className={AModalCSS.modalContainer}>
           <div className={AModalCSS.exitButton}>
             <button type="submit" className={AModalCSS.exitBtn} onClick={hideModal}>X</button>
           </div>
@@ -96,18 +133,18 @@ class AnswerModal extends React.Component {
           <div className={AModalCSS.body}>
             <div>
               <div>Your Answer:</div>
-              <textarea placeholder="Answer away..." maxLength="1000" rows="4" cols="60" name="body" onChange={(e) => { this.handleChange(e); }} />
+              <textarea placeholder="Answer away..." maxLength="1000" rows="4" cols="60" name="body" required onChange={(e) => { this.handleChange(e); }} />
             </div>
             <div>
               <div>What is your nickname:</div>
-              <input type="type" placeholder="Example: jack543!" name="name" onChange={(e) => { this.handleChange(e); }} />
+              <input type="type" placeholder="Example: jack543!" maxLength="60" name="name" required onChange={(e) => { this.handleChange(e); }} />
               <div className={AModalCSS.security}>
                 For privacy reasons, do not use your full name or email address
               </div>
             </div>
             <div>
               <div>Your email:</div>
-              <input type="email" placeholder="Example: jack@email.com" name="email" onChange={(e) => { this.handleChange(e); }} />
+              <input type="email" placeholder="Example: jack@email.com" maxLength="60" name="email" required onChange={(e) => { this.handleChange(e); }} />
               <div className={AModalCSS.security}>
                 For authentication reasons, you will not be emailed
               </div>
@@ -120,9 +157,9 @@ class AnswerModal extends React.Component {
 
           </div>
           <div className={AModalCSS.footer}>
-            <button type="submit" className={AModalCSS.submitBtn} onClick={this.submitAnswer}>Submit answer</button>
+            <button type="submit" className={AModalCSS.submitBtn} onClick={this.validateForm}>Submit answer</button>
           </div>
-        </div>
+        </form>
       </div>
     );
   }
