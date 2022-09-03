@@ -184,10 +184,10 @@ export default class FormModal extends React.Component {
           </div>
           <div>
             <p>Characteristics*</p>
-            <div className={FormModalCSS.characteristics_grid}>
+            {/* <div className={FormModalCSS.characteristics_grid}> */}
               {/* {gridHeader} */}
-              {characteristicsGrid}
-            </div>
+            {characteristicsGrid}
+            {/* </div> */}
           </div>
           <div className={FormModalCSS.reviewContainer}>
             <label htmlFor="review_summary">
