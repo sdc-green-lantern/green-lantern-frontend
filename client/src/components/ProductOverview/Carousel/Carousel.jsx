@@ -8,51 +8,36 @@ export default function Carousel({ currentStyles }) {
 
   useEffect(() => {
     //
-    // console.log('carousel :: currentStyles => ', currentStyles);
-    // const getImages = async () => {
-    //   const getAllImages = await setProductImages(currentStyles.photos);
-    //   const getCurrentImage = await setCurrentImage(productImages[currentIndex].url);
-    // };
-
-    // getImages()
-    //   .then(() => {
-    //     console.log('carousel :: productImages => ', productImages);
-    //     console.log('carousel :: currentImage => ', currentImage);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
     console.log('carousel :: currentStyles => ', currentStyles);
 
     if (Object.keys(currentStyles).length !== 0) {
-      const { photos } = currentStyles;
-      setProductImages(photos);
-      console.log("Product Images: ");
-      console.log(productImages);
+      setProductImages(currentStyles.photos);
       if (productImages.length !== 0) {
-        setCurrentImage(productImages[currentIndex].url);
+        setCurrentImage(productImages[0].url);
       }
     }
-  }, [currentStyles, productImages, currentImage]);
+  }, [currentStyles, productImages]);
 
   const handlePreviousImg = () => {
     const isFirst = currentIndex === 0;
-    const newIndex = isFirst ? productImages.length : currentIndex - 1;
+    const newIndex = isFirst ? productImages.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
+    setCurrentImage(productImages[newIndex].url);
   };
 
   const handleNextImg = () => {
     const isLast = currentIndex === productImages.length - 1;
     const newIndex = isLast ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
+    setCurrentImage(productImages[newIndex].url);
   };
 
   return (
     <div className={carouselstyles.imageGallery} style={{ backgroundImage: `url(${currentImage})` }}>
       <div className={carouselstyles.thumbnailRow}>
         {productImages.map((productImage, index) => (
-            <div className={carouselstyles.thumbnail} key={index} productimage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})` }} />
-          ))}
+          <div className={carouselstyles.thumbnail} key={index} productimage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})` }} />
+        ))}
         <div className={carouselstyles.goToNext}>▼</div>
       </div>
       <div className={carouselstyles.arrows}>

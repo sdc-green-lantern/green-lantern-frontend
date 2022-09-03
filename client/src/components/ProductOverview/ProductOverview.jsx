@@ -32,11 +32,7 @@ export default function ProductOverview({ productId }) {
 
     fetchData(stylesEndpoint)
       .then((response) => {
-        console.log("Styles: ");
-        console.log(response.results);
         setStyles(response.results);
-        console.log("Current Style: ");
-        console.log(response.results[0]);
         setCurrentStyles(response.results[0]);
       })
       .catch((err) => {
