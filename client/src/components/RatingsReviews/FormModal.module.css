@@ -105,3 +105,23 @@ max-width: 20%; */
   width: 50%;
   height: 50%;
 }
+
+.characteristics_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.characteristics_ratings {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: flex-end;
+  /* align-items: center; */
+}
+
+.characteristic_name {
+  font-weight: bold;
+  padding-right: 2em;
+}

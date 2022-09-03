@@ -110,9 +110,17 @@ export default class FormModal extends React.Component {
     //   </div>
     // );
 
-    const characteristicsGrid = Object.keys(characteristics).map((feature, index) => (
-      <div className={FormModalCSS.characteristics_grid}>
-        { feature }
+    const characteristicsNames = Object.keys(characteristics).map((feature, index) => (
+      <div className={FormModalCSS.characteristics_row}>
+        <div className={FormModalCSS.characteristic_name}>
+          {feature}
+        </div>
+      </div>
+    ));
+
+    const characteristicsRatings = Object.keys(characteristics).map((feature, index) => (
+      <div className={FormModalCSS.characteristics_ratings}>
+        {feature}
         {[1, 2, 3, 4, 5].map((rating) => (
           <label htmlFor={feature}>
             {featureRatings[feature][rating - 1]}
@@ -186,7 +194,8 @@ export default class FormModal extends React.Component {
             <p>Characteristics*</p>
             {/* <div className={FormModalCSS.characteristics_grid}> */}
               {/* {gridHeader} */}
-            {characteristicsGrid}
+            {/* {characteristicsNames} */}
+            {characteristicsRatings}
             {/* </div> */}
           </div>
           <div className={FormModalCSS.reviewContainer}>
