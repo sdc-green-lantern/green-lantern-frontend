@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-const instance = axios.create({
+const axiosConfig = axios.create({
   baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp',
 });
 
-instance.defaults.headers.common.Authorization = '**YOUR_AUTH_TOKEN**';
+axiosConfig.defaults.headers.common.Authorization = '**YOUR_AUTH_TOKEN**';
 
-export default instance;
+export const IMGBB_API_KEY = '**YOUR_IMBBB_API_KEY**';
+export default axiosConfig;

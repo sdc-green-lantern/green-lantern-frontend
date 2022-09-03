@@ -1,4 +1,5 @@
 import React from 'react';
+import PubSub from 'pubsub-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faRegStar } from '@fortawesome/free-regular-svg-icons';
@@ -24,14 +25,14 @@ class Card extends React.Component {
       defaultStyle: {},
       reviewMeta: {},
     };
-    this.updateProduct = this.updateProduct.bind(this);
+    this.getProductInfo = this.getProductInfo.bind(this);
   }
 
   componentDidMount() {
-    this.updateProduct();
+    this.getProductInfo();
   }
 
-  async updateProduct() {
+  async getProductInfo() {
     const { id } = this.props;
     const infoResponse = await instance.get(`/products/${id}`);
     const styleResponse = await instance.get(`/products/${id}/styles`);
@@ -51,6 +52,17 @@ class Card extends React.Component {
     });
   }
 
+  showProduct = () => {
+    const { id, updateProductId } = this.props;
+    updateProductId(id);
+  };
+
+  showModal = (e) => {
+    e.stopPropagation();
+    const { id } = this.props;
+    PubSub.publish('showModal', { isShown: true, id });
+  };
+
   render() {
     const { info, reviewMeta, defaultStyle } = this.state;
     const { name, category } = info;
@@ -59,8 +71,8 @@ class Card extends React.Component {
 
     const averageRating = Card.averageRating(ratings);
     return (
-      <div className={card.container}>
-        <FontAwesomeIcon icon={faRegStar} size="2xl" className={card.action} />
+      <div className={card.container} onClick={this.showProduct}>
+        <FontAwesomeIcon icon={faRegStar} size="2xl" className={card.action} onClick={this.showModal} tabIndex="-1" />
         <div className={card['img-container']}>
           <img
             src={photos ? photos[0].url : ''}
