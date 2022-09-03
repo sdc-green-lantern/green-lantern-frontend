@@ -1,6 +1,7 @@
 .productSelection h3 {
   font-size: 14px;
   padding: 0 20px;
+  text-transform: uppercase;
 }
 .productSelection span {
   font-weight: 100;

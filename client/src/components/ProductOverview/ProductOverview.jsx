@@ -11,19 +11,29 @@ import ProductDescription from './ProductDescription/ProductDescription.jsx';
 export default function ProductOverview({ productId }) {
   const [product, setProduct] = useState({ features: [] });
   const [styles, setStyles] = useState([]);
+  const [currentStyles, setCurrentStyles] = useState([]);
 
   useEffect(() => {
-    axiosConfig.get(`/products/${productId}`)
+    const productEndpoint = `/products/${productId}`;
+    const stylesEndpoint = `/products/${productId}/styles`;
+
+    const fetchData = async (url) => {
+      const response = await axiosConfig.get(url);
+      return response.data;
+    };
+
+    fetchData(productEndpoint)
       .then((response) => {
-        console.log('get product => ', response.data);
-        setProduct(response.data);
+        setProduct(response);
       })
-      .then(() => {
-        axiosConfig.get(`/products/${productId}/styles`)
-          .then((response) => {
-            console.log('get styles => ', response.data);
-            setStyles(response.data.results);
-          });
+      .catch((err) => {
+        console.error(err);
+      });
+
+    fetchData(stylesEndpoint)
+      .then((response) => {
+        setStyles(response.results);
+        setCurrentStyles(response.results[0]);
       })
       .catch((err) => {
         console.error(err);
@@ -34,8 +44,14 @@ export default function ProductOverview({ productId }) {
     <div className={postyles.productoverview}>
       <Nav />
       <Announcements />
-      <ProductInfo productId={productId} product={product} styles={styles} setStyles={setStyles} />
-      <ProductDescription productId={productId} product={product} />
+      <ProductInfo
+        productId={productId}
+        product={product}
+        styles={styles}
+        currentStyles={currentStyles}
+        setCurrentStyles={setCurrentStyles}
+      />
+      <ProductDescription product={product} />
     </div>
   );
 }

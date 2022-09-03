@@ -2,9 +2,6 @@ import React from 'react';
 import pdStyles from './ProductDescription.module.css';
 
 export default function ProductDescription({ product }) {
-  // const { features } = product;
-  console.log('product description - product features... ', product.features);
-
   return (
     <div className={pdStyles.productdescription}>
       <div className={pdStyles.descriptionBody}>
