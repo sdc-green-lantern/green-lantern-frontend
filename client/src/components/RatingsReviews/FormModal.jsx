@@ -15,6 +15,7 @@ export default class FormModal extends React.Component {
       imgFilePaths: [],
       imgFileURLs: [],
       showUploadButton: true,
+      characteristics: {},
       featureRatings: {
         Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
         Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
@@ -24,9 +25,41 @@ export default class FormModal extends React.Component {
         Fit: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
       },
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleCharacteristicsChange = this.handleCharacteristicsChange.bind(this);
     this.handleReviewBodyChange = this.handleReviewBodyChange.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
     this.handleFormSubmission = this.handleFormSubmission.bind(this);
+  }
+
+  componentDidMount() {
+    const { characteristics } = this.props;
+    const keys = Object.keys(characteristics);
+    const newCharacteristics = {};
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      const { id } = characteristics[key];
+      newCharacteristics[id] = null;
+    }
+    this.setState({ characteristics: newCharacteristics });
+  }
+
+  handleChange(event) {
+    // console.log(event.target);
+    // console.log(event.target.name);
+    // console.log(event.target.value);
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  handleCharacteristicsChange(event) {
+    // console.log(event.target.name);
+    // console.log(event.target.value);
+    let { characteristics } = this.state;
+    characteristics[event.target.name] = Number(event.target.value);
+    console.log(characteristics);
+    this.setState({ characteristics });
   }
 
   handleReviewBodyChange(event) {
@@ -39,19 +72,7 @@ export default class FormModal extends React.Component {
     const { IMGBB_API_KEY } = this.props;
     const { imgFilePaths, imgFileURLs } = this.state;
 
-    // console.log(event);
-    // console.log(event.target.files[0]);
-    // let files = Array.from(event.target.files);
-    // if (files.length > 5) {
-    //   this.setState({ numImgs: files.length });
-    //   files = files.slice(0, 5);
-    // }
-    // this.setState({ imgFiles: files });
-
     const filePath = event.target.value;
-    // console.log(filePath);
-    // console.log(IMGBB_API_KEY);
-
     imgFilePaths.push(filePath);
     this.setState({ imgFilePaths });
 
@@ -62,7 +83,6 @@ export default class FormModal extends React.Component {
     const body = new FormData();
     body.set('key', IMGBB_API_KEY);
     body.append('image', event.target.files[0]);
-    // console.log(body);
 
     axios({
       method: 'post',
@@ -71,7 +91,7 @@ export default class FormModal extends React.Component {
     })
       .then((response) => {
         // console.log(response);
-        console.log(response.data.data.display_url);
+        // console.log(response.data.data.display_url);
         imgFileURLs.push(response.data.data.display_url);
         this.setState({ imgFileURLs });
       })
@@ -81,7 +101,8 @@ export default class FormModal extends React.Component {
   }
 
   handleFormSubmission(event) {
-    console.log(event);
+    event.preventDefault();
+    // console.log(event.target.form);
     // validate form inputs
     // if any invalid entries, do not send to API.
     // display warning message: "You must enter the following: "
@@ -89,7 +110,9 @@ export default class FormModal extends React.Component {
 
   render() {
     const { close, productName, characteristics } = this.props;
-    const { remainingChars, imgFileURLs, showUploadButton, featureRatings } = this.state;
+    const {
+      remainingChars, imgFileURLs, showUploadButton, featureRatings,
+    } = this.state;
     const photos = imgFileURLs.map((url) => (
       <div>
         <img
@@ -122,9 +145,10 @@ export default class FormModal extends React.Component {
                 key={feature}
                 className={FormModalCSS.radio_input}
                 type="radio"
-                id={feature}
-                name={feature}
+                id={characteristics[feature].id}
+                name={characteristics[feature].id}
                 value={rating}
+                onChange={this.handleCharacteristicsChange}
               />
             </label>
           </td>
@@ -149,130 +173,139 @@ export default class FormModal extends React.Component {
             <h1>Write Your Review</h1>
             <h4>{`About the ${productName}`}</h4>
           </div>
-          <div>
-            Overall Rating*
-            <select>
-              <option defaultValue value={null}>--Select a Rating--</option>
-              <option value={1}>★</option>
-              <option value={2}>★★</option>
-              <option value={3}>★★★</option>
-              <option value={4}>★★★★</option>
-              <option value={5}>★★★★★</option>
-            </select>
-          </div>
-          <div>
-            <p>Do you recommend this product?*</p>
-            <div className={FormModalCSS.recommendation}>
-              <label htmlFor="yes">
-                Yes
-                <input
-                  className={FormModalCSS.radio_input}
-                  type="radio"
-                  id="yes"
-                  name="recommendation"
-                  value="yes"
-                />
-              </label>
-              <label htmlFor="no">
-                No
-                <input
-                  className={FormModalCSS.radio_input}
-                  type="radio"
-                  id="radio_no"
-                  name="recommendation"
-                  value="no"
-                />
-              </label>
-            </div>
-          </div>
-          <div>
-            <p>Characteristics*</p>
-            <table>
-              {characteristicsHeader}
-              {characteristicsRows}
-            </table>
-            {/* <div className={FormModalCSS.characteristics_grid}> */}
-              {/* {gridHeader} */}
-            {/* {characteristicsNames} */}
-            {/* {characteristicsRatings} */}
-            {/* </div> */}
-          </div>
-          <div className={FormModalCSS.reviewContainer}>
-            <label htmlFor="review_summary">
-              <p>Review Summary</p>
-              <input
-                id="review_summary"
-                name="review_summary"
-                placeholder="Example: Best purchase ever!"
-                type="text"
-                maxLength="60"
-                size="50"
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="review_body">
-              <p>Review Body*</p>
-              <textarea
-                id="review_body"
-                name="review_body"
-                className={FormModalCSS.review_body}
-                rows="10"
-                cols="100"
-                placeholder="Why did you like the product or not?"
-                onChange={this.handleReviewBodyChange}
-              />
-            </label>
-            {(remainingChars > 0 && `Minimum required characters left: ${remainingChars}`)}
-          </div>
-          <div>
-            <p>Upload your photos</p>
-            {showUploadButton && (
-            <label htmlFor="upload-images">
-              <input
-                type="file"
-                id="upload-images"
-                name="upload-images"
-                accept="image/png, image/jpeg"
-                onChange={this.handleImageUpload}
-              />
-            </label>
-            )}
+          <form>
             <div>
-              {photos}
+              Overall Rating*
+              <select
+                name="rating"
+                onChange={this.handleChange}
+              >
+                <option defaultValue value={null}>--Select a Rating--</option>
+                <option value={1}>★</option>
+                <option value={2}>★★</option>
+                <option value={3}>★★★</option>
+                <option value={4}>★★★★</option>
+                <option value={5}>★★★★★</option>
+              </select>
             </div>
-          </div>
-          <div>
-            <label htmlFor="displayName">
-              <p>What is your nickname?*</p>
-              <input id="displayName" type="text" maxLength="60" size="50" />
-            </label>
-            <p>For privacy reasons, do not use your full name or email address.</p>
-          </div>
-          <div>
-            <label htmlFor="email">
-              <p>Your email*</p>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                maxLength="60"
-                size="50"
-              />
-            </label>
-            <p>For authentication reasons, you will not be emailed.</p>
-          </div>
-          <div>
-            <div
+            <div>
+              <p>Do you recommend this product?*</p>
+              <div className={FormModalCSS.recommendation}>
+                <label htmlFor="yes">
+                  Yes
+                  <input
+                    className={FormModalCSS.radio_input}
+                    type="radio"
+                    id="yes"
+                    name="recommendation"
+                    value="yes"
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <label htmlFor="no">
+                  No
+                  <input
+                    className={FormModalCSS.radio_input}
+                    type="radio"
+                    id="radio_no"
+                    name="recommendation"
+                    value="no"
+                    onChange={this.handleChange}
+                  />
+                </label>
+              </div>
+            </div>
+            <div>
+              <p>Characteristics*</p>
+              <table>
+                {characteristicsHeader}
+                {characteristicsRows}
+              </table>
+            </div>
+            <div className={FormModalCSS.reviewContainer}>
+              <label htmlFor="review_summary">
+                <p>Review Summary</p>
+                <input
+                  id="review_summary"
+                  name="reviewSummary"
+                  placeholder="Example: Best purchase ever!"
+                  type="text"
+                  maxLength="60"
+                  size="50"
+                  onChange={this.handleChange}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="review_body">
+                <p>Review Body*</p>
+                <textarea
+                  id="review_body"
+                  name="review_body"
+                  className={FormModalCSS.review_body}
+                  rows="10"
+                  cols="100"
+                  placeholder="Why did you like the product or not?"
+                  onChange={this.handleReviewBodyChange}
+                />
+              </label>
+              {(remainingChars > 0 && `Minimum required characters left: ${remainingChars}`)}
+            </div>
+            <div>
+              <p>Upload your photos</p>
+              {showUploadButton && (
+              <label htmlFor="upload-images">
+                <input
+                  type="file"
+                  id="upload-images"
+                  name="upload-images"
+                  accept="image/png, image/jpeg"
+                  onChange={this.handleImageUpload}
+                />
+              </label>
+              )}
+              <div>
+                {photos}
+              </div>
+            </div>
+            <div>
+              <label htmlFor="displayName">
+                <p>What is your nickname?*</p>
+                <input
+                  id="displayName"
+                  name="displayName"
+                  type="text"
+                  maxLength="60"
+                  size="50"
+                  onChange={this.handleChange}
+                />
+              </label>
+              <p>For privacy reasons, do not use your full name or email address.</p>
+            </div>
+            <div>
+              <label htmlFor="email">
+                <p>Your email*</p>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  maxLength="60"
+                  size="50"
+                  onChange={this.handleChange}
+                />
+              </label>
+              <p>For authentication reasons, you will not be emailed.</p>
+            </div>
+            <input
+              type="submit"
+              value="Submit"
               className={FormModalCSS.modal_button}
               onClick={this.handleFormSubmission}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0px 0px 10px',
               }}
-            >
-              Submit
-            </div>
-          </div>
+            />
+          </form>
         </div>
       </div>
     );
