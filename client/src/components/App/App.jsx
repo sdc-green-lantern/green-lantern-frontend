@@ -1,6 +1,5 @@
 import React from 'react';
 import axiosConfig, { IMGBB_API_KEY } from '../../../../axiosConfig.js'; // use this variable in place of axios
-import PubSub from 'pubsub-js';
 import ProductOverview from '../ProductOverview/ProductOverview.jsx';
 import Comparison from '../Comparison/Comparison.jsx';
 import QA from '../QA/QA.jsx';
