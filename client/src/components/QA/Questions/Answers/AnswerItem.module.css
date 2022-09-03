@@ -2,6 +2,15 @@
   border-bottom: 1px solid lightseagreen;
 }
 
+.imgContainer {
+
+}
+
+.thumbnail_img {
+  width: auto;
+  height: 50px;
+}
+
 .interactions {
 
 }

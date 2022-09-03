@@ -2,7 +2,7 @@
 .questionlist {
   display: flex;
   flex-direction: row;
-  height: 350px;
+  max-height: 350px;
   flex-flow: row wrap;
   margin: 5px;
   padding: 5px;
@@ -10,7 +10,8 @@
 }
 
 .addQButton {
-  right: 40%;
+  position: relative;
+  left: 45%;
   width: fit-content;
   height: fit-content;
   cursor: pointer;

@@ -1,6 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 import AModalCSS from './AnswerModal.module.css';
-import axiosConfig from '../../../../../axiosConfig.js';
+import axiosConfig, { IMGBB_API_KEY } from '../../../../../axiosConfig.js';
 
 class AnswerModal extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class AnswerModal extends React.Component {
     this.submitAnswer = this.submitAnswer.bind(this);
     this.state = {
       photos: [],
+      imgFileURLs: [],
     };
   }
 
@@ -19,17 +21,44 @@ class AnswerModal extends React.Component {
   };
 
   handlePhotos = (e) => {
-    const { photos } = this.state;
+    const { photos, imgFileURLs } = this.state;
     photos.push(e.target.value);
-    this.setState({
-      photos,
-    });
+    this.setState({ photos });
+
+    if (photos.length >= 5) {
+      this.setState({ showUploadButton: false });
+    }
+
+    const body = new FormData();
+    body.set('key', IMGBB_API_KEY);
+    body.append('image', e.target.files[0]);
+    console.log(body);
+
+    axios({
+      method: 'post',
+      url: 'https://api.imgbb.com/1/upload',
+      data: body,
+    })
+      .then((response) => {
+        // console.log(response);
+        console.log(response.data.data.display_url);
+        imgFileURLs.push(response.data.data.display_url);
+        this.setState({ imgFileURLs });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   submitAnswer = () => {
     const { question_id, hideModal, getAnswers } = this.props;
+    const {
+      body, name, email, imgFileURLs,
+    } = this.state;
     console.log(this.state);
-    axiosConfig.post(`/qa/questions/${question_id}/answers`, this.state)
+    axiosConfig.post(`/qa/questions/${question_id}/answers`, {
+      body, name, email, photos: imgFileURLs,
+    })
       .then((response) => {
         hideModal();
         getAnswers();
@@ -42,6 +71,16 @@ class AnswerModal extends React.Component {
 
   render() {
     const { hideModal } = this.props;
+    const { imgFileURLs } = this.state;
+    const displayPhotos = imgFileURLs.map((url) => (
+      <div className={AModalCSS.imgContainer}>
+        <img
+          src={url}
+          alt=""
+          className={AModalCSS.thumbnail_img}
+        />
+      </div>
+    ));
     return (
       <div className={AModalCSS.modalBackground}>
         <div className={AModalCSS.modalContainer}>
@@ -74,7 +113,9 @@ class AnswerModal extends React.Component {
             <div>
               <div>Upload you photos:</div>
               <input type="file" onChange={(e) => { this.handlePhotos(e); }} />
+              {displayPhotos}
             </div>
+
           </div>
           <div className={AModalCSS.footer}>
             <button type="submit" className={AModalCSS.submitBtn} onClick={this.submitAnswer}>Submit answer</button>

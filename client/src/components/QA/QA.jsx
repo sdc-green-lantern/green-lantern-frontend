@@ -46,29 +46,22 @@ class QA extends React.Component {
   };
 
   render() {
-    let displayList;
     const { display, results } = this.state;
     const { productId } = this.props;
-    if (display.length !== 0) {
-      displayList = (
-        <QuestionList
-          questions={display}
-          compare={results}
-          productId={productId}
-          getQuestions={this.getQuestions}
-          getMoreQuestions={this.getMoreQuestions}
-        />
-      );
-    } else {
-      displayList = <div className={QACSS.container}><button className={QACSS.askButton} type="submit">Ask a Question</button></div>;
-    }
+
     return (
       <div>
         <div className={QACSS.qa_section}>
           <div className={QACSS.qa_body}>
             <h2 data-testid="QA-1">Questions and Answers</h2>
             <SearchQA />
-            { displayList }
+            <QuestionList
+              questions={display}
+              compare={results}
+              productId={productId}
+              getQuestions={this.getQuestions}
+              getMoreQuestions={this.getMoreQuestions}
+            />
           </div>
         </div>
       </div>

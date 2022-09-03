@@ -9,6 +9,7 @@ function QuestionList(props) {
   const {
     compare, questions, getMoreQuestions, productId, getQuestions,
   } = props;
+
   let showBtn = true;
 
   if (questions.length === compare.length) {

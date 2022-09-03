@@ -43,8 +43,15 @@ class AnswerItem extends React.Component {
 
   render() {
     const { answer } = this.props;
-    const { answerer_name, helpfulness } = answer;
+    const { answerer_name, helpfulness, photos } = answer;
     const { yesCount } = this.state;
+    const displayPhotos = photos.map((photo) => (
+      <img
+        src={photo.url}
+        alt=""
+        className={AItemCSS.thumbnail_img}
+      />
+    ));
 
     const condition = {
       fontWeight: 'normal',
@@ -60,6 +67,9 @@ class AnswerItem extends React.Component {
           </span>
           {answer.body}
         </p>
+        <div className={AItemCSS.imgContainer}>
+          {displayPhotos}
+        </div>
         <span>
           <span className={AItemCSS.answerInfo}> by </span>
           <span style={condition}>
