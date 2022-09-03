@@ -37,7 +37,7 @@ class RelatedProducts extends React.Component {
         relatedProductIds: data,
       });
     } catch (err) {
-      conosle.log(err);
+      console.log(err);
     }
   };
 
