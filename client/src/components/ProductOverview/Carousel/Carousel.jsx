@@ -1,35 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import axiosConfig from '../../../../../axiosConfig.js';
 import carouselstyles from './Carousel.module.css';
 
-export default function Carousel({ productId }) {
+export default function Carousel({ currentStyles }) {
   const [productImages, setProductImages] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    console.log(productId);
-    axiosConfig.get(`/products/${productId}/styles`)
-      .then((response) => {
-        const result = response.data.results[0].photos;
-        setProductImages(result);
-        setCurrentImage(result[currentIndex].url);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [currentIndex]);
+    //
+    console.log('carousel :: currentStyles => ', currentStyles);
+
+    if (Object.keys(currentStyles).length !== 0) {
+      setProductImages(currentStyles.photos);
+      if (productImages.length !== 0) {
+        setCurrentImage(productImages[0].url);
+      }
+    }
+  }, [currentStyles, productImages]);
 
   const handlePreviousImg = () => {
     const isFirst = currentIndex === 0;
-    const newIndex = isFirst ? productImages.length : currentIndex - 1;
+    const newIndex = isFirst ? productImages.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
+    setCurrentImage(productImages[newIndex].url);
   };
 
   const handleNextImg = () => {
     const isLast = currentIndex === productImages.length - 1;
     const newIndex = isLast ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
+    setCurrentImage(productImages[newIndex].url);
   };
 
   return (
