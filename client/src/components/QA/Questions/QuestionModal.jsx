@@ -31,10 +31,9 @@ class QuestionModal extends React.Component {
   submitQuestion = () => {
     const { toggleQModal, getQuestions } = this.props;
     axiosConfig.post('/qa/questions', this.state)
-      .then((response) => {
+      .then(() => {
         toggleQModal(false);
         getQuestions();
-        console.log(response);
       })
       .catch((err) => {
         console.log(err);
@@ -42,14 +41,14 @@ class QuestionModal extends React.Component {
   };
 
   render() {
-    const { toggleQModal } = this.props;
+    const { toggleQModal, productName } = this.props;
     return (
       <div className={QModalCSS.modalBackground}>
         <div className={QModalCSS.modalContainer}>
           <button type="submit" className={QModalCSS.exitBtn} onClick={() => { toggleQModal(false); }}> X </button>
           <h2>Ask Your Question</h2>
           <h4>
-            About the product name
+            {`About the ${productName}`}
           </h4>
           <div className={QModalCSS.body}>
             <div>

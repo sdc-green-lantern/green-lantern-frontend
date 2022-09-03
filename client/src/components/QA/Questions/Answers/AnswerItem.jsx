@@ -50,6 +50,7 @@ class AnswerItem extends React.Component {
         src={photo.url}
         alt=""
         className={AItemCSS.thumbnail_img}
+        key={photo.id}
       />
     ));
 

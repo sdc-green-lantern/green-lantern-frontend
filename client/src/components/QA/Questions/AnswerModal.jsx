@@ -51,7 +51,8 @@ class AnswerModal extends React.Component {
   };
 
   submitAnswer = () => {
-    const { question_id, hideModal, getAnswers } = this.props;
+    const { question, hideModal, getAnswers } = this.props;
+    const { question_id } = question;
     const {
       body, name, email, imgFileURLs,
     } = this.state;
@@ -70,7 +71,8 @@ class AnswerModal extends React.Component {
   };
 
   render() {
-    const { hideModal } = this.props;
+    const { hideModal, question, productName } = this.props;
+    const { question_body } = question;
     const { imgFileURLs } = this.state;
     const displayPhotos = imgFileURLs.map((url) => (
       <div className={AModalCSS.imgContainer}>
@@ -89,7 +91,7 @@ class AnswerModal extends React.Component {
           </div>
           <h2 className={AModalCSS.title}>Submit Your Answer</h2>
           <h4 className={AModalCSS.subtitle}>
-            product name: question body
+            {`${productName}: ${question_body}`}
           </h4>
           <div className={AModalCSS.body}>
             <div>

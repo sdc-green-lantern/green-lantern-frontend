@@ -82,8 +82,8 @@ class QuestionItem extends React.Component {
     const {
       results, showAModal, yesCount, display,
     } = this.state;
-    const { question } = this.props;
-    const { question_body, question_helpfulness, question_id } = question;
+    const { question, productName } = this.props;
+    const { question_body, question_helpfulness } = question;
     if (display.length !== 0) {
       answerDisplay = (
         <AnswerList
@@ -124,7 +124,8 @@ class QuestionItem extends React.Component {
         <div>
           { showAModal && (
           <AnswerModal
-            question_id={question_id}
+            question={question}
+            productName={productName}
             hideModal={() => { this.setState({ showAModal: false }); }}
             getAnswers={this.getAnswers}
             getMoreAnswers={this.getMoreAnswers}

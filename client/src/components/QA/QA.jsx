@@ -9,15 +9,18 @@ class QA extends React.Component {
     super(props);
     this.getQuestions = this.getQuestions.bind(this);
     this.getMoreQuestions = this.getMoreQuestions.bind(this);
+    this.getProductInfo = this.getProductInfo.bind(this);
     this.state = {
       count: 2,
       results: [],
       display: [],
+      productName: '',
     };
   }
 
   componentDidMount() {
     this.getQuestions();
+    this.getProductInfo();
   }
 
   getQuestions = () => {
@@ -45,8 +48,21 @@ class QA extends React.Component {
     });
   };
 
+  getProductInfo = () => {
+    const { productId } = this.props;
+    axiosConfig.get(`/products/${productId}`)
+      .then((results) => {
+        this.setState({
+          productName: results.data.name,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   render() {
-    const { display, results } = this.state;
+    const { display, results, productName } = this.state;
     const { productId } = this.props;
 
     return (
@@ -58,6 +74,7 @@ class QA extends React.Component {
             <QuestionList
               questions={display}
               compare={results}
+              productName={productName}
               productId={productId}
               getQuestions={this.getQuestions}
               getMoreQuestions={this.getMoreQuestions}

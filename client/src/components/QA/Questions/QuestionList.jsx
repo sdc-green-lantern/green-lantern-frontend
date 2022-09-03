@@ -7,7 +7,7 @@ import QuestionModal from './QuestionModal.jsx';
 function QuestionList(props) {
   const [openQModal, toggleQModal] = useState(false);
   const {
-    compare, questions, getMoreQuestions, productId, getQuestions,
+    compare, questions, getMoreQuestions, productId, productName, getQuestions,
   } = props;
 
   let showBtn = true;
@@ -22,6 +22,7 @@ function QuestionList(props) {
         {questions.map((question) => (
           <QuestionItem
             question={question}
+            productName={productName}
             key={question.question_id}
           />
         ))}
@@ -32,6 +33,7 @@ function QuestionList(props) {
       <QuestionModal
         toggleQModal={toggleQModal}
         productId={productId}
+        productName={productName}
         getQuestions={getQuestions}
       />
       )}
