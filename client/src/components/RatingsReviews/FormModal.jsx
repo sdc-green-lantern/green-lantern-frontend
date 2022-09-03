@@ -11,11 +11,17 @@ export default class FormModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      rating: 0,
+      recommendation: null,
+      characteristics: {},
+      reviewSummary: '',
+      reviewBody: '',
+      imgFileURLs: [],
+      displayName: '',
+      email: '',
       remainingChars: 50,
       imgFilePaths: [],
-      imgFileURLs: [],
       showUploadButton: true,
-      characteristics: {},
       featureRatings: {
         Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
         Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
@@ -26,10 +32,12 @@ export default class FormModal extends React.Component {
       },
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleNumericChange = this.handleNumericChange.bind(this);
     this.handleCharacteristicsChange = this.handleCharacteristicsChange.bind(this);
     this.handleReviewBodyChange = this.handleReviewBodyChange.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
-    this.handleFormSubmission = this.handleFormSubmission.bind(this);
+    this.handleFormValidation = this.handleFormValidation.bind(this);
+    this.submitForm = this.submitForm.bind(this);
   }
 
   componentDidMount() {
@@ -53,12 +61,18 @@ export default class FormModal extends React.Component {
     });
   }
 
+  handleNumericChange(event) {
+    this.setState({
+      [event.target.name]: Number(event.target.value),
+    });
+  }
+
   handleCharacteristicsChange(event) {
     // console.log(event.target.name);
     // console.log(event.target.value);
     let { characteristics } = this.state;
     characteristics[event.target.name] = Number(event.target.value);
-    console.log(characteristics);
+    // console.log(characteristics);
     this.setState({ characteristics });
   }
 
@@ -66,6 +80,7 @@ export default class FormModal extends React.Component {
     const reviewLength = event.target.value.length;
     const remainingChars = reviewLength < 50 ? 50 - reviewLength : 0;
     this.setState({ remainingChars });
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleImageUpload(event) {
@@ -100,12 +115,53 @@ export default class FormModal extends React.Component {
       });
   }
 
-  handleFormSubmission(event) {
+  handleFormValidation(event) {
     event.preventDefault();
-    // console.log(event.target.form);
-    // validate form inputs
-    // if any invalid entries, do not send to API.
-    // display warning message: "You must enter the following: "
+    console.log(this.state);
+
+    let isValid = true;
+    let warning = 'You must enter the following: ';
+    const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    const { rating, recommendation, characteristics, reviewSummary,
+      reviewBody, imgFileURLs, displayName, email, remainingChars
+    } = this.state;
+
+    if (rating === 0) {
+      warning += '\n - valid rating';
+    }
+
+    if (recommendation !== 'yes' && recommendation !== 'no') {
+      warning += '\n - valid recommendation';
+    }
+
+    if (Object.values(characteristics).includes(null)) {
+      warning += '\n - valid characteristics';
+    }
+
+    if (remainingChars > 0) {
+      isValid = false;
+      warning += '\n - valid review body';
+    }
+    if (displayName.length < 1) {
+      isValid = false;
+      warning += '\n - valid nickname';
+    }
+    if (email.length < 1 || regex.test(email) === false) {
+      isValid = false;
+      warning += '\n - valid email';
+    }
+
+    warning = warning.slice(0, warning.length - 1);
+    if (isValid) {
+      this.submitForm();
+    } else {
+      alert(warning);
+    }
+  }
+
+  submitForm() {
+
+    console.log('form submitted!');
   }
 
   render() {
@@ -178,9 +234,10 @@ export default class FormModal extends React.Component {
               Overall Rating*
               <select
                 name="rating"
-                onChange={this.handleChange}
+                onChange={this.handleNumericChange}
+                required
               >
-                <option defaultValue value={null}>--Select a Rating--</option>
+                <option defaultValue value={0}>--Select a Rating--</option>
                 <option value={1}>★</option>
                 <option value={2}>★★</option>
                 <option value={3}>★★★</option>
@@ -200,6 +257,7 @@ export default class FormModal extends React.Component {
                     name="recommendation"
                     value="yes"
                     onChange={this.handleChange}
+                    required
                   />
                 </label>
                 <label htmlFor="no">
@@ -211,6 +269,7 @@ export default class FormModal extends React.Component {
                     name="recommendation"
                     value="no"
                     onChange={this.handleChange}
+                    required
                   />
                 </label>
               </div>
@@ -223,10 +282,10 @@ export default class FormModal extends React.Component {
               </table>
             </div>
             <div className={FormModalCSS.reviewContainer}>
-              <label htmlFor="review_summary">
+              <label htmlFor="reviewSummary">
                 <p>Review Summary</p>
                 <input
-                  id="review_summary"
+                  id="reviewSummary"
                   name="reviewSummary"
                   placeholder="Example: Best purchase ever!"
                   type="text"
@@ -237,16 +296,17 @@ export default class FormModal extends React.Component {
               </label>
             </div>
             <div>
-              <label htmlFor="review_body">
+              <label htmlFor="reviewBody">
                 <p>Review Body*</p>
                 <textarea
-                  id="review_body"
-                  name="review_body"
+                  id="reviewBody"
+                  name="reviewBody"
                   className={FormModalCSS.review_body}
                   rows="10"
                   cols="100"
                   placeholder="Why did you like the product or not?"
                   onChange={this.handleReviewBodyChange}
+                  required
                 />
               </label>
               {(remainingChars > 0 && `Minimum required characters left: ${remainingChars}`)}
@@ -278,6 +338,7 @@ export default class FormModal extends React.Component {
                   maxLength="60"
                   size="50"
                   onChange={this.handleChange}
+                  required
                 />
               </label>
               <p>For privacy reasons, do not use your full name or email address.</p>
@@ -292,6 +353,7 @@ export default class FormModal extends React.Component {
                   maxLength="60"
                   size="50"
                   onChange={this.handleChange}
+                  required
                 />
               </label>
               <p>For authentication reasons, you will not be emailed.</p>
@@ -300,7 +362,7 @@ export default class FormModal extends React.Component {
               type="submit"
               value="Submit"
               className={FormModalCSS.modal_button}
-              onClick={this.handleFormSubmission}
+              onClick={this.handleFormValidation}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0px 0px 10px',
               }}
