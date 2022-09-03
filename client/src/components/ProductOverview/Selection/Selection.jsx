@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import selectionStyles from './Selection.module.css';
 
-export default function Selection() {
+import axiosConfig from '../../../../../axiosConfig.js';
+
+export default function Selection({ styles, currentStyles, setCurrentStyles }) {
+  useEffect(() => {
+    //
+  }, [styles, currentStyles]);
+
   return(
     <div className={selectionStyles.productSelection}>
-      <h3>STYLE > <span>SELECTED STYLE</span></h3>
+      <h3>STYLE > <span>{currentStyles.name}</span></h3>
       <div className={selectionStyles.selectionContainer}>
-        {/* Map over avaialbe styles */}
-        <img className={selectionStyles.selectionOption} src="https://via.placeholder.com/100x100" />
-        <img className={selectionStyles.selectionOption} src="https://via.placeholder.com/100x100" />
-        <img className={selectionStyles.selectionOption} src="https://via.placeholder.com/100x100" />
-        <img className={selectionStyles.selectionOption} src="https://via.placeholder.com/100x100" />
-        <img className={selectionStyles.selectionOption} src="https://via.placeholder.com/100x100" />
-        <img className={selectionStyles.selectionOption} src="https://via.placeholder.com/100x100" />
-        <img className={selectionStyles.selectionOption} src="https://via.placeholder.com/100x100" />
-        <img className={selectionStyles.selectionOption} src="https://via.placeholder.com/100x100" />
+        {styles.map((style, index) => <img className={selectionStyles.selectionOption} key={index} src={style.photos[0].thumbnail_url} onClick={() => {setCurrentStyles(style)}} />)}
       </div>
     </div>
   );
