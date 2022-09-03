@@ -102,39 +102,34 @@ export default class FormModal extends React.Component {
       </div>
     ));
 
-    // const gridHeader = (
-    //   <div className={FormModalCSS.characteristics_grid}>
-    //     {['', 1, 2, 3, 4, 5].map((rating) => (
-    //       {rating}
-    //     ))}
-    //   </div>
-    // );
-
-    const characteristicsNames = Object.keys(characteristics).map((feature, index) => (
-      <div className={FormModalCSS.characteristics_row}>
-        <div className={FormModalCSS.characteristic_name}>
-          {feature}
-        </div>
-      </div>
-    ));
-
-    const characteristicsRatings = Object.keys(characteristics).map((feature, index) => (
-      <div className={FormModalCSS.characteristics_ratings}>
-        {feature}
+    const characteristicsHeader = (
+      <tr>
+        <th>&nbsp;</th>
         {[1, 2, 3, 4, 5].map((rating) => (
-          <label htmlFor={feature}>
-            {featureRatings[feature][rating - 1]}
-            <input
-              key={feature}
-              className={FormModalCSS.radio_input}
-              type="radio"
-              id={feature}
-              name={feature}
-              value={rating}
-            />
-          </label>
+          <th>{rating}</th>
         ))}
-      </div>
+      </tr>
+    );
+
+    const characteristicsRows = Object.keys(characteristics).map((feature, index) => (
+      <tr>
+        <th>{feature}</th>
+        {[1, 2, 3, 4, 5].map((rating) => (
+          <td>
+            <label htmlFor={feature}>
+              {featureRatings[feature][rating - 1]}
+              <input
+                key={feature}
+                className={FormModalCSS.radio_input}
+                type="radio"
+                id={feature}
+                name={feature}
+                value={rating}
+              />
+            </label>
+          </td>
+        ))}
+      </tr>
     ));
 
     return (
@@ -192,10 +187,14 @@ export default class FormModal extends React.Component {
           </div>
           <div>
             <p>Characteristics*</p>
+            <table>
+              {characteristicsHeader}
+              {characteristicsRows}
+            </table>
             {/* <div className={FormModalCSS.characteristics_grid}> */}
               {/* {gridHeader} */}
             {/* {characteristicsNames} */}
-            {characteristicsRatings}
+            {/* {characteristicsRatings} */}
             {/* </div> */}
           </div>
           <div className={FormModalCSS.reviewContainer}>

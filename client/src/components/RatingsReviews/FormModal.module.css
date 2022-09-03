@@ -125,3 +125,12 @@ max-width: 20%; */
   font-weight: bold;
   padding-right: 2em;
 }
+
+table {
+  background: lightgray;
+}
+
+
+td {
+  text-align: center;
+}
