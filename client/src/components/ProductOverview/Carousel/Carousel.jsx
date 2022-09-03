@@ -8,47 +8,47 @@ export default function Carousel({ currentStyles }) {
 
   useEffect(() => {
     //
+    // console.log('carousel :: currentStyles => ', currentStyles);
+    // const getImages = async () => {
+    //   const getAllImages = await setProductImages(currentStyles.photos);
+    //   const getCurrentImage = await setCurrentImage(productImages[currentIndex].url);
+    // };
+
+    // getImages()
+    //   .then(() => {
+    //     console.log('carousel :: productImages => ', productImages);
+    //     console.log('carousel :: currentImage => ', currentImage);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
     console.log('carousel :: currentStyles => ', currentStyles);
-    const getImages = async () => {
+
+    const getProductImages = async () => {
       const getAllImages = await setProductImages(currentStyles.photos);
-      const getCurrentImage = await setCurrentImage(productImages[currentIndex].url);
+      return getAllImages;
     };
 
-    getImages()
+    getProductImages()
       .then(() => {
-        console.log('carousel :: productImages => ', productImages);
-        console.log('carousel :: currentImage => ', currentImage);
+        console.log('await setProductImages... ', productImages);
       })
       .catch((err) => {
         console.error(err);
       });
-    // console.log('carousel :: currentStyles => ', currentStyles);
 
-    // const getProductImages = async () => {
-    //   const getAllImages = await setProductImages(currentStyles.photos);
-    //   return getAllImages;
-    // };
+    const getCurrentImage = async () => {
+      const getImage = await setCurrentImage(productImages[currentIndex].url);
+      return getImage;
+    };
 
-    // getProductImages()
-    //   .then(() => {
-    //     console.log('await setProductImages... ', productImages);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
-
-    // const getCurrentImage = async () => {
-    //   const getImage = await setCurrentImage(productImages[currentIndex].url);
-    //   return getImage;
-    // };
-
-    // getCurrentImage()
-    //   .then(() => {
-    //     console.log('await setCurrentImage... ', currentImage);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
+    getCurrentImage()
+      .then(() => {
+        console.log('await setCurrentImage... ', currentImage);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, [currentStyles, productImages, currentImage]);
 
   const handlePreviousImg = () => {
@@ -66,9 +66,9 @@ export default function Carousel({ currentStyles }) {
   return (
     <div className={carouselstyles.imageGallery} style={{ backgroundImage: `url(${currentImage})` }}>
       <div className={carouselstyles.thumbnailRow}>
-        {productImages.map((productImage, index) => (
+        {/* {productImages.map((productImage, index) => (
           <div className={carouselstyles.thumbnail} key={index} productimage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})` }} />
-        ))}
+        ))} */}
         <div className={carouselstyles.goToNext}>▼</div>
       </div>
       <div className={carouselstyles.arrows}>
