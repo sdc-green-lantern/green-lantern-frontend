@@ -24,31 +24,15 @@ export default function Carousel({ currentStyles }) {
     //   });
     console.log('carousel :: currentStyles => ', currentStyles);
 
-    const getProductImages = async () => {
-      const getAllImages = await setProductImages(currentStyles.photos);
-      return getAllImages;
-    };
-
-    getProductImages()
-      .then(() => {
-        console.log('await setProductImages... ', productImages);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-
-    const getCurrentImage = async () => {
-      const getImage = await setCurrentImage(productImages[currentIndex].url);
-      return getImage;
-    };
-
-    getCurrentImage()
-      .then(() => {
-        console.log('await setCurrentImage... ', currentImage);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    if (Object.keys(currentStyles).length !== 0) {
+      const { photos } = currentStyles;
+      setProductImages(photos);
+      console.log("Product Images: ");
+      console.log(productImages);
+      if (productImages.length !== 0) {
+        setCurrentImage(productImages[currentIndex].url);
+      }
+    }
   }, [currentStyles, productImages, currentImage]);
 
   const handlePreviousImg = () => {
@@ -66,9 +50,9 @@ export default function Carousel({ currentStyles }) {
   return (
     <div className={carouselstyles.imageGallery} style={{ backgroundImage: `url(${currentImage})` }}>
       <div className={carouselstyles.thumbnailRow}>
-        {/* {productImages.map((productImage, index) => (
-          <div className={carouselstyles.thumbnail} key={index} productimage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})` }} />
-        ))} */}
+        {productImages.map((productImage, index) => (
+            <div className={carouselstyles.thumbnail} key={index} productimage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})` }} />
+          ))}
         <div className={carouselstyles.goToNext}>▼</div>
       </div>
       <div className={carouselstyles.arrows}>
