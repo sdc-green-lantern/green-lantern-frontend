@@ -123,8 +123,6 @@ class RatingsReviews extends React.Component {
 
     axiosConfig.get(metaURL)
       .then((response) => {
-        console.log("Metadata: ");
-        console.log(response);
         this.setState({ metadata: response.data });
       })
       .catch((error) => {
