@@ -1,48 +1,43 @@
 import React from 'react';
-import PubSub from 'pubsub-js';
-// eslint-disable-next-line import/extensions
-import Card from '../Card/Card.jsx';
 import relatedProducts from './RelatedProducts.module.css';
 import ProductList from '../ProductList/ProductList.jsx';
 import instance from '../../../../../axiosConfig.js';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class RelatedProducts extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      relatedProductIds: [],
-    };
-  }
+  state = {
+    relatedProductIds: [],
+  };
 
+  // get the related products id when initially mounted
   componentDidMount() {
     const { productId } = this.props;
-    this.token = PubSub.subscribe('newProductId', (msg, data) => {
-      this.updateRelatedProducts(data.id);
-    });
-
     this.updateRelatedProducts(productId);
   }
 
-  componentWillUnmount() {
-    PubSub.unsubscribe(this.token);
+  // when updated,
+  // if the productId changed, re-get the related products id
+  componentDidUpdate(prevProps) {
+    const { productId: prevId } = prevProps;
+    const { productId: currId } = this.props;
+
+    if (prevId !== currId) {
+      this.updateRelatedProducts(currId);
+    }
   }
 
-  // if the right edge of the carousel is inside the container
-  // set this.state.isRightEdgeInBound to false
+  // get the related products id and update state
   updateRelatedProducts = async (productId) => {
     try {
       const response = await instance.get(`/products/${productId}/related`);
       let { data } = response;
       data = [...new Set(data)];
 
-      await new Promise((res) => {
-        this.setState({
-          relatedProductIds: data,
-        }, res);
+      this.setState({
+        relatedProductIds: data,
       });
-    } catch (e) {
-      console.warn(e);
+    } catch (err) {
+      conosle.log(err);
     }
   };
 
@@ -55,7 +50,7 @@ class RelatedProducts extends React.Component {
           Current Product Id:
           {productId}
         </span>
-        <ProductList productsIdToDisplay={relatedProductIds} updateProductId={updateProductId} listType="RelatedProducts" />
+        <ProductList productsIdToDisplay={relatedProductIds} updateProductId={updateProductId} productId={productId} listType="RelatedProducts" />
       </div>
     );
   }

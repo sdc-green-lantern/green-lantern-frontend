@@ -8,19 +8,34 @@ class YourProducts extends React.Component {
     yourProductIds: [],
   };
 
+  // subscribe the newYourProduct updates when mounted
+  // when updated
   componentDidMount() {
-    this.token = PubSub.subscribe('newYourProduct', (msg, id) => {
-      this.updateYourProducts(id);
+    this.token1 = PubSub.subscribe('newYourProduct', (msg, id) => {
+      this.addYourProduct(id);
+    });
+    this.token2 = PubSub.subscribe('yourProductToRemove', (msg, id) => {
+      this.removeYourProduct(id);
     });
   }
 
   componentWillUnmount() {
-    PubSub.unsubscribe(this.token);
+    PubSub.unsubscribe(this.token1);
+    PubSub.unsubscribe(this.token2);
   }
 
-  updateYourProducts = (id) => {
+  removeYourProduct = (idToRemove) => {
+    const { yourProductIds: prevProductIds } = this.state;
+    const newProductIds = prevProductIds.filter((id) => id !== idToRemove);
+    this.setState({
+      yourProductIds: newProductIds,
+    });
+  };
+
+  addYourProduct = (id) => {
     const { yourProductIds: prevProductIds } = this.state;
     if (prevProductIds.includes(id)) {
+      alert('The product has already been selected');
       return;
     }
     const newProductIds = [...prevProductIds, id];

@@ -5,20 +5,23 @@ import productList from './ProductList.module.css';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class ProductList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isRightScrollerShown: false,
-      leftOffset: 0,
-    };
-  }
+  state = {
+    isRightScrollerShown: false,
+    leftOffset: 0,
+  };
 
-  componentDidMount() {
-    console.log('mount again');
-  }
-
+  // When updated,
+  // check the listtype and if the product id changed, reset the display list to the left
+  // check if the right scroller should display
   componentDidUpdate(prevProps, prevState) {
     const { isRightScrollerShown: prevRightScroller } = prevState;
+    const { productId: prevId } = prevProps;
+    const { productId: currId, listType } = this.props;
+
+    if (prevId !== currId && listType === 'RelatedProducts') {
+      this.setState({ leftOffset: 0 });
+    }
+
     const result = this.shouldRightScrollerDisplay();
     if (prevRightScroller !== result) {
       this.setState({
@@ -27,6 +30,7 @@ class ProductList extends React.Component {
     }
   }
 
+  // scroll button click handler
   handleScroll = (isRight) => async () => {
     const unitOffset = isRight ? -192 : 192;
     const { leftOffset } = this.state;
@@ -51,7 +55,9 @@ class ProductList extends React.Component {
 
   render() {
     const { leftOffset, isRightScrollerShown } = this.state;
-    const { productsIdToDisplay, updateProductId, listType, productId } = this.props;
+    const {
+      productsIdToDisplay, updateProductId, listType, productId,
+    } = this.props;
 
     return (
       <div className={productList.products}>
@@ -83,10 +89,10 @@ class ProductList extends React.Component {
               ref={(ele) => { this.carouselWrapper = ele; }}
               style={{ left: leftOffset }}
             >
-              { listType === 'YourProducts' ? <Card cardType="add" productId={productId} /> : null}
-              {productsIdToDisplay.map((id) =>
-                <Card key={id} id={id} updateProductId={updateProductId} />
-              )}
+              {listType === 'YourProducts' ? <Card cardType="add" id={productId} /> : null}
+              {productsIdToDisplay
+                .map(
+                  (id) => <Card key={id} id={id} updateProductId={updateProductId} cardType={listType} />)}
             </div>
           </div>
         </div>

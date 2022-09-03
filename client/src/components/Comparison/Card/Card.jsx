@@ -2,7 +2,7 @@ import React from 'react';
 import PubSub from 'pubsub-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
-import { faStar as faRegStar, faSquarePlus } from '@fortawesome/free-regular-svg-icons';
+import { faStar as faRegStar, faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import card from './Card.module.css';
 import instance from '../../../../../axiosConfig.js';
 
@@ -71,9 +71,16 @@ class Card extends React.Component {
     PubSub.publish('showModal', { isShown: true, id });
   };
 
-  addYourProduct = () => {
-    const { productId } = this.props;
-    PubSub.publish('newYourProduct', productId);
+  addYourProduct = (e) => {
+    e.stopPropagation();
+    const { id } = this.props;
+    PubSub.publish('newYourProduct', id);
+  };
+
+  removeYourProduct = (e) => {
+    e.stopPropagation();
+    const { id } = this.props;
+    PubSub.publish('yourProductToRemove', id);
   };
 
   render() {
@@ -93,10 +100,12 @@ class Card extends React.Component {
     const { ratings } = reviewMeta;
 
     const averageRating = Card.averageRating(ratings);
+    const actionIcon = cardType === 'YourProducts' ? faCircleXmark : faRegStar;
+    const iconactionHandler = cardType === 'YourProducts' ? this.removeYourProduct : this.showModal;
 
     return (
       <div className={card.container} onClick={this.showProduct}>
-        <FontAwesomeIcon icon={faRegStar} size="2xl" className={card.action} onClick={this.showModal} tabIndex="-1" />
+        <FontAwesomeIcon icon={actionIcon} size="2xl" className={card.action} onClick={iconactionHandler} tabIndex="-1" />
         <div className={card['img-container']}>
           <img
             src={photos ? photos[0].url : ''}
