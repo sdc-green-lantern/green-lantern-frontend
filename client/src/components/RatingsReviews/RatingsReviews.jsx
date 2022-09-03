@@ -3,11 +3,13 @@ import RatingsReviewsCSS from './RatingsReviews.module.css';
 import ReviewsList from './ReviewsList.jsx';
 import MoreReviews from './MoreReviews.jsx';
 import SortOptions from './SortOptions.jsx';
+import NewReview from './NewReview.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      productName: '',
       reviews: [],
       displayedReviews: [],
       numReviews: 0,
@@ -34,6 +36,15 @@ class RatingsReviews extends React.Component {
           numReviews: reviews.length,
           numDisplayed: displayedReviews.length,
         });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    const productNameURL = `/products/${productId}`;
+    axiosConfig.get(productNameURL)
+      .then((response) => {
+        this.setState({ productName: response.data.name });
       })
       .catch((error) => {
         console.log(error);
@@ -92,9 +103,9 @@ class RatingsReviews extends React.Component {
   }
 
   render() {
-    const { axiosConfig, productId } = this.props;
+    const { axiosConfig, IMGBB_API_KEY, productId } = this.props;
     const {
-      reviews, displayedReviews, numReviews, numDisplayed,
+      reviews, displayedReviews, numReviews, numDisplayed, productName,
     } = this.state;
     return (
       <div className={RatingsReviewsCSS.ratings_section}>
@@ -135,13 +146,12 @@ class RatingsReviews extends React.Component {
             />
           </div>
           <div className={RatingsReviewsCSS.write_new_review_btn_box}>
-            <p>Add a Review</p>
-            <button
-              className={RatingsReviewsCSS.button}
-              type="button"
-            >
-              ADD A REVIEW+
-            </button>
+            {/* <p>Add a review</p> */}
+            <NewReview
+              axiosConfig={axiosConfig}
+              IMGBB_API_KEY={IMGBB_API_KEY}
+              productName={productName}
+            />
           </div>
         </div>
       </div>

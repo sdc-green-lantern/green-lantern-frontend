@@ -20,7 +20,7 @@
   padding: 20px;
   border-radius: 4px;
   max-width: 450px;
-  height: 500px;
+  height: fit-content;
 }
 .exitBtn {
   position: relative;
@@ -41,6 +41,16 @@
 	justify-content:space-around;
 }
 
+.imgContainer {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.thumbnail_img {
+  width: auto;
+  height: 40px;
+}
+
 .footer {
   display : flex;
 	flex-direction: column;
@@ -49,6 +59,8 @@
 }
 
 .submitBtn {
+  position: relative;
+  margin-top: 20px;
   width: fit-content;
   height: fit-content;
   cursor: pointer;
