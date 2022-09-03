@@ -8,11 +8,40 @@ class QuestionModal extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     // this.handlePhotos = this.handlePhotos.bind(this);
     this.submitQuestion = this.submitQuestion.bind(this);
+    this.validateForm = this.validateForm.bind(this);
     const { productId } = this.props;
     this.state = {
       product_id: productId,
+      body: '',
+      name: '',
+      email: '',
     };
   }
+
+  validateForm = () => {
+    let isValid = true;
+    let warning = 'You must enter the following: ';
+    const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    const { body, name, email } = this.state;
+    if (body.length < 1) {
+      isValid = false;
+      warning += 'valid question,';
+    }
+    if (name.length < 1) {
+      isValid = false;
+      warning += ' valid name,';
+    }
+    if (email.length < 1 || regex.test(email) === false) {
+      isValid = false;
+      warning += ' valid email,';
+    }
+    warning = warning.slice(0, warning.length - 1);
+    if (isValid) {
+      this.submitQuestion();
+    } else {
+      alert(warning);
+    }
+  };
 
   handleChange = (e) => {
     this.setState({
@@ -53,24 +82,24 @@ class QuestionModal extends React.Component {
           <div className={QModalCSS.body}>
             <div>
               Your Question:
-              <textarea placeholder="Ask away..." maxLength="1000" rows="4" cols="60" name="body" onChange={(e) => { this.handleChange(e); }} />
+              <textarea placeholder="Ask away..." maxLength="1000" rows="4" cols="60" name="body" required onChange={(e) => { this.handleChange(e); }} />
             </div>
             <div>
               What is your nickname:
-              <input type="type" placeholder="Example: jackson11!" name="name" onChange={(e) => { this.handleChange(e); }} />
+              <input type="type" placeholder="Example: jackson11!" name="name" required onChange={(e) => { this.handleChange(e); }} />
               <div className={QModalCSS.security}>
                 For privacy reasons, do not use your full name or email address
               </div>
             </div>
             <div>
               Your email:
-              <input type="email" placeholder="Example: jackson@email.com" name="email" onChange={(e) => { this.handleChange(e); }} />
+              <input type="email" placeholder="Example: jackson@email.com" name="email" required onChange={(e) => { this.handleChange(e); }} />
               <div className={QModalCSS.security}>
                 For authentication reasons, you will not be emailed
               </div>
             </div>
             <div className={QModalCSS.footer}>
-              <button type="submit" className={QModalCSS.submitBtn} onClick={this.submitQuestion}>Submit question</button>
+              <button type="submit" className={QModalCSS.submitBtn} onClick={this.validateForm}>Submit question</button>
             </div>
           </div>
         </div>
