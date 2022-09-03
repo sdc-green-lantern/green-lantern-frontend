@@ -83,7 +83,7 @@ class QuestionItem extends React.Component {
       results, showAModal, yesCount, display,
     } = this.state;
     const { question } = this.props;
-    const { question_body, question_helpfulness } = question;
+    const { question_body, question_helpfulness, question_id } = question;
     if (display.length !== 0) {
       answerDisplay = (
         <AnswerList
@@ -98,11 +98,11 @@ class QuestionItem extends React.Component {
     }
     return (
       <div className={QItemCSS.questionEach}>
-        <span>
-          <span style={{ fontWeight: 'bold' }}>
-            Q:
-            { question_body }
-          </span>
+        <span style={{ fontWeight: 'bold' }}>
+          Q:
+          { question_body }
+        </span>
+        <span className={QItemCSS.interactions}>
           <span className={QItemCSS.helpful}>
             Helpful?
             <button
@@ -120,12 +120,18 @@ class QuestionItem extends React.Component {
           <span>
             <button className={QItemCSS.addAnswerBtn} type="submit" onClick={() => { this.setState({ showAModal: true }); }}>Add Answer</button>
           </span>
-          <div>
-            { showAModal && (
-            <AnswerModal hideModal={() => { this.setState({ showAModal: false }); }} />
-            )}
-          </div>
         </span>
+        <div>
+          { showAModal && (
+          <AnswerModal
+            question_id={question_id}
+            hideModal={() => { this.setState({ showAModal: false }); }}
+            getAnswers={this.getAnswers}
+            getMoreAnswers={this.getMoreAnswers}
+          />
+          )}
+        </div>
+
         { answerDisplay }
       </div>
     );

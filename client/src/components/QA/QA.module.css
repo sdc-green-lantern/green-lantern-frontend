@@ -1,21 +1,29 @@
 .qa_section {
   display: flex;
   justify-content: center;
-  border: 1px solid black;
   width: 100%;
 }
 .qa_body {
   display: flex;
   flex-direction: column;
-  border: 3px solid black;
   height: 500px;
   width: 70%;
 }
+.container {
+  display : flex;
+	flex-direction: column;
+	justify-content:space-around;
+  align-items: center;
+}
 
 .askButton {
-  right: 45%;
   width: fit-content;
   height: fit-content;
   cursor: pointer;
-  color: blue;
+  color: black;
+  background-color: lightseagreen;
+}
+
+.askButton.hover {
+  background-color: darkseagreen;
 }
