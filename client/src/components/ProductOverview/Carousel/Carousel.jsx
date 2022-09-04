@@ -39,18 +39,16 @@ export default function Carousel({ currentStyles }) {
   const handleThumbnailClick = (index) => {
     setCurrentIndex(index);
     setCurrentImage(productImages[index].url);
-    console.log(selectThumbnail(index));
     // console.log('thumbclick/index... ', index);
     // console.log('thumbclick/currentImg... ', productImages[index].url);
   };
 
-  console.log(productImages.length);
   return (
     <div className={carouselstyles.imageGallery} style={{ backgroundImage: `url(${currentImage})` }}>
       <div className={carouselstyles.thumbnailRow}>
         {productImages.map((productImage, index) => (
           <div className={carouselstyles.thumbnail} onClick={() => {handleThumbnailClick(index)}} key={index} id={index} productimage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})` }} />))}
-        <div className={carouselstyles.goToNext}>▼</div>
+        {/* <div className={carouselstyles.goToNext}>▼</div> */}
       </div>
       <div className={carouselstyles.arrows}>
         {currentIndex === 0 ? <div className={carouselstyles.leftArrow}></div> : <div className={carouselstyles.leftArrow} onClick={handlePreviousImg}>❮</div>}

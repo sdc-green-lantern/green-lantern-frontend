@@ -2,7 +2,7 @@ import React from 'react';
 import pdStyles from './ProductDescription.module.css';
 
 export default function ProductDescription({ product }) {
-  const conditionalClassName = product.features.length !== 0 ? 'pdStyles.checklistStyles' : '';
+  const conditionalClassName = product.features.length !== 0 ? '' : pdStyles.checklistStyles;
 
   return (
     <div className={pdStyles.productdescription}>
@@ -11,11 +11,9 @@ export default function ProductDescription({ product }) {
         <p>{product.description}</p>
       </div>
       <div className={pdStyles.checklist}>
-        <ul className={conditionalClassName}>
-          {product.features.length !== 0 ?
-          product.features.map((feature, index) => <li className={pdStyles.listItem} key={index}>✅ <span>{feature.feature}: {feature.value}</span></li>) :
-          ''}
-        </ul>
+        { product.features.length !== 0 ? <ul className={pdStyles.checklistStyles}>
+          {product.features.map((feature, index) => <li className={pdStyles.listItem} key={index}>✅ <span>{feature.feature}: {feature.value}</span></li>)}
+        </ul> : ''}
       </div>
     </div>
   );
