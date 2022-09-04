@@ -56,12 +56,20 @@
   cursor: pointer;
   padding-left: 12px;
   font-size: 30px;
+  transition: color 0.2s;
+}
+.leftArrow:hover {
+  color: grey;
 }
 .rightArrow {
   color: white;
   cursor: pointer;
   padding-right: 12px;
   font-size: 30px;
+  transition: color 0.2s;
+}
+.rightArrow:hover {
+  color: grey;
 }
 .lightbox {
   position: absolute;
