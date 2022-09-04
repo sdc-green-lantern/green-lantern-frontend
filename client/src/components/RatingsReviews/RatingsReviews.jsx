@@ -15,8 +15,12 @@ class RatingsReviews extends React.Component {
       displayedReviews: [],
       numReviews: 0,
       numDisplayed: 0,
-      // sortOption: 'relevant', // newest, helpful, relevant
+      sortOption: 'relevant', // newest, helpful, relevant
       metadata: {},
+      avgRating: 0,
+      pctRecommend: '',
+      ratingProportions: {},
+      ratingCounts: {},
     };
 
     this.updateReviews = this.updateReviews.bind(this);
@@ -25,6 +29,8 @@ class RatingsReviews extends React.Component {
     this.handleGetReviews = this.handleGetReviews.bind(this);
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
     this.handleSort = this.handleSort.bind(this);
+    this.calculateRatings = this.calculateRatings.bind(this);
+    this.calculatePercentRecommend = this.calculatePercentRecommend.bind(this);
   }
 
   componentDidMount() {
@@ -124,18 +130,51 @@ class RatingsReviews extends React.Component {
 
     axiosConfig.get(metaURL)
       .then((response) => {
-        console.log(response.data);
+        // console.log("Update Metadata Response: ", response.data);
         this.setState({ metadata: response.data });
+        this.calculateRatings(response.data);
+        this.calculatePercentRecommend(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
+  calculateRatings(metadata) {
+    // console.log("Metadata Ratings: ", metadata);
+    const ratings = Object.keys(metadata.ratings);
+    const counts = Object.values(metadata.ratings);
+    const ratingProportions = {};
+    let denominator = 0;
+    let numerator = 0;
+    for (let i = 0; i < ratings.length; i++) {
+      denominator += Number(counts[i]);
+      numerator += Number(ratings[i]) * Number(counts[i]);
+    }
+    for (let i = 0; i < ratings.length; i++) {
+      const key = ratings[i];
+      ratingProportions[key] = Number(counts[i]) / denominator;
+    }
+    const avgRating = Math.round(10 * (numerator / denominator)) / 10;
+    // console.log("Average Rating: ", avgRating);
+    // console.log("Average Rating: ", ratingProportions);
+    this.setState({ avgRating, ratingProportions, ratingCounts: ratings });
+  }
+
+  calculatePercentRecommend(metadata) {
+    // console.log("Metadata Recommended: ", metadata.recommended);
+    const numerator = metadata.recommended.true;
+    const denominator = metadata.recommended.true + metadata.recommended.false;
+    const pctRecommend = String(Math.round(100 * (numerator / denominator)));
+    // console.log("Percent Recommend: ", pctRecommend);
+    this.setState({ pctRecommend: `${pctRecommend}%` });
+  }
+
   render() {
     const { axiosConfig, IMGBB_API_KEY, productId } = this.props;
     const {
       reviews, displayedReviews, numReviews, numDisplayed, productName, metadata,
+      avgRating, pctRecommend, ratingProportions, ratingCounts,
     } = this.state;
     return (
       <div className={RatingsReviewsCSS.ratings_section}>
@@ -151,7 +190,11 @@ class RatingsReviews extends React.Component {
             <p>Ratings Breakdown</p>
             <RatingsBreakdown
               productId={productId}
-              metadata={metadata}
+              // metadata={metadata}
+              avgRating={avgRating}
+              pctRecommend={pctRecommend}
+              ratingProportions={ratingProportions}
+              ratingCounts={ratingCounts}
             />
           </div>
           <div className={RatingsReviewsCSS.product_breakdown_sidebar}>
