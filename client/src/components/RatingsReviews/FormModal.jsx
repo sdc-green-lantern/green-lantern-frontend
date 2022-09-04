@@ -220,7 +220,7 @@ export default class FormModal extends React.Component {
 
     const characteristicsRows = Object.keys(characteristics).map((feature, index) => (
       <tr>
-        <th>{feature}</th>
+        <th key={index}>{feature}</th>
         {[1, 2, 3, 4, 5].map((rating) => (
           <td>
             <label htmlFor={feature}>
@@ -303,8 +303,12 @@ export default class FormModal extends React.Component {
             <div>
               <p>Characteristics*</p>
               <table>
-                {characteristicsHeader}
-                {characteristicsRows}
+                <thead>
+                  {characteristicsHeader}
+                </thead>
+                <tbody>
+                  {characteristicsRows}
+                </tbody>
               </table>
             </div>
             <div className={FormModalCSS.reviewContainer}>
