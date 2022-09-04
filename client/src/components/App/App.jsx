@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 65635, // Pugs: 65633 // Shoes: 65635
+      productId: 65636, // Pugs: 65633 // Shoes: 65635
     };
     this.updateProductId = this.updateProductId.bind(this);
   }

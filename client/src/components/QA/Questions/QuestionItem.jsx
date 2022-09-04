@@ -94,7 +94,7 @@ class QuestionItem extends React.Component {
         />
       );
     } else {
-      answerDisplay = <button type="submit" className={QItemCSS.answerQBtn} onClick={() => {}}> Answer this question </button>;
+      answerDisplay = <button type="submit" className={QItemCSS.answerQBtn} onClick={() => { this.setState({ showAModal: true }); }}> Answer this question </button>;
     }
     return (
       <div className={QItemCSS.questionEach}>
