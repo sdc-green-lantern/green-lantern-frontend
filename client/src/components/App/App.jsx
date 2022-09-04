@@ -1,6 +1,5 @@
 import React from 'react';
 import axiosConfig, { IMGBB_API_KEY } from '../../../../axiosConfig.js'; // use this variable in place of axios
-import PubSub from 'pubsub-js';
 import ProductOverview from '../ProductOverview/ProductOverview.jsx';
 import Comparison from '../Comparison/Comparison.jsx';
 import QA from '../QA/QA.jsx';
@@ -11,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 65633, // Pugs: 65633 // Shoes: 65635
+      productId: 65635, // Pugs: 65633 // Shoes: 65635
     };
     this.updateProductId = this.updateProductId.bind(this);
   }
@@ -20,7 +19,6 @@ class App extends React.Component {
     this.setState({
       productId: id,
     });
-    PubSub.publish('newProductId', { id });
   }
 
   render() {
@@ -39,6 +37,7 @@ class App extends React.Component {
         <QA productId={productId} key={productId} />
         <Comparison productId={productId} updateProductId={this.updateProductId} />
         <RatingsReviews
+          key={`RR: ${productId}`}
           axiosConfig={axiosConfig}
           IMGBB_API_KEY={IMGBB_API_KEY}
           productId={productId}

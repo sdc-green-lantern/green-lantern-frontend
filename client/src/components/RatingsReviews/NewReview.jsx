@@ -16,7 +16,10 @@ export default class NewReview extends React.Component {
   }
 
   render() {
-    const { productName, axiosConfig, IMGBB_API_KEY } = this.props;
+    const {
+      productId, productName, characteristics,
+      axiosConfig, IMGBB_API_KEY, updateReviews,
+    } = this.props;
     const { showModal } = this.state;
     return (
       <>
@@ -29,13 +32,15 @@ export default class NewReview extends React.Component {
         </button>
         {showModal && (
           <FormModal
+            productId={productId}
             productName={productName}
+            characteristics={characteristics}
             axiosConfig={axiosConfig}
             IMGBB_API_KEY={IMGBB_API_KEY}
+            updateReviews={updateReviews}
             close={() => { this.setState({ showModal: false }); }}
             submit={this.handleSubmitForm}
           />
-          // <div>Hello there!</div>
         )}
       </>
     );

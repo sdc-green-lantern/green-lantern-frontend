@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductList from './ProductList/ProductList.jsx';
 // eslint-disable-next-line import/extensions
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 // eslint-disable-next-line import/extensions
@@ -13,8 +14,8 @@ class Comparison extends React.Component {
     return (
       <div className={comparison.container}>
         <RelatedProducts productId={productId} updateProductId={updateProductId} />
-        <YourProducts />
-        <Modal productId={productId} />
+        <YourProducts productId={productId} updateProductId={updateProductId} />
+        <Modal key={productId} productId={productId} />
       </div>
     );
   }

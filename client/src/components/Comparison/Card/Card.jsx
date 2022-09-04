@@ -1,8 +1,8 @@
 import React from 'react';
 import PubSub from 'pubsub-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { faStar as faRegStar } from '@fortawesome/free-regular-svg-icons';
+import { faStar, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faRegStar, faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import card from './Card.module.css';
 import instance from '../../../../../axiosConfig.js';
 
@@ -29,27 +29,35 @@ class Card extends React.Component {
   }
 
   componentDidMount() {
+    const { cardType } = this.props;
+    if (cardType === 'add') {
+      return;
+    }
     this.getProductInfo();
   }
 
   async getProductInfo() {
     const { id } = this.props;
-    const infoResponse = await instance.get(`/products/${id}`);
-    const styleResponse = await instance.get(`/products/${id}/styles`);
-    const reviewResponse = await instance.get('/reviews/meta', { params: { product_id: id } });
+    try {
+      const infoResponse = await instance.get(`/products/${id}`);
+      const styleResponse = await instance.get(`/products/${id}/styles`);
+      const reviewResponse = await instance.get('/reviews/meta', { params: { product_id: id } });
 
-    const { data: infoData } = infoResponse;
-    const { data: { results: styleData } } = styleResponse;
-    const { data: reviewData } = reviewResponse;
+      const { data: infoData } = infoResponse;
+      const { data: { results: styleData } } = styleResponse;
+      const { data: reviewData } = reviewResponse;
 
-    const defaultStyle = styleData.filter((style) => style['default?'])[0] || styleData[0];
+      const defaultStyle = styleData.filter((style) => style['default?'])[0] || styleData[0];
 
-    this.setState({
-      info: infoData,
-      styles: styleData,
-      defaultStyle,
-      reviewMeta: reviewData,
-    });
+      this.setState({
+        info: infoData,
+        styles: styleData,
+        defaultStyle,
+        reviewMeta: reviewData,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   showProduct = () => {
@@ -63,16 +71,41 @@ class Card extends React.Component {
     PubSub.publish('showModal', { isShown: true, id });
   };
 
+  addYourProduct = (e) => {
+    e.stopPropagation();
+    const { id } = this.props;
+    PubSub.publish('newYourProduct', id);
+  };
+
+  removeYourProduct = (e) => {
+    e.stopPropagation();
+    const { id } = this.props;
+    PubSub.publish('yourProductToRemove', id);
+  };
+
   render() {
+    const { cardType } = this.props;
+
+    if (cardType === 'add') {
+      return (
+        <div className={card.container} onClick={this.addYourProduct} id={card.add} >
+          <FontAwesomeIcon icon={faCirclePlus} id={card['plus-icon']} />
+        </div>
+      );
+    }
+
     const { info, reviewMeta, defaultStyle } = this.state;
     const { name, category } = info;
     const { original_price: originalPrice, sale_price: salePrice, photos } = defaultStyle;
     const { ratings } = reviewMeta;
 
     const averageRating = Card.averageRating(ratings);
+    const actionIcon = cardType === 'YourProducts' ? faCircleXmark : faRegStar;
+    const iconactionHandler = cardType === 'YourProducts' ? this.removeYourProduct : this.showModal;
+
     return (
       <div className={card.container} onClick={this.showProduct}>
-        <FontAwesomeIcon icon={faRegStar} size="2xl" className={card.action} onClick={this.showModal} tabIndex="-1" />
+        <FontAwesomeIcon icon={actionIcon} size="2xl" className={card.action} onClick={iconactionHandler} tabIndex="-1" />
         <div className={card['img-container']}>
           <img
             src={photos ? photos[0].url : ''}

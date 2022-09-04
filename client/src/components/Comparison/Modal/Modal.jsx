@@ -17,37 +17,44 @@ class Modal extends React.Component {
 
   async componentDidMount() {
     const { productId } = this.props;
-    const { data: { features: productFeatures, name: productName } } = await instance.get(`/products/${productId}`);
-    const productFeaturesMap = new Map();
-    productFeatures.forEach((feature) => {
-      productFeaturesMap.set(feature.feature, feature.value);
-    });
-
-    this.token = PubSub.subscribe('showModal', async (msg, data) => {
-      const { id, isShown } = data;
-      const { data: { features: comparedFeatures, name: comparedProductName } } = await instance.get(`/products/${id}`);
-
-      const comparedFeaturesMap = new Map();
-      comparedFeatures.forEach((feature) => {
-        comparedFeaturesMap.set(feature.feature, feature.value);
+    try {
+      const { data: { features: productFeatures, name: productName } } = await instance.get(`/products/${productId}`);
+      const productFeaturesMap = new Map();
+      productFeatures.forEach((feature) => {
+        productFeaturesMap.set(feature.feature, feature.value);
       });
 
-      const comparedFeatureKeys = comparedFeatures.map((featureObj) => featureObj.feature);
-      const productFeatureKeys = productFeatures.map((featureObj) => featureObj.feature);
+      this.token = PubSub.subscribe('showModal', async (msg, data) => {
+        const { id, isShown } = data;
+        try {
+          const { data: { features: comparedFeatures, name: comparedProductName } } = await instance.get(`/products/${id}`);
+          const comparedFeaturesMap = new Map();
+          comparedFeatures.forEach((feature) => {
+            comparedFeaturesMap.set(feature.feature, feature.value);
+          });
 
-      let features = [...comparedFeatureKeys, ...productFeatureKeys];
-      features = new Set(features);
-      features = [...features];
+          const comparedFeatureKeys = comparedFeatures.map((featureObj) => featureObj.feature);
+          const productFeatureKeys = productFeatures.map((featureObj) => featureObj.feature);
 
-      this.setState({
-        isShown,
-        productName,
-        comparedProductName,
-        comparedFeatures: comparedFeaturesMap,
-        productFeatures: productFeaturesMap,
-        features,
+          let features = [...comparedFeatureKeys, ...productFeatureKeys];
+          features = new Set(features);
+          features = [...features];
+
+          this.setState({
+            isShown,
+            productName,
+            comparedProductName,
+            comparedFeatures: comparedFeaturesMap,
+            productFeatures: productFeaturesMap,
+            features,
+          });
+        } catch (err) {
+          console.log(err);
+        }
       });
-    })
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   componentWillUnmount() {
