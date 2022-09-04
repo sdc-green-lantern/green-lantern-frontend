@@ -72,12 +72,13 @@ max-width: 20%; */
 .modal_button {
   /* align-items: 'center';
   justify-content: 'center'; */
-  margin: 10px 0px 0px;
+  margin: 10px 0px 10px;
   border: 2px solid black;
   height: 3em;
   width: 5em;
   background-color: buttonface;
 }
+
 
 .modal_button:hover {
   background-color: darkgrey;
@@ -104,4 +105,33 @@ max-width: 20%; */
   border: 1px solid black;
   width: 50%;
   height: 50%;
+}
+
+.characteristics_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.characteristics_ratings {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: flex-end;
+  /* align-items: center; */
+}
+
+.characteristic_name {
+  font-weight: bold;
+  padding-right: 2em;
+}
+
+table {
+  background: lightgray;
+}
+
+
+td {
+  text-align: center;
 }

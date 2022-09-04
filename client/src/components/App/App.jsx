@@ -37,6 +37,7 @@ class App extends React.Component {
         <QA productId={productId} key={productId} />
         <Comparison productId={productId} updateProductId={this.updateProductId} />
         <RatingsReviews
+          key={`RR: ${productId}`}
           axiosConfig={axiosConfig}
           IMGBB_API_KEY={IMGBB_API_KEY}
           productId={productId}
