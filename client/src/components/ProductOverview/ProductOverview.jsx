@@ -22,6 +22,7 @@ export default function ProductOverview({ productId }) {
       return response.data;
     };
 
+    // fetchData('/products/65640')
     fetchData(productEndpoint)
       .then((response) => {
         setProduct(response);
