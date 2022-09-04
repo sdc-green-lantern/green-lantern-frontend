@@ -66,16 +66,19 @@ class QA extends React.Component {
     const standard = string.toUpperCase();
     const { results } = this.state;
     const newDisplay = [];
-    if (string.length > 2) {
+    if (standard.length > 2) {
       // eslint-disable-next-line no-plusplus
       for (let i = 0; i < results.length; i++) {
-        if (results[i].question_body.includes(standard)) {
+        const qBody = results[i].question_body.toUpperCase();
+        if (qBody.includes(standard)) {
           newDisplay.push(results[i]);
         }
       }
       this.setState({
         display: newDisplay,
       });
+    } else {
+      this.getQuestions();
     }
   };
 
