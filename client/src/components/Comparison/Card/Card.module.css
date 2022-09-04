@@ -5,6 +5,7 @@
   height: 250px;
   border: 1px solid black;
   margin: 10px 10px 10px 0;
+  background-color: white;
 
 }
 
@@ -12,12 +13,30 @@
   margin-right: 0;
 }
 
-svg{
-  color: black;
-}
-
 .container:active:not(:focus-within) {
   outline: thick double #0ABAB5;
+}
+
+#add {
+  position: sticky;
+  left: 0;
+  z-index: 90;
+}
+
+#plus-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+   display: block;
+  font-size: 5em;
+  margin: auto;
+  opacity: 0.3;
+}
+
+#plus-icon:active{
+  opacity: 0.6;
 }
 
 .img-container {
@@ -45,7 +64,7 @@ img {
   opacity: 50%;
 }
 
-.action:focus{
+.action:focus {
   outline: none
 }
 
