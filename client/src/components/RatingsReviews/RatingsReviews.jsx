@@ -4,6 +4,7 @@ import ReviewsList from './ReviewsList.jsx';
 import MoreReviews from './MoreReviews.jsx';
 import SortOptions from './SortOptions.jsx';
 import NewReview from './NewReview.jsx';
+import RatingsBreakdown from './Breakdowns/RatingsBreakdown.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class RatingsReviews extends React.Component {
       displayedReviews: [],
       numReviews: 0,
       numDisplayed: 0,
-      sortOption: 'relevant', // newest, helpful, relevant
+      // sortOption: 'relevant', // newest, helpful, relevant
       metadata: {},
     };
 
@@ -119,10 +120,11 @@ class RatingsReviews extends React.Component {
 
   updateMetadata() {
     const { productId, axiosConfig } = this.props;
-    const metaURL = `https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews/meta?product_id=${productId}`;
+    const metaURL = `/reviews/meta?product_id=${productId}`;
 
     axiosConfig.get(metaURL)
       .then((response) => {
+        console.log(response.data);
         this.setState({ metadata: response.data });
       })
       .catch((error) => {
@@ -133,7 +135,7 @@ class RatingsReviews extends React.Component {
   render() {
     const { axiosConfig, IMGBB_API_KEY, productId } = this.props;
     const {
-      reviews, displayedReviews, numReviews, numDisplayed, productName, metadata
+      reviews, displayedReviews, numReviews, numDisplayed, productName, metadata,
     } = this.state;
     return (
       <div className={RatingsReviewsCSS.ratings_section}>
@@ -147,6 +149,10 @@ class RatingsReviews extends React.Component {
           </div>
           <div className={RatingsReviewsCSS.ratings_breakdown_sidebar}>
             <p>Ratings Breakdown</p>
+            <RatingsBreakdown
+              productId={productId}
+              metadata={metadata}
+            />
           </div>
           <div className={RatingsReviewsCSS.product_breakdown_sidebar}>
             <p>Product Breakdown</p>
