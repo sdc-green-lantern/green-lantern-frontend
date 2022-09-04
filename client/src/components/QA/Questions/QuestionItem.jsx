@@ -98,29 +98,32 @@ class QuestionItem extends React.Component {
     }
     return (
       <div className={QItemCSS.questionEach}>
-        <span style={{ fontWeight: 'bold' }}>
-          Q:
-          { question_body }
-        </span>
-        <span className={QItemCSS.interactions}>
-          <span className={QItemCSS.helpful}>
-            Helpful?
-            <button
-              type="submit"
-              className={QItemCSS.yesHelpful}
-              onClick={() => { this.addQYes(); }}
-            >
-              Yes
-            </button>
-          </span>
-          <span>
-            {`(${question_helpfulness + yesCount})`}
-          </span>
-          |
-          <span>
-            <button className={QItemCSS.addAnswerBtn} type="submit" onClick={() => { this.setState({ showAModal: true }); }}>Add Answer</button>
-          </span>
-        </span>
+        <div className={QItemCSS.container}>
+          <div style={{ fontWeight: 'bold' }}>
+            Q:
+            { question_body }
+          </div>
+          <div className={QItemCSS.interactions}>
+            <span className={QItemCSS.helpful}>
+              Helpful?
+              <button
+                type="submit"
+                className={QItemCSS.yesHelpful}
+                onClick={() => { this.addQYes(); }}
+              >
+                Yes
+              </button>
+            </span>
+            <span>
+              {`(${question_helpfulness + yesCount})`}
+            </span>
+            |
+            <span>
+              <button className={QItemCSS.addAnswerBtn} type="submit" onClick={() => { this.setState({ showAModal: true }); }}>Add Answer</button>
+            </span>
+          </div>
+        </div>
+
         <div>
           { showAModal && (
           <AnswerModal
