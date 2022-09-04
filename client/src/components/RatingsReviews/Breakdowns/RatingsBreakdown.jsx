@@ -17,14 +17,16 @@ export default class RatingsBreakdown extends React.Component {
 
     return (
       <div>
-        <div className={RatingsBreakdownCSS.star_rating}>
-          <p>
-            {`Average Rating: ${avgRating}`}
+        <div className={RatingsBreakdownCSS.top_box}>
+          <div>
+            <h1>{avgRating}</h1>
+          </div>
+          <div>
             ★★★★★
-          </p>
+          </div>
         </div>
         <div className={RatingsBreakdownCSS.recommmend_box}>
-          <p>{`Pct Recommend: ${pctRecommend}`}</p>
+          <p>{`${pctRecommend} of reviews recommend this product.`}</p>
         </div>
         <div className={RatingsBreakdownCSS.proportions_box}>
           <p>{`Rating Proportions: ${ratingProportions}`}</p>

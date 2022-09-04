@@ -187,7 +187,6 @@ class RatingsReviews extends React.Component {
             </span>
           </div>
           <div className={RatingsReviewsCSS.ratings_breakdown_sidebar}>
-            <p>Ratings Breakdown</p>
             <RatingsBreakdown
               productId={productId}
               // metadata={metadata}
