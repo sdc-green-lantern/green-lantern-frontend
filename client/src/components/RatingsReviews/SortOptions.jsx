@@ -10,7 +10,7 @@ class SortOptions extends React.Component {
     const { numReviews, handleSort } = this.props;
     return (
       <div>
-        {`${numReviews} reviews, ordered by `}
+        {`${numReviews} reviews, sorted by `}
         <select defaultValue="relevant" onChange={handleSort}>
           <option value="relevant">Relevance</option>
           <option value="helpful">Helpfulness</option>

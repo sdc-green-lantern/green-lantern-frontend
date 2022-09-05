@@ -1,0 +1,87 @@
+h1 {
+  margin: 0 0
+}
+
+.breakdown_container {
+  padding: 0.5em 0.5em;
+}
+
+.top_box {
+  display: flex;
+  gap: 1em;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+
+.recommend_box {
+  font-style: italic;
+}
+
+.proportions_box {
+  display: flex;
+  flex-direction: row;
+  height: 1rem;
+  gap: 1em;
+  padding-bottom: 0.5em;
+  font-weight: bold;
+}
+
+.proportions_box:hover {
+  background-color: grey;
+}
+
+.grey_bar {
+  border: 1px solid black;
+  background-color: darkgrey;
+  width: 70%;
+  height: 100%;
+}
+
+.rating {
+  position: relative;
+  background-color: red;
+  display: inline-flex;
+  justify-content: space-around;
+}
+
+.rating_overlay {
+  background-color: #0ABAB5;
+  opacity: 75%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  mix-blend-mode: color;
+}
+
+.star {
+  color: lightgray;
+  display: flex;
+  justify-content: left;
+  /* font-size: 28; */
+}
+
+/* .rating {
+  position: relative;
+  background-color: white;
+  display: inline-flex;
+  justify-content: space-around;
+}
+
+.rating-overlay {
+  background-color: #0ABAB5;
+  opacity: 75%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  mix-blend-mode: color;
+}
+
+.star {
+  color: lightgray;
+  display: flex;
+  justify-content: left;
+} */
