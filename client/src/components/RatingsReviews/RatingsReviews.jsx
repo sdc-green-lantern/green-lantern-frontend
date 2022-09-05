@@ -17,7 +17,6 @@ class RatingsReviews extends React.Component {
       displayedReviews: [],
       numReviews: 0,
       numDisplayed: 0,
-      sortOption: 'relevant', // newest, helpful, relevant
       metadata: {},
       avgRating: 0,
       pctRecommend: '',
@@ -86,7 +85,6 @@ class RatingsReviews extends React.Component {
           displayedReviews,
           numReviews: reviews.length,
           numDisplayed: displayedReviews.length,
-          sortOption,
         });
       })
       .catch((error) => {
