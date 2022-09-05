@@ -82,12 +82,16 @@ class QA extends React.Component {
     }
   };
 
+  handleClick = (e) => {
+    console.log(e);
+  };
+
   render() {
     const { display, results, productName } = this.state;
     const { productId } = this.props;
 
     return (
-      <div>
+      <div onClick={(e) => this.handleClick(e)}>
         <div className={QACSS.qa_section}>
           <div className={QACSS.qa_body}>
             <h2 data-testid="QA-1">Questions and Answers</h2>
