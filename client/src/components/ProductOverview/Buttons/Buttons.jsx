@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import buttonStyles from './Buttons.module.css';
 
-export default function Buttons() {
+export default function Buttons({ currentStyles }) {
+  const [currentSkus, setCurrentSkus] = useState([]);
+
+  useEffect(() => {
+    // console.log('buttons :: currentStyles... ', currentStyles);
+    console.log('buttons :: currentStyles.skus... ', currentStyles.skus);
+    if (Object.keys(currentStyles).length !== 0) {
+      setCurrentSkus(Object.keys(currentStyles.skus));
+    }
+  }, [currentStyles]);
+
   return(
     <div className={buttonStyles.buttons}>
       <div className={buttonStyles.quantityRow}>
-        <div className={buttonStyles.selectSize}>
-          <p>select size</p>
-          <p>▼</p>
-        </div>
-        <div className={buttonStyles.selectQuantity}>
-          <p>1</p>
-          <p>▼</p>
-        </div>
+        <select className={buttonStyles.selectSize}>
+          <option selected="true" disabled="disabled">Select Size</option>
+          {/* {currentSkus.length !== 0 ? currentSkus.map((currentSku, index) => (
+            <option className={buttonStyles.selectSize} key={index}>{currentStyles.skus[currentSku].size}</option>
+          )) : ''} */}
+        </select>
+        <select className={buttonStyles.selectQuantity}>
+          {/* {currentStyles.skus[currentSku].quantity.map((currentSku, index) => (
+            <option className={buttonStyles.selectSize} key={index}>{currentStyles.skus[currentSku].size}</option>
+          ))} */}
+        </select>
       </div>
       <div className={buttonStyles.checkoutRow}>
         <div className={buttonStyles.addToBag}>
           <p>add to bag</p>
-          <p>▼</p>
+          <p>+</p>
         </div>
         <div className={buttonStyles.favorite}>⭐</div>
       </div>

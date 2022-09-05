@@ -19,6 +19,9 @@ export default function ProductInfo(props) {
     <div className={piStyles.productinfo}>
       <Carousel
         data-testid="Carousel"
+        // styles={styles}
+        // stylesIndex={stylesIndex}
+        // setStylesIndex={setStylesIndex}
         currentStyles={currentStyles}
       />
       <div className={piStyles.productoptions}>
@@ -26,17 +29,22 @@ export default function ProductInfo(props) {
         <div className={piStyles.productTitle}>
           <h3>{product.category}</h3>
           <h1>{product.name}</h1>
-          <h3 className={piStyles.productPrice}>
-            $
-            {product.default_price}
-          </h3>
+          {currentStyles.sale_price !== null ? <h3 className={piStyles.productPrice}><del>${product.default_price}</del> ${currentStyles.sale_price}</h3> : <h3>${product.default_price}</h3>}
+          {/* {styles[stylesIndex].sale_price !== null ? <h3 className={piStyles.productPrice}><del>${product.default_price}</del> ${styles[stylesIndex].sale_price}</h3> : <h3>${product.default_price}</h3>} */}
         </div>
         <Selection
           styles={styles}
+          // stylesIndex={stylesIndex}
+          // setStylesIndex={setStylesIndex}
           currentStyles={currentStyles}
           setCurrentStyles={setCurrentStyles}
         />
-        <Buttons />
+        <Buttons
+          // styles={styles}
+          // stylesIndex={stylesIndex}
+          // setStyleIndex={setStylesIndex}
+        currentStyles={currentStyles}
+        />
       </div>
     </div>
   );
