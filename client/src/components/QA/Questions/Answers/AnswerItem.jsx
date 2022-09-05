@@ -1,4 +1,5 @@
 import React from 'react';
+import { format, parseISO } from 'date-fns';
 import AItemCSS from './AnswerItem.module.css';
 import axiosConfig from '../../../../../../axiosConfig.js';
 
@@ -18,7 +19,7 @@ class AnswerItem extends React.Component {
     const { yesCount } = this.state;
     if (yesCount < 1) {
       axiosConfig.put(`/qa/answers/${answer_id}/helpful`)
-        .then((response) => {
+        .then(() => {
           this.setState({
             yesCount: yesCount + 1,
           });
@@ -33,7 +34,7 @@ class AnswerItem extends React.Component {
     const { answer, getAnswers } = this.props;
     const { answer_id } = answer;
     axiosConfig.put(`/qa/answers/${answer_id}/report`)
-      .then((response) => {
+      .then(() => {
         getAnswers();
       })
       .catch((err) => {
@@ -43,6 +44,7 @@ class AnswerItem extends React.Component {
 
   render() {
     const { answer } = this.props;
+    const date = format(parseISO(answer.date), 'MMMM dd, yyyy');
     const { answerer_name, helpfulness, photos } = answer;
     const { yesCount } = this.state;
     const displayPhotos = photos.map((photo) => (
@@ -50,6 +52,7 @@ class AnswerItem extends React.Component {
         src={photo.url}
         alt=""
         className={AItemCSS.thumbnail_img}
+        key={photo.id}
       />
     ));
 
@@ -76,7 +79,7 @@ class AnswerItem extends React.Component {
             {answer.answerer_name}
           </span>
           <span>
-            {`, ${answer.date}   |`}
+            {`, ${date}   |`}
           </span>
           <span className={AItemCSS.interactions}>
             <span>
