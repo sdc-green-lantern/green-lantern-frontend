@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import relatedProducts from './RelatedProducts.module.css';
 import ProductList from '../ProductList/ProductList.jsx';
 import instance from '../../../../../axiosConfig.js';
@@ -7,6 +9,8 @@ import instance from '../../../../../axiosConfig.js';
 class RelatedProducts extends React.Component {
   state = {
     relatedProductIds: [],
+    isLoading: false,
+    hasError: false,
   };
 
   // get the related products id when initially mounted
@@ -29,20 +33,26 @@ class RelatedProducts extends React.Component {
   // get the related products id and update state
   updateRelatedProducts = async (productId) => {
     try {
+      this.setState({ isLoading: true });
       const response = await instance.get(`/products/${productId}/related`);
       let { data } = response;
       data = [...new Set(data)];
 
       this.setState({
         relatedProductIds: data,
+        isLoading: false,
       });
     } catch (err) {
-      console.log(err);
+      this.setState({
+        hasError: true,
+        isLoading: false,
+      });
+      console.log(err.response.data);
     }
   };
 
   render() {
-    const { relatedProductIds } = this.state;
+    const { relatedProductIds, isLoading, hasError } = this.state;
     const { updateProductId, productId } = this.props;
     return (
       <div className={relatedProducts['related-products']}>
@@ -50,7 +60,12 @@ class RelatedProducts extends React.Component {
           Current Product Id:
           {productId}
         </span>
-        <ProductList productsIdToDisplay={relatedProductIds} updateProductId={updateProductId} productId={productId} listType="RelatedProducts" />
+        {
+          isLoading
+            ? <FontAwesomeIcon icon={faSpinner} beat spin className={relatedProducts.loading} />
+            : hasError ? <h3 className={relatedProducts.error}>......Unstable Internet Connection. Please try again later</h3>
+              : <ProductList productsIdToDisplay={relatedProductIds} updateProductId={updateProductId} productId={productId} listType="RelatedProducts" />
+        }
       </div>
     );
   }

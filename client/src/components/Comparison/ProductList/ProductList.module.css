@@ -4,52 +4,59 @@
   margin-bottom: 10px;
 }
 
-.main{
+.main {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-.carousel{
+.carousel {
   z-index: 1;
   overflow: hidden;
-  width:100%;
+  width: 100%;
   display: flex;
   align-items: center;
+  height: 270px;
 }
 
-.carousel-wrapper{
+.carousel-wrapper {
   white-space: nowrap;
   position: relative;
   width: auto;
   display: flex;
   align-items: center;
+  height: 100%;
 }
 
+.backup {
+  width:100%;
+  text-align: center;
 
-.scroll-left{
+}
+
+.scroll-left {
   z-index: 2;
   position: absolute;
   left: 20px;
-  width:30px;
+  width: 30px;
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.scroll-right{
+.scroll-right {
   z-index: 3;
   position: absolute;
   right: 20px;
-  width:30px;
+  width: 30px;
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-button{
+button {
   position: absolute;
   height: 60px;
   width: 50px;
@@ -57,7 +64,7 @@ button{
   border-radius: 10%;
 }
 
-.arrow-left{
+.arrow-left {
   box-sizing: border-box;
   width: 20px;
   height: 20px;
@@ -66,10 +73,10 @@ button{
   transform: rotate(135deg);
   display: inline-block;
   position: absolute;
-  left:8px
+  left: 8px
 }
 
-.arrow-right{
+.arrow-right {
   box-sizing: border-box;
   width: 20px;
   height: 20px;
@@ -81,6 +88,6 @@ button{
   right: 8px
 }
 
-#id{
+#id {
   background-color: antiquewhite;
 }

@@ -97,3 +97,11 @@ img {
   display: flex;
   justify-content: left;
 }
+.info span{
+  margin-right: 10px;
+}
+
+.info>div:nth-child(2){
+  font-weight: bold;
+  font-size: 1.1em;
+}

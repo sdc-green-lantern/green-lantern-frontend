@@ -56,7 +56,7 @@ class Card extends React.Component {
         reviewMeta: reviewData,
       });
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data);
     }
   }
 
@@ -117,8 +117,8 @@ class Card extends React.Component {
           <div>{category}</div>
           <div>{name}</div>
           <div>
-            <span style={{ display: salePrice ? 'inline' : 'none' }}>{`sale price: $ ${salePrice}`}</span>
-            <span style={{ display: originalPrice ? 'inline' : 'none' }}>{`$ ${originalPrice}`}</span>
+            <span style={{ display: salePrice ? 'inline' : 'none', color: salePrice ? 'red' : 'none' }}>{`$ ${salePrice}`}</span>
+            <span style={{ textDecoration: salePrice ? 'line-through' : 'none', color: salePrice ? 'grey' : 'none' }}>{`$ ${originalPrice}`}</span>
           </div>
           <div className={card.rating}>
             <div className={card['rating-overlay']} style={{ width: `${averageRating * 20}%` }} />
