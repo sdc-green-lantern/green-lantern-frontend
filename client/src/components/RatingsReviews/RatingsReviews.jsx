@@ -1,9 +1,12 @@
 import React from 'react';
+import _ from 'underscore';
+
 import RatingsReviewsCSS from './RatingsReviews.module.css';
 import ReviewsList from './ReviewsList.jsx';
 import MoreReviews from './MoreReviews.jsx';
 import SortOptions from './SortOptions.jsx';
 import NewReview from './NewReview.jsx';
+import RatingsBreakdown from './Breakdowns/RatingsBreakdown.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
@@ -14,8 +17,13 @@ class RatingsReviews extends React.Component {
       displayedReviews: [],
       numReviews: 0,
       numDisplayed: 0,
-      sortOption: 'relevant', // newest, helpful, relevant
+      sortOption: 'relevant',
       metadata: {},
+      avgRating: 0,
+      pctRecommend: '',
+      ratingProportions: {},
+      ratingCounts: {},
+      selectedRatings: [],
     };
 
     this.updateReviews = this.updateReviews.bind(this);
@@ -24,6 +32,9 @@ class RatingsReviews extends React.Component {
     this.handleGetReviews = this.handleGetReviews.bind(this);
     this.handleMoreReviews = this.handleMoreReviews.bind(this);
     this.handleSort = this.handleSort.bind(this);
+    this.calculateRatings = this.calculateRatings.bind(this);
+    this.calculatePercentRecommend = this.calculatePercentRecommend.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
   }
 
   componentDidMount() {
@@ -61,21 +72,39 @@ class RatingsReviews extends React.Component {
     });
   }
 
-  handleSort(event) {
+  handleSort(event, ratings) {
     const { productId, axiosConfig } = this.props;
-    const sortOption = event.target.value;
+    let { sortOption, selectedRatings } = this.state;
+    sortOption = event === undefined ? sortOption : event.target.value;
+    selectedRatings = ratings === undefined ? selectedRatings : ratings;
     const productURL = `/reviews/?sort=${sortOption}&product_id=${productId}&count=1000`;
 
     axiosConfig.get(productURL)
       .then((response) => {
-        const reviews = response.data.results;
-        const displayedReviews = response.data.results.slice(0, 2);
+        let reviews = response.data.results;
+
+        console.log("Handle Sort: ", selectedRatings);
+        if (selectedRatings.length > 0) {
+          reviews = _.filter(reviews, function(review) {
+            return selectedRatings.includes(review.rating)
+          });
+        }
+          // console.log(selectedRatings);
+          // console.log(filteredReviews);
+
+          // this.setState({ reviews: filteredReviews });
+          // this.setState({ displayedReviews: filteredReviews.slice(0, 2) });
+
+
+        // const displayedReviews = response.data.results.slice(0, 2);
+        const displayedReviews = reviews.slice(0, 2);
         this.setState({
           reviews,
           displayedReviews,
           numReviews: reviews.length,
           numDisplayed: displayedReviews.length,
           sortOption,
+          selectedRatings,
         });
       })
       .catch((error) => {
@@ -119,21 +148,76 @@ class RatingsReviews extends React.Component {
 
   updateMetadata() {
     const { productId, axiosConfig } = this.props;
-    const metaURL = `https://app-hrsei-api.herokuapp.com/api/fec2/rfp/reviews/meta?product_id=${productId}`;
+    const metaURL = `/reviews/meta?product_id=${productId}`;
 
     axiosConfig.get(metaURL)
       .then((response) => {
+        // console.log("Update Metadata Response: ", response.data);
         this.setState({ metadata: response.data });
+        this.calculateRatings(response.data);
+        this.calculatePercentRecommend(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
+  calculateRatings(metadata) {
+    // console.log("Metadata Ratings: ", metadata);
+    const ratings = Object.keys(metadata.ratings);
+    const counts = Object.values(metadata.ratings);
+    const ratingProportions = {};
+    let denominator = 0;
+    let numerator = 0;
+    for (let i = 0; i < ratings.length; i++) {
+      denominator += Number(counts[i]);
+      numerator += Number(ratings[i]) * Number(counts[i]);
+    }
+    for (let i = 0; i < ratings.length; i++) {
+      const key = ratings[i];
+      ratingProportions[key] = Number(counts[i]) / denominator;
+    }
+    const avgRating = Math.round(10 * (numerator / denominator)) / 10;
+    // console.log("Average Rating: ", avgRating);
+    // console.log("Average Rating: ", ratingProportions);
+    this.setState({ avgRating, ratingProportions, ratingCounts: ratings });
+  }
+
+  calculatePercentRecommend(metadata) {
+    // console.log("Metadata Recommended: ", metadata.recommended);
+    const numerator = metadata.recommended.true;
+    const denominator = metadata.recommended.true + metadata.recommended.false;
+    const pctRecommend = String(Math.round(100 * (numerator / denominator)));
+    // console.log("Percent Recommend: ", pctRecommend);
+    this.setState({ pctRecommend: `${pctRecommend}%` });
+  }
+
+  toggleFilter(event, rating) {
+    // console.log(event);
+    // console.log(rating);
+    let { selectedRatings } = this.state;
+
+    rating = Number(rating);
+    if (!selectedRatings.includes(rating)) {
+      selectedRatings.push(rating);
+    } else {
+      selectedRatings = _.filter(selectedRatings, function(num) {return num !== rating} );
+    }
+    selectedRatings.sort();
+
+    // if (selectedRatings.length === 0) {
+    //   selectedRatings = [];
+    // }
+    this.setState({ selectedRatings });
+    console.log("Toggle Filter: ", selectedRatings);
+    this.handleSort(undefined, selectedRatings);
+  }
+
   render() {
     const { axiosConfig, IMGBB_API_KEY, productId } = this.props;
     const {
-      reviews, displayedReviews, numReviews, numDisplayed, productName, metadata
+      reviews, displayedReviews, numReviews, numDisplayed, productName, metadata,
+      avgRating, pctRecommend, ratingProportions, ratingCounts, selectedRatings,
     } = this.state;
     return (
       <div className={RatingsReviewsCSS.ratings_section}>
@@ -146,7 +230,17 @@ class RatingsReviews extends React.Component {
             </span>
           </div>
           <div className={RatingsReviewsCSS.ratings_breakdown_sidebar}>
-            <p>Ratings Breakdown</p>
+            <RatingsBreakdown
+              toggleFilter={this.toggleFilter}
+              handleSort={this.handleSort}
+              productId={productId}
+              selectedRatings={selectedRatings}
+              // metadata={metadata}
+              avgRating={avgRating}
+              pctRecommend={pctRecommend}
+              ratingProportions={ratingProportions}
+              ratingCounts={ratingCounts}
+            />
           </div>
           <div className={RatingsReviewsCSS.product_breakdown_sidebar}>
             <p>Product Breakdown</p>

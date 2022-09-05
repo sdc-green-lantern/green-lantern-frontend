@@ -11,7 +11,8 @@ export default function Carousel({ currentStyles }) {
     if (Object.keys(currentStyles).length !== 0) {
       setProductImages(currentStyles.photos);
       if (productImages.length !== 0) {
-        setCurrentImage(productImages[0].url);
+        setCurrentIndex(0);
+        setCurrentImage(productImages[currentIndex].url);
       }
     }
   }, [currentStyles, productImages]);

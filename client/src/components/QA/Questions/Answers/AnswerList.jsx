@@ -9,7 +9,9 @@ class AnswerList extends React.Component {
   }
 
   render() {
-    const { answers, compare, getMoreAnswers, getAnswers } = this.props;
+    const {
+      answers, compare, getMoreAnswers, getAnswers,
+    } = this.props;
     let showMoreBtn = true;
     if (answers.length === compare.length) {
       showMoreBtn = false;
@@ -20,8 +22,8 @@ class AnswerList extends React.Component {
           {answers.map((answer) => (
             <AnswerItem
               answer={answer}
-              key={answer.answer_id}
               getAnswers={getAnswers}
+              key={answer.answer_id}
             />
           ))}
         </div>
