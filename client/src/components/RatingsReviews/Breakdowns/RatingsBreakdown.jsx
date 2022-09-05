@@ -15,7 +15,7 @@ export default class RatingsBreakdown extends React.Component {
     const {
       avgRating, pctRecommend,
       ratingProportions, ratingCounts,
-      toggleFilter
+      toggleFilter, selectedRatings, handleSort,
     } = this.props;
 
     const ratings = Object.keys(ratingProportions).reverse();
@@ -33,6 +33,12 @@ export default class RatingsBreakdown extends React.Component {
         <div className={RatingsBreakdownCSS.grey_bar} />
       </div>
     ));
+
+    const filters = selectedRatings.map((num) => {
+      return (
+        <div>{`- ${num} Stars`}</div>
+      );
+    });
 
     return (
       <div className={RatingsBreakdownCSS.breakdown_container}>
@@ -62,6 +68,22 @@ export default class RatingsBreakdown extends React.Component {
         </div>
         <div>
           {ratingsBar}
+        </div>
+        <div>
+          {selectedRatings.length > 0 ? (
+            <>
+              Filters applied. Displaying reviews with:
+              {filters}
+              <input
+                type="submit"
+                value="Remove all filters"
+                onClick={() => handleSort(undefined, [])}
+              />
+            </>
+          )
+          :
+          (<></>)
+          }
         </div>
       </div>
     );

@@ -17,12 +17,13 @@ class RatingsReviews extends React.Component {
       displayedReviews: [],
       numReviews: 0,
       numDisplayed: 0,
+      sortOption: 'relevant',
       metadata: {},
       avgRating: 0,
       pctRecommend: '',
       ratingProportions: {},
       ratingCounts: {},
-      selectedRatings: [1, 2, 3, 4, 5],
+      selectedRatings: [],
     };
 
     this.updateReviews = this.updateReviews.bind(this);
@@ -71,20 +72,39 @@ class RatingsReviews extends React.Component {
     });
   }
 
-  handleSort(event) {
+  handleSort(event, ratings) {
     const { productId, axiosConfig } = this.props;
-    const sortOption = event.target.value;
+    let { sortOption, selectedRatings } = this.state;
+    sortOption = event === undefined ? sortOption : event.target.value;
+    selectedRatings = ratings === undefined ? selectedRatings : ratings;
     const productURL = `/reviews/?sort=${sortOption}&product_id=${productId}&count=1000`;
 
     axiosConfig.get(productURL)
       .then((response) => {
-        const reviews = response.data.results;
-        const displayedReviews = response.data.results.slice(0, 2);
+        let reviews = response.data.results;
+
+        console.log("Handle Sort: ", selectedRatings);
+        if (selectedRatings.length > 0) {
+          reviews = _.filter(reviews, function(review) {
+            return selectedRatings.includes(review.rating)
+          });
+        }
+          // console.log(selectedRatings);
+          // console.log(filteredReviews);
+
+          // this.setState({ reviews: filteredReviews });
+          // this.setState({ displayedReviews: filteredReviews.slice(0, 2) });
+
+
+        // const displayedReviews = response.data.results.slice(0, 2);
+        const displayedReviews = reviews.slice(0, 2);
         this.setState({
           reviews,
           displayedReviews,
           numReviews: reviews.length,
           numDisplayed: displayedReviews.length,
+          sortOption,
+          selectedRatings,
         });
       })
       .catch((error) => {
@@ -173,28 +193,24 @@ class RatingsReviews extends React.Component {
   }
 
   toggleFilter(event, rating) {
-    console.log(event);
-    console.log(rating);
-
-    let { selectedRatings, displayedReviews } = this.state;
+    // console.log(event);
+    // console.log(rating);
+    let { selectedRatings } = this.state;
 
     rating = Number(rating);
     if (!selectedRatings.includes(rating)) {
       selectedRatings.push(rating);
-    } else if (selectedRatings.includes(rating)) {
+    } else {
       selectedRatings = _.filter(selectedRatings, function(num) {return num !== rating} );
     }
-    if (selectedRatings.length === 0) {
-      selectedRatings = [1, 2, 3, 4, 5];
-    }
-    this.setState({ selectedRatings });
+    selectedRatings.sort();
 
-    const filteredDisplayedReviews = _.filter(displayedReviews, function(review) {
-      return selectedRatings.includes(review.rating)
-    });
-    console.log(selectedRatings);
-    console.log(filteredDisplayedReviews);
-    this.setState({ displayedReviews: filteredDisplayedReviews });
+    // if (selectedRatings.length === 0) {
+    //   selectedRatings = [];
+    // }
+    this.setState({ selectedRatings });
+    console.log("Toggle Filter: ", selectedRatings);
+    this.handleSort(undefined, selectedRatings);
   }
 
   render() {
@@ -216,7 +232,9 @@ class RatingsReviews extends React.Component {
           <div className={RatingsReviewsCSS.ratings_breakdown_sidebar}>
             <RatingsBreakdown
               toggleFilter={this.toggleFilter}
+              handleSort={this.handleSort}
               productId={productId}
+              selectedRatings={selectedRatings}
               // metadata={metadata}
               avgRating={avgRating}
               pctRecommend={pctRecommend}
