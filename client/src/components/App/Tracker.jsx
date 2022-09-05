@@ -12,27 +12,28 @@ class Tracker extends React.Component {
     };
   }
 
-  sendInteraction = () => {
-    const { element, widget, time } = this.state;
-    axiosConfig.post('/interactopms', {
-      element,
-      widget,
-      time,
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  sendInteraction = (module, e) => {
+    console.log(e.target.localName, module, e.timeStamp);
+    this.setState({
+      element: e.target.localName,
+      widget: module,
+      time: String(e.timeStamp),
+    }, () => {
+      axiosConfig.post('/interactions', this.state)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
   };
 
   render() {
-    const { element, widget, time } = this.state;
     const { render } = this.props;
     return (
       <div>
-        {render(element, widget, time, this.sendInteraction)}
+        {render(this.sendInteraction)}
       </div>
     );
   }

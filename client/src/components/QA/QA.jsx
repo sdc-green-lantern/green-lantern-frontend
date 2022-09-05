@@ -82,16 +82,14 @@ class QA extends React.Component {
     }
   };
 
-  handleClick = (e) => {
-    console.log(e);
-  };
-
   render() {
     const { display, results, productName } = this.state;
-    const { productId } = this.props;
+    const { productId, sendInteraction } = this.props;
 
     return (
-      <div onClick={(e) => this.handleClick(e)}>
+      // eslint-disable-next-line max-len
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+      <div onClick={(e) => sendInteraction('Question and Answer', e)}>
         <div className={QACSS.qa_section}>
           <div className={QACSS.qa_body}>
             <h2 data-testid="QA-1">Questions and Answers</h2>
