@@ -1,0 +1,22 @@
+.rating {
+  position: relative;
+  background-color: white;
+  display: inline-flex;
+  justify-content: space-around;
+}
+
+.rating-overlay {
+  background-color: #0ABAB5;
+  opacity: 75%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  mix-blend-mode: color;
+}
+
+.star {
+  color: lightgray;
+  display: flex;
+  justify-content: left;
+}

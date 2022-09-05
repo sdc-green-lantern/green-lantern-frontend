@@ -1,8 +1,9 @@
 import React from 'react';
 import PubSub from 'pubsub-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faRegStar, faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import Stars from '../../Stars/Stars.jsx';
 import card from './Card.module.css';
 import instance from '../../../../../axiosConfig.js';
 
@@ -120,14 +121,7 @@ class Card extends React.Component {
             <span style={{ display: salePrice ? 'inline' : 'none', color: salePrice ? 'red' : 'none' }}>{`$ ${salePrice}`}</span>
             <span style={{ textDecoration: salePrice ? 'line-through' : 'none', color: salePrice ? 'grey' : 'none' }}>{`$ ${originalPrice}`}</span>
           </div>
-          <div className={card.rating}>
-            <div className={card['rating-overlay']} style={{ width: `${averageRating * 20}%` }} />
-            <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
-            <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
-            <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
-            <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
-            <FontAwesomeIcon icon={faStar} size="lg" className={card.star} />
-          </div>
+          <Stars averageRating={averageRating} />
         </div>
       </div>
 
