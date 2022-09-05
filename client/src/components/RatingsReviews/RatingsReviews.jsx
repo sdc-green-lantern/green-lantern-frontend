@@ -1,4 +1,6 @@
 import React from 'react';
+import _ from 'underscore';
+
 import RatingsReviewsCSS from './RatingsReviews.module.css';
 import ReviewsList from './ReviewsList.jsx';
 import MoreReviews from './MoreReviews.jsx';
@@ -21,6 +23,7 @@ class RatingsReviews extends React.Component {
       pctRecommend: '',
       ratingProportions: {},
       ratingCounts: {},
+      selectedRatings: [1, 2, 3, 4, 5],
     };
 
     this.updateReviews = this.updateReviews.bind(this);
@@ -31,6 +34,7 @@ class RatingsReviews extends React.Component {
     this.handleSort = this.handleSort.bind(this);
     this.calculateRatings = this.calculateRatings.bind(this);
     this.calculatePercentRecommend = this.calculatePercentRecommend.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
   }
 
   componentDidMount() {
@@ -170,11 +174,36 @@ class RatingsReviews extends React.Component {
     this.setState({ pctRecommend: `${pctRecommend}%` });
   }
 
+  toggleFilter(event, rating) {
+    console.log(event);
+    console.log(rating);
+
+    let { selectedRatings, displayedReviews } = this.state;
+
+    rating = Number(rating);
+    if (!selectedRatings.includes(rating)) {
+      selectedRatings.push(rating);
+    } else if (selectedRatings.includes(rating)) {
+      selectedRatings = _.filter(selectedRatings, function(num) {return num !== rating} );
+    }
+    if (selectedRatings.length === 0) {
+      selectedRatings = [1, 2, 3, 4, 5];
+    }
+    this.setState({ selectedRatings });
+
+    const filteredDisplayedReviews = _.filter(displayedReviews, function(review) {
+      return selectedRatings.includes(review.rating)
+    });
+    console.log(selectedRatings);
+    console.log(filteredDisplayedReviews);
+    this.setState({ displayedReviews: filteredDisplayedReviews });
+  }
+
   render() {
     const { axiosConfig, IMGBB_API_KEY, productId } = this.props;
     const {
       reviews, displayedReviews, numReviews, numDisplayed, productName, metadata,
-      avgRating, pctRecommend, ratingProportions, ratingCounts,
+      avgRating, pctRecommend, ratingProportions, ratingCounts, selectedRatings,
     } = this.state;
     return (
       <div className={RatingsReviewsCSS.ratings_section}>
@@ -188,6 +217,7 @@ class RatingsReviews extends React.Component {
           </div>
           <div className={RatingsReviewsCSS.ratings_breakdown_sidebar}>
             <RatingsBreakdown
+              toggleFilter={this.toggleFilter}
               productId={productId}
               // metadata={metadata}
               avgRating={avgRating}

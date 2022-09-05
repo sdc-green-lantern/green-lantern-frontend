@@ -15,12 +15,19 @@ export default class RatingsBreakdown extends React.Component {
     const {
       avgRating, pctRecommend,
       ratingProportions, ratingCounts,
+      toggleFilter
     } = this.props;
 
     const ratings = Object.keys(ratingProportions).reverse();
     const proportions = Object.values(ratingProportions).reverse();
     const ratingsBar = ratings.map((rating, index) => (
-      <div key={rating} className={RatingsBreakdownCSS.proportions_box}>
+      <div
+        key={rating}
+        className={RatingsBreakdownCSS.proportions_box}
+        onClick={(e) => toggleFilter(e, rating)}
+        role='button'
+        tabIndex="-1"
+        >
         {`${rating} Stars`}
         {/* {proportions[index]} */}
         <div className={RatingsBreakdownCSS.grey_bar} />

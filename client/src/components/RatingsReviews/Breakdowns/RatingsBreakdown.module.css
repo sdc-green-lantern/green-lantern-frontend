@@ -13,6 +13,8 @@ h1 {
   align-items: top;
 }
 
+
+
 .recommend_box {
   font-style: italic;
 }
@@ -24,6 +26,10 @@ h1 {
   gap: 1em;
   padding-bottom: 0.5em;
   font-weight: bold;
+}
+
+.proportions_box:hover {
+  background-color: grey;
 }
 
 .grey_bar {
