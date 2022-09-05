@@ -8,7 +8,7 @@ import Announcements from './Announcements/Announcements.jsx';
 import ProductInfo from './ProductInfo/ProductInfo.jsx';
 import ProductDescription from './ProductDescription/ProductDescription.jsx';
 
-export default function ProductOverview({ productId }) {
+export default function ProductOverview({ productId, sendInteraction }) {
   const [product, setProduct] = useState({ features: [] });
   const [styles, setStyles] = useState([]);
   const [currentStyles, setCurrentStyles] = useState({});
@@ -42,7 +42,9 @@ export default function ProductOverview({ productId }) {
   }, []);
 
   return (
-    <div className={postyles.productoverview}>
+    // eslint-disable-next-line max-len
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    <div className={postyles.productoverview} onClick={(e) => sendInteraction('Product Overview', e)}>
       <Nav />
       <Announcements />
       <ProductInfo

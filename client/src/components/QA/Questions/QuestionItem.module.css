@@ -9,13 +9,16 @@
 
 }
 
+.container {
+  display: inline-flex;
+}
+
 .interactions {
   position: relative;
-  align-items: right;
 }
 
 .yesHelpful {
-  position: static;
+  position: relative;
   text-decoration: underline;
   width: fit-content;
   height: fit-content;

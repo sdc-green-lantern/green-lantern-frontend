@@ -82,8 +82,8 @@ class QuestionItem extends React.Component {
     const {
       results, showAModal, yesCount, display,
     } = this.state;
-    const { question } = this.props;
-    const { question_body, question_helpfulness, question_id } = question;
+    const { question, productName } = this.props;
+    const { question_body, question_helpfulness } = question;
     if (display.length !== 0) {
       answerDisplay = (
         <AnswerList
@@ -94,37 +94,41 @@ class QuestionItem extends React.Component {
         />
       );
     } else {
-      answerDisplay = <button type="submit" className={QItemCSS.answerQBtn} onClick={() => {}}> Answer this question </button>;
+      answerDisplay = <button type="submit" className={QItemCSS.answerQBtn} onClick={() => { this.setState({ showAModal: true }); }}> Answer this question </button>;
     }
     return (
       <div className={QItemCSS.questionEach}>
-        <span style={{ fontWeight: 'bold' }}>
-          Q:
-          { question_body }
-        </span>
-        <span className={QItemCSS.interactions}>
-          <span className={QItemCSS.helpful}>
-            Helpful?
-            <button
-              type="submit"
-              className={QItemCSS.yesHelpful}
-              onClick={() => { this.addQYes(); }}
-            >
-              Yes
-            </button>
-          </span>
-          <span>
-            {`(${question_helpfulness + yesCount})`}
-          </span>
-          |
-          <span>
-            <button className={QItemCSS.addAnswerBtn} type="submit" onClick={() => { this.setState({ showAModal: true }); }}>Add Answer</button>
-          </span>
-        </span>
+        <div className={QItemCSS.container}>
+          <div style={{ fontWeight: 'bold' }}>
+            Q:
+            { question_body }
+          </div>
+          <div className={QItemCSS.interactions}>
+            <span className={QItemCSS.helpful}>
+              Helpful?
+              <button
+                type="submit"
+                className={QItemCSS.yesHelpful}
+                onClick={() => { this.addQYes(); }}
+              >
+                Yes
+              </button>
+            </span>
+            <span>
+              {`(${question_helpfulness + yesCount})`}
+            </span>
+            |
+            <span>
+              <button className={QItemCSS.addAnswerBtn} type="submit" onClick={() => { this.setState({ showAModal: true }); }}>Add Answer</button>
+            </span>
+          </div>
+        </div>
+
         <div>
           { showAModal && (
           <AnswerModal
-            question_id={question_id}
+            question={question}
+            productName={productName}
             hideModal={() => { this.setState({ showAModal: false }); }}
             getAnswers={this.getAnswers}
             getMoreAnswers={this.getMoreAnswers}
