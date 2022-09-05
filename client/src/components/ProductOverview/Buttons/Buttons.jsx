@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 import buttonStyles from './Buttons.module.css';
 
 export default function Buttons({ currentStyles }) {
-  const [currentSkus, setCurrentSkus] = useState([]);
+  // const [currentSkus, setCurrentSkus] = useState([]);
 
   useEffect(() => {
     // console.log('buttons :: currentStyles... ', currentStyles);
-    console.log('buttons :: currentStyles.skus... ', currentStyles.skus);
-    if (Object.keys(currentStyles).length !== 0) {
-      setCurrentSkus(Object.keys(currentStyles.skus));
-    }
+    // console.log('buttons :: currentStyles.skus... ', currentStyles.skus);
+    // if (Object.keys(currentStyles).length !== 0) {
+    //   setCurrentSkus(Object.keys(currentStyles.skus));
+    // }
   }, [currentStyles]);
 
   return(
     <div className={buttonStyles.buttons}>
       <div className={buttonStyles.quantityRow}>
-        <select className={buttonStyles.selectSize}>
-          <option selected="true" disabled="disabled">Select Size</option>
+        <select className={buttonStyles.selectSize} defaultValue={"default"}>
+          <option value="default" disabled="disabled">Select Size</option>
           {/* {currentSkus.length !== 0 ? currentSkus.map((currentSku, index) => (
             <option className={buttonStyles.selectSize} key={index}>{currentStyles.skus[currentSku].size}</option>
           )) : ''} */}
