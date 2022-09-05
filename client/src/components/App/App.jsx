@@ -4,6 +4,7 @@ import ProductOverview from '../ProductOverview/ProductOverview.jsx';
 import Comparison from '../Comparison/Comparison.jsx';
 import QA from '../QA/QA.jsx';
 import RatingsReviews from '../RatingsReviews/RatingsReviews.jsx';
+import Tracker from './Tracker.jsx';
 import './App.css';
 
 class App extends React.Component {
@@ -35,14 +36,42 @@ class App extends React.Component {
           Current Product Id:
           {productId}
         </p>
-        <ProductOverview productId={productId} />
-        <QA productId={productId} key={productId} />
-        <Comparison productId={productId} updateProductId={this.updateProductId} />
-        <RatingsReviews
-          key={`RR: ${productId}`}
-          axiosConfig={axiosConfig}
-          IMGBB_API_KEY={IMGBB_API_KEY}
-          productId={productId}
+        <Tracker
+          render={(sendInteraction) => (
+            <ProductOverview
+              sendInteraction={sendInteraction}
+              productId={productId}
+            />
+          )}
+        />
+        <Tracker
+          render={(sendInteraction) => (
+            <QA
+              sendInteraction={sendInteraction}
+              productId={productId}
+              key={productId}
+            />
+          )}
+        />
+        <Tracker
+          render={(sendInteraction) => (
+            <Comparison
+              sendInteraction={sendInteraction}
+              productId={productId}
+              updateProductId={this.updateProductId}
+            />
+          )}
+        />
+        <Tracker
+          render={(sendInteraction) => (
+            <RatingsReviews
+              key={`RR: ${productId}`}
+              axiosConfig={axiosConfig}
+              IMGBB_API_KEY={IMGBB_API_KEY}
+              sendInteraction={sendInteraction}
+              productId={productId}
+            />
+          )}
         />
       </div>
     );

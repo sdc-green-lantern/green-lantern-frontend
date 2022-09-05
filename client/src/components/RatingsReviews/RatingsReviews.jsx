@@ -214,13 +214,17 @@ class RatingsReviews extends React.Component {
   }
 
   render() {
-    const { axiosConfig, IMGBB_API_KEY, productId } = this.props;
+    const {
+      axiosConfig, IMGBB_API_KEY, productId, sendInteraction,
+    } = this.props;
     const {
       reviews, displayedReviews, numReviews, numDisplayed, productName, metadata,
       avgRating, pctRecommend, ratingProportions, ratingCounts, selectedRatings,
     } = this.state;
     return (
-      <div className={RatingsReviewsCSS.ratings_section}>
+      // eslint-disable-next-line max-len
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+      <div className={RatingsReviewsCSS.ratings_section} onClick={(e) => sendInteraction('Ratings and Reviews', e)}>
         <div className={RatingsReviewsCSS.ratings_container}>
           <div className={RatingsReviewsCSS.ratings_header} data-testid="RatingsReviews-header">
             RATINGS & REVIEWS
