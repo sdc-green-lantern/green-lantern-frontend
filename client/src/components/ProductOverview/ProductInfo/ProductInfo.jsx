@@ -11,6 +11,26 @@ export default function ProductInfo(props) {
     currentStyles, setCurrentStyles,
   } = props;
 
+  let priceDisplay = (
+    <div>
+      $
+      {currentStyles.original_price}
+    </div>
+  );
+
+  if (currentStyles.sale_price !== null) {
+    priceDisplay = (
+      <span>
+        <strike>
+          $
+          {currentStyles.original_price}
+        </strike>
+        $
+        {currentStyles.sale_price}
+      </span>
+    );
+  }
+
   useEffect(() => {
     //
   }, [product, styles]);
@@ -29,8 +49,9 @@ export default function ProductInfo(props) {
         <div className={piStyles.productTitle}>
           <h3>{product.category}</h3>
           <h1>{product.name}</h1>
-          {currentStyles.sale_price !== null ? <h3 className={piStyles.productPrice}><del>${product.default_price}</del> ${currentStyles.sale_price}</h3> : <h3>${product.default_price}</h3>}
-          {/* {styles[stylesIndex].sale_price !== null ? <h3 className={piStyles.productPrice}><del>${product.default_price}</del> ${styles[stylesIndex].sale_price}</h3> : <h3>${product.default_price}</h3>} */}
+          <h3 className={piStyles.productPrice}>
+            {priceDisplay}
+          </h3>
         </div>
         <Selection
           styles={styles}

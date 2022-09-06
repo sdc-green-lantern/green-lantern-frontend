@@ -35,7 +35,9 @@ export default function ProductOverview({ productId, sendInteraction }) {
     // fetchData('/products/65661/styles')
     fetchData(stylesEndpoint)
       .then((response) => {
+        console.log(response.results);
         setStyles(response.results);
+        console.log(response.results[0]);
         setCurrentStyles(response.results[0]);
       })
       .catch((err) => {

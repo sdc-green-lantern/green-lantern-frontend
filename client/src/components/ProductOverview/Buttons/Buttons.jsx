@@ -1,30 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import buttonStyles from './Buttons.module.css';
 
 export default function Buttons({ currentStyles }) {
-  // const [currentSkus, setCurrentSkus] = useState([]);
+  const [selectedSku, setSkuInfo] = useState({ sku_id: '', quantity: 0 });
+  const [selectedCount, setCount] = useState('1');
+  const arraySkus = [];
+  const currentSkus = currentStyles.skus;
+  let itterate = Array.from({ length: selectedSku.quantity }, (v, k) => k + 1);
 
-  useEffect(() => {
-    // console.log('buttons :: currentStyles... ', currentStyles);
-    // console.log('buttons :: currentStyles.skus... ', currentStyles.skus);
-    // if (Object.keys(currentStyles).length !== 0) {
-    //   setCurrentSkus(Object.keys(currentStyles.skus));
-    // }
-  }, [currentStyles]);
+  // eslint-disable-next-line no-restricted-syntax
+  for (const key in currentSkus) {
+    if (key !== null && currentSkus[key].quantity !== 0) {
+      arraySkus.push(
+        { skuID: key, quantity: currentSkus[key].quantity, size: currentSkus[key].size },
+      );
+    }
+  }
 
-  return(
+  return (
     <div className={buttonStyles.buttons}>
       <div className={buttonStyles.quantityRow}>
-        <select className={buttonStyles.selectSize} defaultValue={"default"}>
+        <select className={buttonStyles.selectSize} defaultValue="default" onChange={(e) => setSkuInfo({ sku_id: e.target.name, quantity: e.target.value })}>
           <option value="default" disabled="disabled">Select Size</option>
-          {/* {currentSkus.length !== 0 ? currentSkus.map((currentSku, index) => (
-            <option className={buttonStyles.selectSize} key={index}>{currentStyles.skus[currentSku].size}</option>
-          )) : ''} */}
+          {arraySkus.length !== 0 && arraySkus.map((skuObj, index) => (
+            <option
+              className={buttonStyles.selectSize}
+              name={skuObj.skuID}
+              value={skuObj.quantity}
+              key={index}
+            >
+              {skuObj.size}
+            </option>
+          ))}
         </select>
-        <select className={buttonStyles.selectQuantity}>
-          {/* {currentStyles.skus[currentSku].quantity.map((currentSku, index) => (
-            <option className={buttonStyles.selectSize} key={index}>{currentStyles.skus[currentSku].size}</option>
-          ))} */}
+        <select className={buttonStyles.selectQuantity} defaultValue="default" onChange={(e) => setCount(e.target.value)}>
+          <option value="default" disabled="disabled">Quantity</option>
+          {itterate.map((number, index) => (
+            <option
+              className={buttonStyles.selectQuantity}
+              key={index}
+            >
+              {number}
+            </option>
+          ))}
         </select>
       </div>
       <div className={buttonStyles.checkoutRow}>

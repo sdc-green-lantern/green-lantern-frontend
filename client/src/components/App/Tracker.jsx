@@ -13,16 +13,15 @@ class Tracker extends React.Component {
   }
 
   sendInteraction = (module, e) => {
-    console.log(e.target.localName, module, e.timeStamp);
     this.setState({
       element: e.target.localName,
       widget: module,
       time: String(e.timeStamp),
     }, () => {
       axiosConfig.post('/interactions', this.state)
-        .then((response) => {
-          console.log(response);
-        })
+        // .then((response) => {
+        //   console.log(response);
+        // })
         .catch((err) => {
           console.log(err);
         });

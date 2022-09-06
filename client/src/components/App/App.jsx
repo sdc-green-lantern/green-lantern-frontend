@@ -41,6 +41,7 @@ class App extends React.Component {
             <ProductOverview
               sendInteraction={sendInteraction}
               productId={productId}
+              key={productId}
             />
           )}
         />
