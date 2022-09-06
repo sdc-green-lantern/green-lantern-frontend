@@ -30,12 +30,16 @@ h1 {
   background-color: gold;
 }
 
-.grey_bar {
+.ratings_bar {
+  position: relative;
   border: 1px solid black;
-  background-color: darkgrey;
+  background-color: lightgrey;
   width: 70%;
   height: 80%;
 }
 
-
-
+.ratings_bar_overlay {
+  background-color: green;
+  position: absolute;
+  height: 100%;
+}

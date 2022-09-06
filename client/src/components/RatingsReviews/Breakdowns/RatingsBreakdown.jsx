@@ -30,7 +30,12 @@ export default class RatingsBreakdown extends React.Component {
       >
         {`${rating} Stars`}
         {/* {proportions[index]} */}
-        <div className={RatingsBreakdownCSS.grey_bar} />
+        <div className={RatingsBreakdownCSS.ratings_bar}>
+          <span
+            className={RatingsBreakdownCSS.ratings_bar_overlay}
+            style={{ width: `${Math.round(100*proportions[index])}%` }}
+          />
+        </div>
       </div>
     ));
 
