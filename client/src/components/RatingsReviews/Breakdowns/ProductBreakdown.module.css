@@ -1,0 +1,6 @@
+.breakdown_container {
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+  padding: 0.5em 0.5em;
+}

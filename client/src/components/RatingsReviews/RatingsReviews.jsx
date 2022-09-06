@@ -25,6 +25,14 @@ class RatingsReviews extends React.Component {
       ratingProportions: {},
       ratingCounts: {},
       selectedRatings: [],
+      featureRatings: {
+        Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
+        Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+        Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+        Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+        Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+        Fit: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+      },
     };
 
     this.updateReviews = this.updateReviews.bind(this);
@@ -156,7 +164,7 @@ class RatingsReviews extends React.Component {
   }
 
   calculateRatings(metadata) {
-    console.log("Metadata Ratings: ", metadata.ratings);
+    // console.log("Metadata Ratings: ", metadata.ratings);
     const ratings = [1, 2, 3, 4, 5];
     // const counts = Object.values(metadata.ratings);
     // console.log(metadata.ratings);
@@ -215,6 +223,7 @@ class RatingsReviews extends React.Component {
     const {
       reviews, displayedReviews, numReviews, numDisplayed, productName, metadata,
       avgRating, pctRecommend, ratingProportions, ratingCounts, selectedRatings,
+      featureRatings,
     } = this.state;
     return (
       // eslint-disable-next-line max-len
@@ -242,7 +251,10 @@ class RatingsReviews extends React.Component {
             />
           </div>
           <div className={RatingsReviewsCSS.product_breakdown_sidebar}>
-            <ProductBreakdown />
+            <ProductBreakdown
+              // productId={productId}
+              characteristics={metadata.characteristics}
+            />
           </div>
           <div className={RatingsReviewsCSS.sort_options}>
             <SortOptions
@@ -274,6 +286,7 @@ class RatingsReviews extends React.Component {
               productId={productId}
               characteristics={metadata.characteristics}
               updateReviews={this.updateReviews}
+              featureRatings={featureRatings}
             />
           </div>
         </div>
