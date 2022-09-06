@@ -1,5 +1,4 @@
 import React from 'react';
-import ProductList from './ProductList/ProductList.jsx';
 // eslint-disable-next-line import/extensions
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 // eslint-disable-next-line import/extensions

@@ -12,6 +12,7 @@ import Modal from './Modal/Modal.jsx';
 export default function ProductOverview({ productId, sendInteraction }) {
   const [product, setProduct] = useState({ features: [] });
   const [styles, setStyles] = useState([]);
+  // const [stylesIndex, setStylesIndex] = useState(0);
   const [currentStyles, setCurrentStyles] = useState({});
 
   const [showModal, setShowModal] = useState(false);
@@ -25,7 +26,7 @@ export default function ProductOverview({ productId, sendInteraction }) {
       return response.data;
     };
 
-    // fetchData('/products/65640')
+    // fetchData('/products/65661')
     fetchData(productEndpoint)
       .then((response) => {
         setProduct(response);
@@ -34,9 +35,12 @@ export default function ProductOverview({ productId, sendInteraction }) {
         console.error(err);
       });
 
+    // fetchData('/products/65661/styles')
     fetchData(stylesEndpoint)
       .then((response) => {
+        console.log(response.results);
         setStyles(response.results);
+        console.log(response.results[0]);
         setCurrentStyles(response.results[0]);
       })
       .catch((err) => {
@@ -46,6 +50,7 @@ export default function ProductOverview({ productId, sendInteraction }) {
 
   return (
     // eslint-disable-next-line max-len
+<<<<<<< HEAD
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interaction
     <>
       {showModal && <Modal currentStyles={currentStyles} setShowModal={setShowModal} />}
@@ -63,5 +68,22 @@ export default function ProductOverview({ productId, sendInteraction }) {
         <ProductDescription product={product} />
       </div>
     </>
+=======
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    <div className={postyles.productoverview} onClick={(e) => sendInteraction('Product Overview', e)}>
+      <Nav />
+      <Announcements />
+      <ProductInfo
+        productId={productId}
+        product={product}
+        styles={styles}
+        // stylesIndex={stylesIndex}
+        // setStyleIndex={setStylesIndex}
+        currentStyles={currentStyles}
+        setCurrentStyles={setCurrentStyles}
+      />
+      <ProductDescription product={product} />
+    </div>
+>>>>>>> master
   );
 }

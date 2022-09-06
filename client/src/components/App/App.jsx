@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 65635, // Pugs: 65633 // Shoes: 65635
+      productId: 65635, // Pugs: 65633 // Shoes: 65635 //sales price: 65661
     };
     this.updateProductId = this.updateProductId.bind(this);
   }
@@ -31,6 +31,7 @@ class App extends React.Component {
           <option value="65635">65635</option>
           <option value="65640">65640</option>
           <option value="65630">65630</option>
+          <option value="65661">65661</option>
         </select>
         <p id="id-display">
           Current Product Id:
@@ -41,6 +42,7 @@ class App extends React.Component {
             <ProductOverview
               sendInteraction={sendInteraction}
               productId={productId}
+              key={productId}
             />
           )}
         />

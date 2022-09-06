@@ -49,11 +49,11 @@ class Modal extends React.Component {
             features,
           });
         } catch (err) {
-          console.log(err);
+          console.log(err.response.data);
         }
       });
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data);
     }
   }
 
