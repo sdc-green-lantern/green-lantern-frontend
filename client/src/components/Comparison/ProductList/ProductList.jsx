@@ -37,7 +37,6 @@ class ProductList extends React.Component {
 
   scroll = (distance) => {
     if (this.timer) {
-      console.log('still have timer', this.timer);
       return;
     }
 
@@ -48,10 +47,11 @@ class ProductList extends React.Component {
       const { leftOffset } = this.state;
       let newLeftOffset = leftOffset + speed;
       if ((newLeftOffset >= end && speed > 0) || (newLeftOffset <= end && speed < 0)) {
-        console.log('hit end');
         newLeftOffset = end;
         clearInterval(this.timer);
+        this.timer = null;
       }
+
       this.setState({ leftOffset: newLeftOffset }, this.setRightScrollerDisplay);
     }, unitDuration);
   };
