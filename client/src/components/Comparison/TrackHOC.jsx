@@ -1,7 +1,7 @@
 import React from 'react';
 import axiosConfig from '../../../../axiosConfig.js';
 
-const sendData = (module, e) => {
+export const sendData = (module, e) => {
   // console.log(e.target.localName, module, e.timeStamp);
   const state = {
     element: e.target.localName,
