@@ -29,7 +29,6 @@
   color: black;
 }
 .image {
-  display: block;
   cursor: crosshair;
   height: 88vh;
   max-width: 100%;
@@ -56,4 +55,9 @@
   cursor: pointer;
   width: 5vw;
   height: 10vh;
+}
+.zoom {
+  display: flex;
+  align-items: center;
+  overflow: scroll;
 }

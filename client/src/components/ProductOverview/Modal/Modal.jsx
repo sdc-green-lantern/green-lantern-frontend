@@ -6,6 +6,8 @@ export default function Modal({ currentStyles, setShowModal }) {
   const [currentImage, setCurrentImage] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const [magnify, setMagnify] = useState(false);
+
   useEffect(() => {
     //
     if (Object.keys(currentStyles).length !== 0) {
@@ -36,6 +38,10 @@ export default function Modal({ currentStyles, setShowModal }) {
     setCurrentImage(productImages[index].url);
   };
 
+  const handleMagnify = () => {
+    setMagnify(!magnify);
+  };
+
   return(
     <>
       <button
@@ -46,7 +52,10 @@ export default function Modal({ currentStyles, setShowModal }) {
       <div className={modalStyles.modal}>
           <div className={modalStyles.imgContainer}>
             {currentIndex === 0 ? <div className={modalStyles.leftArrow}></div> : <div className={modalStyles.leftArrow} onClick={handlePreviousImg}>❮</div>}
-            <img className={modalStyles.image} src={currentImage} />
+            {/* IMAGE */}
+            <div className={modalStyles.zoom}>
+              {magnify ? <img className={modalStyles.image} src={currentImage} style={{ transform: 'scale(2.5)' }} onClick={() => {handleMagnify()}}/> : <img className={modalStyles.image} src={currentImage} onClick={() => {handleMagnify()}}/>}
+            </div>
             {currentIndex === productImages.length - 1 ? <div className={modalStyles.rightArrow}></div> : <div className={modalStyles.rightArrow} onClick={handleNextImg}>❯</div>}
           </div>
         <div className={modalStyles.thumbnailRow}>

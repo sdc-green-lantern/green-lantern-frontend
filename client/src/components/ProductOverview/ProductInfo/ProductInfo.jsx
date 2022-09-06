@@ -21,10 +21,11 @@ export default function ProductInfo(props) {
   if (currentStyles.sale_price !== null) {
     priceDisplay = (
       <span>
-        <strike>
+        <del>
           $
           {currentStyles.original_price}
-        </strike>
+        </del>
+        &nbsp;
         $
         {currentStyles.sale_price}
       </span>
