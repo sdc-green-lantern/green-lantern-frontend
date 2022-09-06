@@ -1,83 +1,30 @@
 .related-products {
+  position: relative;
   width: 70%;
   height: 300px;
   margin-bottom: 10px;
 }
 
-.main{
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.carousel{
-  z-index: 1;
-  overflow: hidden;
-  width:100%;
-  display: flex;
-  align-items: center;
-}
-
-.carousel-wrapper{
-  white-space: nowrap;
-  position: relative;
-  width: auto;
-  display: flex;
-  align-items: center;
-}
-
-
-.scroll-left{
-  z-index: 2;
+.loading {
   position: absolute;
-  left: 20px;
-  width:30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.scroll-right{
-  z-index: 3;
-  position: absolute;
-  right: 20px;
-  width:30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-button{
-  position: absolute;
-  height: 60px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   width: 50px;
-  opacity: 0.3;
-  border-radius: 10%;
+  height: 50px;
+  margin: auto;
+  color: grey;
 }
 
-.arrow-left{
-  box-sizing: border-box;
-  width: 20px;
-  height: 20px;
-  border: solid lightgray;
-  border-width: 0 6px 6px 0;
-  transform: rotate(135deg);
-  display: inline-block;
+.error {
   position: absolute;
-  left:8px
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  max-width: 400px;
+  margin: auto;
+  color: grey;
 }
-
-.arrow-right{
-  box-sizing: border-box;
-  width: 20px;
-  height: 20px;
-  border: solid lightgray;
-  border-width: 0 6px 6px 0;
-  transform: rotate(-45deg);
-  display: inline-block;
-  position: absolute;
-  right: 8px
-}
-
