@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axiosConfig from '../../../../../axiosConfig.js';
 import buttonStyles from './Buttons.module.css';
 
 export default function Buttons({ currentStyles }) {
@@ -22,20 +23,36 @@ export default function Buttons({ currentStyles }) {
     defaultSize = 'OUT OF STOCK';
   }
 
-  const sendToCart = () => {
+  const handleChange = (e) => {
+    for (let i = 0; i < arraySkus.length; i += 1) {
+      if (arraySkus[i].skuID === e.target.value) {
+        setSkuInfo({ sku_id: arraySkus[i].skuID, quantity: arraySkus[i].quantity });
+        break;
+      }
+    }
+  };
 
-  }
+  const sendToCart = () => {
+    for (let i = 0; i < selectedCount; i += 1) {
+      axiosConfig.post('/cart', { sku_id: selectedSku.sku_id })
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
   return (
     <div className={buttonStyles.buttons}>
       <div className={buttonStyles.quantityRow}>
-        <select className={buttonStyles.selectSize} defaultValue="default" onChange={(e) => setSkuInfo({ sku_id: e.target.name, quantity: e.target.value })}>
+        <select className={buttonStyles.selectSize} defaultValue="default" onChange={(e) => handleChange(e)}>
           <option value="default" disabled="disabled">{defaultSize}</option>
           {arraySkus.map((skuObj, index) => (
             <option
               className={buttonStyles.selectSize}
-              name={skuObj.skuID}
-              value={skuObj.quantity}
+              value={skuObj.skuID}
               key={index}
             >
               {skuObj.size}
@@ -57,7 +74,7 @@ export default function Buttons({ currentStyles }) {
       </div>
       <div className={buttonStyles.checkoutRow}>
         {arraySkus.length !== 0 && (
-        <button type="submit" className={buttonStyles.addToBag}>
+        <button type="submit" className={buttonStyles.addToBag} onClick={sendToCart}>
           ADD TO BAG
         </button>
         )}
