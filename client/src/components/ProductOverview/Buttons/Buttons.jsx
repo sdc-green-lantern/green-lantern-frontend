@@ -19,35 +19,34 @@ export default function Buttons({ currentStyles }) {
 
   return (
     <div className={buttonStyles.buttons}>
-      { arraySkus.length !== 0 && (
-        <div className={buttonStyles.quantityRow}>
-          <select className={buttonStyles.selectSize} defaultValue="default" onChange={(e) => setSkuInfo({ sku_id: e.target.name, quantity: e.target.value })}>
-            <option value="default" disabled="disabled">Select Size</option>
-            {arraySkus.map((skuObj, index) => (
-              <option
-                className={buttonStyles.selectSize}
-                name={skuObj.skuID}
-                value={skuObj.quantity}
-                key={index}
-              >
-                {skuObj.size}
-              </option>
-            ))}
-          </select>
-          <select className={buttonStyles.selectQuantity} defaultValue="default" onChange={(e) => setCount(e.target.value)}>
-            <option value="default" disabled="disabled">-</option>
-            {(itterate.slice(0, selectedSku.quantity)).map((number, index) => (
-              <option
-                className={buttonStyles.selectQuantity}
-                value={number}
-                key={index}
-              >
-                {number}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
+      <div className={buttonStyles.quantityRow}>
+        {arraySkus.length === 0 && <div>OUT OF STOCK</div>}
+        <select className={buttonStyles.selectSize} defaultValue="default" onChange={(e) => setSkuInfo({ sku_id: e.target.name, quantity: e.target.value })}>
+          <option value="default" disabled="disabled">Select Size</option>
+          {arraySkus.map((skuObj, index) => (
+            <option
+              className={buttonStyles.selectSize}
+              name={skuObj.skuID}
+              value={skuObj.quantity}
+              key={index}
+            >
+              {skuObj.size}
+            </option>
+          ))}
+        </select>
+        <select className={buttonStyles.selectQuantity} defaultValue="1" onChange={() => console.log(selectedSku.sku_id, selectedSku.quantity)}>
+          {selectedSku.quantity === 0 ? <option value="1" disabled="disabled">-</option> : <option value="1">1</option>}
+          {(itterate.slice(1, selectedSku.quantity)).map((number, index) => (
+            <option
+              className={buttonStyles.selectQuantity}
+              value={number}
+              key={index}
+            >
+              {number}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className={buttonStyles.checkoutRow}>
         <div className={buttonStyles.addToBag}>
           <p>add to bag</p>
