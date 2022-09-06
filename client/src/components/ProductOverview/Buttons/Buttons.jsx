@@ -6,7 +6,7 @@ export default function Buttons({ currentStyles }) {
   const [selectedCount, setCount] = useState('1');
   const arraySkus = [];
   const currentSkus = currentStyles.skus;
-  const itterate = Array.from({ length: selectedSku.quantity }, (v, k) => k + 1) || [1];
+  const itterate = Array.from({ length: 15 }, (v, k) => k + 1);
 
   // eslint-disable-next-line no-restricted-syntax, guard-for-in
   for (const key in currentSkus) {
@@ -34,8 +34,9 @@ export default function Buttons({ currentStyles }) {
               </option>
             ))}
           </select>
-          <select className={buttonStyles.selectQuantity} defaultValue="1" onChange={(e) => setCount(e.target.value)}>
-            {itterate.map((number, index) => (
+          <select className={buttonStyles.selectQuantity} defaultValue="default" onChange={(e) => setCount(e.target.value)}>
+            <option value="default" disabled="disabled">-</option>
+            {(itterate.slice(0, selectedSku.quantity)).map((number, index) => (
               <option
                 className={buttonStyles.selectQuantity}
                 value={number}
