@@ -7,6 +7,7 @@ import MoreReviews from './MoreReviews.jsx';
 import SortOptions from './SortOptions.jsx';
 import NewReview from './NewReview.jsx';
 import RatingsBreakdown from './Breakdowns/RatingsBreakdown.jsx';
+import ProductBreakdown from './Breakdowns/ProductBreakdown.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
@@ -241,7 +242,7 @@ class RatingsReviews extends React.Component {
             />
           </div>
           <div className={RatingsReviewsCSS.product_breakdown_sidebar}>
-            <p>Product Breakdown</p>
+            <ProductBreakdown />
           </div>
           <div className={RatingsReviewsCSS.sort_options}>
             <SortOptions
