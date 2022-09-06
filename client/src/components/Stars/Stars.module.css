@@ -6,17 +6,17 @@
 }
 
 .rating-overlay {
-  background-color: #0ABAB5;
-  opacity: 75%;
+  background-color: black;
+  /* opacity: 100%; */
   position: absolute;
   left: 0;
   top: 0;
   height: 100%;
-  mix-blend-mode: color;
+  mix-blend-mode: overlay;
 }
 
 .star {
-  color: lightgray;
+  color: lightgrey;
   display: flex;
   justify-content: left;
 }
