@@ -13,8 +13,6 @@ h1 {
   align-items: center;
 }
 
-
-
 .recommend_box {
   font-style: italic;
 }
@@ -39,49 +37,5 @@ h1 {
   height: 100%;
 }
 
-.rating {
-  position: relative;
-  background-color: red;
-  display: inline-flex;
-  justify-content: space-around;
-}
 
-.rating_overlay {
-  background-color: #0ABAB5;
-  opacity: 75%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  mix-blend-mode: color;
-}
 
-.star {
-  color: lightgray;
-  display: flex;
-  justify-content: left;
-  /* font-size: 28; */
-}
-
-/* .rating {
-  position: relative;
-  background-color: white;
-  display: inline-flex;
-  justify-content: space-around;
-}
-
-.rating-overlay {
-  background-color: #0ABAB5;
-  opacity: 75%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  mix-blend-mode: color;
-}
-
-.star {
-  color: lightgray;
-  display: flex;
-  justify-content: left;
-} */

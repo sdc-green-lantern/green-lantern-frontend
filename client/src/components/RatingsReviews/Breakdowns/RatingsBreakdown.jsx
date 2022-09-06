@@ -47,24 +47,6 @@ export default class RatingsBreakdown extends React.Component {
             <h1>{avgRating}</h1>
           </div>
           <Stars averageRating={avgRating} />
-          {/*
-          <div className={RatingsBreakdownCSS.rating}>
-            <div
-              className={RatingsBreakdownCSS.rating_overlay}
-              style={{ width: `${avgRating * 20}%` }}
-            />
-            <div className={RatingsBreakdownCSS.star}>☆</div>
-              <div className={RatingsBreakdownCSS.star}>☆</div>
-              <div className={RatingsBreakdownCSS.star}>☆</div>
-              <div className={RatingsBreakdownCSS.star}>☆</div>
-              <div className={RatingsBreakdownCSS.star}>☆</div>
-            <FontAwesomeIcon icon={faStar} size="lg" className={RatingsBreakdownCSS.star} />
-            <FontAwesomeIcon icon={faStar} size="lg" className={RatingsBreakdownCSS.star} />
-            <FontAwesomeIcon icon={faStar} size="lg" className={RatingsBreakdownCSS.star} />
-            <FontAwesomeIcon icon={faStar} size="lg" className={RatingsBreakdownCSS.star} />
-            <FontAwesomeIcon icon={faStar} size="lg" className={RatingsBreakdownCSS.star} />
-          </div>
-          */}
         </div>
         <div className={RatingsBreakdownCSS.recommmend_box}>
           <p>{`${pctRecommend} of reviews recommend this product.`}</p>
@@ -84,11 +66,10 @@ export default class RatingsBreakdown extends React.Component {
               />
             </>
           )
-          :
-          (<></>)
+            : (<></>)
           }
         </div>
-      </div >
+      </div>
     );
   }
 }
