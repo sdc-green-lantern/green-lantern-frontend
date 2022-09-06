@@ -17,18 +17,38 @@ export default function Modal({ currentStyles, setShowModal }) {
     }
   }, [currentStyles, productImages]);
 
+  const handlePreviousImg = () => {
+    const isFirst = currentIndex === 0;
+    const newIndex = isFirst ? productImages.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+    setCurrentImage(productImages[newIndex].url);
+  };
+
+  const handleNextImg = () => {
+    const isLast = currentIndex === productImages.length - 1;
+    const newIndex = isLast ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+    setCurrentImage(productImages[newIndex].url);
+  };
+
   const handleThumbnailClick = (index) => {
     setCurrentIndex(index);
     setCurrentImage(productImages[index].url);
-    // console.log('thumbclick/index... ', index);
-    // console.log('thumbclick/currentImg... ', productImages[index].url);
   };
 
   return(
     <>
-      <button className={modalStyles.button} onClick={() => {setShowModal(false)}}>X</button>
+      <button
+        className={modalStyles.button}
+        onClick={() => {setShowModal(false)}}>
+        <span>X</span>
+      </button>
       <div className={modalStyles.modal}>
-        <img className={modalStyles.image} src={currentImage} />
+          <div className={modalStyles.imgContainer}>
+            {currentIndex === 0 ? <div className={modalStyles.leftArrow}></div> : <div className={modalStyles.leftArrow} onClick={handlePreviousImg}>❮</div>}
+            <img className={modalStyles.image} src={currentImage} />
+            {currentIndex === productImages.length - 1 ? <div className={modalStyles.rightArrow}></div> : <div className={modalStyles.rightArrow} onClick={handleNextImg}>❯</div>}
+          </div>
         <div className={modalStyles.thumbnailRow}>
           {productImages.map((productImage, index) => (
             <div className={modalStyles.thumbs} onClick={() => {handleThumbnailClick(index)}} key={index} id={index} productimage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})` }} />))}
@@ -37,9 +57,3 @@ export default function Modal({ currentStyles, setShowModal }) {
     </>
   );
 }
-
-{/* <div className={carouselstyles.imageGallery} style={{ backgroundImage: `url(${currentImage})` }}>
-<div className={carouselstyles.thumbnailRow}>
-  {productImages.map((productImage, index) => (
-    <div className={carouselstyles.thumbnail} onClick={() => {handleThumbnailClick(index)}} key={index} id={index} productimage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})` }} />))}
-</div> */}
