@@ -10,46 +10,56 @@ class ProductList extends React.Component {
     leftOffset: 0,
   };
 
+  // proudctlist of related product will remount each time the productId changes
   componentDidMount() {
-    const result = this.shouldRightScrollerDisplay();
-    const { isRightScrollerShown } = this.state;
-    if (isRightScrollerShown !== result) {
-      this.setState({
-        isRightScrollerShown: result,
-      });
+    window.addEventListener('resize', this.resizeHandler);
+    this.setRightScrollerDisplay();
+    this.setState({ leftOffset: 0 });
+  }
+
+  componentDidUpdate(prevProps) {
+    const { productsIdToDisplay: prevProducts } = prevProps;
+    const { productsIdToDisplay: currProducts } = this.props;
+    const { listType } = this.props;
+    // add a new product to your product list
+    if (listType === 'YourProducts' && prevProducts !== currProducts) {
+      this.setRightScrollerDisplay();
     }
   }
 
-  // When updated,
-  // check the listtype and if the product id changed, reset the display list to the left
-  // check if the right scroller should display
-  componentDidUpdate(prevProps, prevState) {
-    const { isRightScrollerShown: prevRightScroller } = prevState;
-    const { productId: prevId } = prevProps;
-    const { productId: currId, listType } = this.props;
-
-    if (prevId !== currId && listType === 'RelatedProducts') {
-      this.setState({ leftOffset: 0 });
-    }
-
-    const result = this.shouldRightScrollerDisplay();
-    if (prevRightScroller !== result) {
-      this.setState({
-        isRightScrollerShown: result,
-      });
-    }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resizeHandler);
   }
+
+  resizeHandler = () => {
+    this.setRightScrollerDisplay();
+  };
+
+  scroll = (distance) => {
+    if (this.timer) {
+      return;
+    }
+
+    const end = this.state.leftOffset + distance;
+    const speed = distance < 0 ? -10 : 10;
+    const unitDuration = 30;
+    this.timer = setInterval(() => {
+      const { leftOffset } = this.state;
+      let newLeftOffset = leftOffset + speed;
+      if ((newLeftOffset >= end && speed > 0) || (newLeftOffset <= end && speed < 0)) {
+        newLeftOffset = end;
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+
+      this.setState({ leftOffset: newLeftOffset }, this.setRightScrollerDisplay);
+    }, unitDuration);
+  };
 
   // scroll button click handler
-  handleScroll = (isRight) => async () => {
-    const unitOffset = isRight ? -192 : 192;
-    const { leftOffset } = this.state;
-    await new Promise((resolve) => {
-      this.setState({
-        leftOffset: leftOffset + unitOffset,
-      }, resolve);
-    });
-    this.shouldRightScrollerDisplay();
+  handleScroll = (isRight) => () => {
+    const unitOffset = isRight ? -190 : 190;
+    this.scroll(unitOffset);
   };
 
   // if the right edge of the carousel is inside the container
@@ -61,6 +71,16 @@ class ProductList extends React.Component {
 
     const result = (wrapperWidth + leftOffset > conainerWidth);
     return result;
+  };
+
+  setRightScrollerDisplay = () => {
+    const result = this.shouldRightScrollerDisplay();
+    const { isRightScrollerShown } = this.state;
+    if (isRightScrollerShown !== result) {
+      this.setState({
+        isRightScrollerShown: result,
+      });
+    }
   };
 
   render() {
