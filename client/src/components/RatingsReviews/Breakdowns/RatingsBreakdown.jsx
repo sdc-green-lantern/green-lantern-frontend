@@ -20,6 +20,7 @@ export default class RatingsBreakdown extends React.Component {
 
     const ratings = Object.keys(ratingProportions).reverse();
     const proportions = Object.values(ratingProportions).reverse();
+    console.log(ratingCounts);
     const ratingsBar = ratings.map((rating, index) => (
       <div
         key={rating}
@@ -33,9 +34,10 @@ export default class RatingsBreakdown extends React.Component {
         <div className={RatingsBreakdownCSS.ratings_bar}>
           <span
             className={RatingsBreakdownCSS.ratings_bar_overlay}
-            style={{ width: `${Math.round(100*proportions[index])}%` }}
+            style={{ width: `${Math.round(100 * proportions[index])}%` }}
           />
         </div>
+        {`${ratingCounts[rating] !== undefined ? ratingCounts[rating] : 0}`}
       </div>
     ));
 

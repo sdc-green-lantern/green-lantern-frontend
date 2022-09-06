@@ -155,24 +155,29 @@ class RatingsReviews extends React.Component {
   }
 
   calculateRatings(metadata) {
-    // console.log("Metadata Ratings: ", metadata);
-    const ratings = Object.keys(metadata.ratings);
-    const counts = Object.values(metadata.ratings);
+    console.log("Metadata Ratings: ", metadata.ratings);
+    const ratings = [1, 2, 3, 4, 5];
+    // const counts = Object.values(metadata.ratings);
+    // console.log(metadata.ratings);
     const ratingProportions = {};
     let denominator = 0;
     let numerator = 0;
     for (let i = 0; i < ratings.length; i++) {
-      denominator += Number(counts[i]);
-      numerator += Number(ratings[i]) * Number(counts[i]);
+      const rating = ratings[i];
+      const count = metadata.ratings[rating] !== undefined ? metadata.ratings[rating] : 0;
+      denominator += Number(count);
+      numerator += Number(rating) * Number(count);
     }
     for (let i = 0; i < ratings.length; i++) {
-      const key = ratings[i];
-      ratingProportions[key] = Number(counts[i]) / denominator;
+      const rating = ratings[i];
+      const count = metadata.ratings[rating] !== undefined ? metadata.ratings[rating] : 0;
+      ratingProportions[rating] = Number(count) / denominator;
     }
+    // console.log(numerator, denominator);
     const avgRating = Math.round(10 * (numerator / denominator)) / 10;
     // console.log("Average Rating: ", avgRating);
     // console.log("Average Rating: ", ratingProportions);
-    this.setState({ avgRating, ratingProportions, ratingCounts: ratings });
+    this.setState({ avgRating, ratingProportions, ratingCounts: metadata.ratings });
   }
 
   calculatePercentRecommend(metadata) {

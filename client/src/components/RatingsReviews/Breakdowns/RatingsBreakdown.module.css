@@ -20,7 +20,8 @@ h1 {
 .proportions_box {
   display: flex;
   flex-direction: row;
-  height: 1rem;
+  align-items: center;
+  height: 2rem;
   gap: 1em;
   padding-bottom: 0.5em;
   font-weight: bold;
