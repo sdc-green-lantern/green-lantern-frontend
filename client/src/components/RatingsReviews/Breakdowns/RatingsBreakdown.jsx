@@ -43,10 +43,10 @@ export default class RatingsBreakdown extends React.Component {
 
     const filters = selectedRatings.map((num) => {
       return (
-        <div>
+        <div className={RatingsBreakdownCSS.filter_row}>
           {`- ${num} Stars`}
-          <br />
-          <br />
+          {/* <br />
+          <br /> */}
         </div>
       );
     });
@@ -65,12 +65,12 @@ export default class RatingsBreakdown extends React.Component {
         <div>
           {ratingsBar}
         </div>
-        <div>
+        <div className={RatingsBreakdownCSS.filters}>
           {selectedRatings.length > 0 ? (
             <>
               Filters applied. Displaying reviews with:
-              <br />
-              <br />
+              {/* <br />
+              <br /> */}
               {filters}
               <input
                 type="submit"
