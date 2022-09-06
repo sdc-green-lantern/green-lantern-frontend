@@ -7,11 +7,14 @@ import Nav from './Nav/Nav.jsx';
 import Announcements from './Announcements/Announcements.jsx';
 import ProductInfo from './ProductInfo/ProductInfo.jsx';
 import ProductDescription from './ProductDescription/ProductDescription.jsx';
+import Modal from './Modal/Modal.jsx';
 
 export default function ProductOverview({ productId, sendInteraction }) {
   const [product, setProduct] = useState({ features: [] });
   const [styles, setStyles] = useState([]);
   const [currentStyles, setCurrentStyles] = useState({});
+
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const productEndpoint = `/products/${productId}`;
@@ -43,7 +46,7 @@ export default function ProductOverview({ productId, sendInteraction }) {
 
   return (
     // eslint-disable-next-line max-len
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interaction
     <div className={postyles.productoverview} onClick={(e) => sendInteraction('Product Overview', e)}>
       <Nav />
       <Announcements />
@@ -53,6 +56,7 @@ export default function ProductOverview({ productId, sendInteraction }) {
         styles={styles}
         currentStyles={currentStyles}
         setCurrentStyles={setCurrentStyles}
+        setShowModal={setShowModal}
       />
       <ProductDescription product={product} />
     </div>

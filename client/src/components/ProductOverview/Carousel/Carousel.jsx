@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import carouselstyles from './Carousel.module.css';
 
-export default function Carousel({ currentStyles }) {
+export default function Carousel({ currentStyles, setShowModal }) {
   const [productImages, setProductImages] = useState([]);
   const [currentImage, setCurrentImage] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -55,7 +55,10 @@ export default function Carousel({ currentStyles }) {
         {currentIndex === 0 ? <div className={carouselstyles.leftArrow}></div> : <div className={carouselstyles.leftArrow} onClick={handlePreviousImg}>❮</div>}
         {currentIndex === productImages.length - 1 ? <div className={carouselstyles.rightArrow}></div> : <div className={carouselstyles.rightArrow} onClick={handleNextImg}>❯</div>}
       </div>
-      <div className={carouselstyles.lightbox} />
+      <div
+        className={carouselstyles.lightbox}
+        onClick={() => {setShowModal(true)}}
+      />
     </div>
   );
 }

@@ -7,7 +7,7 @@ import Selection from '../Selection/Selection.jsx';
 
 export default function ProductInfo(props) {
   const {
-    product, styles,
+    product, styles, setShowModal,
     currentStyles, setCurrentStyles,
   } = props;
 
@@ -20,6 +20,7 @@ export default function ProductInfo(props) {
       <Carousel
         data-testid="Carousel"
         currentStyles={currentStyles}
+        setShowModal={setShowModal}
       />
       <div className={piStyles.productoptions}>
         <div className={piStyles.starRatings}><span>Read all reviews</span></div>
