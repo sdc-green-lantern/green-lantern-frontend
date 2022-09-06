@@ -11,20 +11,14 @@ class ProductList extends React.Component {
   };
 
   componentDidMount() {
-    const result = this.shouldRightScrollerDisplay();
-    const { isRightScrollerShown } = this.state;
-    if (isRightScrollerShown !== result) {
-      this.setState({
-        isRightScrollerShown: result,
-      });
-    }
+    window.addEventListener('resize', this.resizeHandler);
+    this.setRightScrollerDisplay();
   }
 
   // When updated,
   // check the listtype and if the product id changed, reset the display list to the left
   // check if the right scroller should display
-  componentDidUpdate(prevProps, prevState) {
-    const { isRightScrollerShown: prevRightScroller } = prevState;
+  componentDidUpdate(prevProps) {
     const { productId: prevId } = prevProps;
     const { productId: currId, listType } = this.props;
 
@@ -32,30 +26,37 @@ class ProductList extends React.Component {
       this.setState({ leftOffset: 0 });
     }
 
-    const result = this.shouldRightScrollerDisplay();
-    if (prevRightScroller !== result) {
-      this.setState({
-        isRightScrollerShown: result,
-      });
-    }
+    this.setRightScrollerDisplay();
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resizeHandler);
+  }
+
+  resizeHandler = () => {
+    this.setRightScrollerDisplay();
+  };
+
   scroll = (distance) => {
+    if (this.timer) {
+      return;
+    }
     const duration = 800;
     const steps = 40;
     const unitDist = distance / steps;
     const unitDuration = duration / steps;
-    const interval = setInterval(() => {
+    this.timer = setInterval(() => {
       const { leftOffset } = this.state;
       this.setState({ leftOffset: leftOffset + unitDist });
     }, unitDuration);
     setTimeout(() => {
-      clearInterval(interval);
+      clearInterval(this.timer);
+      this.timer = null;
     }, duration);
   };
 
   // scroll button click handler
-  handleScroll = (isRight) => async () => {
+  handleScroll = (isRight) => () => {
     const unitOffset = isRight ? -190 : 190;
     this.scroll(unitOffset);
     /*
@@ -78,6 +79,16 @@ class ProductList extends React.Component {
 
     const result = (wrapperWidth + leftOffset > conainerWidth);
     return result;
+  };
+
+  setRightScrollerDisplay = () => {
+    const result = this.shouldRightScrollerDisplay();
+    const { isRightScrollerShown } = this.state;
+    if (isRightScrollerShown !== result) {
+      this.setState({
+        isRightScrollerShown: result,
+      });
+    }
   };
 
   render() {
