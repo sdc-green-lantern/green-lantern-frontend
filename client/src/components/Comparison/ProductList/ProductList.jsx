@@ -40,16 +40,33 @@ class ProductList extends React.Component {
     }
   }
 
+  scroll = (distance) => {
+    const duration = 800;
+    const steps = 40;
+    const unitDist = distance / steps;
+    const unitDuration = duration / steps;
+    const interval = setInterval(() => {
+      const { leftOffset } = this.state;
+      this.setState({ leftOffset: leftOffset + unitDist });
+    }, unitDuration);
+    setTimeout(() => {
+      clearInterval(interval);
+    }, duration);
+  };
+
   // scroll button click handler
   handleScroll = (isRight) => async () => {
-    const unitOffset = isRight ? -192 : 192;
-    const { leftOffset } = this.state;
+    const unitOffset = isRight ? -190 : 190;
+    this.scroll(unitOffset);
+    /*
+   const { leftOffset } = this.state;
     await new Promise((resolve) => {
       this.setState({
         leftOffset: leftOffset + unitOffset,
       }, resolve);
     });
-    this.shouldRightScrollerDisplay();
+    */
+    // this.shouldRightScrollerDisplay();
   };
 
   // if the right edge of the carousel is inside the container

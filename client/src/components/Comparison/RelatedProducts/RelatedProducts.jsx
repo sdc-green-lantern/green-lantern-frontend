@@ -56,10 +56,10 @@ class RelatedProducts extends React.Component {
     const { updateProductId, productId } = this.props;
     return (
       <div className={relatedProducts['related-products']}>
-        <span>
+        {/* <span>
           Current Product Id:
           {productId}
-        </span>
+        </span> */}
         {
           isLoading
             ? <FontAwesomeIcon icon={faSpinner} beat spin className={relatedProducts.loading} />
