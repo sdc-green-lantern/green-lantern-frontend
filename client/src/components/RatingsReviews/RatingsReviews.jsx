@@ -83,20 +83,12 @@ class RatingsReviews extends React.Component {
       .then((response) => {
         let reviews = response.data.results;
 
-        console.log("Handle Sort: ", selectedRatings);
+        // console.log("Handle Sort: ", selectedRatings);
         if (selectedRatings.length > 0) {
           reviews = _.filter(reviews, function(review) {
             return selectedRatings.includes(review.rating)
           });
         }
-          // console.log(selectedRatings);
-          // console.log(filteredReviews);
-
-          // this.setState({ reviews: filteredReviews });
-          // this.setState({ displayedReviews: filteredReviews.slice(0, 2) });
-
-
-        // const displayedReviews = response.data.results.slice(0, 2);
         const displayedReviews = reviews.slice(0, 2);
         this.setState({
           reviews,
@@ -205,11 +197,8 @@ class RatingsReviews extends React.Component {
     }
     selectedRatings.sort();
 
-    // if (selectedRatings.length === 0) {
-    //   selectedRatings = [];
-    // }
     this.setState({ selectedRatings });
-    console.log("Toggle Filter: ", selectedRatings);
+    // console.log("Toggle Filter: ", selectedRatings);
     this.handleSort(undefined, selectedRatings);
   }
 
