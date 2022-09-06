@@ -37,20 +37,23 @@ class ProductList extends React.Component {
 
   scroll = (distance) => {
     if (this.timer) {
+      console.log('still have timer', this.timer);
       return;
     }
-    const duration = 800;
-    const steps = 40;
-    const unitDist = distance / steps;
-    const unitDuration = duration / steps;
+
+    const end = this.state.leftOffset + distance;
+    const speed = distance < 0 ? -10 : 10;
+    const unitDuration = 30;
     this.timer = setInterval(() => {
       const { leftOffset } = this.state;
-      this.setState({ leftOffset: leftOffset + unitDist }, this.setRightScrollerDisplay);
+      let newLeftOffset = leftOffset + speed;
+      if ((newLeftOffset >= end && speed > 0) || (newLeftOffset <= end && speed < 0)) {
+        console.log('hit end');
+        newLeftOffset = end;
+        clearInterval(this.timer);
+      }
+      this.setState({ leftOffset: newLeftOffset }, this.setRightScrollerDisplay);
     }, unitDuration);
-    setTimeout(() => {
-      clearInterval(this.timer);
-      this.timer = null;
-    }, duration);
   };
 
   // scroll button click handler
