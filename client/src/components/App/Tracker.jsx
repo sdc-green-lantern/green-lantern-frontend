@@ -13,7 +13,6 @@ class Tracker extends React.Component {
   }
 
   sendInteraction = (module, e) => {
-    console.log(e.target.localName, module, e.timeStamp);
     this.setState({
       element: e.target.localName,
       widget: module,
