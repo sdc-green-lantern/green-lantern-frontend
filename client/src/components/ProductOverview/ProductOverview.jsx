@@ -11,6 +11,7 @@ import ProductDescription from './ProductDescription/ProductDescription.jsx';
 export default function ProductOverview({ productId, sendInteraction }) {
   const [product, setProduct] = useState({ features: [] });
   const [styles, setStyles] = useState([]);
+  // const [stylesIndex, setStylesIndex] = useState(0);
   const [currentStyles, setCurrentStyles] = useState({});
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function ProductOverview({ productId, sendInteraction }) {
       return response.data;
     };
 
-    // fetchData('/products/65640')
+    // fetchData('/products/65661')
     fetchData(productEndpoint)
       .then((response) => {
         setProduct(response);
@@ -31,9 +32,12 @@ export default function ProductOverview({ productId, sendInteraction }) {
         console.error(err);
       });
 
+    // fetchData('/products/65661/styles')
     fetchData(stylesEndpoint)
       .then((response) => {
+        console.log(response.results);
         setStyles(response.results);
+        console.log(response.results[0]);
         setCurrentStyles(response.results[0]);
       })
       .catch((err) => {
@@ -51,6 +55,8 @@ export default function ProductOverview({ productId, sendInteraction }) {
         productId={productId}
         product={product}
         styles={styles}
+        // stylesIndex={stylesIndex}
+        // setStyleIndex={setStylesIndex}
         currentStyles={currentStyles}
         setCurrentStyles={setCurrentStyles}
       />
