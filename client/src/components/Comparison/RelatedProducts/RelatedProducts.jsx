@@ -33,6 +33,7 @@ class RelatedProducts extends React.Component {
   // get the related products id and update state
   updateRelatedProducts = async (productId) => {
     try {
+      // make productlist remount each time
       this.setState({ isLoading: true });
       const response = await instance.get(`/products/${productId}/related`);
       let { data } = response;

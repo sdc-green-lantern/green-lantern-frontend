@@ -10,23 +10,21 @@ class ProductList extends React.Component {
     leftOffset: 0,
   };
 
+  // proudctlist of related product will remount each time the productId changes
   componentDidMount() {
     window.addEventListener('resize', this.resizeHandler);
     this.setRightScrollerDisplay();
+    this.setState({ leftOffset: 0 });
   }
 
-  // When updated,
-  // check the listtype and if the product id changed, reset the display list to the left
-  // check if the right scroller should display
   componentDidUpdate(prevProps) {
-    const { productId: prevId } = prevProps;
-    const { productId: currId, listType } = this.props;
-
-    if (prevId !== currId && listType === 'RelatedProducts') {
-      this.setState({ leftOffset: 0 });
+    const { productsIdToDisplay: prevProducts } = prevProps;
+    const { productsIdToDisplay: currProducts } = this.props;
+    const { listType } = this.props;
+    // add a new product to your product list
+    if (listType === 'YourProducts' && prevProducts !== currProducts) {
+      this.setRightScrollerDisplay();
     }
-
-    this.setRightScrollerDisplay();
   }
 
   componentWillUnmount() {
@@ -47,7 +45,7 @@ class ProductList extends React.Component {
     const unitDuration = duration / steps;
     this.timer = setInterval(() => {
       const { leftOffset } = this.state;
-      this.setState({ leftOffset: leftOffset + unitDist });
+      this.setState({ leftOffset: leftOffset + unitDist }, this.setRightScrollerDisplay);
     }, unitDuration);
     setTimeout(() => {
       clearInterval(this.timer);
@@ -59,15 +57,6 @@ class ProductList extends React.Component {
   handleScroll = (isRight) => () => {
     const unitOffset = isRight ? -190 : 190;
     this.scroll(unitOffset);
-    /*
-   const { leftOffset } = this.state;
-    await new Promise((resolve) => {
-      this.setState({
-        leftOffset: leftOffset + unitOffset,
-      }, resolve);
-    });
-    */
-    // this.shouldRightScrollerDisplay();
   };
 
   // if the right edge of the carousel is inside the container
