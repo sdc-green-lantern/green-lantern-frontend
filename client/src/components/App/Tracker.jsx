@@ -19,9 +19,9 @@ class Tracker extends React.Component {
       time: String(e.timeStamp),
     }, () => {
       axiosConfig.post('/interactions', this.state)
-        // .then((response) => {
-        //   console.log(response);
-        // })
+        .then((response) => {
+          console.log(response);
+        })
         .catch((err) => {
           console.log(err);
         });
