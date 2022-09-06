@@ -10,6 +10,16 @@ class ProductList extends React.Component {
     leftOffset: 0,
   };
 
+  componentDidMount() {
+    const result = this.shouldRightScrollerDisplay();
+    const { isRightScrollerShown } = this.state;
+    if (isRightScrollerShown !== result) {
+      this.setState({
+        isRightScrollerShown: result,
+      });
+    }
+  }
+
   // When updated,
   // check the listtype and if the product id changed, reset the display list to the left
   // check if the right scroller should display
@@ -58,7 +68,7 @@ class ProductList extends React.Component {
     const {
       productsIdToDisplay, updateProductId, listType, productId,
     } = this.props;
-
+    const relatedProductExist = productsIdToDisplay.length !== 0;
     return (
       <div className={productList.products}>
         <div className={productList.title} data-testid="title">
@@ -84,6 +94,7 @@ class ProductList extends React.Component {
             <button type="button" onClick={this.handleScroll(true)} />
           </div>
           <div className={productList.carousel}>
+            {!relatedProductExist && listType === 'RelatedProducts' ? <div className={productList.backup}>No Related Product</div> : null}
             <div
               className={productList['carousel-wrapper']}
               ref={(ele) => { this.carouselWrapper = ele; }}
@@ -92,7 +103,9 @@ class ProductList extends React.Component {
               {listType === 'YourProducts' ? <Card cardType="add" id={productId} /> : null}
               {productsIdToDisplay
                 .map(
-                  (id) => <Card key={id} id={id} updateProductId={updateProductId} cardType={listType} />)}
+                  // eslint-disable-next-line max-len
+                  (id) => <Card key={id} id={id} updateProductId={updateProductId} cardType={listType} />
+                )}
             </div>
           </div>
         </div>
