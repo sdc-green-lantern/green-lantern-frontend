@@ -14,22 +14,31 @@ export default class ProductBreakdown extends React.Component {
   }
 
   render() {
-    const { characteristics } = this.props;
+    const { characteristics, featureRatings } = this.props;
     console.log("Characteristics:");
     console.log(characteristics);
     let characteristicsRows = [];
-    if (characteristics !== undefined && Object.keys(characteristics).length > 0) {
+    if ((characteristics !== undefined && Object.keys(characteristics).length > 0)
+      && (featureRatings !== undefined && Object.keys(featureRatings).length > 0)) {
       const characteristicNames = Object.keys(characteristics);
+      console.log(characteristics);
       console.log(characteristicNames);
+      console.log(featureRatings);
 
       characteristicsRows = characteristicNames.map((name) => {
         const { id, value } = characteristics[name];
-        console.log(id, value);
+        const { descriptions } = featureRatings[name];
+        // console.log(descriptions);
+        // console.log(name, id, value, descriptions);
         return (
-          <div>
-            {name}
-            id: {id},
-            value: {value}
+          <div
+            className={ProductBreakdownCSS.characteristic_container}
+            key={id}
+          >
+            <div>{name}</div>
+            <div>{id}</div>
+            <div>{value}</div>
+            {/* descriptions: {descriptions} */}
           </div>
         );
       });

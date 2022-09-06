@@ -254,6 +254,7 @@ class RatingsReviews extends React.Component {
             <ProductBreakdown
               // productId={productId}
               characteristics={metadata.characteristics}
+              featureRatings={featureRatings}
             />
           </div>
           <div className={RatingsReviewsCSS.sort_options}>
