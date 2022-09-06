@@ -7,6 +7,7 @@ export default function Buttons({ currentStyles }) {
   const arraySkus = [];
   const currentSkus = currentStyles.skus;
   const itterate = Array.from({ length: 15 }, (v, k) => k + 1);
+  let defaultSize = 'Select Size';
 
   // eslint-disable-next-line no-restricted-syntax, guard-for-in
   for (const key in currentSkus) {
@@ -17,12 +18,19 @@ export default function Buttons({ currentStyles }) {
     }
   }
 
+  if (arraySkus.length === 0) {
+    defaultSize = 'OUT OF STOCK';
+  }
+
+  const sendToCart = () => {
+
+  }
+
   return (
     <div className={buttonStyles.buttons}>
       <div className={buttonStyles.quantityRow}>
-        {arraySkus.length === 0 && <div>OUT OF STOCK</div>}
         <select className={buttonStyles.selectSize} defaultValue="default" onChange={(e) => setSkuInfo({ sku_id: e.target.name, quantity: e.target.value })}>
-          <option value="default" disabled="disabled">Select Size</option>
+          <option value="default" disabled="disabled">{defaultSize}</option>
           {arraySkus.map((skuObj, index) => (
             <option
               className={buttonStyles.selectSize}
@@ -34,7 +42,7 @@ export default function Buttons({ currentStyles }) {
             </option>
           ))}
         </select>
-        <select className={buttonStyles.selectQuantity} defaultValue="1" onChange={() => console.log(selectedSku.sku_id, selectedSku.quantity)}>
+        <select className={buttonStyles.selectQuantity} defaultValue="1" onChange={(e) => setCount(e.target.value)}>
           {selectedSku.quantity === 0 ? <option value="1" disabled="disabled">-</option> : <option value="1">1</option>}
           {(itterate.slice(1, selectedSku.quantity)).map((number, index) => (
             <option
@@ -48,11 +56,12 @@ export default function Buttons({ currentStyles }) {
         </select>
       </div>
       <div className={buttonStyles.checkoutRow}>
-        <div className={buttonStyles.addToBag}>
-          <p>add to bag</p>
-          <p>+</p>
-        </div>
-        <div className={buttonStyles.favorite}>⭐</div>
+        {arraySkus.length !== 0 && (
+        <button type="submit" className={buttonStyles.addToBag}>
+          ADD TO BAG
+        </button>
+        )}
+        <button type="submit" className={buttonStyles.favorite}>⭐</button>
       </div>
     </div>
   );
