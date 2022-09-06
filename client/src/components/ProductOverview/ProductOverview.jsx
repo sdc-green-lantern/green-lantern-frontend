@@ -47,18 +47,21 @@ export default function ProductOverview({ productId, sendInteraction }) {
   return (
     // eslint-disable-next-line max-len
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interaction
-    <div className={postyles.productoverview} onClick={(e) => sendInteraction('Product Overview', e)}>
-      <Nav />
-      <Announcements />
-      <ProductInfo
-        productId={productId}
-        product={product}
-        styles={styles}
-        currentStyles={currentStyles}
-        setCurrentStyles={setCurrentStyles}
-        setShowModal={setShowModal}
-      />
-      <ProductDescription product={product} />
-    </div>
+    <>
+      {showModal && <Modal currentStyles={currentStyles} setShowModal={setShowModal} />}
+      <div className={postyles.productoverview} onClick={(e) => sendInteraction('Product Overview', e)}>
+        <Nav />
+        <Announcements />
+        <ProductInfo
+          productId={productId}
+          product={product}
+          styles={styles}
+          currentStyles={currentStyles}
+          setCurrentStyles={setCurrentStyles}
+          setShowModal={setShowModal}
+        />
+        <ProductDescription product={product} />
+      </div>
+    </>
   );
 }
