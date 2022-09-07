@@ -231,11 +231,7 @@ class RatingsReviews extends React.Component {
       <div className={RatingsReviewsCSS.ratings_section} onClick={(e) => sendInteraction('Ratings and Reviews', e)}>
         <div className={RatingsReviewsCSS.ratings_container}>
           <div className={RatingsReviewsCSS.ratings_header} data-testid="RatingsReviews-header">
-            RATINGS & REVIEWS
-            <span>
-              Current Product Id:
-              {productId}
-            </span>
+            <h2 className={RatingsReviewsCSS.ratings_reviews_header}>RATINGS & REVIEWS</h2>
           </div>
           <div className={RatingsReviewsCSS.ratings_breakdown_sidebar}>
             <RatingsBreakdown
