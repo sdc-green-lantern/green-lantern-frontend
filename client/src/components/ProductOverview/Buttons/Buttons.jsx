@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import Select from 'react-select';
 import axiosConfig from '../../../../../axiosConfig.js';
 import buttonStyles from './Buttons.module.css';
 
 export default function Buttons({ currentStyles }) {
   const [selectedSku, setSkuInfo] = useState({ sku_id: '', quantity: 0 });
+  const [selectValue, setSelectValue] = useState('');
   const [selectedCount, setCount] = useState('1');
+  const selectRef = React.useRef();
   const arraySkus = [];
   const currentSkus = currentStyles.skus;
   const itterate = Array.from({ length: 15 }, (v, k) => k + 1);
-  let defaultSize = 'Select Size';
+  let messageFlag = true;
+
+  const options = [];
 
   // eslint-disable-next-line no-restricted-syntax, guard-for-in
   for (const key in currentSkus) {
@@ -16,16 +21,15 @@ export default function Buttons({ currentStyles }) {
       arraySkus.push(
         { skuID: key, quantity: currentSkus[key].quantity, size: currentSkus[key].size },
       );
+      options.push({ value: key, label: currentSkus[key].size });
     }
   }
 
-  if (arraySkus.length === 0) {
-    defaultSize = 'OUT OF STOCK';
-  }
-
-  const handleChange = (e) => {
+  const handleChange = (selectValue) => {
+    setSelectValue(selectValue);
+    // console.log(selectValue);
     for (let i = 0; i < arraySkus.length; i += 1) {
-      if (arraySkus[i].skuID === e.target.value) {
+      if (arraySkus[i].skuID === selectValue.value) {
         setSkuInfo({ sku_id: arraySkus[i].skuID, quantity: arraySkus[i].quantity });
         break;
       }
@@ -33,22 +37,40 @@ export default function Buttons({ currentStyles }) {
   };
 
   const sendToCart = () => {
-    for (let i = 0; i < selectedCount; i += 1) {
-      axiosConfig.post('/cart', { sku_id: selectedSku.sku_id })
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    if (selectedSku.sku_id && selectedSku.quantity > 0) {
+      for (let i = 0; i < selectedCount; i += 1) {
+        axiosConfig.post('/cart', { sku_id: selectedSku.sku_id })
+          // .then((result) => {
+          //   console.log(result);
+          // })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    } else if (selectRef.current) {
+      selectRef.current.focus();
     }
   };
 
   return (
     <div className={buttonStyles.buttons}>
       <div className={buttonStyles.quantityRow}>
-        <select className={buttonStyles.selectSize} defaultValue="default" onChange={(e) => handleChange(e)}>
-          <option value="default" disabled="disabled">{defaultSize}</option>
+        {selectRef.current && <span>Please select a size</span>}
+        <label htmlFor="Selector">
+          {arraySkus.length === 0 ? 'OUT OF STOCK' : 'SELECT SIZE'}
+          <Select
+          // className={}
+            id="Selector"
+            openMenuOnFocus
+            ref={selectRef}
+            options={options}
+            value={selectValue}
+            onChange={handleChange}
+          />
+        </label>
+
+        {/* <select className={buttonStyles.selectSize} defaultValue="default" onChange={(e) => handleChange(e)}>
+          <option value="default" disabled="disabled">{arraySkus.length === 0 ? 'OUT OF STOCK' : 'SELECT SIZE'}</option>
           {arraySkus.map((skuObj, index) => (
             <option
               className={buttonStyles.selectSize}
@@ -58,7 +80,7 @@ export default function Buttons({ currentStyles }) {
               {skuObj.size}
             </option>
           ))}
-        </select>
+        </select> */}
         <select className={buttonStyles.selectQuantity} defaultValue="1" onChange={(e) => setCount(e.target.value)}>
           {selectedSku.quantity === 0 ? <option value="1" disabled="disabled">-</option> : <option value="1">1</option>}
           {(itterate.slice(1, selectedSku.quantity)).map((number, index) => (
