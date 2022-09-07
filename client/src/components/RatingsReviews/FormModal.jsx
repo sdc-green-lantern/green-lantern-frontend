@@ -22,14 +22,6 @@ export default class FormModal extends React.Component {
       remainingChars: 50,
       imgFilePaths: [],
       showUploadButton: true,
-      featureRatings: {
-        Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
-        Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
-        Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
-        Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
-        Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-        Fit: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-      },
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleNumericChange = this.handleNumericChange.bind(this);
@@ -69,7 +61,7 @@ export default class FormModal extends React.Component {
 
   handleCharacteristicsChange(event) {
     // console.log(event.target.value);
-    let { characteristics } = this.state;
+    const { characteristics } = this.state;
     characteristics[event.target.name] = Number(event.target.value);
     // console.log(characteristics);
     this.setState({ characteristics });
@@ -195,9 +187,11 @@ export default class FormModal extends React.Component {
   }
 
   render() {
-    const { close, productName, characteristics } = this.props;
     const {
-      remainingChars, imgFileURLs, showUploadButton, featureRatings,
+      close, productName, characteristics, featureRatings,
+    } = this.props;
+    const {
+      remainingChars, imgFileURLs, showUploadButton,
     } = this.state;
     const photos = imgFileURLs.map((url) => (
       <div>
