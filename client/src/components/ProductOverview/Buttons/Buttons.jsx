@@ -26,6 +26,7 @@ export default function Buttons({ currentStyles }) {
   }
 
   const handleChange = (selectValue) => {
+    console.log(currentStyles);
     setSelectValue(selectValue);
     showMessage(false);
     // console.log(selectValue);
@@ -60,13 +61,13 @@ export default function Buttons({ currentStyles }) {
       <div className={buttonStyles.quantityRow}>
         <Select
           // className={}
-          id="Selector"
           placeholder={arraySkus.length === 0 ? 'OUT OF STOCK' : 'SELECT SIZE'}
           openMenuOnFocus
           ref={selectRef}
           options={options}
           value={selectValue}
           onChange={handleChange}
+          key={currentStyles.style_id}
         />
 
         {/* <select className={buttonStyles.selectSize} defaultValue="default" onChange={(e) => handleChange(e)}>

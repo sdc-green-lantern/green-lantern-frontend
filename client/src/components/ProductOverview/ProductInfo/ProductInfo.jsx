@@ -64,7 +64,8 @@ export default function ProductInfo(props) {
           // styles={styles}
           // stylesIndex={stylesIndex}
           // setStyleIndex={setStylesIndex}
-        currentStyles={currentStyles}
+          currentStyles={currentStyles}
+          // key={currentStyles.style_id}
         />
       </div>
     </div>
