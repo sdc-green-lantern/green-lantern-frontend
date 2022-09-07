@@ -43,7 +43,7 @@ class YourProducts extends React.Component {
     const newProductIds = [...prevProductIds, id];
     this.setState({
       yourProductIds: newProductIds,
-      isAdding: true
+      isAdding: true,
     });
   };
 

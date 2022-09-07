@@ -42,8 +42,8 @@ class ProductList extends React.Component {
 
     // eslint-disable-next-line react/destructuring-assignment
     const end = this.state.leftOffset + distance;
-    const speed = distance < 0 ? -10 : 10;
-    const unitDuration = 30;
+    const speed = distance < 0 ? -8 : 8;
+    const unitDuration = 20;
     this.timer = setInterval(() => {
       const { leftOffset } = this.state;
       let newLeftOffset = leftOffset + speed;
@@ -92,9 +92,9 @@ class ProductList extends React.Component {
     const relatedProductExist = productsIdToDisplay.length !== 0;
     return (
       <div className={productList.products}>
-        <div className={productList.title} data-testid="title">
+        <h2 className={productList.title} data-testid="title">
           {listType}
-        </div>
+        </h2>
         <div className={productList.main} ref={(ele) => { this.main = ele; }}>
           <div
             className={productList['scroll-left']}
@@ -119,7 +119,6 @@ class ProductList extends React.Component {
             <div
               className={
                 `${productList['carousel-wrapper']}
-                ${productList[listType === 'YourProducts' ? 'your-products' : '']}
                 ${productList[isAdding ? 'is-adding' : '']}`
                 }
               ref={(ele) => { this.carouselWrapper = ele; }}
