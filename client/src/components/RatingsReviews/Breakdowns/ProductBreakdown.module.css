@@ -14,6 +14,7 @@
 }
 
 .characteristic_bar {
+  position: relative;
   display: flex;
   flex-direction: row;
   gap: 0.5em;
@@ -22,12 +23,26 @@
   background-color: white;
   justify-content: space-around;
   /* padding: 0.5em 0.5em; */
+  height: 1.0em;
+  padding: 0.2em 0.2em;
+}
+
+.grey_bar {
+  background-color: lightgrey;
 }
 
 .characteristic_item {
   display: flex;
-  background-color: lightgrey;
   width: 100%;
   justify-content: center;
   font-weight: normal;
+}
+
+
+.characteristic_rating {
+  display: flex;
+  width: 100%;
+  /* background-color: yellow; */
+  position: relative;
+  left: 40%;
 }

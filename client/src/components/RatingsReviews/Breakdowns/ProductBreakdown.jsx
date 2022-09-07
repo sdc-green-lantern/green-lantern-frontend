@@ -32,6 +32,7 @@ export default class ProductBreakdown extends React.Component {
         const { id, value } = characteristics[name];
         console.log(name);
         const descriptions = featureRatings[name];
+        const greyCharacteristicContainer = `${ProductBreakdownCSS.characteristic_item} ${ProductBreakdownCSS.grey_bar}`;
 
         return (
           <div
@@ -39,14 +40,29 @@ export default class ProductBreakdown extends React.Component {
             key={id}
           >
             <div>{name}</div>
-            <div>{value}</div>
+            <div
+              className={ProductBreakdownCSS.characteristic_rating}
+              style={{ left: `${Math.round(25 * (value - 1))}%` }}
+            >
+              <FontAwesomeIcon icon={faCaretDown} size="lg" />
+            </div>
+            <div
+              className={ProductBreakdownCSS.characteristic_bar}
+            >
+              <div
+                className={greyCharacteristicContainer}
+              />
+              <div
+                className={greyCharacteristicContainer}
+              />
+              <div
+                className={greyCharacteristicContainer}
+              />
+            </div>
             <div className={ProductBreakdownCSS.characteristic_bar}>
               <div className={ProductBreakdownCSS.characteristic_item}>{descriptions[0]}</div>
               <div className={ProductBreakdownCSS.characteristic_item}>{descriptions[2]}</div>
               <div className={ProductBreakdownCSS.characteristic_item}>{descriptions[4]}</div>
-            </div>
-            <div>
-              <FontAwesomeIcon icon={faCaretDown} size="lg" />
             </div>
           </div>
         );
