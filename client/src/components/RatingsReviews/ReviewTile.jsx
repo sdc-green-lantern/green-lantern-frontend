@@ -188,6 +188,9 @@ export default class ReviewTile extends React.Component {
             photo={currentPhoto}
           />
         )}
+        <div>
+          <hr />
+        </div>
       </div>
     );
   }
