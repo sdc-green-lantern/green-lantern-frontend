@@ -8,9 +8,7 @@ import ProductBreakdownCSS from './ProductBreakdown.module.css';
 export default class ProductBreakdown extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      characteristics: {},
-    };
+    this.state = {};
   }
 
   render() {
@@ -21,43 +19,38 @@ export default class ProductBreakdown extends React.Component {
       && (featureRatings !== undefined && Object.keys(featureRatings).length > 0)) {
       const characteristicNames = Object.keys(characteristics);
 
-      console.log("Characteristics:");
-      console.log(characteristics);
-      console.log(characteristicNames);
+      // console.log("Characteristics:");
+      // console.log(characteristics);
+      // console.log(characteristicNames);
 
-      console.log("Feature Ratings:")
-      console.log(featureRatings);
+      // console.log("Feature Ratings:")
+      // console.log(featureRatings);
 
       characteristicsRows = characteristicNames.map((name) => {
         const { id, value } = characteristics[name];
-        console.log(name);
+        // console.log(name);
         const descriptions = featureRatings[name];
         const greyCharacteristicContainer = `${ProductBreakdownCSS.characteristic_item} ${ProductBreakdownCSS.grey_bar}`;
+        // console.log(greyCharacteristicContainer);
 
         return (
           <div
             className={ProductBreakdownCSS.characteristic_container}
             key={id}
           >
-            <div>{name}</div>
-            <div
-              className={ProductBreakdownCSS.characteristic_rating}
-              style={{ left: `${Math.round(25 * (value - 1))}%` }}
-            >
-              <FontAwesomeIcon icon={faCaretDown} size="lg" />
-            </div>
-            <div
-              className={ProductBreakdownCSS.characteristic_bar}
-            >
+            <h2>{name}</h2>
+            <div className={ProductBreakdownCSS.characteristic_row}>
               <div
-                className={greyCharacteristicContainer}
-              />
-              <div
-                className={greyCharacteristicContainer}
-              />
-              <div
-                className={greyCharacteristicContainer}
-              />
+                className={ProductBreakdownCSS.characteristic_rating}
+                style={{ left: `${Math.round(25 * (value - 1))}%` }}
+              >
+                <FontAwesomeIcon icon={faCaretDown} size="lg" />
+              </div>
+              <div className={ProductBreakdownCSS.characteristic_bar}>
+                <div className={greyCharacteristicContainer}/>
+                <div className={greyCharacteristicContainer}/>
+                <div className={greyCharacteristicContainer}/>
+              </div>
             </div>
             <div className={ProductBreakdownCSS.characteristic_bar}>
               <div className={ProductBreakdownCSS.characteristic_item}>{descriptions[0]}</div>
