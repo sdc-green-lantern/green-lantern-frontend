@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-// import fs from "fs";
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import stars from '../Stars/Stars.module.css';
+
 import RatingsReviewsCSS from './RatingsReviews.module.css';
 import FormModalCSS from './FormModal.module.css';
 
