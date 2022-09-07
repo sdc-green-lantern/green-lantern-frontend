@@ -100,6 +100,8 @@ export default class FormModal extends React.Component {
         // console.log(response.data.data.display_url);
         imgFileURLs.push(response.data.data.display_url);
         this.setState({ imgFileURLs });
+        // console.log(imgFileURLs);
+        // console.log(imgFilePaths);
       })
       .catch((error) => {
         console.log(error);
@@ -115,6 +117,7 @@ export default class FormModal extends React.Component {
     const {
       rating, recommendation, characteristics,
       displayName, email, remainingChars,
+      imgFilePaths, imgFileURLs,
     } = this.state;
 
     if (rating === 0) {
@@ -136,10 +139,17 @@ export default class FormModal extends React.Component {
       isValid = false;
       warning += '\n - valid review body';
     }
+
+    if (imgFilePaths.length !== imgFileURLs.length) {
+      isValid = false;
+      warning += ' valid image file type';
+    }
+
     if (displayName.length < 1) {
       isValid = false;
       warning += '\n - valid nickname';
     }
+
     if (email.length < 1 || regex.test(email) === false) {
       isValid = false;
       warning += '\n - valid email';
