@@ -229,7 +229,7 @@ class RatingsReviews extends React.Component {
       // eslint-disable-next-line max-len
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
       <div className={RatingsReviewsCSS.ratings_section} onClick={(e) => sendInteraction('Ratings and Reviews', e)}>
-        <div className={RatingsReviewsCSS.ratings_container}>
+        <div className={RatingsReviewsCSS.ratings_container} id="read-reviews">
           <div className={RatingsReviewsCSS.ratings_header} data-testid="RatingsReviews-header">
             <h2 className={RatingsReviewsCSS.ratings_reviews_header}>RATINGS & REVIEWS</h2>
           </div>
