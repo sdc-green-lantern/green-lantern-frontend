@@ -11,6 +11,26 @@ export default function ProductInfo(props) {
     currentStyles, setCurrentStyles,
   } = props;
 
+  let priceDisplay = (
+    <div>
+      $
+      {currentStyles.original_price}
+    </div>
+  );
+
+  if (currentStyles.sale_price !== null) {
+    priceDisplay = (
+      <span>
+        <strike>
+          $
+          {currentStyles.original_price}
+        </strike>
+        $
+        {currentStyles.sale_price}
+      </span>
+    );
+  }
+
   useEffect(() => {
     //
   }, [product, styles]);
@@ -19,6 +39,9 @@ export default function ProductInfo(props) {
     <div className={piStyles.productinfo}>
       <Carousel
         data-testid="Carousel"
+        // styles={styles}
+        // stylesIndex={stylesIndex}
+        // setStylesIndex={setStylesIndex}
         currentStyles={currentStyles}
       />
       <div className={piStyles.productoptions}>
@@ -27,16 +50,22 @@ export default function ProductInfo(props) {
           <h3>{product.category}</h3>
           <h1>{product.name}</h1>
           <h3 className={piStyles.productPrice}>
-            $
-            {product.default_price}
+            {priceDisplay}
           </h3>
         </div>
         <Selection
           styles={styles}
+          // stylesIndex={stylesIndex}
+          // setStylesIndex={setStylesIndex}
           currentStyles={currentStyles}
           setCurrentStyles={setCurrentStyles}
         />
-        <Buttons />
+        <Buttons
+          // styles={styles}
+          // stylesIndex={stylesIndex}
+          // setStyleIndex={setStylesIndex}
+        currentStyles={currentStyles}
+        />
       </div>
     </div>
   );
