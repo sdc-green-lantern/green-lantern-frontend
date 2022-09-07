@@ -7,11 +7,11 @@ export default function Buttons({ currentStyles }) {
   const [selectedSku, setSkuInfo] = useState({ sku_id: '', quantity: 0 });
   const [selectValue, setSelectValue] = useState('');
   const [selectedCount, setCount] = useState('1');
+  const [message, showMessage] = useState(false);
   const selectRef = React.useRef();
   const arraySkus = [];
   const currentSkus = currentStyles.skus;
   const itterate = Array.from({ length: 15 }, (v, k) => k + 1);
-  let messageFlag = true;
 
   const options = [];
 
@@ -47,27 +47,26 @@ export default function Buttons({ currentStyles }) {
             console.log(err);
           });
       }
-    } else if (selectRef.current) {
+    } else {
       selectRef.current.focus();
+      showMessage(true);
     }
   };
 
   return (
     <div className={buttonStyles.buttons}>
+      {message && <div>Please select a size</div>}
       <div className={buttonStyles.quantityRow}>
-        {selectRef.current && <span>Please select a size</span>}
-        <label htmlFor="Selector">
-          {arraySkus.length === 0 ? 'OUT OF STOCK' : 'SELECT SIZE'}
-          <Select
+        <Select
           // className={}
-            id="Selector"
-            openMenuOnFocus
-            ref={selectRef}
-            options={options}
-            value={selectValue}
-            onChange={handleChange}
-          />
-        </label>
+          id="Selector"
+          placeholder={arraySkus.length === 0 ? 'OUT OF STOCK' : 'SELECT SIZE'}
+          openMenuOnFocus
+          ref={selectRef}
+          options={options}
+          value={selectValue}
+          onChange={handleChange}
+        />
 
         {/* <select className={buttonStyles.selectSize} defaultValue="default" onChange={(e) => handleChange(e)}>
           <option value="default" disabled="disabled">{arraySkus.length === 0 ? 'OUT OF STOCK' : 'SELECT SIZE'}</option>
