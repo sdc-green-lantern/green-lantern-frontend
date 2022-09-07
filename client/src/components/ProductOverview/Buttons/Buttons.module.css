@@ -16,6 +16,7 @@
   justify-content: space-between;
   padding: 0 10px;
   border: 1px solid black;
+  border-radius: 8%;
   padding-left: 15px;
   width: 25%;
 }
@@ -24,14 +25,14 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-  background-color: white;
+  background-color: lightseagreen;
   font-weight: 600;
   text-transform: uppercase;
   padding: 0 10px;
-  border: 1px solid black;
+  border: none;
+  border-radius: 0%;
   padding-left: 10px;
   width: fit-content;
-  height: fit-content;
   opacity: 1;
 }
 .favorite {

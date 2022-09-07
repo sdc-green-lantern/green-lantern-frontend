@@ -25,7 +25,8 @@
   cursor: pointer;
   overflow: hidden;
   outline: none;
-  color: blue;
+  opacity: 1;
+  color: lightseagreen;
 }
 
 .reportBtn {
@@ -39,5 +40,6 @@
   cursor: pointer;
   overflow: hidden;
   outline: none;
-  color: blue;
+  opacity: 1;
+  color: lightseagreen;
 }
