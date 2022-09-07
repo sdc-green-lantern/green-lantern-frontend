@@ -34,36 +34,9 @@
   display: none;  /* Safari and Chrome */
 }
 
-/* .button {
-  width: 10rem;
-  max-height: 3rem;
-  opacity: 1;
-  border-radius: 0%;
-  border: 1px solid black;
-  background-color: buttonface;
-} */
-/* display: block; */
-/* display: flex; */
-/* justify-self: flex-end; */
-/* min-width: 10%;
-max-width: 20%; */
-/* position: */
-
-/* .button:hover {
-  background-color: darkgray;
-  cursor: pointer;
-} */
-
-/* .reviewBody {
-  display: flex;
-  justify-content: center;
-} */
-
-/* .modal_btn_box {
-  display: 'flex';
-  align-items: 'center';
-  justify-content: 'center';
-} */
+select {
+  font-family: 'FontAwesome', 'Second Font name'
+}
 
 .form_component {
   padding: 0 30px;
@@ -134,4 +107,27 @@ table {
 
 td {
   text-align: center;
+}
+
+
+
+.star_rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+/* button, */
+.button_settings {
+  all: unset;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: #000;
+}
+.off {
+  color: #ccc;
 }

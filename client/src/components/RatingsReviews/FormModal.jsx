@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -245,6 +245,9 @@ export default class FormModal extends React.Component {
       </tr>
     ));
 
+    // const [rating, setRating] = useState(0);
+    // const [hover, setHover] = useState(0);
+
     return (
       <div className={FormModalCSS.formModalBackground}>
         <div className={FormModalCSS.formModalContainer}>
@@ -263,18 +266,22 @@ export default class FormModal extends React.Component {
           <form>
             <div>
               Overall Rating*
-              <select
-                name="rating"
-                onChange={this.handleNumericChange}
-                required
-              >
-                <option defaultValue value={0}>--Select a Rating--</option>
-                <option value={1}>★</option>
-                <option value={2}>★★</option>
-                <option value={3}>★★★</option>
-                <option value={4}>★★★★</option>
-                <option value={5}>★★★★★</option>
-              </select>
+              <div className={FormModalCSS.star_rating}>
+                {[...Array(5)].map((star, index) => {
+                  // index += 1;
+                  // console.log(index);
+                  return (
+                    <button
+                      type="submit"
+                      key={index}
+                      className={FormModalCSS.button_settings}
+                    // onClick={this.handleFormValidation}
+                    >
+                      <FontAwesomeIcon icon={faStar} size="lg" className={stars.star} />
+                    </button>
+                  );
+                })}
+              </div>
             </div>
             <div>
               <p>Do you recommend this product?*</p>
