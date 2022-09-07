@@ -7,6 +7,7 @@ import MoreReviews from './MoreReviews.jsx';
 import SortOptions from './SortOptions.jsx';
 import NewReview from './NewReview.jsx';
 import RatingsBreakdown from './Breakdowns/RatingsBreakdown.jsx';
+import ProductBreakdown from './Breakdowns/ProductBreakdown.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
@@ -24,6 +25,14 @@ class RatingsReviews extends React.Component {
       ratingProportions: {},
       ratingCounts: {},
       selectedRatings: [],
+      featureRatings: {
+        Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
+        Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+        Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+        Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+        Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+        Fit: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+      },
     };
 
     this.updateReviews = this.updateReviews.bind(this);
@@ -83,20 +92,12 @@ class RatingsReviews extends React.Component {
       .then((response) => {
         let reviews = response.data.results;
 
-        console.log("Handle Sort: ", selectedRatings);
+        // console.log("Handle Sort: ", selectedRatings);
         if (selectedRatings.length > 0) {
           reviews = _.filter(reviews, function(review) {
             return selectedRatings.includes(review.rating)
           });
         }
-          // console.log(selectedRatings);
-          // console.log(filteredReviews);
-
-          // this.setState({ reviews: filteredReviews });
-          // this.setState({ displayedReviews: filteredReviews.slice(0, 2) });
-
-
-        // const displayedReviews = response.data.results.slice(0, 2);
         const displayedReviews = reviews.slice(0, 2);
         this.setState({
           reviews,
@@ -163,24 +164,29 @@ class RatingsReviews extends React.Component {
   }
 
   calculateRatings(metadata) {
-    // console.log("Metadata Ratings: ", metadata);
-    const ratings = Object.keys(metadata.ratings);
-    const counts = Object.values(metadata.ratings);
+    // console.log("Metadata Ratings: ", metadata.ratings);
+    const ratings = [1, 2, 3, 4, 5];
+    // const counts = Object.values(metadata.ratings);
+    // console.log(metadata.ratings);
     const ratingProportions = {};
     let denominator = 0;
     let numerator = 0;
     for (let i = 0; i < ratings.length; i++) {
-      denominator += Number(counts[i]);
-      numerator += Number(ratings[i]) * Number(counts[i]);
+      const rating = ratings[i];
+      const count = metadata.ratings[rating] !== undefined ? metadata.ratings[rating] : 0;
+      denominator += Number(count);
+      numerator += Number(rating) * Number(count);
     }
     for (let i = 0; i < ratings.length; i++) {
-      const key = ratings[i];
-      ratingProportions[key] = Number(counts[i]) / denominator;
+      const rating = ratings[i];
+      const count = metadata.ratings[rating] !== undefined ? metadata.ratings[rating] : 0;
+      ratingProportions[rating] = Number(count) / denominator;
     }
+    // console.log(numerator, denominator);
     const avgRating = Math.round(10 * (numerator / denominator)) / 10;
     // console.log("Average Rating: ", avgRating);
     // console.log("Average Rating: ", ratingProportions);
-    this.setState({ avgRating, ratingProportions, ratingCounts: ratings });
+    this.setState({ avgRating, ratingProportions, ratingCounts: metadata.ratings });
   }
 
   calculatePercentRecommend(metadata) {
@@ -205,11 +211,8 @@ class RatingsReviews extends React.Component {
     }
     selectedRatings.sort();
 
-    // if (selectedRatings.length === 0) {
-    //   selectedRatings = [];
-    // }
     this.setState({ selectedRatings });
-    console.log("Toggle Filter: ", selectedRatings);
+    // console.log("Toggle Filter: ", selectedRatings);
     this.handleSort(undefined, selectedRatings);
   }
 
@@ -220,6 +223,7 @@ class RatingsReviews extends React.Component {
     const {
       reviews, displayedReviews, numReviews, numDisplayed, productName, metadata,
       avgRating, pctRecommend, ratingProportions, ratingCounts, selectedRatings,
+      featureRatings,
     } = this.state;
     return (
       // eslint-disable-next-line max-len
@@ -227,11 +231,7 @@ class RatingsReviews extends React.Component {
       <div className={RatingsReviewsCSS.ratings_section} onClick={(e) => sendInteraction('Ratings and Reviews', e)}>
         <div className={RatingsReviewsCSS.ratings_container}>
           <div className={RatingsReviewsCSS.ratings_header} data-testid="RatingsReviews-header">
-            RATINGS & REVIEWS
-            <span>
-              Current Product Id:
-              {productId}
-            </span>
+            <h2 className={RatingsReviewsCSS.ratings_reviews_header}>RATINGS & REVIEWS</h2>
           </div>
           <div className={RatingsReviewsCSS.ratings_breakdown_sidebar}>
             <RatingsBreakdown
@@ -247,7 +247,11 @@ class RatingsReviews extends React.Component {
             />
           </div>
           <div className={RatingsReviewsCSS.product_breakdown_sidebar}>
-            <p>Product Breakdown</p>
+            <ProductBreakdown
+              // productId={productId}
+              characteristics={metadata.characteristics}
+              featureRatings={featureRatings}
+            />
           </div>
           <div className={RatingsReviewsCSS.sort_options}>
             <SortOptions
@@ -279,6 +283,7 @@ class RatingsReviews extends React.Component {
               productId={productId}
               characteristics={metadata.characteristics}
               updateReviews={this.updateReviews}
+              featureRatings={featureRatings}
             />
           </div>
         </div>

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faRegStar, faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import Stars from '../../Stars/Stars.jsx';
+import { sendData } from '../TrackHOC.jsx';
 import card from './Card.module.css';
 import instance from '../../../../../axiosConfig.js';
 
@@ -68,18 +69,21 @@ class Card extends React.Component {
 
   showModal = (e) => {
     e.stopPropagation();
+    sendData('Related Items and Comparison', e);
     const { id } = this.props;
     PubSub.publish('showModal', { isShown: true, id });
   };
 
   addYourProduct = (e) => {
     e.stopPropagation();
+    sendData('Related Items and Comparison', e);
     const { id } = this.props;
     PubSub.publish('newYourProduct', id);
   };
 
   removeYourProduct = (e) => {
     e.stopPropagation();
+    sendData('Related Items and Comparison', e);
     const { id } = this.props;
     PubSub.publish('yourProductToRemove', id);
   };

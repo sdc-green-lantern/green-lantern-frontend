@@ -19,7 +19,10 @@ export default class NewReview extends React.Component {
     const {
       productId, productName, characteristics,
       axiosConfig, IMGBB_API_KEY, updateReviews,
+      featureRatings,
     } = this.props;
+    // console.log("Characteristics: ");
+    // console.log(characteristics);
     const { showModal } = this.state;
     return (
       <>
@@ -40,6 +43,7 @@ export default class NewReview extends React.Component {
             updateReviews={updateReviews}
             close={() => { this.setState({ showModal: false }); }}
             submit={this.handleSubmitForm}
+            featureRatings={featureRatings}
           />
         )}
       </>

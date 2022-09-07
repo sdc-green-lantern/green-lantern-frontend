@@ -20,6 +20,7 @@ export default class RatingsBreakdown extends React.Component {
 
     const ratings = Object.keys(ratingProportions).reverse();
     const proportions = Object.values(ratingProportions).reverse();
+    // console.log(ratingCounts);
     const ratingsBar = ratings.map((rating, index) => (
       <div
         key={rating}
@@ -30,13 +31,23 @@ export default class RatingsBreakdown extends React.Component {
       >
         {`${rating} Stars`}
         {/* {proportions[index]} */}
-        <div className={RatingsBreakdownCSS.grey_bar} />
+        <div className={RatingsBreakdownCSS.ratings_bar}>
+          <span
+            className={RatingsBreakdownCSS.ratings_bar_overlay}
+            style={{ width: `${Math.round(100 * proportions[index])}%` }}
+          />
+        </div>
+        {`${ratingCounts[rating] !== undefined ? ratingCounts[rating] : 0}`}
       </div>
     ));
 
     const filters = selectedRatings.map((num) => {
       return (
-        <div>{`- ${num} Stars`}</div>
+        <div className={RatingsBreakdownCSS.filter_row}>
+          {`- ${num} Stars`}
+          {/* <br />
+          <br /> */}
+        </div>
       );
     });
 
@@ -47,24 +58,6 @@ export default class RatingsBreakdown extends React.Component {
             <h1>{avgRating}</h1>
           </div>
           <Stars averageRating={avgRating} />
-          {/*
-          <div className={RatingsBreakdownCSS.rating}>
-            <div
-              className={RatingsBreakdownCSS.rating_overlay}
-              style={{ width: `${avgRating * 20}%` }}
-            />
-            <div className={RatingsBreakdownCSS.star}>☆</div>
-              <div className={RatingsBreakdownCSS.star}>☆</div>
-              <div className={RatingsBreakdownCSS.star}>☆</div>
-              <div className={RatingsBreakdownCSS.star}>☆</div>
-              <div className={RatingsBreakdownCSS.star}>☆</div>
-            <FontAwesomeIcon icon={faStar} size="lg" className={RatingsBreakdownCSS.star} />
-            <FontAwesomeIcon icon={faStar} size="lg" className={RatingsBreakdownCSS.star} />
-            <FontAwesomeIcon icon={faStar} size="lg" className={RatingsBreakdownCSS.star} />
-            <FontAwesomeIcon icon={faStar} size="lg" className={RatingsBreakdownCSS.star} />
-            <FontAwesomeIcon icon={faStar} size="lg" className={RatingsBreakdownCSS.star} />
-          </div>
-          */}
         </div>
         <div className={RatingsBreakdownCSS.recommmend_box}>
           <p>{`${pctRecommend} of reviews recommend this product.`}</p>
@@ -72,10 +65,12 @@ export default class RatingsBreakdown extends React.Component {
         <div>
           {ratingsBar}
         </div>
-        <div>
+        <div className={RatingsBreakdownCSS.filters}>
           {selectedRatings.length > 0 ? (
             <>
               Filters applied. Displaying reviews with:
+              {/* <br />
+              <br /> */}
               {filters}
               <input
                 type="submit"
@@ -84,11 +79,10 @@ export default class RatingsBreakdown extends React.Component {
               />
             </>
           )
-          :
-          (<></>)
+            : (<></>)
           }
         </div>
-      </div >
+      </div>
     );
   }
 }
