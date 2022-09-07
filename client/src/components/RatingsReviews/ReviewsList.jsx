@@ -1,6 +1,6 @@
 import React from 'react';
 import ReviewTile from './ReviewTile.jsx';
-// import instance from '../../axiosConfig.js'
+import RatingsReviewsCSS from './RatingsReviews.module.css';
 
 class ReviewsList extends React.Component {
   constructor(props) {

@@ -20,7 +20,7 @@ export default class RatingsBreakdown extends React.Component {
 
     const ratings = Object.keys(ratingProportions).reverse();
     const proportions = Object.values(ratingProportions).reverse();
-    console.log(ratingCounts);
+    // console.log(ratingCounts);
     const ratingsBar = ratings.map((rating, index) => (
       <div
         key={rating}
