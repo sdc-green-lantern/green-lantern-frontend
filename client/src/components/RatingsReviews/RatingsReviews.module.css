@@ -60,15 +60,13 @@
   grid-column: 2/4;
   /* border: 1px solid black; */
   padding-left: 5%;
-}
-
-/* .reviews_list_container {
+  height: 50em;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
-.reviews_list_container::-webkit-scrollbar {
+/* .reviews_list::-webkit-scrollbar {
   display: none;
 } */
 
