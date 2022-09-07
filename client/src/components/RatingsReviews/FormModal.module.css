@@ -67,7 +67,7 @@ select {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-start;
 }
 
 .radio_input {
@@ -117,7 +117,6 @@ td {
   justify-content: flex-start;
 }
 
-/* button, */
 .button_settings {
   all: unset;
   background-color: transparent;
