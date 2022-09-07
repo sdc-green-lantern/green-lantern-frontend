@@ -27,6 +27,7 @@ export default function Buttons({ currentStyles }) {
 
   const handleChange = (selectValue) => {
     setSelectValue(selectValue);
+    showMessage(false);
     // console.log(selectValue);
     for (let i = 0; i < arraySkus.length; i += 1) {
       if (arraySkus[i].skuID === selectValue.value) {
