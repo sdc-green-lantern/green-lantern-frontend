@@ -93,7 +93,7 @@ class Card extends React.Component {
 
     if (cardType === 'add') {
       return (
-        <div className={card.container} onClick={this.addYourProduct} id={card.add} >
+        <div className={card.container} onClick={this.addYourProduct} id={card.add}>
           <FontAwesomeIcon icon={faCirclePlus} id={card['plus-icon']} />
         </div>
       );

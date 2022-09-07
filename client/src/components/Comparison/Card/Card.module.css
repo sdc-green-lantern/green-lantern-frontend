@@ -6,7 +6,10 @@
   border: 1px solid black;
   margin: 10px 8px 10px 0;
   background-color: white;
+}
 
+.container:hover{
+  box-shadow: 0 0 10px rgba(100, 100, 100, 0.8);
 }
 
 .container:last-child {
@@ -14,7 +17,7 @@
 }
 
 .container:active:not(:focus-within) {
-  outline: thick double #0ABAB5;
+  outline: 2px solid #0ABAB5;
 }
 
 #add {
@@ -33,6 +36,10 @@
   font-size: 5em;
   margin: auto;
   opacity: 0.3;
+}
+
+#plus-icon:hover{
+  opacity: 0.4;
 }
 
 #plus-icon:active{
@@ -62,6 +69,10 @@ img {
   top: 10px;
   color: #0ABAB5;
   opacity: 50%;
+}
+
+.action:hover{
+  opacity: 75%;
 }
 
 .action:focus {

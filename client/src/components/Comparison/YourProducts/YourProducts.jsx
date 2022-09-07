@@ -6,6 +6,7 @@ import yourProducts from './YourProducts.module.css';
 class YourProducts extends React.Component {
   state = {
     yourProductIds: [],
+    isAdding: false,
   };
 
   // subscribe the newYourProduct updates when mounted
@@ -29,6 +30,7 @@ class YourProducts extends React.Component {
     const newProductIds = prevProductIds.filter((id) => id !== idToRemove);
     this.setState({
       yourProductIds: newProductIds,
+      isAdding: false
     });
   };
 
@@ -41,11 +43,12 @@ class YourProducts extends React.Component {
     const newProductIds = [...prevProductIds, id];
     this.setState({
       yourProductIds: newProductIds,
+      isAdding: true
     });
   };
 
   render() {
-    const { yourProductIds } = this.state;
+    const { yourProductIds, isAdding } = this.state;
     const { productId, updateProductId } = this.props;
     return (
       <div className={yourProducts['your-products']}>
@@ -53,7 +56,7 @@ class YourProducts extends React.Component {
           Current Product Id:
           {productId}
         </span> */}
-        <ProductList productsIdToDisplay={yourProductIds} listType="YourProducts" productId={productId} updateProductId={updateProductId} />
+        <ProductList productsIdToDisplay={yourProductIds} listType="YourProducts" productId={productId} updateProductId={updateProductId} isAdding={isAdding} />
       </div>
     );
   }

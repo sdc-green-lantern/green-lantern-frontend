@@ -40,6 +40,7 @@ class ProductList extends React.Component {
       return;
     }
 
+    // eslint-disable-next-line react/destructuring-assignment
     const end = this.state.leftOffset + distance;
     const speed = distance < 0 ? -10 : 10;
     const unitDuration = 30;
@@ -86,7 +87,7 @@ class ProductList extends React.Component {
   render() {
     const { leftOffset, isRightScrollerShown } = this.state;
     const {
-      productsIdToDisplay, updateProductId, listType, productId,
+      productsIdToDisplay, updateProductId, listType, productId, isAdding
     } = this.props;
     const relatedProductExist = productsIdToDisplay.length !== 0;
     return (
@@ -116,7 +117,11 @@ class ProductList extends React.Component {
           <div className={productList.carousel}>
             {!relatedProductExist && listType === 'RelatedProducts' ? <div className={productList.backup}>No Related Product</div> : null}
             <div
-              className={productList['carousel-wrapper']}
+              className={
+                `${productList['carousel-wrapper']}
+                ${productList[listType === 'YourProducts' ? 'your-products' : '']}
+                ${productList[isAdding ? 'is-adding' : '']}`
+                }
               ref={(ele) => { this.carouselWrapper = ele; }}
               style={{ left: leftOffset }}
             >
@@ -124,7 +129,7 @@ class ProductList extends React.Component {
               {productsIdToDisplay
                 .map(
                   // eslint-disable-next-line max-len
-                  (id) => <Card key={id} id={id} updateProductId={updateProductId} cardType={listType} />
+                  (id) => <Card key={id} id={id} updateProductId={updateProductId} cardType={listType} />,
                 )}
             </div>
           </div>
