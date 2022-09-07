@@ -33,6 +33,7 @@ class RelatedProducts extends React.Component {
   // get the related products id and update state
   updateRelatedProducts = async (productId) => {
     try {
+      // make productlist remount each time
       this.setState({ isLoading: true });
       const response = await instance.get(`/products/${productId}/related`);
       let { data } = response;
@@ -56,10 +57,10 @@ class RelatedProducts extends React.Component {
     const { updateProductId, productId } = this.props;
     return (
       <div className={relatedProducts['related-products']}>
-        <span>
+        {/* <span>
           Current Product Id:
           {productId}
-        </span>
+        </span> */}
         {
           isLoading
             ? <FontAwesomeIcon icon={faSpinner} beat spin className={relatedProducts.loading} />
