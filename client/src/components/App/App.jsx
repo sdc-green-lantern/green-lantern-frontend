@@ -1,3 +1,4 @@
+// eslint-disable-next-line max-classes-per-file
 import React from 'react';
 import axiosConfig, { IMGBB_API_KEY } from '../../../../axiosConfig.js'; // use this variable in place of axios
 import ProductOverview from '../ProductOverview/ProductOverview.jsx';
@@ -55,7 +56,7 @@ class App extends React.Component {
             />
           )}
         />
-        <Tracker
+        {/* <Tracker
           render={(sendInteraction) => (
             <Comparison
               sendInteraction={sendInteraction}
@@ -63,7 +64,8 @@ class App extends React.Component {
               updateProductId={this.updateProductId}
             />
           )}
-        />
+        /> */}
+        <Comparison productId={productId} updateProductId={this.updateProductId} />
         <Tracker
           render={(sendInteraction) => (
             <RatingsReviews
