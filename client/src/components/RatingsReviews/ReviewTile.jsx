@@ -139,8 +139,16 @@ export default class ReviewTile extends React.Component {
 
         </div>
         <div>
-          <FontAwesomeIcon icon={faCheck} />
-          {recommend}
+          {recommend !== '' ?
+            (
+              <>
+                <FontAwesomeIcon icon={faCheck} />
+                {recommend}
+              </>
+            ) : (
+              <></>
+            )}
+
         </div>
         <div className={RatingsReviewsCSS.review_response}>
           {response !== ''
@@ -180,6 +188,9 @@ export default class ReviewTile extends React.Component {
             photo={currentPhoto}
           />
         )}
+        <div>
+          <hr />
+        </div>
       </div>
     );
   }

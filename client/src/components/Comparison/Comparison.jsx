@@ -1,11 +1,9 @@
 import React from 'react';
-// eslint-disable-next-line import/extensions
+import withTracker from './TrackHOC.jsx';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
-// eslint-disable-next-line import/extensions
 import YourProducts from './YourProducts/YourProducts.jsx';
 import Modal from './Modal/Modal.jsx';
 import comparison from './Comparison.module.css';
-import Tracker from '../App/Tracker.jsx';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Comparison extends React.Component {
@@ -23,4 +21,4 @@ class Comparison extends React.Component {
   }
 }
 
-export default Comparison;
+export default withTracker(Comparison);
