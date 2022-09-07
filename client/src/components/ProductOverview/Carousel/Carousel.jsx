@@ -35,7 +35,7 @@ export default function Carousel({ currentStyles, setShowModal }) {
     // console.log('next/currentImg... ', productImages[newIndex].url);
   };
 
-  const selectThumbnail = (index) => document.getElementById(index);
+  // const selectThumbnail = (index) => document.getElementById(index);
 
   const handleThumbnailClick = (index) => {
     setCurrentIndex(index);
@@ -44,16 +44,28 @@ export default function Carousel({ currentStyles, setShowModal }) {
     // console.log('thumbclick/currentImg... ', productImages[index].url);
   };
 
+  const hideLeftArrow = <div className={carouselstyles.leftArrow}></div>;
+  const showLeftArrow = <div className={carouselstyles.leftArrow} onClick={handlePreviousImg}>❮</div>;
+
+  const hideRightArrow = <div className={carouselstyles.rightArrow}></div>;
+  const showRightArrow = <div className={carouselstyles.rightArrow} onClick={handleNextImg}>❯</div>;
+
   return (
     <div className={carouselstyles.imageGallery} style={{ backgroundImage: `url(${currentImage})` }}>
       <div className={carouselstyles.thumbnailRow}>
         {productImages.map((productImage, index) => (
-          <div className={carouselstyles.thumbnail} onClick={() => {handleThumbnailClick(index)}} key={index} id={index} productimage={productImage} style={{ backgroundImage: `url(${productImage.thumbnail_url})` }} />))}
+          <div
+            className={carouselstyles.thumbnail}
+            onClick={() => {handleThumbnailClick(index)}}
+            key={index} id={index}
+            productimage={productImage}
+            style={{ backgroundImage: `url(${productImage.thumbnail_url})` }}
+          />))}
         {/* <div className={carouselstyles.goToNext}>▼</div> */}
       </div>
       <div className={carouselstyles.arrows}>
-        {currentIndex === 0 ? <div className={carouselstyles.leftArrow}></div> : <div className={carouselstyles.leftArrow} onClick={handlePreviousImg}>❮</div>}
-        {currentIndex === productImages.length - 1 ? <div className={carouselstyles.rightArrow}></div> : <div className={carouselstyles.rightArrow} onClick={handleNextImg}>❯</div>}
+        {currentIndex === 0 ? hideLeftArrow : showLeftArrow}
+        {currentIndex === productImages.length - 1 ? hideRightArrow : showRightArrow}
       </div>
       <div
         className={carouselstyles.lightbox}

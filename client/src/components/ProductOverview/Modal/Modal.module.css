@@ -28,11 +28,11 @@
 .leftArrow:hover, .rightArrow:hover {
   color: black;
 }
-.image {
+/* .image {
   cursor: crosshair;
   height: 88vh;
   max-width: 100%;
-}
+} */
 .button {
   font-size: 2rem;
   background: none;
@@ -53,11 +53,16 @@
 }
 .thumbs {
   cursor: pointer;
-  width: 5vw;
-  height: 10vh;
+  width: 6vw;
+  height: 12vh;
 }
-.zoom {
+/* .zoom {
   display: flex;
   align-items: center;
-  overflow: scroll;
-}
+  overflow: auto;
+} */
+/* -ms-overflow-style: none;  Internet Explorer 10+ */
+/* scrollbar-width: none;  Firefox */
+/* .zoom::-webkit-scrollbar {
+  display: none;  Safari and Chrome
+} */

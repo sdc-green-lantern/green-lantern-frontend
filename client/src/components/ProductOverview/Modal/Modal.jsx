@@ -1,12 +1,71 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import modalStyles from './Modal.module.css';
+
+import styled from 'styled-components';
+
+const Container = styled.div`
+  cursor: crosshair;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  padding: 30px;
+  height: 72vh;
+  max-width: 100%;
+`;
+
+const Image = styled.img.attrs((props) => ({
+  src: props.source
+}))``;
+
+const Target = styled(Image)`
+  position: absolute;
+  left: ${(props) => props.offset.left}px;
+  top: ${(props) => props.offset.top}px;
+  opacity: ${(props) => props.opacity};
+`;
 
 export default function Modal({ currentStyles, setShowModal }) {
   const [productImages, setProductImages] = useState([]);
   const [currentImage, setCurrentImage] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const [magnify, setMagnify] = useState(false);
+  const sourceRef = useRef(null);
+  const targetRef = useRef(null);
+  const containerRef = useRef(null);
+
+  const [opacity, setOpacity] = useState(0);
+  const [offset, setOffset] = useState({ left: 0, top: 0 });
+
+  const handleMouseEnter = () => {
+    setOpacity(1);
+  };
+
+  const handleMouseLeave = () => {
+    setOpacity(0);
+  };
+
+  const handleMouseMove = (e) => {
+    const targetRect = targetRef.current.getBoundingClientRect();
+    const sourceRect = sourceRef.current.getBoundingClientRect();
+    const containerRect = containerRef.current.getBoundingClientRect();
+
+    const xRatio = (targetRect.width - containerRect.width) / sourceRect.width;
+    const yRatio = (targetRect.height - containerRect.height) / sourceRect.height;
+
+    const left = Math.max(
+      Math.min(e.pageX - sourceRect.left, sourceRect.width),
+      0
+    );
+    const top = Math.max(
+      Math.min(e.pageY - sourceRect.top, sourceRect.height),
+      0
+    );
+
+    setOffset({
+      left: left * -xRatio,
+      top: top * -yRatio,
+    });
+  };
 
   useEffect(() => {
     //
@@ -38,9 +97,11 @@ export default function Modal({ currentStyles, setShowModal }) {
     setCurrentImage(productImages[index].url);
   };
 
-  const handleMagnify = () => {
-    setMagnify(!magnify);
-  };
+  // const [magnify, setMagnify] = useState(false);
+
+  // const handleMagnify = () => {
+  //   setMagnify(!magnify);
+  // };
 
   return(
     <>
@@ -53,9 +114,23 @@ export default function Modal({ currentStyles, setShowModal }) {
           <div className={modalStyles.imgContainer}>
             {currentIndex === 0 ? <div className={modalStyles.leftArrow}></div> : <div className={modalStyles.leftArrow} onClick={handlePreviousImg}>❮</div>}
             {/* IMAGE */}
-            <div className={modalStyles.zoom}>
-              {magnify ? <img className={modalStyles.image} src={currentImage} style={{ transform: 'scale(2.5)' }} onClick={() => {handleMagnify()}}/> : <img className={modalStyles.image} src={currentImage} onClick={() => {handleMagnify()}}/>}
-            </div>
+            <Container
+              ref={containerRef}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              onMouseMove={handleMouseMove}
+            >
+              <Image ref={sourceRef} alt="source" source={currentImage} />
+              <Target
+                ref={targetRef}
+                alt="target"
+                opacity={opacity}
+                offset={offset}
+                source={currentImage}
+              />
+            </Container>
+            {/* <div className={modalStyles.zoom}> */}
+              {/* {magnify ? <img className={modalStyles.image} src={currentImage} style={{ transform: 'scale(2.5) translate(20%, 25%)' }} onClick={() => {handleMagnify()}}/> : <img className={modalStyles.image} src={currentImage} onClick={() => {handleMagnify()}}/>} */}
             {currentIndex === productImages.length - 1 ? <div className={modalStyles.rightArrow}></div> : <div className={modalStyles.rightArrow} onClick={handleNextImg}>❯</div>}
           </div>
         <div className={modalStyles.thumbnailRow}>
