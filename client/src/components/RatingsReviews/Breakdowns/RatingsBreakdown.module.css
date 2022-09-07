@@ -22,9 +22,10 @@ h1 {
   flex-direction: row;
   align-items: center;
   height: 2rem;
-  gap: 1em;
-  padding: 0.5em;
+  gap: 0.5em;
+  padding-bottom: 0.5em;
   font-weight: bold;
+  width: 100%;
 }
 
 .proportions_box:hover {
@@ -35,7 +36,7 @@ h1 {
   position: relative;
   border: 1px solid black;
   background-color: lightgrey;
-  width: 70%;
+  width: 50%;
   height: 80%;
 }
 
