@@ -17,6 +17,10 @@ class App extends React.Component {
     this.updateProductId = this.updateProductId.bind(this);
   }
 
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   updateProductId(id) {
     this.setState({
       productId: id,
