@@ -49,10 +49,10 @@ class YourProducts extends React.Component {
     const { productId, updateProductId } = this.props;
     return (
       <div className={yourProducts['your-products']}>
-        <span>
+        {/* <span>
           Current Product Id:
           {productId}
-        </span>
+        </span> */}
         <ProductList productsIdToDisplay={yourProductIds} listType="YourProducts" productId={productId} updateProductId={updateProductId} />
       </div>
     );
