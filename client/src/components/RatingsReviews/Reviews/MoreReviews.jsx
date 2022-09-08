@@ -1,5 +1,5 @@
 import React from 'react';
-import RatingsReviewsCSS from './RatingsReviews.module.css';
+import RatingsReviewsCSS from '../RatingsReviews.module.css';
 
 class MoreReviews extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class MoreReviews extends React.Component {
     const { numReviews, numDisplayed, handleMoreReviews } = this.props;
     if (numReviews === numDisplayed) {
       return (
-        <div />
+        <></>
       );
     }
     return (

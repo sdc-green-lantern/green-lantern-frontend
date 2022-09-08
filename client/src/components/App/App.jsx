@@ -12,7 +12,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 65631,
+      productId: 65661, // Pugs: 65633 // Shoes: 65635 //sales price: 65661
     };
     this.updateProductId = this.updateProductId.bind(this);
   }
@@ -23,7 +23,7 @@ class App extends React.Component {
 
   updateProductId(id) {
     this.setState({
-      productId: id,
+      productId: Number(id),
     });
   }
 

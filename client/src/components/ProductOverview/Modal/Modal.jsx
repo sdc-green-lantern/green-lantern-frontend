@@ -10,7 +10,6 @@ const Container = styled.div`
   display: block;
   padding: 30px;
   height: 72vh;
-  max-width: 100%;
 `;
 
 const Image = styled.img.attrs((props) => ({
@@ -18,6 +17,8 @@ const Image = styled.img.attrs((props) => ({
 }))``;
 
 const Target = styled(Image)`
+  width: 250%;
+  height: 250%;
   position: absolute;
   left: ${(props) => props.offset.left}px;
   top: ${(props) => props.offset.top}px;
@@ -108,7 +109,7 @@ export default function Modal({ currentStyles, setShowModal }) {
       <button
         className={modalStyles.button}
         onClick={() => {setShowModal(false)}}>
-        <span>X</span>
+        <span style={{ margin: '10px', color: 'grey' }}>X</span>
       </button>
       <div className={modalStyles.modal}>
           <div className={modalStyles.imgContainer}>
