@@ -3,6 +3,13 @@ import Select from 'react-select';
 import axiosConfig from '../../../../../axiosConfig.js';
 import buttonStyles from './Buttons.module.css';
 
+const customStyles = {
+  menu: (provided) => ({
+    ...provided,
+    border: '1px dotted pink',
+  }),
+};
+
 export default function Buttons({ currentStyles }) {
   const [selectedSku, setSkuInfo] = useState({ sku_id: '', quantity: 0 });
   const [selectValue, setSelectValue] = useState('');
@@ -60,7 +67,7 @@ export default function Buttons({ currentStyles }) {
       <div className={buttonStyles.quantityRow}>
         <Select
           // className={}
-          className={buttonStyles.selectSize}
+          styles={customStyles}
           id="Selector"
           placeholder={arraySkus.length === 0 ? 'OUT OF STOCK' : 'SELECT SIZE'}
           openMenuOnFocus
@@ -97,11 +104,11 @@ export default function Buttons({ currentStyles }) {
       </div>
       <div className={buttonStyles.checkoutRow}>
         {arraySkus.length !== 0 && (
-        <button type="submit" className={buttonStyles.addToBag} onClick={sendToCart}>
+        <button type="submit" onClick={sendToCart}>
           ADD TO BAG
         </button>
         )}
-        <button type="submit" className={buttonStyles.favorite}>⭐</button>
+        <button type="submit">⭐</button>
       </div>
     </div>
   );
