@@ -22,11 +22,18 @@ class ReviewsList extends React.Component {
       />
     ));
 
-    return (
-      <>
-        {reviewTiles}
-      </>
-    );
+    if (reviewTiles.length > 0) {
+      return (
+        <>
+          {reviewTiles}
+        </>
+      );
+    } else {
+      return (
+        <></>
+      )
+    }
+
   }
 }
 

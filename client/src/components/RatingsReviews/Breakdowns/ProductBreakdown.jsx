@@ -47,9 +47,9 @@ export default class ProductBreakdown extends React.Component {
                 <FontAwesomeIcon size="2xl" icon={faCaretDown} />
               </div>
               <div className={ProductBreakdownCSS.characteristic_bar}>
-                <div className={greyCharacteristicContainer}/>
-                <div className={greyCharacteristicContainer}/>
-                <div className={greyCharacteristicContainer}/>
+                <div className={greyCharacteristicContainer} />
+                <div className={greyCharacteristicContainer} />
+                <div className={greyCharacteristicContainer} />
               </div>
             </div>
             <div className={ProductBreakdownCSS.characteristic_bar}>
