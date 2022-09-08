@@ -32,11 +32,11 @@ class App extends React.Component {
     return (
       <div>
         <select value={productId} id="id-selector" onChange={(e) => { this.updateProductId(e.target.value); }}>
-          {/* <option value="65633">65633</option>
+          <option value="65633">65633</option>
           <option value="65635">65635</option>
           <option value="65640">65640</option>
           <option value="65630">65630</option>
-          <option value="65661">65661</option> */}
+          <option value="65661">65661</option>
         </select>
         <p id="id-display">
           Current Product Id:
