@@ -62,9 +62,24 @@ class RelatedProducts extends React.Component {
           {productId}
         </span> */}
         {
+          // eslint-disable-next-line no-nested-ternary
           isLoading
-            ? <FontAwesomeIcon icon={faSpinner} beat spin className={relatedProducts.loading} />
-            : hasError ? <h3 className={relatedProducts.error}>......Unstable Internet Connection. Please try again later</h3>
+            ? (
+              <div className={relatedProducts.loading}>
+                <div className={relatedProducts['loading-icon']}>
+                  <span />
+                  <span />
+                  <span />
+                </div>
+              </div>
+            )
+            // ? <FontAwesomeIcon icon={faSpinner} beat spin className={relatedProducts.loading} />
+            : hasError
+              ? (
+                <h3 className={relatedProducts.error}>
+                  ......Unstable Internet Connection. Please Try Again Later
+                </h3>
+              )
               : <ProductList productsIdToDisplay={relatedProductIds} updateProductId={updateProductId} productId={productId} listType="RelatedProducts" />
         }
       </div>

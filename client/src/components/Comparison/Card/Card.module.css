@@ -1,12 +1,15 @@
 .container {
   position: relative;
   display: inline-block;
-  width: 180px;
-  height: 250px;
+  width: 240px;
+  height: 320px;
   border: 1px solid black;
   margin: 10px 8px 10px 0;
   background-color: white;
+}
 
+.container:hover{
+  box-shadow: 0 0 10px rgba(100, 100, 100, 0.8);
 }
 
 .container:last-child {
@@ -14,7 +17,7 @@
 }
 
 .container:active:not(:focus-within) {
-  outline: thick double #0ABAB5;
+  outline: 2px solid #0ABAB5;
 }
 
 #add {
@@ -35,25 +38,25 @@
   opacity: 0.3;
 }
 
+#plus-icon:hover{
+  opacity: 0.4;
+}
+
 #plus-icon:active{
   opacity: 0.6;
 }
 
 .img-container {
   width: 100%;
-  height: 150px;
+  height: 210px;
   overflow: hidden;
   display: flex;
   justify-content: center;
-  background-color: grey;
+  background-color: black;
 }
 
 img {
   height: 100%;
-}
-
-.info {
-  margin: 5px;
 }
 
 .action {
@@ -62,6 +65,10 @@ img {
   top: 10px;
   color: #0ABAB5;
   opacity: 50%;
+}
+
+.action:hover{
+  opacity: 75%;
 }
 
 .action:focus {
@@ -75,11 +82,19 @@ img {
 
 }
 
+.info {
+  margin: 10px 5px;
+}
+
 .info span{
   margin-right: 10px;
 }
 
+.info>div{
+  margin: 3px;
+}
 .info>div:nth-child(2){
   font-weight: bold;
   font-size: 1.1em;
 }
+

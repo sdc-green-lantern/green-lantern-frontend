@@ -93,7 +93,7 @@ class Card extends React.Component {
 
     if (cardType === 'add') {
       return (
-        <div className={card.container} onClick={this.addYourProduct} id={card.add} >
+        <div className={card.container} onClick={this.addYourProduct} id={card.add}>
           <FontAwesomeIcon icon={faCirclePlus} id={card['plus-icon']} />
         </div>
       );
@@ -125,7 +125,7 @@ class Card extends React.Component {
             <span style={{ display: salePrice ? 'inline' : 'none', color: salePrice ? 'red' : 'none' }}>{`$ ${salePrice}`}</span>
             <span style={{ textDecoration: salePrice ? 'line-through' : 'none', color: salePrice ? 'grey' : 'none' }}>{`$ ${originalPrice}`}</span>
           </div>
-          <Stars averageRating={averageRating} />
+          <Stars averageRating={averageRating} color="#0ABAB5" />
         </div>
       </div>
 
