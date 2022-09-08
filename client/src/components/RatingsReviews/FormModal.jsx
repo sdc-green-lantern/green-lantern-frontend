@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import stars from '../Stars/Stars.module.css';
+// import stars from '../Stars/Stars.module.css';
 
 import RatingsReviewsCSS from './RatingsReviews.module.css';
 import FormModalCSS from './FormModal.module.css';
@@ -13,6 +13,7 @@ export default class FormModal extends React.Component {
     super(props);
     this.state = {
       rating: 0,
+      hover: 0,
       recommendation: null,
       characteristics: {},
       reviewSummary: '',
@@ -31,6 +32,8 @@ export default class FormModal extends React.Component {
     this.handleImageUpload = this.handleImageUpload.bind(this);
     this.handleFormValidation = this.handleFormValidation.bind(this);
     this.submitForm = this.submitForm.bind(this);
+    this.setRating = this.setRating.bind(this);
+    this.setHover = this.setHover.bind(this);
   }
 
   componentDidMount() {
@@ -197,12 +200,20 @@ export default class FormModal extends React.Component {
       });
   }
 
+  setHover(data) {
+    this.setState({ hover: data });
+  }
+
+  setRating(data) {
+    this.setState({ rating: data });
+  }
+
   render() {
     const {
       close, productName, characteristics, featureRatings,
     } = this.props;
     const {
-      remainingChars, imgFileURLs, showUploadButton,
+      remainingChars, imgFileURLs, showUploadButton, rating, hover
     } = this.state;
     const photos = imgFileURLs.map((url) => (
       <div>
@@ -245,9 +256,6 @@ export default class FormModal extends React.Component {
       </tr>
     ));
 
-    // const [rating, setRating] = useState(0);
-    // const [hover, setHover] = useState(0);
-
     return (
       <div className={FormModalCSS.formModalBackground}>
         <div className={FormModalCSS.formModalContainer}>
@@ -268,16 +276,21 @@ export default class FormModal extends React.Component {
               Overall Rating*
               <div className={FormModalCSS.star_rating}>
                 {[...Array(5)].map((star, index) => {
-                  // index += 1;
-                  // console.log(index);
+                  index += 1;
                   return (
                     <button
-                      type="submit"
+                      type="button"
                       key={index}
                       className={FormModalCSS.button_settings}
-                    // onClick={this.handleFormValidation}
+                      onClick={() => this.setRating(index)}
+                      onMouseEnter={() => this.setHover(index)}
+                      onMouseLeave={() => this.setHover(rating)}
                     >
-                      <FontAwesomeIcon icon={faStar} size="lg" className={stars.star} />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        size="lg"
+                        className={index <= (hover || rating) ? FormModalCSS.on : FormModalCSS.off}
+                      />
                     </button>
                   );
                 })}

@@ -52,7 +52,6 @@ select {
   background-color: buttonface;
 }
 
-
 .modal_button:hover {
   background-color: darkgrey;
   cursor: pointer;
@@ -110,12 +109,24 @@ td {
 }
 
 
-
 .star_rating {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
+
+/* button {
+  all: unset;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+} */
 
 .button_settings {
   all: unset;
@@ -124,9 +135,13 @@ td {
   outline: none;
   cursor: pointer;
 }
+
 .on {
-  color: #000;
+  color: black;
 }
+
 .off {
-  color: #ccc;
+  color: lightgrey;
 }
+
+

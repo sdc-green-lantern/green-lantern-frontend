@@ -118,9 +118,11 @@
 }
 
 .button {
-  min-width: 10%;
+  /* min-width: 10%;
   max-width: 40%;
-  max-height: 5%;
+  max-height: 5%; */
+  width: fit-content;
+  height: fit-content;
   opacity: 1;
   border-radius: 0%;
   /* border: 1px solid black; */
