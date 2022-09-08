@@ -15,6 +15,7 @@ class AnswerModal extends React.Component {
       body: '',
       email: '',
       name: '',
+      showUploadButton: true,
     };
   }
 
@@ -106,11 +107,7 @@ class AnswerModal extends React.Component {
   render() {
     const { hideModal, question, productName } = this.props;
     const { question_body } = question;
-    const { imgFileURLs, photos } = this.state;
-    let showUpload = true;
-    if (photos.length === 5) {
-      showUpload = false;
-    }
+    const { imgFileURLs, photos, showUploadButton } = this.state;
     const displayPhotos = imgFileURLs.map((url, index) => (
       <img
         src={url}
@@ -150,7 +147,7 @@ class AnswerModal extends React.Component {
             </div>
             <div>
               <div>Upload you photos:</div>
-              {showUpload && <input type="file" display="none" className={AModalCSS.file} onChange={(e) => { this.handlePhotos(e); }} />}
+              {showUploadButton && <input type="file" display="none" className={AModalCSS.file} onChange={(e) => { this.handlePhotos(e); }} />}
               <div className={AModalCSS.imgContainer}>
                 {displayPhotos}
               </div>
