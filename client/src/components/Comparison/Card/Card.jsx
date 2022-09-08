@@ -14,7 +14,6 @@ class Card extends React.Component {
     if (!ratings) {
       return null;
     }
-    console.log('card..... ', ratings);
     const total = Object.entries(ratings).reduce((prev, [key, value]) => (prev + key * value), 0);
     const count = Object.entries(ratings).reduce((prev, [_, value]) => (prev + value * 1), 0);
     return Math.floor((total / count) / 0.25) * 0.25;

@@ -39,9 +39,7 @@ export default function ProductOverview({ productId, sendInteraction }) {
     // fetchData('/products/65661/styles')
     fetchData(stylesEndpoint)
       .then((response) => {
-        console.log(response.results);
         setStyles(response.results);
-        console.log(response.results[0]);
         setCurrentStyles(response.results[0]);
       })
       .catch((err) => {
@@ -50,7 +48,6 @@ export default function ProductOverview({ productId, sendInteraction }) {
 
     fetchData(reviewsEndpoint, { params: { product_id: productId } })
       .then((response) => {
-        console.log('reviews.....', response.ratings);
         const total = Object.entries(response.ratings).reduce((prev, [key, value]) => (prev + key * value), 0);
         const count = Object.entries(response.ratings).reduce((prev, [_, value]) => (prev + value * 1), 0);
         setAverageRating(Math.floor((total / count) / 0.25) * 0.25);
@@ -65,7 +62,10 @@ export default function ProductOverview({ productId, sendInteraction }) {
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interaction
     <>
       {showModal && <Modal currentStyles={currentStyles} setShowModal={setShowModal} />}
-      <div className={postyles.productoverview} onClick={(e) => sendInteraction('Product Overview', e)}>
+      <div
+        className={postyles.productoverview}
+        onClick={(e) => sendInteraction('Product Overview', e)}
+      >
         <Nav />
         <Announcements />
         <ProductInfo
