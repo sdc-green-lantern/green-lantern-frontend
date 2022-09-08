@@ -10,7 +10,7 @@ import Stars from '../../Stars/Stars.jsx';
 export default function ProductInfo(props) {
   const {
     product, styles, setShowModal,
-    currentStyles, setCurrentStyles,
+    currentStyles, setCurrentStyles, averageRating,
   } = props;
 
   let priceDisplay = (
@@ -46,7 +46,7 @@ export default function ProductInfo(props) {
         setShowModal={setShowModal}
       />
       <div className={piStyles.productoptions}>
-        <div className={piStyles.starRatings}><Stars />&nbsp;<a href="#read-reviews" className={piStyles.reviews}>Read all reviews</a></div>
+        <div className={piStyles.starRatings}><Stars averageRating={averageRating} />&nbsp;<a href="#read-reviews" className={piStyles.reviews}>Read all reviews</a></div>
         <div className={piStyles.productTitle}>
           <h3>{product.category}</h3>
           <h1>{product.name}</h1>

@@ -20,30 +20,18 @@
   width: 25%;
 }
 .addToBag {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  background-color: white;
-  font-weight: 600;
-  text-transform: uppercase;
-  padding: 0 10px;
+/*  */
   border: 1px solid black;
-  padding-left: 10px;
-  width: fit-content;
-  height: fit-content;
-  opacity: 1;
+  border-radius: 0;
+  padding: 0 10px;
+  width: 70%;
 }
 .favorite {
-  display: flex;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  border: 1px solid black;
-  width: fit-content;
-  height: fit-content;
-  opacity: 1;
+/*  */
+border: 1px solid black;
+border-radius: 0;
+padding: 0 10px;
+width: 20%;
 }
 .quantityRow, .checkoutRow{
   display: flex;

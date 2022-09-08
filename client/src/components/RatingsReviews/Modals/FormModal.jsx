@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 // import stars from '../Stars/Stars.module.css';
 
-import RatingsReviewsCSS from './RatingsReviews.module.css';
-import FormModalCSS from './FormModal.module.css';
+import RatingsReviewsCSS from '../RatingsReviews.module.css';
+import FormModalCSS from '../Modals/FormModal.module.css';
 
 export default class FormModal extends React.Component {
   constructor(props) {

@@ -3,6 +3,58 @@ import Select from 'react-select';
 import axiosConfig from '../../../../../axiosConfig.js';
 import buttonStyles from './Buttons.module.css';
 
+const sizingStyles = {
+  clearIndicator: () => ({}),
+  // container: () => ({}),
+  control: (provided) => ({
+    ...provided,
+    border: '1px solid black',
+    borderRadius: '0',
+    padding: '0 10px',
+    height: '100%',
+    width: '160%',
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+    color: 'black',
+  }),
+  // group
+  // groupHeading
+  // indicatorsContainer
+  indicatorSeparator: (provided) => ({
+    ...provided,
+    display: 'none',
+  }),
+// input
+// loadingIndicator
+// loadingMessage
+  menu: (provided) => ({
+    ...provided,
+    width: "160%",
+  }),
+// menuList
+// menuPortal
+// multiValue
+// multiValueLabel
+// multiValueRemove
+// noOptionsMessage
+// option
+// placeholder
+// singleValue
+// valueContainer
+};
+
+const quantityStyles = {
+  control: (provided) => ({
+    ...provided,
+    height: '100%',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    width: "160%",
+  }),
+};
+
 export default function Buttons({ currentStyles }) {
   const [selectedSku, setSkuInfo] = useState({ sku_id: '', quantity: 0 });
   const [selectValue, setSelectValue] = useState('');
@@ -59,7 +111,7 @@ export default function Buttons({ currentStyles }) {
       {message && <div>Please select a size</div>}
       <div className={buttonStyles.quantityRow}>
         <Select
-          // className={}
+          styles={sizingStyles}
           id="Selector"
           placeholder={arraySkus.length === 0 ? 'OUT OF STOCK' : 'SELECT SIZE'}
           openMenuOnFocus
@@ -69,19 +121,11 @@ export default function Buttons({ currentStyles }) {
           onChange={handleChange}
         />
 
-        {/* <select className={buttonStyles.selectSize} defaultValue="default" onChange={(e) => handleChange(e)}>
-          <option value="default" disabled="disabled">{arraySkus.length === 0 ? 'OUT OF STOCK' : 'SELECT SIZE'}</option>
-          {arraySkus.map((skuObj, index) => (
-            <option
-              className={buttonStyles.selectSize}
-              value={skuObj.skuID}
-              key={index}
-            >
-              {skuObj.size}
-            </option>
-          ))}
-        </select> */}
-        <select className={buttonStyles.selectQuantity} defaultValue="1" onChange={(e) => setCount(e.target.value)}>
+        <select
+          className={buttonStyles.selectQuantity}
+          defaultValue="1" onChange={(e) => setCount(e.target.value)}
+          style={quantityStyles}
+        >
           {selectedSku.quantity === 0 ? <option value="1" disabled="disabled">-</option> : <option value="1">1</option>}
           {(itterate.slice(1, selectedSku.quantity)).map((number, index) => (
             <option
@@ -96,11 +140,11 @@ export default function Buttons({ currentStyles }) {
       </div>
       <div className={buttonStyles.checkoutRow}>
         {arraySkus.length !== 0 && (
-        <button type="submit" className={buttonStyles.addToBag} onClick={sendToCart}>
+        <button className={buttonStyles.addToBag} type="submit" onClick={sendToCart}>
           ADD TO BAG
         </button>
         )}
-        <button type="submit" className={buttonStyles.favorite}>⭐</button>
+        <button className={buttonStyles.favorite} type="submit">⭐</button>
       </div>
     </div>
   );
