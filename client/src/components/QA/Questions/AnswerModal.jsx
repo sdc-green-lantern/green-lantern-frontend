@@ -18,7 +18,8 @@ class AnswerModal extends React.Component {
     };
   }
 
-  validateForm = () => {
+  validateForm = (e) => {
+    e.preventDefault();
     let isValid = true;
     let warning = 'You must enter the following: ';
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
