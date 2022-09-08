@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
-import RatingsReviewsCSS from './RatingsReviews.module.css';
+import RatingsReviewsCSS from '../RatingsReviews.module.css';
 import ReviewImageModalCSS from './ReviewImageModal.module.css';
 
 export default class ReviewImageModal extends React.Component {

@@ -1,6 +1,6 @@
 import React from 'react';
 import RatingsReviewsCSS from './RatingsReviews.module.css';
-import FormModal from './FormModal.jsx';
+import FormModal from './Modals/FormModal.jsx';
 
 export default class NewReview extends React.Component {
   constructor(props) {
