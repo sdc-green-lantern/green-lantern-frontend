@@ -78,7 +78,6 @@ export default function Buttons({ currentStyles }) {
   }
 
   const handleChange = (selectValue) => {
-    console.log(currentStyles);
     setSelectValue(selectValue);
     showMessage(false);
     // console.log(selectValue);
@@ -95,7 +94,7 @@ export default function Buttons({ currentStyles }) {
       for (let i = 0; i < selectedCount; i += 1) {
         axiosConfig.post('/cart', { sku_id: selectedSku.sku_id })
           .then((result) => {
-            console.log(result);
+            // console.log(result);
           })
           .catch((err) => {
             console.log(err);

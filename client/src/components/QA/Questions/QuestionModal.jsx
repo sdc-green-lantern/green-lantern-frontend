@@ -37,7 +37,6 @@ class QuestionModal extends React.Component {
     }
     warning = warning.slice(0, warning.length - 1);
     if (isValid) {
-      console.log('inside validate');
       this.submitQuestion();
     } else {
       alert(warning);
@@ -62,8 +61,7 @@ class QuestionModal extends React.Component {
     const { toggleQModal, getQuestions } = this.props;
     console.log('inside submit Question');
     axiosConfig.post('/qa/questions', this.state)
-      .then((response) => {
-        console.log(response);
+      .then(() => {
         toggleQModal(false);
         getQuestions();
       })

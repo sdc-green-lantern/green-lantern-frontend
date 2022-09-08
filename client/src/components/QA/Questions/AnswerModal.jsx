@@ -46,7 +46,6 @@ class AnswerModal extends React.Component {
 
     warning = warning.slice(0, warning.length - 1);
     if (isValid) {
-      console.log('validated');
       this.submitAnswer();
     } else {
       alert(warning);
@@ -63,10 +62,6 @@ class AnswerModal extends React.Component {
     const { photos, imgFileURLs } = this.state;
     photos.push(e.target.value);
     this.setState({ photos });
-
-    // if (photos.length >= 5) {
-    //   this.setState({ showUploadButton: false });
-    // }
 
     const body = new FormData();
     body.set('key', IMGBB_API_KEY);
@@ -96,8 +91,7 @@ class AnswerModal extends React.Component {
     axiosConfig.post(`/qa/questions/${question_id}/answers`, {
       body, name, email, photos: imgFileURLs,
     })
-      .then((response) => {
-        console.log(response);
+      .then(() => {
         hideModal();
         getAnswers();
       })
