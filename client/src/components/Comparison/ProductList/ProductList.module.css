@@ -76,19 +76,13 @@ h2.title {
   opacity: 1
 }
 
-/* TO-DO: Bug Fix!
-  Why is this here?
-  We should not be setting top level tag styles within individual products.
-*/
-/* button {
+.scroll-left>button, .scroll-right>button {
   position: absolute;
   height: 60px;
   width: 50px;
   opacity: 0.3;
   border-radius: 10%;
-} */
-
-
+}
 
 .arrow-left {
   box-sizing: border-box;
