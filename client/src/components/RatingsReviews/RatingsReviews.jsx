@@ -268,24 +268,26 @@ class RatingsReviews extends React.Component {
               handleGetReviews={this.handleGetReviews}
             />
           </div>
-          <div className={RatingsReviewsCSS.more_reviews_btn_box}>
-            <MoreReviews
-              handleMoreReviews={this.handleMoreReviews}
-              numReviews={numReviews}
-              numDisplayed={numDisplayed}
-            />
-          </div>
-          <div className={RatingsReviewsCSS.write_new_review_btn_box}>
-            <NewReview
-              axiosConfig={axiosConfig}
-              IMGBB_API_KEY={IMGBB_API_KEY}
-              productName={productName}
-              productId={productId}
-              characteristics={metadata.characteristics}
-              updateReviews={this.updateReviews}
-              featureRatings={featureRatings}
-            />
-          </div>
+          <div className={RatingsReviewsCSS.review_buttons_container}>
+              <div className={RatingsReviewsCSS.review_btn_box}>
+                <MoreReviews
+                  handleMoreReviews={this.handleMoreReviews}
+                  numReviews={numReviews}
+                  numDisplayed={numDisplayed}
+                />
+              </div>
+              <div className={RatingsReviewsCSS.review_btn_box}>
+                <NewReview
+                  axiosConfig={axiosConfig}
+                  IMGBB_API_KEY={IMGBB_API_KEY}
+                  productName={productName}
+                  productId={productId}
+                  characteristics={metadata.characteristics}
+                  updateReviews={this.updateReviews}
+                  featureRatings={featureRatings}
+                />
+              </div>
+            </div>
         </div>
       </div>
     );

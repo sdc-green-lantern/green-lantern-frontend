@@ -106,13 +106,24 @@
   flex-direction: column;
 }
 
-.more_reviews_btn_box {
+.review_buttons_container {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-around; */
+  justify-content: center;
+  padding: 1.0em;
+  /* gap: 40%; */
+  grid-row: 6;
+  grid-column: 2/5;
+}
+
+.review_btn_box {
   display: flex;
   justify-content: center;
   align-items: center;
   /* background-color: orange; */
-  grid-row: 6;
-  grid-column: 2/3;
+  /* grid-row: 6; */
+  /* grid-column: 2/3; */
   /* border: 1px solid black; */
   padding: 1em;
 }
@@ -144,8 +155,8 @@
   /* background-color: orange; */
   justify-content: center;
   align-items: center;
-  grid-row: 6;
-  grid-column: 3/3;
+  /* grid-row: 6;
+  grid-column: 3/3; */
   padding: 1em;
   /* border: 1px solid black; */
 }
