@@ -23,9 +23,9 @@ class ReviewsList extends React.Component {
     ));
 
     return (
-      <div>
+      <>
         {reviewTiles}
-      </div>
+      </>
     );
   }
 }
