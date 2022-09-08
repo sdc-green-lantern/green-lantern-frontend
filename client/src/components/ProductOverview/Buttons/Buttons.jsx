@@ -93,9 +93,9 @@ export default function Buttons({ currentStyles }) {
     if (selectedSku.sku_id && selectedSku.quantity > 0) {
       for (let i = 0; i < selectedCount; i += 1) {
         axiosConfig.post('/cart', { sku_id: selectedSku.sku_id })
-          // .then((result) => {
-          //   console.log(result);
-          // })
+          .then((result) => {
+            // console.log(result);
+          })
           .catch((err) => {
             console.log(err);
           });

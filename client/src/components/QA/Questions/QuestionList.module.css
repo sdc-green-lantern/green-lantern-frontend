@@ -14,14 +14,30 @@
   left: 45%;
   width: fit-content;
   height: fit-content;
+  border: none;
+  border-radius: 0%;
+  background-color: lightseagreen;
+  padding: 5px 10px;
   cursor: pointer;
-  color: blue;
+  font-weight: 600;
+  text-transform: uppercase;
+  opacity: 1;
+  color: black;
 }
 
 .moreButton {
   right: 60%;
   width: fit-content;
   height: fit-content;
+  border: none;
+  border-radius: 0%;
+  background-color: lightseagreen;
+  padding: 5px 10px;
   cursor: pointer;
-  color: blue;
+  font-weight: 600;
+  text-transform: uppercase;
+  opacity: 1;
+  color: black;
 }
+
+/* .moreButton .hover */

@@ -18,7 +18,8 @@ class AnswerModal extends React.Component {
     };
   }
 
-  validateForm = () => {
+  validateForm = (e) => {
+    e.preventDefault();
     let isValid = true;
     let warning = 'You must enter the following: ';
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -61,10 +62,6 @@ class AnswerModal extends React.Component {
     const { photos, imgFileURLs } = this.state;
     photos.push(e.target.value);
     this.setState({ photos });
-
-    if (photos.length >= 5) {
-      this.setState({ showUploadButton: false });
-    }
 
     const body = new FormData();
     body.set('key', IMGBB_API_KEY);

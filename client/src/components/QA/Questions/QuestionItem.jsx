@@ -66,7 +66,7 @@ class QuestionItem extends React.Component {
     const { yesCount } = this.state;
     if (yesCount < 1) {
       axiosConfig.put(`/qa/questions/${question_id}/helpful`)
-        .then((response) => {
+        .then(() => {
           this.setState({
             yesCount: yesCount + 1,
           });

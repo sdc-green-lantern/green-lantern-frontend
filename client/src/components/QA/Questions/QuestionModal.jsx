@@ -59,6 +59,7 @@ class QuestionModal extends React.Component {
 
   submitQuestion = () => {
     const { toggleQModal, getQuestions } = this.props;
+    console.log('inside submit Question');
     axiosConfig.post('/qa/questions', this.state)
       .then(() => {
         toggleQModal(false);

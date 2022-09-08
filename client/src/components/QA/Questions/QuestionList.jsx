@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 import QListCSS from './QuestionList.module.css';
 import QuestionItem from './QuestionItem.jsx';
 import QuestionModal from './QuestionModal.jsx';

@@ -8,8 +8,10 @@
   background-repeat: no-repeat;
   background-color: transparent;
   border: none;
+  text-decoration: underline;
   cursor: pointer;
   overflow: hidden;
   outline: none;
-  color: blue;
+  opacity: 1;
+  color: lightseagreen;
 }

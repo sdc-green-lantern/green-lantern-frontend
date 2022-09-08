@@ -5,6 +5,7 @@ export default function Carousel({ currentStyles, setShowModal }) {
   const [productImages, setProductImages] = useState([]);
   const [currentImage, setCurrentImage] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [borderSpec, setBorderSpec] = useState('none');
 
   useEffect(() => {
     //
@@ -40,7 +41,7 @@ export default function Carousel({ currentStyles, setShowModal }) {
   const handleThumbnailClick = (index) => {
     setCurrentIndex(index);
     setCurrentImage(productImages[index].url);
-    // console.log('thumbclick/index... ', index);
+    console.log('thumbclick/index... ', index);
     // console.log('thumbclick/currentImg... ', productImages[index].url);
   };
 
@@ -57,7 +58,8 @@ export default function Carousel({ currentStyles, setShowModal }) {
           <div
             className={carouselstyles.thumbnail}
             onClick={() => {handleThumbnailClick(index)}}
-            key={index} id={index}
+            key={index}
+            tabIndex="1"
             productimage={productImage}
             style={{ backgroundImage: `url(${productImage.thumbnail_url})` }}
           />))}
