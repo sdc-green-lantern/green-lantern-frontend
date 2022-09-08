@@ -23,7 +23,7 @@ class App extends React.Component {
 
   updateProductId(id) {
     this.setState({
-      productId: id,
+      productId: Number(id),
     });
   }
 

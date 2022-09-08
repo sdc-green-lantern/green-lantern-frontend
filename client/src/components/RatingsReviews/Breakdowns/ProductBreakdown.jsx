@@ -38,7 +38,7 @@ export default class ProductBreakdown extends React.Component {
             className={ProductBreakdownCSS.characteristic_container}
             key={id}
           >
-            <h2>{name}</h2>
+            <div className={ProductBreakdownCSS.characteristicText}>{name}</div>
             <div className={ProductBreakdownCSS.characteristic_row}>
               <div
                 className={ProductBreakdownCSS.characteristic_rating}
