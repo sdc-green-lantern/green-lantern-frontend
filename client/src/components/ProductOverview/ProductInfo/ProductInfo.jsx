@@ -9,7 +9,7 @@ import Stars from '../../Stars/Stars.jsx';
 
 export default function ProductInfo(props) {
   const {
-    product, styles,
+    product, styles, setShowModal,
     currentStyles, setCurrentStyles,
   } = props;
 
@@ -23,10 +23,11 @@ export default function ProductInfo(props) {
   if (currentStyles.sale_price !== null) {
     priceDisplay = (
       <span>
-        <strike>
+        <del>
           $
           {currentStyles.original_price}
-        </strike>
+        </del>
+        &nbsp;
         $
         {currentStyles.sale_price}
       </span>
@@ -42,6 +43,7 @@ export default function ProductInfo(props) {
       <Carousel
         data-testid="Carousel"
         currentStyles={currentStyles}
+        setShowModal={setShowModal}
       />
       <div className={piStyles.productoptions}>
         <div className={piStyles.starRatings}><Stars />&nbsp;<a href="#read-reviews" className={piStyles.reviews}>Read all reviews</a></div>
