@@ -20,6 +20,3 @@ app.listen(PORT, () => {
 });
 
 // **need to reconfigure webpack and add server script**
-// 1. clarify edge case
-// 2. confirm time/space complexity
-// 3.
