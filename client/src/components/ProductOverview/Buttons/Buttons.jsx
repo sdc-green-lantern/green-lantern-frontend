@@ -60,6 +60,7 @@ export default function Buttons({ currentStyles }) {
       <div className={buttonStyles.quantityRow}>
         <Select
           // className={}
+          className={buttonStyles.selectSize}
           id="Selector"
           placeholder={arraySkus.length === 0 ? 'OUT OF STOCK' : 'SELECT SIZE'}
           openMenuOnFocus
