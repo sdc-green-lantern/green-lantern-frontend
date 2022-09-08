@@ -8,14 +8,10 @@ const path = require('path');
 app.use(cors());
 app.use(express.json());
 
-app.use('/products/:id', express.static(path.join(__dirname, '../client/dist/')));
+app.use('/products', express.static(path.join(__dirname, '../client/dist/')));
 
-app.use((err, req, res, next) => {
-  if (err) {
-    console.log(err.message);
-    console.log(err.stack);
-    res.end('404');
-  }
+app.use('/', (req, res) => {
+  res.send('<h1>......404 Not Found</h1>');
 });
 
 const PORT = process.env.PORT || 3030;
