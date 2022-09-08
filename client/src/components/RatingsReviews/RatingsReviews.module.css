@@ -106,6 +106,20 @@
   flex-direction: column;
 }
 
+.review_buttons_container_no_reviews {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  justify-content: flex-start;
+  /* padding: 1.0em; */
+  /* gap: 40%; */
+  grid-row: 3;
+  grid-column: 2/5;
+  height: fit-content;
+  padding-left: 5%;
+}
+
+
 .review_buttons_container {
   display: flex;
   flex-direction: row;
@@ -115,6 +129,7 @@
   /* gap: 40%; */
   grid-row: 6;
   grid-column: 2/5;
+  height: fit-content;
 }
 
 .review_btn_box {

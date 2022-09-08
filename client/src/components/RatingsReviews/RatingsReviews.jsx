@@ -259,6 +259,12 @@ class RatingsReviews extends React.Component {
               handleSort={this.handleSort}
             />
           </div>
+          {/* {numReviews > 0 ? (
+
+          )
+
+          } */}
+
           <div className={RatingsReviewsCSS.reviews_list}>
             <ReviewsList
               axiosConfig={axiosConfig}
@@ -268,7 +274,9 @@ class RatingsReviews extends React.Component {
               handleGetReviews={this.handleGetReviews}
             />
           </div>
-          <div className={RatingsReviewsCSS.review_buttons_container}>
+
+          {numReviews > 0 ? (
+            <div className={RatingsReviewsCSS.review_buttons_container}>
               <div className={RatingsReviewsCSS.review_btn_box}>
                 <MoreReviews
                   handleMoreReviews={this.handleMoreReviews}
@@ -288,6 +296,24 @@ class RatingsReviews extends React.Component {
                 />
               </div>
             </div>
+          ) : (
+            <div className={RatingsReviewsCSS.review_buttons_container_no_reviews}>
+              <div>
+                <p>There are no reviews for this product.</p>
+              </div>
+              <div>
+                <NewReview
+                  axiosConfig={axiosConfig}
+                  IMGBB_API_KEY={IMGBB_API_KEY}
+                  productName={productName}
+                  productId={productId}
+                  characteristics={metadata.characteristics}
+                  updateReviews={this.updateReviews}
+                  featureRatings={featureRatings}
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
