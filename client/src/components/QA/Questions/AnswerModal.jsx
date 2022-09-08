@@ -15,7 +15,6 @@ class AnswerModal extends React.Component {
       body: '',
       email: '',
       name: '',
-      showUploadButton: true,
     };
   }
 
@@ -46,6 +45,7 @@ class AnswerModal extends React.Component {
 
     warning = warning.slice(0, warning.length - 1);
     if (isValid) {
+      console.log('validated');
       this.submitAnswer();
     } else {
       alert(warning);
@@ -63,9 +63,9 @@ class AnswerModal extends React.Component {
     photos.push(e.target.value);
     this.setState({ photos });
 
-    if (photos.length >= 5) {
-      this.setState({ showUploadButton: false });
-    }
+    // if (photos.length >= 5) {
+    //   this.setState({ showUploadButton: false });
+    // }
 
     const body = new FormData();
     body.set('key', IMGBB_API_KEY);
@@ -95,7 +95,8 @@ class AnswerModal extends React.Component {
     axiosConfig.post(`/qa/questions/${question_id}/answers`, {
       body, name, email, photos: imgFileURLs,
     })
-      .then(() => {
+      .then((response) => {
+        console.log(response);
         hideModal();
         getAnswers();
       })
@@ -107,7 +108,11 @@ class AnswerModal extends React.Component {
   render() {
     const { hideModal, question, productName } = this.props;
     const { question_body } = question;
-    const { imgFileURLs, photos, showUploadButton } = this.state;
+    const { imgFileURLs, photos } = this.state;
+    let showUpload = true;
+    if (photos.length === 5) {
+      showUpload = false;
+    }
     const displayPhotos = imgFileURLs.map((url, index) => (
       <img
         src={url}
@@ -147,7 +152,7 @@ class AnswerModal extends React.Component {
             </div>
             <div>
               <div>Upload you photos:</div>
-              {showUploadButton && <input type="file" display="none" className={AModalCSS.file} onChange={(e) => { this.handlePhotos(e); }} />}
+              {showUpload && <input type="file" display="none" className={AModalCSS.file} onChange={(e) => { this.handlePhotos(e); }} />}
               <div className={AModalCSS.imgContainer}>
                 {displayPhotos}
               </div>
