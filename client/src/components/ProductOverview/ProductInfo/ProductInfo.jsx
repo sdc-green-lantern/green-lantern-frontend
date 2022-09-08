@@ -45,7 +45,9 @@ export default function ProductInfo(props) {
         currentStyles={currentStyles}
       />
       <div className={piStyles.productoptions}>
-        <div className={piStyles.starRatings}><button type="submit" onClick={() => window.scrollTo({ top: 1900, left: 0, behavior: 'smooth' })}>Read all reviews</button></div>
+        <div className={piStyles.starRatings}>
+          <button type="submit" className={piStyles.goToReviews} onClick={() => window.scrollTo({ top: 1900, left: 0, behavior: 'smooth' })}>Read all reviews</button>
+        </div>
         <div className={piStyles.productTitle}>
           <h3>{product.category}</h3>
           <h1>{product.name}</h1>

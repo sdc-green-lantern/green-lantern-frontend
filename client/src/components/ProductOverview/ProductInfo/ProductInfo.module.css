@@ -12,6 +12,20 @@
   font-size: 12px;
   text-decoration: underline;
 }
+.goToReviews {
+  text-decoration: underline;
+  width: fit-content;
+  height: fit-content;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  opacity: 1;
+  color: lightseagreen;
+
+}
 .productTitle {
   /* border: 1px solid red; */
   line-height: 5px;
