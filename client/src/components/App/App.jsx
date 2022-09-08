@@ -31,6 +31,7 @@ class App extends React.Component {
     const { productId } = this.state;
     return (
       <div>
+        {/*
         <select value={productId} id="id-selector" onChange={(e) => { this.updateProductId(e.target.value); }}>
           <option value="65633">65633</option>
           <option value="65635">65635</option>
@@ -42,6 +43,7 @@ class App extends React.Component {
           Current Product Id:
           {productId}
         </p>
+        */}
         <Tracker
           render={(sendInteraction) => (
             <ProductOverview
