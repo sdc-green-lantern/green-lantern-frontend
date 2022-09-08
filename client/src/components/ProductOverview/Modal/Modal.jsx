@@ -10,7 +10,6 @@ const Container = styled.div`
   display: block;
   padding: 30px;
   height: 72vh;
-  max-width: 100%;
 `;
 
 const Image = styled.img.attrs((props) => ({
@@ -18,6 +17,8 @@ const Image = styled.img.attrs((props) => ({
 }))``;
 
 const Target = styled(Image)`
+  width: 250%;
+  height: 250%;
   position: absolute;
   left: ${(props) => props.offset.left}px;
   top: ${(props) => props.offset.top}px;
