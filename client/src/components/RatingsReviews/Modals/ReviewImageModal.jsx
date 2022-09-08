@@ -18,7 +18,7 @@ export default class ReviewImageModal extends React.Component {
           <div>
             <button
               onClick={close}
-              className={RatingsReviewsCSS.button}
+              className={ReviewImageModalCSS.closeModalButton}
               type="button"
             >
               {/* <FontAwesomeIcon icon={faWindowClose} /> */}
