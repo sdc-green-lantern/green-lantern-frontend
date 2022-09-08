@@ -1,0 +1,68 @@
+.modal {
+  height: 100vh;
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  text-align: center;
+  z-index: 100;
+}
+.imgContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.leftArrow {
+  cursor: pointer;
+  color: grey;
+  font-size: 2rem;
+  padding-right: 20px;
+  transition: color 0.2s;
+}
+.rightArrow {
+  cursor: pointer;
+  color: grey;
+  font-size: 2rem;
+  padding-left: 20px;
+  transition: color 0.2s;
+}
+.leftArrow:hover, .rightArrow:hover {
+  color: black;
+}
+/* .image {
+  cursor: crosshair;
+  height: 88vh;
+  max-width: 100%;
+} */
+.button {
+  font-size: 2rem;
+  background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+  position: fixed;
+  z-index: 1000;
+}
+.button span {
+  color: black;
+}
+.thumbnailRow {
+  display: flex;
+  justify-content: center;
+  height: 10vh;
+}
+.thumbs {
+  cursor: pointer;
+  width: 6vw;
+  height: 12vh;
+}
+/* .zoom {
+  display: flex;
+  align-items: center;
+  overflow: auto;
+} */
+/* -ms-overflow-style: none;  Internet Explorer 10+ */
+/* scrollbar-width: none;  Firefox */
+/* .zoom::-webkit-scrollbar {
+  display: none;  Safari and Chrome
+} */

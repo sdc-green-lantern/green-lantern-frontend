@@ -12,9 +12,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 65635, // Pugs: 65633 // Shoes: 65635 //sales price: 65661
+      productId: 65661, // Pugs: 65633 // Shoes: 65635 //sales price: 65661
     };
     this.updateProductId = this.updateProductId.bind(this);
+  }
+
+  componentDidMount() {
+    console.log(this.props);
   }
 
   updateProductId(id) {
@@ -27,7 +31,7 @@ class App extends React.Component {
     const { productId } = this.state;
     return (
       <div>
-        <select id="id-selector" onChange={(e) => { this.updateProductId(e.target.value); }}>
+        <select value={productId} id="id-selector" onChange={(e) => { this.updateProductId(e.target.value); }}>
           <option value="65633">65633</option>
           <option value="65635">65635</option>
           <option value="65640">65640</option>

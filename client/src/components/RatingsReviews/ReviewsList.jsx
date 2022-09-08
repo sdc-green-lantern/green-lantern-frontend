@@ -1,6 +1,6 @@
 import React from 'react';
 import ReviewTile from './ReviewTile.jsx';
-// import instance from '../../axiosConfig.js'
+import RatingsReviewsCSS from './RatingsReviews.module.css';
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -22,11 +22,18 @@ class ReviewsList extends React.Component {
       />
     ));
 
-    return (
-      <div>
-        {reviewTiles}
-      </div>
-    );
+    if (reviewTiles.length > 0) {
+      return (
+        <>
+          {reviewTiles}
+        </>
+      );
+    } else {
+      return (
+        <></>
+      )
+    }
+
   }
 }
 

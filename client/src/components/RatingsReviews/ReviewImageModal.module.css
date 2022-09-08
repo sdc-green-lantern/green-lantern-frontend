@@ -1,18 +1,24 @@
 .imgModalBackground {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 9999;
   width: 100%;
   height: 100%;
-  padding-top: 100px;
+  /* padding: 5%; */
   background-color: black;
+  /* margin: 0%; */
 }
 
 .imgModalContainer {
   background-color: black;
   display: flex;
   justify-content: center;
+  width: 80%;
+  height: 80%;
+  /* margin: 0%; */
 }
 

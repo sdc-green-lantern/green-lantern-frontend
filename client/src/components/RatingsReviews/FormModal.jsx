@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-// import fs from "fs";
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+// import stars from '../Stars/Stars.module.css';
+
 import RatingsReviewsCSS from './RatingsReviews.module.css';
 import FormModalCSS from './FormModal.module.css';
 
@@ -12,6 +13,7 @@ export default class FormModal extends React.Component {
     super(props);
     this.state = {
       rating: 0,
+      hover: 0,
       recommendation: null,
       characteristics: {},
       reviewSummary: '',
@@ -22,14 +24,6 @@ export default class FormModal extends React.Component {
       remainingChars: 50,
       imgFilePaths: [],
       showUploadButton: true,
-      featureRatings: {
-        Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
-        Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
-        Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
-        Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
-        Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-        Fit: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-      },
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleNumericChange = this.handleNumericChange.bind(this);
@@ -38,6 +32,8 @@ export default class FormModal extends React.Component {
     this.handleImageUpload = this.handleImageUpload.bind(this);
     this.handleFormValidation = this.handleFormValidation.bind(this);
     this.submitForm = this.submitForm.bind(this);
+    this.setRating = this.setRating.bind(this);
+    this.setHover = this.setHover.bind(this);
   }
 
   componentDidMount() {
@@ -69,7 +65,7 @@ export default class FormModal extends React.Component {
 
   handleCharacteristicsChange(event) {
     // console.log(event.target.value);
-    let { characteristics } = this.state;
+    const { characteristics } = this.state;
     characteristics[event.target.name] = Number(event.target.value);
     // console.log(characteristics);
     this.setState({ characteristics });
@@ -108,6 +104,8 @@ export default class FormModal extends React.Component {
         // console.log(response.data.data.display_url);
         imgFileURLs.push(response.data.data.display_url);
         this.setState({ imgFileURLs });
+        // console.log(imgFileURLs);
+        // console.log(imgFilePaths);
       })
       .catch((error) => {
         console.log(error);
@@ -123,6 +121,7 @@ export default class FormModal extends React.Component {
     const {
       rating, recommendation, characteristics,
       displayName, email, remainingChars,
+      imgFilePaths, imgFileURLs,
     } = this.state;
 
     if (rating === 0) {
@@ -144,10 +143,17 @@ export default class FormModal extends React.Component {
       isValid = false;
       warning += '\n - valid review body';
     }
+
+    if (imgFilePaths.length !== imgFileURLs.length) {
+      isValid = false;
+      warning += ' valid image file type';
+    }
+
     if (displayName.length < 1) {
       isValid = false;
       warning += '\n - valid nickname';
     }
+
     if (email.length < 1 || regex.test(email) === false) {
       isValid = false;
       warning += '\n - valid email';
@@ -194,10 +200,20 @@ export default class FormModal extends React.Component {
       });
   }
 
+  setHover(data) {
+    this.setState({ hover: data });
+  }
+
+  setRating(data) {
+    this.setState({ rating: data });
+  }
+
   render() {
-    const { close, productName, characteristics } = this.props;
     const {
-      remainingChars, imgFileURLs, showUploadButton, featureRatings,
+      close, productName, characteristics, featureRatings,
+    } = this.props;
+    const {
+      remainingChars, imgFileURLs, showUploadButton, rating, hover
     } = this.state;
     const photos = imgFileURLs.map((url) => (
       <div>
@@ -258,18 +274,27 @@ export default class FormModal extends React.Component {
           <form>
             <div>
               Overall Rating*
-              <select
-                name="rating"
-                onChange={this.handleNumericChange}
-                required
-              >
-                <option defaultValue value={0}>--Select a Rating--</option>
-                <option value={1}>★</option>
-                <option value={2}>★★</option>
-                <option value={3}>★★★</option>
-                <option value={4}>★★★★</option>
-                <option value={5}>★★★★★</option>
-              </select>
+              <div className={FormModalCSS.star_rating}>
+                {[...Array(5)].map((star, index) => {
+                  index += 1;
+                  return (
+                    <button
+                      type="button"
+                      key={index}
+                      className={FormModalCSS.button_settings}
+                      onClick={() => this.setRating(index)}
+                      onMouseEnter={() => this.setHover(index)}
+                      onMouseLeave={() => this.setHover(rating)}
+                    >
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        size="lg"
+                        className={index <= (hover || rating) ? FormModalCSS.on : FormModalCSS.off}
+                      />
+                    </button>
+                  );
+                })}
+              </div>
             </div>
             <div>
               <p>Do you recommend this product?*</p>

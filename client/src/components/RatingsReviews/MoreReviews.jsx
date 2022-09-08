@@ -11,7 +11,7 @@ class MoreReviews extends React.Component {
     const { numReviews, numDisplayed, handleMoreReviews } = this.props;
     if (numReviews === numDisplayed) {
       return (
-        <div />
+        <></>
       );
     }
     return (

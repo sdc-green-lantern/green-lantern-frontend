@@ -4,6 +4,7 @@
   "description": "Our outdated client-facing retail web-portal has become significantly outdated and has been proven to be hurting sales numbers. This new project comprises a complete redesign of the retail portal designed to address this concern and modernize the site. This document outlines the features to be implemented as part of the project in its initial release. The following requirements define the new user interface required for customers to browse items in our retail catalog.\t ",
   "main": "client/src/index.js",
   "scripts": {
+    "server-dev": "npx nodemon --watch server server/index.js",
     "dev": "webpack serve",
     "build": "webpack",
     "test": "jest --env=jsdom",
@@ -28,6 +29,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^0.27.2",
+    "cors": "^2.8.5",
     "date-fns": "^2.29.2",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
@@ -36,6 +38,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
+    "react-select": "^5.4.0",
     "react-spring": "^9.0.0-rc.3",
     "styled-components": "^5.3.5",
     "underscore": "^1.13.4"

@@ -88,6 +88,7 @@ export default class ReviewTile extends React.Component {
         key={photo.id}
         onClick={this.showReviewImageModal}
         role="button"
+        className={RatingsReviewsCSS.photo_container}
       >
         <img
           src={photo.url}
@@ -133,14 +134,21 @@ export default class ReviewTile extends React.Component {
               )}
 
           </div>
-          <div className={RatingsReviewsCSS.photos}>
+        </div>
+        <div className={RatingsReviewsCSS.photos}>
             {photos}
-          </div>
-
         </div>
         <div>
-          <FontAwesomeIcon icon={faCheck} />
-          {recommend}
+          {recommend !== '' ?
+            (
+              <>
+                <FontAwesomeIcon icon={faCheck} />
+                {recommend}
+              </>
+            ) : (
+              <></>
+            )}
+
         </div>
         <div className={RatingsReviewsCSS.review_response}>
           {response !== ''
@@ -180,6 +188,9 @@ export default class ReviewTile extends React.Component {
             photo={currentPhoto}
           />
         )}
+        <div>
+          <hr />
+        </div>
       </div>
     );
   }

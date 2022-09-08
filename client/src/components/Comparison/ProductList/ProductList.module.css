@@ -76,13 +76,17 @@ h2.title {
   opacity: 1
 }
 
-button {
+/* TO-DO: Bug Fix!
+  Why is this here?
+  We should not be setting top level tag styles within individual products.
+*/
+/* button {
   position: absolute;
   height: 60px;
   width: 50px;
   opacity: 0.3;
   border-radius: 10%;
-}
+} */
 
 
 

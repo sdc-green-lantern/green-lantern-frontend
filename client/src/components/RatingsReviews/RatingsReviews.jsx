@@ -7,6 +7,7 @@ import MoreReviews from './MoreReviews.jsx';
 import SortOptions from './SortOptions.jsx';
 import NewReview from './NewReview.jsx';
 import RatingsBreakdown from './Breakdowns/RatingsBreakdown.jsx';
+import ProductBreakdown from './Breakdowns/ProductBreakdown.jsx';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
@@ -24,6 +25,14 @@ class RatingsReviews extends React.Component {
       ratingProportions: {},
       ratingCounts: {},
       selectedRatings: [],
+      featureRatings: {
+        Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
+        Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+        Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+        Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+        Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+        Fit: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+      },
     };
 
     this.updateReviews = this.updateReviews.bind(this);
@@ -155,7 +164,7 @@ class RatingsReviews extends React.Component {
   }
 
   calculateRatings(metadata) {
-    console.log("Metadata Ratings: ", metadata.ratings);
+    // console.log("Metadata Ratings: ", metadata.ratings);
     const ratings = [1, 2, 3, 4, 5];
     // const counts = Object.values(metadata.ratings);
     // console.log(metadata.ratings);
@@ -214,18 +223,15 @@ class RatingsReviews extends React.Component {
     const {
       reviews, displayedReviews, numReviews, numDisplayed, productName, metadata,
       avgRating, pctRecommend, ratingProportions, ratingCounts, selectedRatings,
+      featureRatings,
     } = this.state;
     return (
       // eslint-disable-next-line max-len
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
       <div className={RatingsReviewsCSS.ratings_section} onClick={(e) => sendInteraction('Ratings and Reviews', e)}>
-        <div className={RatingsReviewsCSS.ratings_container}>
+        <div className={RatingsReviewsCSS.ratings_container} id="read-reviews">
           <div className={RatingsReviewsCSS.ratings_header} data-testid="RatingsReviews-header">
-            RATINGS & REVIEWS
-            <span>
-              Current Product Id:
-              {productId}
-            </span>
+            <h2 className={RatingsReviewsCSS.ratings_reviews_header}>RATINGS & REVIEWS</h2>
           </div>
           <div className={RatingsReviewsCSS.ratings_breakdown_sidebar}>
             <RatingsBreakdown
@@ -241,7 +247,11 @@ class RatingsReviews extends React.Component {
             />
           </div>
           <div className={RatingsReviewsCSS.product_breakdown_sidebar}>
-            <p>Product Breakdown</p>
+            <ProductBreakdown
+              // productId={productId}
+              characteristics={metadata.characteristics}
+              featureRatings={featureRatings}
+            />
           </div>
           <div className={RatingsReviewsCSS.sort_options}>
             <SortOptions
@@ -249,6 +259,12 @@ class RatingsReviews extends React.Component {
               handleSort={this.handleSort}
             />
           </div>
+          {/* {numReviews > 0 ? (
+
+          )
+
+          } */}
+
           <div className={RatingsReviewsCSS.reviews_list}>
             <ReviewsList
               axiosConfig={axiosConfig}
@@ -258,23 +274,46 @@ class RatingsReviews extends React.Component {
               handleGetReviews={this.handleGetReviews}
             />
           </div>
-          <div className={RatingsReviewsCSS.more_reviews_btn_box}>
-            <MoreReviews
-              handleMoreReviews={this.handleMoreReviews}
-              numReviews={numReviews}
-              numDisplayed={numDisplayed}
-            />
-          </div>
-          <div className={RatingsReviewsCSS.write_new_review_btn_box}>
-            <NewReview
-              axiosConfig={axiosConfig}
-              IMGBB_API_KEY={IMGBB_API_KEY}
-              productName={productName}
-              productId={productId}
-              characteristics={metadata.characteristics}
-              updateReviews={this.updateReviews}
-            />
-          </div>
+
+          {numReviews > 0 ? (
+            <div className={RatingsReviewsCSS.review_buttons_container}>
+              <div className={RatingsReviewsCSS.review_btn_box}>
+                <MoreReviews
+                  handleMoreReviews={this.handleMoreReviews}
+                  numReviews={numReviews}
+                  numDisplayed={numDisplayed}
+                />
+              </div>
+              <div className={RatingsReviewsCSS.review_btn_box}>
+                <NewReview
+                  axiosConfig={axiosConfig}
+                  IMGBB_API_KEY={IMGBB_API_KEY}
+                  productName={productName}
+                  productId={productId}
+                  characteristics={metadata.characteristics}
+                  updateReviews={this.updateReviews}
+                  featureRatings={featureRatings}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className={RatingsReviewsCSS.review_buttons_container_no_reviews}>
+              <div>
+                <p>There are no reviews for this product.</p>
+              </div>
+              <div>
+                <NewReview
+                  axiosConfig={axiosConfig}
+                  IMGBB_API_KEY={IMGBB_API_KEY}
+                  productName={productName}
+                  productId={productId}
+                  characteristics={metadata.characteristics}
+                  updateReviews={this.updateReviews}
+                  featureRatings={featureRatings}
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
