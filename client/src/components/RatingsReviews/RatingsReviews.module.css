@@ -60,6 +60,7 @@
   grid-column: 2/4;
   /* border: 1px solid black; */
   padding-left: 5%;
+  padding-right: 3%;
   height: 50em;
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -82,13 +83,16 @@
   /* border: 1px solid black; */
   padding-bottom: 1em;
   padding-top: 1em;
-  /* padding-right: 0.2em; */
+  width: 100%;
+  /* padding-right: 0.5em; */
 }
 
 .review_header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
+  /* padding-right: 2.0em; */
 }
 
 .review_actions {
@@ -99,6 +103,7 @@
 
 .review_summary {
   font-weight: bold;
+  /* width: 100%; */
 }
 
 .review_content {

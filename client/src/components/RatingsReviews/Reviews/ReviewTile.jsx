@@ -119,12 +119,12 @@ export default class ReviewTile extends React.Component {
                 <>
                   { body.slice(0, 250) }
                   <p>
-                    <a
-                      href="#0"
+                    <button
+                      className={ReviewTileCSS.tileBtn}
                       onClick={() => { this.setState({ displayFullBody: true }); }}
                     >
                       Show more
-                    </a>
+                    </button>
                   </p>
                 </>
               )
@@ -168,7 +168,7 @@ export default class ReviewTile extends React.Component {
           <div>Helpful?</div>
           <div>
             <button
-              className={ReviewTileCSS.helpfulButton}
+              className={ReviewTileCSS.tileBtn}
               onClick={this.handleHelpfulVote}
             >
               Yes
@@ -177,7 +177,7 @@ export default class ReviewTile extends React.Component {
           </div>
           <div>|</div>
           <button
-            className={ReviewTileCSS.reportButton}
+            className={ReviewTileCSS.tileBtn}
             onClick={this.handleReport}
           >
             Report
