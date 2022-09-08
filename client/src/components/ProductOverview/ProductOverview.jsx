@@ -12,17 +12,18 @@ import Modal from './Modal/Modal.jsx';
 export default function ProductOverview({ productId, sendInteraction }) {
   const [product, setProduct] = useState({ features: [] });
   const [styles, setStyles] = useState([]);
-  // const [stylesIndex, setStylesIndex] = useState(0);
   const [currentStyles, setCurrentStyles] = useState({});
+  const [averageRating, setAverageRating] = useState({});
 
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const productEndpoint = `/products/${productId}`;
     const stylesEndpoint = `/products/${productId}/styles`;
+    const reviewsEndpoint = '/reviews/meta';
 
-    const fetchData = async (url) => {
-      const response = await axiosConfig.get(url);
+    const fetchData = async (url, params) => {
+      const response = await axiosConfig.get(url, params);
       return response.data;
     };
 
@@ -46,6 +47,17 @@ export default function ProductOverview({ productId, sendInteraction }) {
       .catch((err) => {
         console.error(err);
       });
+
+    fetchData(reviewsEndpoint, { params: { product_id: productId } })
+      .then((response) => {
+        console.log('reviews.....', response.ratings);
+        const total = Object.entries(response.ratings).reduce((prev, [key, value]) => (prev + key * value), 0);
+        const count = Object.entries(response.ratings).reduce((prev, [_, value]) => (prev + value * 1), 0);
+        setAverageRating(Math.floor((total / count) / 0.25) * 0.25);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
@@ -57,6 +69,7 @@ export default function ProductOverview({ productId, sendInteraction }) {
         <Nav />
         <Announcements />
         <ProductInfo
+          averageRating={averageRating}
           productId={productId}
           product={product}
           styles={styles}
