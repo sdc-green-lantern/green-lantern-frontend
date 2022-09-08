@@ -42,7 +42,7 @@ class ProductList extends React.Component {
 
     // eslint-disable-next-line react/destructuring-assignment
     const end = this.state.leftOffset + distance;
-    const speed = distance < 0 ? -8 : 8;
+    const speed = distance < 0 ? -10 : 10;
     const unitDuration = 20;
     this.timer = setInterval(() => {
       const { leftOffset } = this.state;
