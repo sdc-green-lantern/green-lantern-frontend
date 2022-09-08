@@ -108,7 +108,7 @@ export default function Modal({ currentStyles, setShowModal }) {
       <button
         className={modalStyles.button}
         onClick={() => {setShowModal(false)}}>
-        <span>X</span>
+        <span style={{ margin: '10px', color: 'grey' }}>X</span>
       </button>
       <div className={modalStyles.modal}>
           <div className={modalStyles.imgContainer}>
