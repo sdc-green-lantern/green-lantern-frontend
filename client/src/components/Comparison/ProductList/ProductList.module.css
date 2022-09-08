@@ -1,6 +1,5 @@
 .products {
   width: 100%;
-  height: 300px;
   margin-bottom: 10px;
 }
 
@@ -20,7 +19,7 @@ h2.title {
   width: 100%;
   display: flex;
   align-items: center;
-  height: 270px;
+  height: 350px;
 }
 
 .carousel-wrapper {
@@ -76,7 +75,7 @@ h2.title {
   opacity: 1
 }
 
-.scroll-left>button, .scroll-right>button {
+.products .scroll-left>button, .products .scroll-right>button {
   position: absolute;
   height: 60px;
   width: 50px;

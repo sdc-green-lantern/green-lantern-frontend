@@ -59,7 +59,7 @@ class ProductList extends React.Component {
 
   // scroll button click handler
   handleScroll = (isRight) => () => {
-    const unitOffset = isRight ? -190 : 190;
+    const unitOffset = isRight ? -250 : 250;
     this.scroll(unitOffset);
   };
 
