@@ -22,8 +22,6 @@ class App extends React.Component {
   }
 
   updateProductId(id) {
-    console.log(id);
-    console.log(Number(id));
     this.setState({
       productId: Number(id),
     });
