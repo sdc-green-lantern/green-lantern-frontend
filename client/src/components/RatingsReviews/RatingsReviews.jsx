@@ -190,11 +190,13 @@ class RatingsReviews extends React.Component {
   }
 
   calculatePercentRecommend(metadata) {
-    // console.log("Metadata Recommended: ", metadata.recommended);
-    const numerator = metadata.recommended.true;
-    const denominator = metadata.recommended.true + metadata.recommended.false;
-    const pctRecommend = String(Math.round(100 * (numerator / denominator)));
-    // console.log("Percent Recommend: ", pctRecommend);
+    const isRecommended = metadata.recommended.true !== undefined
+      ? metadata.recommended.true : 0;
+    const notRecommended = metadata.recommended.false !== undefined
+      ? metadata.recommended.false : 0;
+    const denominator = Number(isRecommended) + Number(notRecommended);
+    const pctRecommend = (denominator !== 0)
+      ? String(Math.round(100 * (isRecommended / denominator))) : 0;
     this.setState({ pctRecommend: `${pctRecommend}%` });
   }
 
