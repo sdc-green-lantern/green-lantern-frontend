@@ -24,10 +24,11 @@ export default class ReviewImageModal extends React.Component {
               {/* <FontAwesomeIcon icon={faWindowClose} /> */}
               Close
             </button>
-          </div>
-          <div>
             <img src={photo.url} alt={photo.id} />
           </div>
+          {/* <div>
+
+          </div> */}
         </div>
       </div>
     );
