@@ -91,17 +91,16 @@ class AnswerModal extends React.Component {
       body, name, email, imgFileURLs,
     } = this.state;
 
-    console.log("Do I get here?");
-    // axiosConfig.post(`/qa/questions/${question_id}/answers`, {
-    //   body, name, email, photos: imgFileURLs,
-    // })
-    //   .then(() => {
-    //     hideModal();
-    //     getAnswers();
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axiosConfig.post(`/qa/questions/${question_id}/answers`, {
+      body, name, email, photos: imgFileURLs,
+    })
+      .then(() => {
+        hideModal();
+        getAnswers();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   render() {
