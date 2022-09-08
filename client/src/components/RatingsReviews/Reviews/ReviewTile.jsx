@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import RatingsReviewsCSS from '../RatingsReviews.module.css';
+import ReviewTileCSS from './ReviewTile.module.css';
 import ReviewImageModal from '../Modals/ReviewImageModal.jsx';
 
 export default class ReviewTile extends React.Component {
@@ -166,21 +167,21 @@ export default class ReviewTile extends React.Component {
         <div className={RatingsReviewsCSS.review_actions}>
           <div>Helpful?</div>
           <div>
-            <a
-              href="#0"
+            <button
+              className={ReviewTileCSS.helpfulButton}
               onClick={this.handleHelpfulVote}
             >
               Yes
-            </a>
+            </button>
             {` (${helpfulness})`}
           </div>
           <div>|</div>
-          <a
-            href="#0"
+          <button
+            className={ReviewTileCSS.reportButton}
             onClick={this.handleReport}
           >
             Report
-          </a>
+          </button>
         </div>
         {show && (
           <ReviewImageModal
