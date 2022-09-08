@@ -1,5 +1,5 @@
 import React from 'react';
-import RatingsReviewsCSS from './RatingsReviews.module.css';
+import RatingsReviewsCSS from '../RatingsReviews.module.css';
 
 class MoreReviews extends React.Component {
   constructor(props) {

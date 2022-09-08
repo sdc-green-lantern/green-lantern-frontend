@@ -7,8 +7,8 @@ import { format, parseISO } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-import RatingsReviewsCSS from './RatingsReviews.module.css';
-import ReviewImageModal from './Modals/ReviewImageModal.jsx';
+import RatingsReviewsCSS from '../RatingsReviews.module.css';
+import ReviewImageModal from '../Modals/ReviewImageModal.jsx';
 
 export default class ReviewTile extends React.Component {
   constructor(props) {

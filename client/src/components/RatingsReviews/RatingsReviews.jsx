@@ -2,10 +2,10 @@ import React from 'react';
 import _ from 'underscore';
 
 import RatingsReviewsCSS from './RatingsReviews.module.css';
-import ReviewsList from './ReviewsList.jsx';
-import MoreReviews from './MoreReviews.jsx';
+import ReviewsList from './Reviews/ReviewsList.jsx';
+import MoreReviews from './Reviews/MoreReviews.jsx';
 import SortOptions from './SortOptions.jsx';
-import NewReview from './NewReview.jsx';
+import NewReview from './Reviews/NewReview.jsx';
 import RatingsBreakdown from './Breakdowns/RatingsBreakdown.jsx';
 import ProductBreakdown from './Breakdowns/ProductBreakdown.jsx';
 
