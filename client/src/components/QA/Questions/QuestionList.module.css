@@ -25,8 +25,13 @@
   color: black;
 }
 
+.addQButton:hover {
+  background-color: lightslategray;
+}
+
 .moreButton {
-  right: 60%;
+  position: relative;
+  left: 20%;
   width: fit-content;
   height: fit-content;
   border: none;
@@ -40,4 +45,6 @@
   color: black;
 }
 
-/* .moreButton .hover */
+.moreButton:hover {
+  background-color: lightslategray;
+}

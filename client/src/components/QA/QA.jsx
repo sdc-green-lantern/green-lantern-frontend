@@ -92,7 +92,7 @@ class QA extends React.Component {
       <div onClick={(e) => sendInteraction('Question and Answer', e)}>
         <div className={QACSS.qa_section}>
           <div className={QACSS.qa_body}>
-            <h2 data-testid="QA-1">Questions and Answers</h2>
+            <h2 data-testid="QA-1">QUESTIONS AND ANSWERS</h2>
             <SearchQA searchQuestions={this.searchQuestions} />
             <QuestionList
               questions={display}
