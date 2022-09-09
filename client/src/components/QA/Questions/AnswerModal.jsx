@@ -128,25 +128,25 @@ class AnswerModal extends React.Component {
           </h4>
           <div className={AModalCSS.body}>
             <div>
-              <div>Your Answer:</div>
+              <p>Your Answer</p>
               <textarea placeholder="Answer away..." maxLength="1000" rows="4" cols="60" name="body" required onChange={(e) => { this.handleChange(e); }} />
             </div>
             <div>
-              <div>What is your nickname:</div>
-              <input type="type" placeholder="Example: jack543!" maxLength="60" name="name" required onChange={(e) => { this.handleChange(e); }} />
+              <p>What is your nickname?</p>
+              <input type="type" placeholder="Example: jack543!" maxLength="60" size="50" name="name" required onChange={(e) => { this.handleChange(e); }} />
               <div className={AModalCSS.security}>
-                For privacy reasons, do not use your full name or email address
+                <p>For privacy reasons, do not use your full name or email address.</p>
               </div>
             </div>
             <div>
-              <div>Your email:</div>
-              <input type="email" placeholder="Example: jack@email.com" maxLength="60" name="email" required onChange={(e) => { this.handleChange(e); }} />
+              <p>Your email</p>
+              <input type="email" placeholder="Example: jack@email.com" maxLength="60" size="50" name="email" required onChange={(e) => { this.handleChange(e); }} />
               <div className={AModalCSS.security}>
-                For authentication reasons, you will not be emailed
+                <p>For authentication reasons, you will not be emailed.</p>
               </div>
             </div>
             <div>
-              <div>Upload you photos:</div>
+              <p>Upload photos</p>
               {showUpload && <input type="file" display="none" className={AModalCSS.file} onChange={(e) => { this.handlePhotos(e); }} />}
               <div className={AModalCSS.imgContainer}>
                 {displayPhotos}

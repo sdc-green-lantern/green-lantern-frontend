@@ -53,15 +53,6 @@ class App extends React.Component {
             />
           )}
         />
-        <Tracker
-          render={(sendInteraction) => (
-            <QA
-              sendInteraction={sendInteraction}
-              productId={productId}
-              key={productId}
-            />
-          )}
-        />
         {/* <Tracker
           render={(sendInteraction) => (
             <Comparison
@@ -72,6 +63,15 @@ class App extends React.Component {
           )}
         /> */}
         <Comparison productId={productId} updateProductId={this.updateProductId} />
+        <Tracker
+          render={(sendInteraction) => (
+            <QA
+              sendInteraction={sendInteraction}
+              productId={productId}
+              key={productId}
+            />
+          )}
+        />
         <Tracker
           render={(sendInteraction) => (
             <RatingsReviews
