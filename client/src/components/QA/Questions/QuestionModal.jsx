@@ -103,7 +103,7 @@ class QuestionModal extends React.Component {
                 nChange={(e) => { this.handleChange(e); }}
               />
               <div className={QModalCSS.security}>
-                For privacy reasons, do not use your full name or email address
+                <p>For privacy reasons, do not use your full name or email address.</p>
               </div>
             </div>
             <div>
@@ -118,7 +118,7 @@ class QuestionModal extends React.Component {
                 onChange={(e) => { this.handleChange(e); }}
               />
               <div className={QModalCSS.security}>
-                For authentication reasons, you will not be emailed
+                <p>For authentication reasons, you will not be emailed.</p>
               </div>
             </div>
             <div className={QModalCSS.footer}>
