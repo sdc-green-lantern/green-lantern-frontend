@@ -5,10 +5,15 @@ import buttonStyles from './Buttons.module.css';
 
 const sizingStyles = {
   clearIndicator: () => ({}),
-  // container: () => ({}),
-  control: (provided) => ({
+  control: (provided, state) => ({
     ...provided,
-    border: '1px solid black',
+    cursor: 'pointer',
+    border: state.isFocused ? '1px solid lightseagreen' : '1px solid black',
+    boxShadow: state.isFocused ? '1px solid lightseagreen' : 'none',
+    "&:hover": {
+      border: '3px solid lightseagreen',
+      boxShadow: 'red',
+    },
     borderRadius: '0',
     padding: '0 10px',
     height: '100%',
@@ -18,40 +23,27 @@ const sizingStyles = {
     ...provided,
     color: 'black',
   }),
-  // group
-  // groupHeading
-  // indicatorsContainer
   indicatorSeparator: (provided) => ({
     ...provided,
     display: 'none',
   }),
-// input
-// loadingIndicator
-// loadingMessage
   menu: (provided) => ({
     ...provided,
     width: "160%",
   }),
-// menuList
-// menuPortal
-// multiValue
-// multiValueLabel
-// multiValueRemove
-// noOptionsMessage
-// option
-// placeholder
-// singleValue
-// valueContainer
 };
 
 const quantityStyles = {
+  clearIndicator: () => ({}),
   control: (provided) => ({
     ...provided,
+    cursor: 'pointer',
     height: '100%',
+    borderRadius: '0',
   }),
   menu: (provided) => ({
     ...provided,
-    width: "160%",
+    width: '160%',
   }),
 };
 
@@ -123,8 +115,9 @@ export default function Buttons({ currentStyles }) {
 
         <select
           className={buttonStyles.selectQuantity}
-          defaultValue="1" onChange={(e) => setCount(e.target.value)}
-          style={quantityStyles}
+          defaultValue="1"
+          onChange={(e) => setCount(e.target.value)}
+          styles={quantityStyles}
         >
           {selectedSku.quantity === 0 ? <option value="1" disabled="disabled">-</option> : <option value="1">1</option>}
           {(itterate.slice(1, selectedSku.quantity)).map((number, index) => (

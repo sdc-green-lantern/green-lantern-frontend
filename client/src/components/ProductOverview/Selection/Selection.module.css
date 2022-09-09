@@ -7,9 +7,15 @@
   font-weight: 100;
 }
 .selectionContainer img {
-  border: 1px solid black;
+  border: 3px solid black;
   border-radius: 100%;
   margin: 10px 20px;
   height: 50px;
   width: 50px;
+}
+.selectionOption {
+  cursor: pointer;
+}
+.selectionOption:hover {
+  border: 3px solid lightseagreen;
 }
