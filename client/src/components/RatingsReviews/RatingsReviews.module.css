@@ -129,7 +129,7 @@
   display: flex;
   flex-direction: row;
   /* justify-content: space-around; */
-  justify-content: center;
+  justify-content: space-between;
   padding: 1.0em;
   /* gap: 40%; */
   grid-row: 6;
@@ -138,26 +138,27 @@
 }
 
 .review_btn_box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* background-color: orange; */
-  /* grid-row: 6; */
-  /* grid-column: 2/3; */
-  /* border: 1px solid black; */
+  /* display: flex; */
+  /* justify-content: center;
+  align-items: center; */
+  position: relative;
+  margin-left: 10%;
+  margin-right: 20%;
   padding: 1em;
 }
 
 .button {
-  /* min-width: 10%;
-  max-width: 40%;
-  max-height: 5%; */
   width: fit-content;
   height: fit-content;
-  opacity: 1;
+  border: none;
   border-radius: 0%;
-  /* border: 1px solid black; */
-  background-color: buttonface;
+  background-color: lightseagreen;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  opacity: 1;
+  color: black;
 }
 
 .button:hover {
