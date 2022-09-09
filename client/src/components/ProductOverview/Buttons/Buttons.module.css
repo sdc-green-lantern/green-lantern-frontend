@@ -9,19 +9,28 @@
   border: 1px solid black;
   width: 55%;
 }
+.selectSize:hover, .selectQuantity:hover,
+.addToBag:hover, .favorite:hover {
+  border: 3px solid lightseagreen;
+}
 .selectQuantity {
+  cursor: pointer;
   font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 10px;
   border: 1px solid black;
-  border-radius: 8%;
   padding-left: 15px;
   width: 25%;
 }
+.selectQuantity:focus {
+  border-radius: 0;
+  border: 1px solid lightseagreen;
+}
 .addToBag {
 /*  */
+cursor: pointer;
   border: 1px solid black;
   border-radius: 0;
   padding: 0 10px;
@@ -29,8 +38,8 @@
 }
 .favorite {
 /*  */
+cursor: pointer;
 border: 1px solid black;
-border-radius: 0;
 padding: 0 10px;
 width: 20%;
 }
