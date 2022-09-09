@@ -88,7 +88,7 @@ class QuestionModal extends React.Component {
           </h4>
           <div className={QModalCSS.body}>
             <div>
-              <p>Your Question:</p>
+              <p>Your Question</p>
               <textarea placeholder="Ask away..." maxLength="1000" rows="4" cols="60" name="body" required onChange={(e) => { this.handleChange(e); }} />
             </div>
             <div>
