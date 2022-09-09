@@ -93,7 +93,7 @@ class ProductList extends React.Component {
     return (
       <div className={productList.products}>
         <h2 className={productList.title} data-testid="title">
-          {listType}
+          {listType === 'RelatedProducts' ? 'RELATED PRODUCTS' : 'YOUR OUTFIT'}
         </h2>
         <div className={productList.main} ref={(ele) => { this.main = ele; }}>
           <div

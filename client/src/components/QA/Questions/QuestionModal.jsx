@@ -75,32 +75,60 @@ class QuestionModal extends React.Component {
     return (
       <div className={QModalCSS.modalBackground}>
         <div className={QModalCSS.modalContainer}>
-          <button type="submit" className={QModalCSS.exitBtn} onClick={() => { toggleQModal(false); }}> X </button>
+          <button
+            type="submit"
+            className={QModalCSS.exitBtn}
+            onClick={() => { toggleQModal(false); }}
+          >
+            X
+          </button>
           <h2>Ask Your Question</h2>
           <h4>
             {`About the ${productName}`}
           </h4>
           <div className={QModalCSS.body}>
             <div>
-              Your Question:
+              <p>Your Question</p>
               <textarea placeholder="Ask away..." maxLength="1000" rows="4" cols="60" name="body" required onChange={(e) => { this.handleChange(e); }} />
             </div>
             <div>
-              What is your nickname:
-              <input type="type" placeholder="Example: jackson11!" maxLength="60" name="name" required onChange={(e) => { this.handleChange(e); }} />
+              <p>What is your nickname?</p>
+              <input
+                type="type"
+                placeholder="Example: jackson11!"
+                maxLength="60"
+                size="50"
+                name="name"
+                required o
+                nChange={(e) => { this.handleChange(e); }}
+              />
               <div className={QModalCSS.security}>
-                For privacy reasons, do not use your full name or email address
+                <p>For privacy reasons, do not use your full name or email address.</p>
               </div>
             </div>
             <div>
-              Your email:
-              <input type="email" placeholder="Example: jackson@email.com" name="email" maxLength="60" required onChange={(e) => { this.handleChange(e); }} />
+              <p>Your email</p>
+              <input
+                type="email"
+                placeholder="Example: jackson@email.com"
+                name="email"
+                maxLength="60"
+                size="50"
+                required
+                onChange={(e) => { this.handleChange(e); }}
+              />
               <div className={QModalCSS.security}>
-                For authentication reasons, you will not be emailed
+                <p>For authentication reasons, you will not be emailed.</p>
               </div>
             </div>
             <div className={QModalCSS.footer}>
-              <button type="submit" className={QModalCSS.submitBtn} onClick={this.validateForm}>Submit question</button>
+              <button
+                type="submit"
+                className={QModalCSS.submitBtn}
+                onClick={this.validateForm}
+              >
+                Submit question
+              </button>
             </div>
           </div>
         </div>
