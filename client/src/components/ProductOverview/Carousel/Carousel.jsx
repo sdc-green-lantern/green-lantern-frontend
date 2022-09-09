@@ -50,7 +50,7 @@ export default function Carousel({ currentStyles, setShowModal }) {
   const showRightArrow = <div className={carouselstyles.rightArrow} onClick={handleNextImg}>❯</div>;
 
   return (
-    <div className={carouselstyles.imageGallery} style={{ backgroundImage: `url(${currentImage})`, transition: 'background-image ease-in 0.3s' }}>
+    <div className={carouselstyles.imageGallery} style={{ backgroundImage: `url(${currentImage})`}}>
       <div className={carouselstyles.thumbnailRow}>
         {productImages.map((productImage, index) => (
           <div
